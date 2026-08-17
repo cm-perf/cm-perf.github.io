@@ -113,11 +113,12 @@
     position: relative; overflow: hidden;
   }
   .hero-bg { position: absolute; inset: 0; }
-  .hero-bg img, .hero-bg video {
+  .hero-bg img {
     position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
   }
-  .hero-bg video { opacity: 0; transition: opacity .7s; }
-  .hero-bg video.on { opacity: 1; }
+  .hero-bg video {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  }
   .hero-bg .overlay {
     position: absolute; inset: 0;
     background:
@@ -463,11 +464,6 @@
 
 <script>
 (function() {
-  var v = document.querySelector('.hero-bg video');
-  if (v) {
-    v.addEventListener('playing', function() { v.classList.add('on'); });
-    if (!v.paused) v.classList.add('on');
-  }
   var r = document.querySelectorAll('[data-reveal]');
   if (!r.length) return;
   var o = new IntersectionObserver(function(e) {
