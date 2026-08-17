@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="CM Performance" />
 <meta property="og:title" content="CM Performance — BMW specialists" />
 <meta property="og:description" content="Diagnostics, retrofits and engineering for BMW F & G Series. Building FlameLink." />
-<meta name="theme-color" content="#000000" />
+<meta name="theme-color" content="#ffffff" />
 
 <script type="application/ld+json">
 {
@@ -33,56 +33,60 @@
 
 <style>
   :root {
-    --bg: #000000;
-    --surface: #0c0c0c;
-    --elevated: #161616;
-    --text: #ffffff;
-    --dim: #888888;
-    --muted: #7d7d7d;
-    --border: #1c1c1c;
-    --border-hi: #2e2e2e;
+    --bg: #ffffff;
+    --grey: #f5f5f7;
+    --text: #1d1d1f;
+    --dim: #6e6e73;
+    --border: #d2d2d7;
     --flame: #e85d04;
-    --bmw: #1c69d4;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body {
     background: var(--bg); color: var(--text);
-    font-family: 'Inter', system-ui, sans-serif; line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    line-height: 1.6; -webkit-font-smoothing: antialiased;
   }
   a { color: inherit; text-decoration: none; }
   .wrap { max-width: 940px; margin: 0 auto; padding: 0 20px; }
   .dim { color: var(--dim); }
   .flame { color: var(--flame); }
+
   .label {
-    font-size: 9px; font-weight: 600; letter-spacing: 2.5px;
+    font-size: 12px; font-weight: 600; letter-spacing: .4px;
     text-transform: uppercase; color: var(--dim);
   }
   .tag {
-    display: inline-block; font-size: 9px; font-weight: 600; letter-spacing: 2.5px;
+    display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: .3px;
     text-transform: uppercase; color: var(--dim);
-    border: 1px solid var(--border); border-radius: 3px; padding: 5px 9px;
+    border: 1px solid var(--border); border-radius: 980px; padding: 4px 12px;
   }
   .btn {
-    display: inline-flex; align-items: center; gap: 8px;
-    font-size: 13px; font-weight: 700; letter-spacing: .2px;
-    padding: 10px 18px; border-radius: 4px; border: 1px solid transparent;
-    cursor: pointer; transition: opacity .15s, background .15s, border-color .15s;
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 14px; font-weight: 600; letter-spacing: .1px;
+    padding: 12px 22px; border-radius: 980px; border: none;
+    cursor: pointer; transition: opacity .2s, transform .1s;
   }
-  .btn-flame { background: var(--flame); color: #000; }
+  .btn:active { transform: scale(.97); }
+  .btn-dark { background: var(--text); color: #fff; }
+  .btn-dark:hover { opacity: .85; }
+  .btn-flame { background: var(--flame); color: #fff; }
   .btn-flame:hover { opacity: .9; }
-  .btn-line { background: transparent; color: var(--text); border-color: var(--border-hi); }
-  .btn-line:hover { background: var(--elevated); }
+  .btn-ghost {
+    background: transparent; color: #06c; font-size: 14px; font-weight: 500;
+    padding: 0; border-radius: 0; letter-spacing: 0;
+  }
+  .btn-ghost:hover { text-decoration: underline; }
 
   /* ── nav ────────────────────────────────────────────────────────────────── */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    background: rgba(0,0,0,.85); backdrop-filter: blur(12px);
+    background: rgba(255,255,255,.82); backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
     border-bottom: 1px solid var(--border);
   }
-  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 56px; }
-  nav .logo { font-weight: 800; font-size: 15px; letter-spacing: -.02em; }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 48px; }
+  nav .logo { font-weight: 700; font-size: 15px; letter-spacing: -.01em; }
   nav .logo .flame { margin-right: 1px; }
   nav .links { display: flex; gap: 28px; }
   nav .links a {
@@ -94,87 +98,93 @@
   /* ── hero ───────────────────────────────────────────────────────────────── */
   .hero {
     min-height: 100vh; display: flex; align-items: center;
-    position: relative; overflow: hidden;
+    padding-top: 48px; /* nav offset */
   }
-  .hero::before {
-    content: ''; position: absolute; z-index: 0; pointer-events: none;
-    right: 0; top: 50%; transform: translateY(-50%);
-    width: 760px; height: 760px; max-width: 92vw;
-    background: radial-gradient(circle, rgba(232,93,4,.10), transparent 60%);
-  }
-  .hero-inner { position: relative; z-index: 1; }
   .hero .eyebrow {
-    display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 4px;
-    text-transform: uppercase; color: var(--flame); margin-bottom: 22px;
+    display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: .4px;
+    text-transform: uppercase; color: var(--flame); margin-bottom: 20px;
   }
   .hero h1 {
-    font-size: clamp(28px, 5.5vw, 58px);
-    font-weight: 800; letter-spacing: -.04em; line-height: 1.05;
+    font-size: clamp(32px, 6vw, 64px);
+    font-weight: 700; letter-spacing: -.035em; line-height: 1.05;
+    color: var(--text);
   }
   .hero p {
-    color: var(--dim); font-size: clamp(14px, 1.6vw, 16px);
-    line-height: 1.7; max-width: 520px; margin: 22px 0 32px;
+    color: var(--dim); font-size: clamp(15px, 1.6vw, 18px);
+    line-height: 1.65; max-width: 520px; margin: 20px 0 32px;
   }
-  .hero .ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+  .hero .ctas { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
 
-  /* ── cards / products ───────────────────────────────────────────────────── */
-  section { padding: 96px 0; }
-  section:first-of-type { padding-top: 0; }
-  .section-label { margin-bottom: 32px; }
+  /* ── sections ───────────────────────────────────────────────────────────── */
+  section { padding: 100px 0; }
+  .alt { background: var(--grey); }
+  .section-label { margin-bottom: 8px; }
   .section-title {
-    font-size: clamp(22px, 3.5vw, 36px);
-    font-weight: 800; letter-spacing: -.03em; line-height: 1.15;
-    margin-top: 10px;
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 700; letter-spacing: -.03em; line-height: 1.1;
   }
-  .products { display: grid; gap: 16px; }
+
+  /* ── product cards ──────────────────────────────────────────────────────── */
+  .products { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 40px; }
   .card {
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: 8px; padding: 32px; position: relative;
-    transition: border-color .2s;
+    background: #fff; border: 1px solid var(--border);
+    border-radius: 18px; padding: 36px 32px 32px; position: relative;
+    transition: box-shadow .25s, border-color .25s;
+    display: flex; flex-direction: column;
   }
-  .card:hover { border-color: var(--border-hi); }
-  .card .card-label { margin-bottom: 16px; }
+  .card:hover {
+    box-shadow: 0 4px 24px rgba(0,0,0,.06);
+    border-color: #bbb;
+  }
+  .card .card-label { margin-bottom: 20px; }
   .card h3 {
-    font-size: 20px; font-weight: 700; letter-spacing: -.02em;
-    margin-bottom: 8px;
+    font-size: 24px; font-weight: 700; letter-spacing: -.02em;
+    margin-bottom: 10px;
   }
-  .card p { color: var(--dim); font-size: 14px; line-height: 1.7; max-width: 480px; }
+  .card p { color: var(--dim); font-size: 14px; line-height: 1.65; flex: 1; }
   .card .card-footer {
     display: flex; align-items: center; justify-content: space-between;
-    margin-top: 24px;
+    margin-top: 28px;
   }
-  .card .price { font-size: 13px; font-weight: 700; }
-  .card .price .flame { font-size: 18px; }
+  .card .price { font-size: 14px; font-weight: 600; color: var(--dim); }
+  .card .price strong { color: var(--flame); font-size: 20px; font-weight: 700; }
 
-  /* ── about / services ───────────────────────────────────────────────────── */
-  .services-grid { display: grid; gap: 16px; }
+  /* ── services ───────────────────────────────────────────────────────────── */
+  .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 40px; }
   .svc {
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: 8px; padding: 24px 28px;
-    transition: border-color .2s;
+    background: #fff; border: 1px solid var(--border);
+    border-radius: 18px; padding: 32px 28px;
+    transition: box-shadow .25s, border-color .25s;
   }
-  .svc:hover { border-color: var(--border-hi); }
-  .svc h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
-  .svc p { color: var(--dim); font-size: 13px; line-height: 1.7; }
+  .svc:hover {
+    box-shadow: 0 4px 24px rgba(0,0,0,.06);
+    border-color: #bbb;
+  }
+  .svc h3 { font-size: 17px; font-weight: 600; margin-bottom: 8px; }
+  .svc p { color: var(--dim); font-size: 14px; line-height: 1.65; }
 
   /* ── contact ─────────────────────────────────────────────────────────────── */
-  .contact { text-align: center; padding: 96px 0 120px; }
-  .contact .section-title { margin-bottom: 16px; }
-  .contact p { color: var(--dim); font-size: 15px; margin-bottom: 32px; }
-  .contact a { color: var(--flame); font-weight: 600; }
+  .contact { text-align: center; padding: 100px 0 120px; }
+  .contact .section-title { margin-bottom: 12px; }
+  .contact p { color: var(--dim); font-size: 16px; margin-bottom: 32px; }
+  .contact a.email-link {
+    color: #06c; font-weight: 500; font-size: 16px;
+    transition: opacity .15s;
+  }
+  .contact a.email-link:hover { opacity: .7; }
 
   /* ── footer ─────────────────────────────────────────────────────────────── */
   footer {
-    border-top: 1px solid var(--border); padding: 32px 0;
-    text-align: center;
+    border-top: 1px solid var(--border); padding: 24px 0;
+    text-align: center; background: var(--bg);
   }
-  footer .copy { font-size: 12px; color: var(--muted); }
+  footer .copy { font-size: 12px; color: var(--dim); }
 
-  @media (max-width: 600px) {
+  @media (max-width: 700px) {
+    .products, .services-grid { grid-template-columns: 1fr; }
     nav .links { gap: 20px; }
-    nav .links a { font-size: 12px; }
-    .hero .ctas { flex-direction: column; }
-    .card .card-footer { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .hero .ctas { flex-direction: column; align-items: flex-start; }
+    .card .card-footer { flex-direction: column; align-items: flex-start; gap: 14px; }
   }
 </style>
 </head>
@@ -182,7 +192,7 @@
 
 <nav>
   <div class="wrap">
-    <a href="/" class="logo"><span class="flame">CM</span> Performance</a>
+    <a href="/" class="logo"><span class="flame">CM</span>&nbsp;Performance</a>
     <div class="links">
       <a href="#products">Products</a>
       <a href="#services">Services</a>
@@ -193,7 +203,7 @@
 
 <!-- ──────────────────────────────────────────────────────────────────────────── HERO -->
 <section class="hero">
-  <div class="wrap hero-inner">
+  <div class="wrap">
     <span class="eyebrow">BMW Specialists</span>
     <h1>Diagnostics. Retrofits.<br /><span class="flame">Engineering.</span></h1>
     <p>
@@ -201,8 +211,8 @@
       to full product development — if it involves BMW, we probably do it.
     </p>
     <div class="ctas">
-      <a href="#products" class="btn btn-flame">View products</a>
-      <a href="#contact" class="btn btn-line">Get in touch</a>
+      <a href="#products" class="btn btn-dark">View products</a>
+      <a href="#contact" class="btn btn-ghost">Get in touch</a>
     </div>
   </div>
 </section>
@@ -211,10 +221,9 @@
 <section id="products">
   <div class="wrap">
     <div class="section-label label">Products</div>
-    <div class="section-title">Built by us. <span class="dim">Shipping now.</span></div>
-    <div class="products" style="margin-top: 32px;">
+    <div class="section-title">Built by us.<br /><span class="dim">Shipping now.</span></div>
+    <div class="products">
 
-      <!-- FlameLink -->
       <div class="card">
         <span class="label card-label flame">Available now</span>
         <h3>FlameLink</h3>
@@ -224,22 +233,21 @@
           BMW F &amp; G Series.
         </p>
         <div class="card-footer">
-          <span class="price">From <span class="flame">$499</span></span>
-          <a href="https://cm-perf.github.io/flink/" class="btn btn-line">Learn more &rarr;</a>
+          <span class="price">From <strong>$499</strong></span>
+          <a href="https://cm-perf.github.io/flink/" class="btn-ghost">Learn more &rarr;</a>
         </div>
       </div>
 
-      <!-- future product placeholder -->
       <div class="card">
         <span class="tag">Coming soon</span>
         <h3>bmw-can</h3>
         <p>
-          An open-source CAN bus decoder for BMW F & G Series — real-time engine data
+          An open-source CAN bus decoder for BMW F &amp; G Series — real-time engine data
           logging, module diagnostics and reverse engineering tools. Built in-house.
         </p>
         <div class="card-footer">
           <span class="price dim">In development</span>
-          <a href="https://github.com/cm-perf/flink" class="btn btn-line">GitHub &rarr;</a>
+          <a href="https://github.com/cm-perf/flink" class="btn-ghost">GitHub &rarr;</a>
         </div>
       </div>
 
@@ -248,11 +256,11 @@
 </section>
 
 <!-- ──────────────────────────────────────────────────────────────────────────── SERVICES -->
-<section id="services">
+<section id="services" class="alt">
   <div class="wrap">
     <div class="section-label label">Services</div>
-    <div class="section-title">What we do <span class="dim">every day.</span></div>
-    <div class="services-grid" style="margin-top: 32px;">
+    <div class="section-title">What we do<br /><span class="dim">every day.</span></div>
+    <div class="services-grid">
 
       <div class="svc">
         <h3>BMW Diagnostics</h3>
@@ -282,9 +290,9 @@
 <section id="contact" class="contact">
   <div class="wrap">
     <div class="section-label label">Get in touch</div>
-    <div class="section-title">Let's talk about your car.</div>
+    <div class="section-title">Let's talk about<br />your car.</div>
     <p>cmperformancegh@gmail.com</p>
-    <a href="mailto:cmperformancegh@gmail.com" class="btn btn-flame">Email us</a>
+    <a href="mailto:cmperformancegh@gmail.com" class="email-link">cmperformancegh@gmail.com &rarr;</a>
   </div>
 </section>
 
