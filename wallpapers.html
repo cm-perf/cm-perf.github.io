@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Wallpapers — CM Performance</title>
+<meta name="description" content="Free 4K flame wallpapers from CM Performance. Download high-resolution exhaust flame photography." />
+<link rel="canonical" href="https://cm-perf.github.io/wallpapers.html" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://cm-perf.github.io/wallpapers.html" />
+<meta property="og:site_name" content="CM Performance" />
+<meta property="og:title" content="Wallpapers — CM Performance" />
+<meta property="og:description" content="Free 4K flame wallpapers. Download high-resolution exhaust flame photography." />
+<meta name="theme-color" content="#000000" />
+<link rel="icon" type="image/svg+xml" href="flink/favicon.svg" />
+<link rel="apple-touch-icon" href="flink/favicon.svg" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --bg: #000;
+    --surface: rgba(255,255,255,.04);
+    --text: #fff;
+    --dim: rgba(255,255,255,.7);
+    --accent: #e85d04;
+    --border: rgba(255,255,255,.08);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Geist', system-ui, sans-serif;
+    font-weight: 300; line-height: 1.6;
+    min-height: 100vh; display: flex; flex-direction: column;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  .wrap { max-width: 1024px; margin: 0 auto; padding: 0 24px; }
+
+  .label {
+    font-size: 10px; font-weight: 300; letter-spacing: .3em;
+    text-transform: uppercase; color: var(--dim);
+  }
+  .heading {
+    font-size: clamp(24px, 4vw, 32px); font-weight: 300;
+    letter-spacing: .02em; line-height: 1.2;
+  }
+
+  /* ── header ──────────────────────────────────────────────────────── */
+  header {
+    position: fixed; inset: 0 0 auto 0; z-index: 40;
+    background: rgba(0,0,0,.85); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,.06);
+  }
+  header .wrap {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  .logo {
+    font-size: 15px; font-weight: 300; letter-spacing: .08em;
+    filter: drop-shadow(0 1px 8px rgba(0,0,0,.8));
+  }
+  .logo b { color: var(--accent); font-weight: 300; }
+  .nav { display: flex; gap: 32px; }
+  .nav a {
+    font-size: 11px; font-weight: 300; letter-spacing: .22em;
+    text-transform: uppercase; color: rgba(255,255,255,.7);
+    transition: color .15s;
+  }
+  .nav a:hover { color: var(--text); }
+  .menu-btn {
+    display: none; background: none; border: none; cursor: pointer;
+    font: inherit; font-size: 11px; font-weight: 300; letter-spacing: .22em;
+    text-transform: uppercase; color: rgba(255,255,255,.7);
+  }
+  .mobile-menu {
+    display: grid; grid-template-rows: 0fr;
+    transition: grid-template-rows .4s cubic-bezier(.22,1,.36,1);
+    position: fixed; inset: 64px 0 auto 0; z-index: 39;
+    background: rgba(0,0,0,.95); backdrop-filter: blur(20px);
+    overflow: hidden;
+  }
+  .mobile-menu.open { grid-template-rows: 1fr; }
+  .mobile-menu > div {
+    display: flex; flex-direction: column; padding: 0 24px;
+    min-height: 0; overflow: hidden;
+    transition: padding .4s cubic-bezier(.22,1,.36,1);
+  }
+  .mobile-menu.open > div { padding: 16px 24px 32px; }
+  .mobile-menu a {
+    font-size: 12px; font-weight: 300; letter-spacing: .2em;
+    text-transform: uppercase; color: rgba(255,255,255,.7);
+    padding: 12px 0; border-bottom: 1px solid var(--border);
+  }
+  .mobile-menu a:hover { color: var(--text); }
+
+  @media (max-width: 1024px) {
+    .nav { display: none; }
+    .menu-btn { display: block; }
+  }
+  @media (min-width: 1025px) {
+    .mobile-menu { display: none !important; }
+  }
+
+  /* ── page ─────────────────────────────────────────────────────────── */
+  .page { padding: 120px 0 100px; }
+  .page .section-hdr { margin-bottom: 48px; }
+
+  /* ── wallpaper grid ────────────────────────────────────────────────── */
+  .wp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .wp-card {
+    position: relative; overflow: hidden; border: 1px solid var(--border);
+    background: var(--surface);
+    transition: border-color .3s, transform .3s;
+  }
+  .wp-card:hover { border-color: rgba(255,255,255,.15); transform: translateY(-2px); }
+  .wp-card img {
+    width: 100%; aspect-ratio: 16/9; object-fit: cover;
+    transition: transform .5s cubic-bezier(.22,1,.36,1);
+    background: var(--surface);
+  }
+  .wp-card:hover img { transform: scale(1.03); }
+  .wp-info {
+    padding: 16px; display: flex; align-items: center; justify-content: space-between;
+  }
+  .wp-info span {
+    font-size: 11px; font-weight: 300; letter-spacing: .15em;
+    text-transform: uppercase; color: var(--dim);
+  }
+  .wp-download {
+    font-size: 10px; font-weight: 300; letter-spacing: .2em;
+    text-transform: uppercase; color: var(--accent);
+    border: 1px solid var(--accent); padding: 8px 16px;
+    transition: all .2s; display: inline-block;
+  }
+  .wp-download:hover { background: var(--accent); color: #fff; }
+
+  @media (max-width: 640px) {
+    .wp-grid { grid-template-columns: 1fr; }
+    .wp-info { flex-direction: column; gap: 12px; align-items: flex-start; }
+    .wp-download { width: 100%; text-align: center; }
+  }
+
+  /* ── footer ─────────────────────────────────────────────────────────── */
+  footer { border-top: 1px solid var(--border); padding: 40px 0; margin-top: auto; }
+  .footer-inner {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 11px; color: var(--dim); font-weight: 300; letter-spacing: .1em;
+  }
+  .footer-inner a { color: var(--accent); transition: opacity .15s; }
+  .footer-inner a:hover { opacity: .7; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a href="/" class="logo"><b>CM</b>&nbsp;Performance</a>
+    <div class="nav">
+      <a href="/">Home</a>
+    </div>
+    <button class="menu-btn" type="button" onclick="var m=document.getElementById('mm');m.classList.toggle('open');m.inert=!m.classList.contains('open')" aria-label="Menu">Menu</button>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mm" inert>
+  <div>
+    <a href="/" onclick="this.closest('.mobile-menu').classList.remove('open')">Home</a>
+  </div>
+</div>
+
+<main style="flex:1">
+<section class="page">
+  <div class="wrap">
+    <div class="section-hdr">
+      <span class="label" style="display:block;margin-bottom:12px">Free downloads</span>
+      <div class="heading">Wallpapers</div>
+    </div>
+    <div class="wp-grid">
+      <div class="wp-card">
+        <img src="assets/wallpapers/flame-01.png" alt="Flame wallpaper 01" loading="lazy" />
+        <div class="wp-info">
+          <span>4K &middot; 3840&times;2160</span>
+          <a href="assets/wallpapers/flame-01.png" download class="wp-download">Download</a>
+        </div>
+      </div>
+      <div class="wp-card">
+        <img src="assets/wallpapers/flame-02.png" alt="Flame wallpaper 02" loading="lazy" />
+        <div class="wp-info">
+          <span>4K &middot; 3840&times;2160</span>
+          <a href="assets/wallpapers/flame-02.png" download class="wp-download">Download</a>
+        </div>
+      </div>
+      <div class="wp-card">
+        <img src="assets/wallpapers/flame-03.png" alt="Flame wallpaper 03" loading="lazy" />
+        <div class="wp-info">
+          <span>4K &middot; 3840&times;2160</span>
+          <a href="assets/wallpapers/flame-03.png" download class="wp-download">Download</a>
+        </div>
+      </div>
+      <div class="wp-card">
+        <img src="assets/wallpapers/flame-04.png" alt="Flame wallpaper 04" loading="lazy" />
+        <div class="wp-info">
+          <span>4K &middot; 3840&times;2160</span>
+          <a href="assets/wallpapers/flame-04.png" download class="wp-download">Download</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-inner">
+      <a href="/">&larr; Back to CM Performance</a>
+      <span>&copy; 2026 CM Performance</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
