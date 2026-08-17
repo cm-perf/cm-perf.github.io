@@ -34,747 +34,448 @@
 
 <style>
   :root {
-    --bg-0: #000000;
-    --bg-1: rgba(255,255,255,.04);
-    --primary: #ffffff;
-    --secondary: rgba(255,255,255,.55);
-    --flame: #e85d04;
-    --hairline: rgba(255,255,255,.08);
+    --bg: #000;
+    --surface: rgba(255,255,255,.04);
+    --text: #fff;
+    --dim: rgba(255,255,255,.5);
+    --accent: #e85d04;
+    --border: rgba(255,255,255,.08);
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html {
-    scroll-behavior: smooth;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
   body {
-    background: var(--bg-0);
-    color: var(--primary);
-    font-family: 'Geist', system-ui, -apple-system, sans-serif;
-    font-weight: 300;
-    line-height: 1.6;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+    background: var(--bg); color: var(--text);
+    font-family: 'Geist', system-ui, sans-serif;
+    font-weight: 300; line-height: 1.6;
+    min-height: 100vh; display: flex; flex-direction: column;
   }
-
   a { color: inherit; text-decoration: none; }
   img { display: block; max-width: 100%; }
 
   .wrap { max-width: 1024px; margin: 0 auto; padding: 0 24px; }
-  .wrap-lg { max-width: 1152px; margin: 0 auto; padding: 0 24px; }
 
-  /* ── typography ────────────────────────────────────────────────────────────── */
   .label {
-    font-size: 10px; font-weight: 300; letter-spacing: 0.3em;
-    text-transform: uppercase; color: var(--secondary);
-  }
-  .label-accent {
-    font-size: 10px; font-weight: 300; letter-spacing: 0.3em;
-    text-transform: uppercase; color: var(--flame);
+    font-size: 10px; font-weight: 300; letter-spacing: .3em;
+    text-transform: uppercase; color: var(--dim);
   }
   .heading {
-    font-size: clamp(24px, 4vw, 30px); font-weight: 300;
-    letter-spacing: 0.02em; line-height: 1.2;
-  }
-  .heading-lg {
-    font-size: clamp(32px, 6vw, 64px); font-weight: 300;
-    letter-spacing: -0.02em; line-height: 1.05;
+    font-size: clamp(24px, 4vw, 32px); font-weight: 300;
+    letter-spacing: .02em; line-height: 1.2;
   }
 
-  /* ── header ────────────────────────────────────────────────────────────────── */
+  /* ── header ──────────────────────────────────────────────────────── */
   header {
     position: fixed; inset: 0 0 auto 0; z-index: 40;
-    background: linear-gradient(to bottom, rgba(0,0,0,.70) 0%, transparent 100%);
+    background: linear-gradient(to bottom, rgba(0,0,0,.7), transparent);
   }
-  header .wrap-lg {
+  header .wrap {
     display: flex; align-items: center; justify-content: space-between;
     height: 64px;
   }
-
-  .nav-links { display: flex; gap: 32px; }
-  .nav-links a {
-    font-size: 11px; font-weight: 300; letter-spacing: 0.22em;
-    text-transform: uppercase; color: rgba(255,255,255,.75);
+  .nav { display: flex; gap: 32px; }
+  .nav a {
+    font-size: 11px; font-weight: 300; letter-spacing: .22em;
+    text-transform: uppercase; color: rgba(255,255,255,.7);
     transition: color .15s;
-    padding-bottom: 2px;
     border-bottom: 1px solid transparent;
   }
-  .nav-links a:hover {
-    color: var(--primary);
-    border-bottom-color: var(--flame);
-  }
-
+  .nav a:hover { color: var(--text); border-bottom-color: var(--accent); }
   .logo {
-    font-size: 15px; font-weight: 300; letter-spacing: 0.08em;
+    font-size: 15px; font-weight: 300; letter-spacing: .08em;
     filter: drop-shadow(0 1px 8px rgba(0,0,0,.8));
   }
-  .logo .flame { color: var(--flame); }
-
-  .mobile-menu-btn {
+  .logo b { color: var(--accent); font-weight: 300; }
+  .menu-btn {
     display: none; background: none; border: none; cursor: pointer;
-    font-size: 11px; font-weight: 300; letter-spacing: 0.22em;
-    text-transform: uppercase; color: rgba(255,255,255,.75);
+    font: inherit; font-size: 11px; font-weight: 300; letter-spacing: .22em;
+    text-transform: uppercase; color: rgba(255,255,255,.7);
   }
-
-  /* ── mobile nav ────────────────────────────────────────────────────────────── */
-  .mobile-nav {
+  .mobile-menu {
     display: grid; grid-template-rows: 0fr;
     transition: grid-template-rows .4s cubic-bezier(.22,1,.36,1);
     position: fixed; inset: 64px 0 auto 0; z-index: 39;
     background: rgba(0,0,0,.95); backdrop-filter: blur(20px);
     overflow: hidden;
   }
-  .mobile-nav.open { grid-template-rows: 1fr; }
-  .mobile-nav > div {
-    display: flex; flex-direction: column; padding: 16px 24px 32px; gap: 0;
+  .mobile-menu.open { grid-template-rows: 1fr; }
+  .mobile-menu > div { display: flex; flex-direction: column; padding: 16px 24px 32px; }
+  .mobile-menu a {
+    font-size: 12px; font-weight: 300; letter-spacing: .2em;
+    text-transform: uppercase; color: rgba(255,255,255,.7);
+    padding: 12px 0; border-bottom: 1px solid var(--border);
   }
-  .mobile-nav a {
-    font-size: 12px; font-weight: 300; letter-spacing: 0.2em;
-    text-transform: uppercase; color: rgba(255,255,255,.75);
-    padding: 12px 0; border-bottom: 1px solid var(--hairline);
-    transition: color .15s;
-  }
-  .mobile-nav a:hover { color: var(--primary); }
+  .mobile-menu a:hover { color: var(--text); }
 
-  /* ── hero ──────────────────────────────────────────────────────────────────── */
+  /* ── hero ────────────────────────────────────────────────────────── */
   .hero {
     min-height: 60svh; display: flex; align-items: center;
     position: relative; overflow: hidden;
-    background: var(--bg-0);
   }
-  .hero-bg {
-    position: absolute; inset: 0;
-  }
+  .hero-bg { position: absolute; inset: 0; }
   .hero-bg img, .hero-bg video {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  }
+  .hero-bg video { opacity: 0; transition: opacity .7s; }
+  .hero-bg video.on { opacity: 1; }
+  .hero-bg .overlay {
     position: absolute; inset: 0;
-    width: 100%; height: 100%; object-fit: cover;
+    background:
+      linear-gradient(to bottom, rgba(0,0,0,.6) 0%, rgba(0,0,0,.25) 30%, rgba(0,0,0,.35) 62%, rgba(0,0,0,.8) 100%),
+      radial-gradient(ellipse 120% 90% at 50% 45%, transparent 45%, rgba(0,0,0,.55) 100%);
   }
-  .hero-bg video {
-    opacity: 0; transition: opacity .7s;
-  }
-  .hero-bg video.visible { opacity: 1; }
-  .hero-gradient {
-    position: absolute; inset: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,.60) 0%, rgba(0,0,0,.25) 30%, rgba(0,0,0,.35) 62%, rgba(0,0,0,.80) 100%),
-                radial-gradient(ellipse 120% 90% at 50% 45%, transparent 45%, rgba(0,0,0,.55) 100%);
-    pointer-events: none;
-  }
-  .hero-fade {
-    position: absolute; left: 0; right: 0; bottom: 0;
-    height: 160px;
-    background: linear-gradient(to top, var(--bg-0), transparent);
-    pointer-events: none;
+  .hero-bg .fade {
+    position: absolute; left: 0; right: 0; bottom: 0; height: 160px;
+    background: linear-gradient(to top, var(--bg), transparent);
   }
   .hero-content {
     position: relative; z-index: 1;
     padding: 120px 0 80px;
     text-shadow: 0 1px 16px rgba(0,0,0,.85);
   }
-  .hero .eyebrow {
+  .hero .tag {
     display: inline-block; font-size: 10px; font-weight: 300;
-    letter-spacing: 0.35em; text-transform: uppercase;
-    color: var(--flame); margin-bottom: 24px;
+    letter-spacing: .35em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 24px;
   }
   .hero h1 {
     font-size: clamp(36px, 7vw, 72px); font-weight: 300;
-    letter-spacing: -0.03em; line-height: 1.05;
-    color: var(--primary); margin-bottom: 24px;
+    letter-spacing: -.03em; line-height: 1.05; margin-bottom: 24px;
   }
-  .hero h1 .flame { color: var(--flame); }
+  .hero h1 b { color: var(--accent); font-weight: 300; }
   .hero p {
-    color: var(--secondary); font-size: clamp(14px, 1.5vw, 16px);
-    font-weight: 300; line-height: 1.7; max-width: 480px;
-    margin-bottom: 40px;
+    color: var(--dim); font-size: clamp(14px, 1.5vw, 16px);
+    line-height: 1.7; max-width: 480px; margin-bottom: 40px;
   }
-  .hero .ctas { display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
-
+  .hero .actions { display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
   .btn {
     display: inline-flex; align-items: center; gap: 8px;
-    font-family: inherit; font-size: 11px; font-weight: 300;
-    letter-spacing: 0.22em; text-transform: uppercase;
-    padding: 14px 28px; border: 1px solid var(--hairline);
-    background: transparent; color: var(--primary);
+    font: inherit; font-size: 11px; font-weight: 300;
+    letter-spacing: .22em; text-transform: uppercase;
+    padding: 14px 28px; border: 1px solid var(--border);
+    background: transparent; color: var(--text);
     cursor: pointer; transition: all .2s;
   }
-  .btn:hover {
-    border-color: var(--flame);
-    color: var(--flame);
+  .btn:hover { border-color: var(--accent); color: var(--accent); }
+  .btn-fill { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .btn-fill:hover { background: transparent; color: var(--accent); }
+  .link {
+    font-size: 12px; font-weight: 300; letter-spacing: .25em;
+    text-transform: uppercase; color: var(--dim);
+    cursor: pointer; transition: color .15s; background: none; border: none; padding: 0;
   }
-  .btn-flame {
-    background: var(--flame); border-color: var(--flame);
-    color: #fff;
-  }
-  .btn-flame:hover {
-    background: transparent; color: var(--flame);
-  }
-  .btn-ghost {
-    background: none; border: none; padding: 0;
-    font-size: 12px; font-weight: 300; letter-spacing: 0.25em;
-    text-transform: uppercase; color: var(--secondary);
-    cursor: pointer; transition: color .15s;
-  }
-  .btn-ghost:hover { color: var(--flame); }
+  .link:hover { color: var(--accent); }
 
-  /* ── sections ──────────────────────────────────────────────────────────────── */
+  /* ── sections ────────────────────────────────────────────────────── */
   section { padding: 100px 0; }
-  .section-header { margin-bottom: 48px; }
-  .section-header .label { margin-bottom: 12px; display: block; }
+  .section-hdr { margin-bottom: 48px; }
+  .section-hdr .label { display: block; margin-bottom: 12px; }
 
-  /* ── featured product ──────────────────────────────────────────────────────── */
-  .featured {
-    margin-top: -80px; position: relative; z-index: 2;
-    padding: 0 0 100px;
+  /* ── products ────────────────────────────────────────────────────── */
+  .products { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 40px; }
+  .card {
+    border: 1px solid var(--border); background: var(--surface);
+    padding: 36px 32px; display: flex; flex-direction: column;
+    transition: border-color .3s, transform .3s;
   }
-  .featured-card {
-    display: grid; grid-template-columns: 1fr 1fr;
-    border: 1px solid var(--hairline);
-    background: rgba(255,255,255,.03);
-    overflow: hidden;
-    transition: transform .3s, border-color .3s;
+  .card:hover { border-color: rgba(255,255,255,.15); transform: translateY(-4px); }
+  .card .tag { margin-bottom: 16px; display: block; }
+  .card h3 {
+    font-size: 20px; font-weight: 300; letter-spacing: .04em; margin-bottom: 12px;
   }
-  .featured-card:hover {
-    transform: translateY(-4px);
-    border-bottom-color: var(--flame);
+  .card p {
+    font-size: 14px; color: var(--dim); line-height: 1.7; flex: 1;
   }
-  .featured-image {
-    position: relative; overflow: hidden;
-    background: var(--bg-1);
-    min-height: 320px;
+  .card .meta {
+    margin-top: 28px; font-size: 14px; color: var(--dim);
   }
-  .featured-image img {
-    width: 100%; height: 100%; object-fit: cover;
-  }
-  .featured-content {
-    padding: 40px 36px;
-    display: flex; flex-direction: column; justify-content: center;
-    backdrop-filter: blur(4px);
-  }
-  .featured-content .label-accent { margin-bottom: 16px; display: block; }
-  .featured-content h3 {
-    font-size: clamp(18px, 2.5vw, 24px); font-weight: 300;
-    letter-spacing: 0.04em; line-height: 1.3; margin-bottom: 16px;
-  }
-  .badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
-  .badge {
-    display: inline-flex; align-items: center; gap: 4px;
-    font-size: 9px; font-weight: 300; letter-spacing: 0.06em;
-    text-transform: uppercase; padding: 4px 10px;
-    border-radius: 4px;
-  }
-  .badge-us { background: rgba(255,255,255,.06); color: var(--secondary); }
-  .badge-stock { background: rgba(34,120,60,.2); color: #6ee7a8; }
-  .featured-content .desc {
-    font-size: 14px; font-weight: 300; color: var(--secondary);
-    line-height: 1.7; margin-bottom: 24px;
-    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
-  }
-  .featured-price {
-    font-size: 20px; font-weight: 300; letter-spacing: 0.02em;
-    margin-bottom: 24px;
-  }
-  .featured-price .currency { font-size: 14px; color: var(--secondary); margin-right: 2px; }
-  .featured-ctas { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+  .card .meta strong { color: var(--text); font-size: 22px; }
 
-  /* ── products ──────────────────────────────────────────────────────────────── */
-  .products-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
-    background: var(--hairline);
-    margin-top: 40px;
-  }
-  .product-card {
-    background: var(--bg-0); padding: 40px 32px;
-    display: flex; flex-direction: column;
-    transition: background .25s;
-    position: relative;
-  }
-  .product-card::after {
-    content: '';
-    position: absolute; bottom: 0; left: 0; right: 0;
-    height: 2px; background: var(--flame);
-    transform: scaleX(0); transition: transform .3s;
-  }
-  .product-card:hover { background: var(--bg-1); }
-  .product-card:hover::after { transform: scaleX(1); }
-  .product-card .label-accent { margin-bottom: 16px; display: block; }
-  .product-card h3 {
-    font-size: 20px; font-weight: 300; letter-spacing: 0.04em;
-    margin-bottom: 12px;
-  }
-  .product-card p {
-    font-size: 14px; font-weight: 300; color: var(--secondary);
-    line-height: 1.7; flex: 1;
-  }
-  .product-card .card-price {
-    margin-top: 28px; font-size: 16px; font-weight: 300;
-    color: var(--secondary);
-  }
-  .product-card .card-price strong {
-    color: var(--primary); font-size: 22px;
-  }
-
-  /* ── services ──────────────────────────────────────────────────────────────── */
-  .services-section { background: rgba(255,255,255,.02); }
-  .services-grid {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 1px; background: var(--hairline);
-    margin-top: 40px;
+  /* ── services ────────────────────────────────────────────────────── */
+  .svc-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 40px;
   }
   .svc {
-    background: var(--bg-0); padding: 36px 28px;
-    transition: background .25s;
-    position: relative;
+    padding: 32px 0;
+    border-top: 1px solid var(--border);
   }
-  .svc::after {
-    content: '';
-    position: absolute; bottom: 0; left: 0; right: 0;
-    height: 2px; background: var(--flame);
-    transform: scaleX(0); transition: transform .3s;
-  }
-  .svc:hover { background: var(--bg-1); }
-  .svc:hover::after { transform: scaleX(1); }
   .svc h3 {
-    font-size: 15px; font-weight: 300; letter-spacing: 0.06em;
-    margin-bottom: 10px;
+    font-size: 15px; font-weight: 300; letter-spacing: .06em; margin-bottom: 10px;
   }
-  .svc p {
-    font-size: 14px; font-weight: 300; color: var(--secondary);
-    line-height: 1.7;
-  }
-  .services-footer {
-    margin-top: 32px; text-align: center;
-  }
-  .services-footer .loc {
-    font-size: 12px; font-weight: 300; letter-spacing: 0.2em;
-    text-transform: uppercase; color: var(--secondary);
+  .svc p { font-size: 14px; color: var(--dim); line-height: 1.7; }
+  .svc-footer { margin-top: 40px; text-align: center; }
+  .svc-footer span {
+    font-size: 12px; font-weight: 300; letter-spacing: .2em;
+    text-transform: uppercase; color: var(--dim);
   }
 
-  /* ── gallery ──────────────────────────────────────────────────────────────── */
-  .gallery-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 4px;
-    margin-top: 40px;
-  }
+  /* ── gallery ─────────────────────────────────────────────────────── */
+  .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 40px; }
   .gallery-item {
-    position: relative; overflow: hidden;
-    aspect-ratio: 9/16;
-    background: var(--bg-1);
-    cursor: pointer;
+    position: relative; overflow: hidden; aspect-ratio: 9/16;
+    background: var(--surface);
   }
   .gallery-item img {
     width: 100%; height: 100%; object-fit: cover;
     transition: transform .5s cubic-bezier(.22,1,.36,1);
   }
   .gallery-item:hover img { transform: scale(1.03); }
-  .gallery-item .caption {
+  .gallery-item .cap {
     position: absolute; bottom: 0; left: 0; right: 0;
     padding: 20px 16px 16px;
-    background: linear-gradient(to top, rgba(0,0,0,.70), transparent);
-    font-size: 10px; font-weight: 300; letter-spacing: 0.28em;
-    text-transform: uppercase; color: var(--secondary);
+    background: linear-gradient(to top, rgba(0,0,0,.7), transparent);
+    font-size: 10px; font-weight: 300; letter-spacing: .28em;
+    text-transform: uppercase; color: var(--dim);
     opacity: 0; transition: opacity .3s;
   }
-  .gallery-item:hover .caption { opacity: 1; }
+  .gallery-item:hover .cap { opacity: 1; }
 
-  /* ── about ─────────────────────────────────────────────────────────────────── */
-  .about-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
-    align-items: center; margin-top: 40px;
-  }
-  .about-text blockquote {
-    font-size: clamp(16px, 2vw, 20px); font-weight: 300;
-    color: var(--secondary); line-height: 1.7;
-    font-style: italic; margin-bottom: 24px;
-    border-left: 2px solid var(--flame);
-    padding-left: 20px;
-  }
-  .about-text .attribution {
-    font-size: 12px; font-weight: 300; letter-spacing: 0.14em;
-    text-transform: uppercase; color: var(--secondary);
-  }
-  .about-image {
-    position: relative; overflow: hidden;
-    aspect-ratio: 4/5;
-    background: var(--bg-1);
-  }
-  .about-image img {
-    width: 100%; height: 100%; object-fit: cover;
-  }
-  .about-image figcaption {
-    position: absolute; bottom: 16px; left: 16px;
-    font-size: 10px; font-weight: 300; letter-spacing: 0.28em;
-    text-transform: uppercase; color: var(--secondary);
-  }
-
-  /* ── contact ───────────────────────────────────────────────────────────────── */
-  .contact-section {
-    text-align: center; padding: 100px 0 120px;
-  }
-  .contact-section .heading { margin-bottom: 16px; }
-  .contact-section p {
-    color: var(--secondary); font-size: 14px; font-weight: 300;
-    margin-bottom: 32px; line-height: 1.7;
-  }
-  .contact-section .email-link {
-    font-size: 12px; font-weight: 300; letter-spacing: 0.22em;
-    text-transform: uppercase; color: var(--flame);
+  /* ── contact ─────────────────────────────────────────────────────── */
+  .contact { text-align: center; padding: 100px 0 120px; }
+  .contact .heading { margin-bottom: 16px; }
+  .contact p { color: var(--dim); font-size: 14px; margin-bottom: 32px; line-height: 1.7; }
+  .contact a.mail {
+    font-size: 12px; font-weight: 300; letter-spacing: .22em;
+    text-transform: uppercase; color: var(--accent);
     transition: opacity .15s;
   }
-  .contact-section .email-link:hover { opacity: .7; }
+  .contact a.mail:hover { opacity: .7; }
 
-  /* ── footer ────────────────────────────────────────────────────────────────── */
-  footer {
-    border-top: 1px solid var(--hairline);
-    padding: 60px 0 40px;
-  }
+  /* ── footer ──────────────────────────────────────────────────────── */
+  footer { border-top: 1px solid var(--border); padding: 48px 0 32px; }
   .footer-grid {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr 1fr;
-    gap: 40px;
-    margin-bottom: 48px;
+    display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 40px; margin-bottom: 40px;
   }
   .footer-col h4 {
-    font-size: 10px; font-weight: 300; letter-spacing: 0.2em;
-    text-transform: uppercase; color: var(--primary);
-    margin-bottom: 16px;
+    font-size: 10px; font-weight: 300; letter-spacing: .2em;
+    text-transform: uppercase; margin-bottom: 16px;
   }
   .footer-col p, .footer-col a {
-    font-size: 13px; font-weight: 300; color: var(--secondary);
-    line-height: 1.8; display: block;
+    font-size: 13px; color: var(--dim); line-height: 1.8; display: block;
     transition: color .15s;
   }
-  .footer-col a:hover { color: var(--primary); }
-  .footer-tagline {
-    font-size: 13px; font-weight: 300; color: var(--secondary);
-    line-height: 1.7;
-  }
+  .footer-col a:hover { color: var(--text); }
   .footer-bottom {
-    border-top: 1px solid var(--hairline);
-    padding-top: 24px;
+    border-top: 1px solid var(--border); padding-top: 20px;
     display: flex; justify-content: space-between; align-items: center;
     flex-wrap: wrap; gap: 16px;
   }
   .footer-bottom .links { display: flex; gap: 24px; }
-  .footer-bottom .links a {
-    font-size: 11px; font-weight: 300; letter-spacing: 0.16em;
-    text-transform: uppercase; color: var(--secondary);
+  .footer-bottom a, .footer-bottom span {
+    font-size: 11px; font-weight: 300; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--dim);
     transition: color .15s;
   }
-  .footer-bottom .links a:hover { color: var(--primary); }
-  .footer-bottom .copy {
-    font-size: 11px; font-weight: 300; letter-spacing: 0.16em;
-    text-transform: uppercase; color: var(--secondary);
-  }
+  .footer-bottom a:hover { color: var(--text); }
 
-  /* ── reveal animations ─────────────────────────────────────────────────────── */
+  /* ── reveal ──────────────────────────────────────────────────────── */
   [data-reveal] {
     opacity: 0; transform: translateY(20px);
     transition: opacity .6s cubic-bezier(.22,1,.36,1), transform .6s cubic-bezier(.22,1,.36,1);
   }
-  [data-reveal="visible"] {
-    opacity: 1; transform: translateY(0);
-  }
+  [data-reveal="on"] { opacity: 1; transform: none; }
 
-  /* ── responsive ────────────────────────────────────────────────────────────── */
+  /* ── responsive ──────────────────────────────────────────────────── */
   @media (max-width: 1024px) {
-    .nav-links { display: none; }
-    .mobile-menu-btn { display: block; }
+    .nav { display: none; }
+    .menu-btn { display: block; }
   }
   @media (max-width: 768px) {
-    .featured-card { grid-template-columns: 1fr; }
-    .featured-image { min-height: 240px; }
-    .products-grid { grid-template-columns: 1fr; }
-    .services-grid { grid-template-columns: 1fr; }
-    .about-grid { grid-template-columns: 1fr; gap: 40px; }
-    .gallery-grid { grid-template-columns: 1fr; }
+    .products, .svc-grid, .gallery { grid-template-columns: 1fr; }
     .footer-grid { grid-template-columns: 1fr 1fr; }
     .footer-bottom { flex-direction: column; align-items: flex-start; }
     section { padding: 80px 0; }
   }
   @media (max-width: 480px) {
     .footer-grid { grid-template-columns: 1fr; }
-    .hero .ctas { flex-direction: column; align-items: flex-start; }
-    .featured-ctas { flex-direction: column; align-items: flex-start; }
+    .hero .actions { flex-direction: column; align-items: flex-start; }
   }
 </style>
 </head>
 <body>
 
-<!-- ──────────────────────────────────────────────────────────────────────────── HEADER -->
 <header>
-  <div class="wrap-lg">
-    <div class="nav-links">
+  <div class="wrap">
+    <div class="nav">
       <a href="#products">Products</a>
       <a href="#services">Services</a>
     </div>
-    <a href="/" class="logo"><span class="flame">CM</span>&nbsp;Performance</a>
-    <div class="nav-links">
-      <a href="#about">About</a>
+    <a href="/" class="logo"><b>CM</b>&nbsp;Performance</a>
+    <div class="nav">
+      <a href="#gallery">Gallery</a>
       <a href="#contact">Contact</a>
     </div>
-    <button class="mobile-menu-btn" onclick="var m=document.querySelector('.mobile-nav');var o=m.classList.toggle('open');m.inert=!o" aria-label="Menu">Menu</button>
+    <button class="menu-btn" onclick="var m=document.querySelector('.mobile-menu');var o=m.classList.toggle('open');m.inert=!o" aria-label="Menu">Menu</button>
   </div>
 </header>
 
-<div class="mobile-nav" inert>
+<div class="mobile-menu" inert>
   <div>
-    <a href="#products" onclick="var m=this.closest('.mobile-nav');m.classList.remove('open');m.inert=true">Products</a>
-    <a href="#services" onclick="var m=this.closest('.mobile-nav');m.classList.remove('open');m.inert=true">Services</a>
-    <a href="#about" onclick="var m=this.closest('.mobile-nav');m.classList.remove('open');m.inert=true">About</a>
-    <a href="#contact" onclick="var m=this.closest('.mobile-nav');m.classList.remove('open');m.inert=true">Contact</a>
+    <a href="#products" onclick="var m=this.closest('.mobile-menu');m.classList.remove('open');m.inert=true">Products</a>
+    <a href="#services" onclick="var m=this.closest('.mobile-menu');m.classList.remove('open');m.inert=true">Services</a>
+    <a href="#gallery" onclick="var m=this.closest('.mobile-menu');m.classList.remove('open');m.inert=true">Gallery</a>
+    <a href="#contact" onclick="var m=this.closest('.mobile-menu');m.classList.remove('open');m.inert=true">Contact</a>
   </div>
 </div>
 
 <main style="flex:1">
 
-<!-- ──────────────────────────────────────────────────────────────────────────── HERO -->
 <section class="hero">
-  <div aria-hidden="true" class="hero-bg">
+  <div class="hero-bg" aria-hidden="true">
     <img src="flink/promo/hero-poster.jpg" alt="" />
     <video poster="flink/promo/hero-poster.jpg" autoplay muted loop playsinline preload="auto" disablePictureInPicture tabindex="-1">
       <source src="flink/promo/hero.webm" type="video/webm" />
       <source src="flink/promo/hero.mp4" type="video/mp4" />
     </video>
-    <div class="hero-gradient"></div>
-    <div class="hero-fade"></div>
+    <div class="overlay"></div>
+    <div class="fade"></div>
   </div>
   <div class="wrap">
     <div class="hero-content">
-      <span class="eyebrow">BMW Specialists</span>
-      <h1>Diagnostics.<br />Retrofits.<br /><span class="flame">Engineering.</span></h1>
-      <p>
-        We build systems that don't exist yet for BMW. From CAN bus diagnostics
-        to full product development — if it involves BMW, we probably do it.
-      </p>
-      <div class="ctas">
-        <a href="#products" class="btn btn-flame">View products</a>
-        <a href="#contact" class="btn-ghost">Get in touch &rarr;</a>
+      <span class="tag">BMW Specialists</span>
+      <h1>Diagnostics.<br />Retrofits.<br /><b>Engineering.</b></h1>
+      <p>We build systems that don't exist yet for BMW. From CAN bus diagnostics to full product development — if it involves BMW, we probably do it.</p>
+      <div class="actions">
+        <a href="#products" class="btn btn-fill">View products</a>
+        <a href="#contact" class="link">Get in touch &rarr;</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ──────────────────────────────────────────────────────────────────────────── FEATURED PRODUCT -->
-<section class="featured" data-reveal>
-  <div class="wrap-lg">
-    <div class="featured-card">
-      <div class="featured-image">
-        <img src="assets/gallery/flames/flame-02.jpg" alt="FlameLink exhaust flames" style="width:100%;height:100%;object-fit:cover" loading="lazy" />
-      </div>
-      <div class="featured-content">
-        <span class="label-accent">Featured</span>
-        <h3>FlameLink</h3>
-        <div class="badges">
-          <span class="badge badge-us">Made in Ghana</span>
-          <span class="badge badge-stock">In stock</span>
-        </div>
-        <p class="desc">
-          Standalone exhaust flame kit for any 12V car. Real flames — no ECU flash, no tune,
-          no engine calibration changes. FlameLink Pro adds automatic lift-off flames for
-          BMW F &amp; G Series. The product that started it all.
-        </p>
-        <div class="featured-price"><span class="currency">$</span>499</div>
-        <div class="featured-ctas">
-          <a href="https://cm-perf.github.io/flink/" class="btn">Learn more</a>
-          <a href="#contact" class="btn-ghost">Get in touch &rarr;</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ──────────────────────────────────────────────────────────────────────────── PRODUCTS -->
 <section id="products" data-reveal>
   <div class="wrap">
-    <div class="section-header">
+    <div class="section-hdr">
       <span class="label">Our products</span>
       <div class="heading">Built by us.<br />Shipping now.</div>
     </div>
-    <div class="products-grid">
-
-      <div class="product-card">
-        <span class="label-accent">Available now</span>
+    <div class="products">
+      <div class="card">
+        <span class="tag" style="color:var(--accent)">Available now</span>
         <h3>FlameLink</h3>
-        <p>
-          Standalone exhaust flame kit for any 12V car. Real flames — no ECU flash, no tune,
-          no engine calibration changes. FlameLink Pro adds automatic lift-off flames for
-          BMW F &amp; G Series.
-        </p>
-        <div class="card-price">From <strong>$499</strong></div>
+        <p>Standalone exhaust flame kit for any 12V car. Real flames — no ECU flash, no tune, no engine calibration changes. FlameLink Pro adds automatic lift-off flames for BMW F &amp; G Series.</p>
+        <div class="meta">From <strong>$499</strong></div>
       </div>
-
-      <div class="product-card">
-        <span class="label" style="color:var(--secondary)">Coming soon</span>
+      <div class="card">
+        <span class="label" style="color:var(--dim)">Coming soon</span>
         <h3>Performance Tracker</h3>
-        <p>
-          Enhanced vehicle tracking for performance cars and rental fleets. Goes beyond
-          GPS and remote kill switches — captures redline events, engine &amp; coolant
-          temperatures, driving style analysis, and full trip reconstruction. Know exactly
-          how every car was driven.
-        </p>
-        <div class="card-price" style="color:var(--secondary)">In development</div>
+        <p>Enhanced vehicle tracking for performance cars and rental fleets. Redline events, engine &amp; coolant temperatures, driving style analysis, and full trip reconstruction. Know exactly how every car was driven.</p>
+        <div class="meta" style="color:var(--dim)">In development</div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ──────────────────────────────────────────────────────────────────────────── SERVICES -->
-<section id="services" class="services-section" data-reveal>
+<section id="services" data-reveal>
   <div class="wrap">
-    <div class="section-header">
+    <div class="section-hdr">
       <span class="label">What we do</span>
       <div class="heading">Services</div>
     </div>
-    <div class="services-grid">
-
+    <div class="svc-grid">
       <div class="svc">
         <h3>BMW Diagnostics</h3>
         <p>Full system scans, fault-code analysis and live data logging. We read what the ECU and every module on the bus is doing — no generic OBD-II gimmicks.</p>
       </div>
-
       <div class="svc">
         <h3>Retrofit &amp; Coding</h3>
         <p>Paddle shifters, navigation, ambient lighting, M Sport upgrades — if BMW made it for your chassis, we can retrofit it. VO coding, expert coding and module programming.</p>
       </div>
-
       <div class="svc">
         <h3>Product Development</h3>
         <p>CAN bus controllers, firmware, mobile apps, PCBs — we build the whole stack. FlameLink started as a CAN bus project and grew into a full product line.</p>
       </div>
-
       <div class="svc">
         <h3>Performance Engineering</h3>
         <p>Data-driven tuning support, dyno-free diagnostics, and CAN bus analysis for race builds. If you need to understand what the car is doing at 5000 frames a second, we do that.</p>
       </div>
-
     </div>
-    <div class="services-footer">
-      <span class="loc">Ghana &middot; Worldwide product</span>
-    </div>
+    <div class="svc-footer"><span>Ghana &middot; Worldwide product</span></div>
   </div>
 </section>
 
-<!-- ──────────────────────────────────────────────────────────────────────────── GALLERY -->
-<section data-reveal>
+<section id="gallery" data-reveal>
   <div class="wrap">
-    <div class="section-header">
+    <div class="section-hdr">
       <span class="label">Through the shop</span>
       <div class="heading">Gallery</div>
     </div>
-    <div class="gallery-grid">
+    <div class="gallery">
       <div class="gallery-item">
         <img src="assets/gallery/flames/flame-01.jpg" alt="FlameLink dual exhaust flames at night" loading="lazy" />
-        <div class="caption">FlameLink install</div>
+        <div class="cap">FlameLink install</div>
       </div>
       <div class="gallery-item">
         <img src="assets/gallery/flames/flame-02.jpg" alt="Exhaust flames from FlameLink" loading="lazy" />
-        <div class="caption">Night flames</div>
+        <div class="cap">Night flames</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ──────────────────────────────────────────────────────────────────────────── ABOUT -->
-<section id="about" data-reveal>
-  <div class="wrap">
-    <div class="section-header">
-      <span class="label">Who we are</span>
-    </div>
-    <div class="about-grid">
-      <div class="about-text">
-        <blockquote>
-          "We started with a CAN bus adapter, a laptop, and an obsession with understanding
-          what BMW ECU data actually means. Now we build products that ship worldwide."
-        </blockquote>
-        <div class="attribution">CM Performance &middot; Founded in Ghana</div>
-        <div style="margin-top:32px">
-          <a href="#contact" class="btn-ghost">Get in touch &rarr;</a>
-        </div>
-      </div>
-      <div class="about-image">
-        <img src="flink/promo/poster_002.jpg" alt="CM Performance at work" loading="lazy" />
-        <figcaption>Building in Ghana, shipping worldwide</figcaption>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ──────────────────────────────────────────────────────────────────────────── CONTACT -->
-<section id="contact" class="contact-section" data-reveal>
+<section id="contact" class="contact" data-reveal>
   <div class="wrap">
     <span class="label" style="display:block;margin-bottom:12px">Get in touch</span>
     <div class="heading" style="margin-bottom:16px">Let's talk about<br />your BMW.</div>
-    <p>We respond to every inquiry. Whether it's a product question, a service booking, or a wild CAN bus project — drop us a line.</p>
-    <a href="mailto:cmperformancegh@gmail.com" class="email-link">cmperformancegh@gmail.com &rarr;</a>
+    <p>We respond to every inquiry. Product questions, service bookings, CAN bus projects — drop us a line.</p>
+    <a href="mailto:cmperformancegh@gmail.com" class="mail">cmperformancegh@gmail.com &rarr;</a>
   </div>
 </section>
 
 </main>
 
-<!-- ──────────────────────────────────────────────────────────────────────────── FOOTER -->
 <footer>
-  <div class="wrap-lg">
+  <div class="wrap">
     <div class="footer-grid">
-
       <div class="footer-col">
         <h4>Contact</h4>
         <a href="mailto:cmperformancegh@gmail.com">cmperformancegh@gmail.com</a>
         <p>Ghana &middot; Worldwide product</p>
-        <p style="margin-top:12px">Support<br />Mon &ndash; Fri, 10am &ndash; 6pm GMT</p>
+        <p style="margin-top:12px">Mon &ndash; Fri, 10am &ndash; 6pm GMT</p>
       </div>
-
       <div class="footer-col">
         <h4>Explore</h4>
         <a href="#products">Products</a>
         <a href="#services">Services</a>
-        <a href="#about">About</a>
+        <a href="#gallery">Gallery</a>
         <a href="#contact">Contact</a>
       </div>
-
       <div class="footer-col">
         <h4>Products</h4>
         <a href="https://cm-perf.github.io/flink/">FlameLink</a>
         <a href="#products">Performance Tracker</a>
       </div>
-
       <div class="footer-col">
         <h4>CM Performance</h4>
-        <p class="footer-tagline">Diagnostics, retrofits and engineering for BMW F &amp; G Series. Building FlameLink.</p>
+        <p>Diagnostics, retrofits and engineering for BMW F &amp; G Series. Building FlameLink.</p>
       </div>
-
     </div>
-
     <div class="footer-bottom">
       <div class="links">
         <a href="mailto:cmperformancegh@gmail.com">Email</a>
         <a href="https://github.com/cm-perf">GitHub</a>
       </div>
-      <span class="copy">&copy; 2026 CM Performance</span>
+      <span>&copy; 2026 CM Performance</span>
     </div>
   </div>
 </footer>
 
 <script>
 (function() {
-  var vid = document.querySelector('.hero-bg video');
-  if (vid) {
-    vid.addEventListener('playing', function() { vid.classList.add('visible'); });
-    if (!vid.paused) vid.classList.add('visible');
+  var v = document.querySelector('.hero-bg video');
+  if (v) {
+    v.addEventListener('playing', function() { v.classList.add('on'); });
+    if (!v.paused) v.classList.add('on');
   }
-  var reveals = document.querySelectorAll('[data-reveal]');
-  if (!reveals.length) return;
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.setAttribute('data-reveal', 'visible');
-        observer.unobserve(entry.target);
-      }
+  var r = document.querySelectorAll('[data-reveal]');
+  if (!r.length) return;
+  var o = new IntersectionObserver(function(e) {
+    e.forEach(function(x) {
+      if (x.isIntersecting) { x.target.setAttribute('data-reveal','on'); o.unobserve(x.target); }
     });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-  reveals.forEach(function(el) { observer.observe(el); });
+  }, { threshold: .1, rootMargin: '0px 0px -40px 0px' });
+  r.forEach(function(el) { o.observe(el); });
 })();
 </script>
 
