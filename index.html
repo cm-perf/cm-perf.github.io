@@ -249,6 +249,34 @@
   }
   .gallery-item:hover .cap { opacity: 1; }
 
+  /* ── wallpapers ──────────────────────────────────────────────────── */
+  .wallpapers { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 40px; }
+  .wp-card {
+    position: relative; overflow: hidden; border: 1px solid var(--border);
+    background: var(--surface);
+    transition: border-color .3s, transform .3s;
+  }
+  .wp-card:hover { border-color: rgba(255,255,255,.15); transform: translateY(-2px); }
+  .wp-card img {
+    width: 100%; aspect-ratio: 16/9; object-fit: cover;
+    transition: transform .5s cubic-bezier(.22,1,.36,1);
+  }
+  .wp-card:hover img { transform: scale(1.03); }
+  .wp-info {
+    padding: 16px; display: flex; align-items: center; justify-content: space-between;
+  }
+  .wp-info span {
+    font-size: 11px; font-weight: 300; letter-spacing: .15em;
+    text-transform: uppercase; color: var(--dim);
+  }
+  .wp-info a {
+    font-size: 10px; font-weight: 300; letter-spacing: .2em;
+    text-transform: uppercase; color: var(--accent);
+    border: 1px solid var(--accent); padding: 8px 16px;
+    transition: all .2s;
+  }
+  .wp-info a:hover { background: var(--accent); color: #fff; }
+
   /* ── contact ─────────────────────────────────────────────────────── */
   .contact { text-align: center; padding: 100px 0 120px; }
   .contact .heading { margin-bottom: 16px; }
@@ -304,7 +332,7 @@
     .mobile-menu { display: none !important; }
   }
   @media (max-width: 768px) {
-    .products, .svc-grid, .gallery { grid-template-columns: 1fr; }
+    .products, .svc-grid, .gallery, .wallpapers { grid-template-columns: 1fr; }
     .footer-grid { grid-template-columns: 1fr 1fr; }
     .footer-bottom { flex-direction: column; align-items: flex-start; }
     section { padding: 80px 0; }
@@ -331,6 +359,7 @@
       <a href="#products">Products</a>
       <a href="#services">Services</a>
       <a href="#gallery">Gallery</a>
+      <a href="#wallpapers">Wallpapers</a>
       <a href="#contact">Contact</a>
     </div>
     <button class="menu-btn" type="button" onclick="toggleMobileMenu()" aria-label="Menu" aria-controls="mobile-menu" aria-expanded="false">Menu</button>
@@ -342,6 +371,7 @@
     <a href="#products" onclick="closeMobileMenu()">Products</a>
     <a href="#services" onclick="closeMobileMenu()">Services</a>
     <a href="#gallery" onclick="closeMobileMenu()">Gallery</a>
+    <a href="#wallpapers" onclick="closeMobileMenu()">Wallpapers</a>
     <a href="#contact" onclick="closeMobileMenu()">Contact</a>
   </div>
 </div>
@@ -441,6 +471,45 @@
       <div class="gallery-item">
         <img src="assets/gallery/flames/flame-02.jpg" alt="Exhaust flames from FlameLink" loading="lazy" />
         <div class="cap">Night flames</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="wallpapers" data-reveal>
+  <div class="wrap">
+    <div class="section-hdr">
+      <span class="label">Free downloads</span>
+      <div class="heading">Wallpapers</div>
+    </div>
+    <div class="wallpapers">
+      <div class="wp-card">
+        <img src="assets/wallpapers/flame-01.png" alt="Flame wallpaper" loading="lazy" />
+        <div class="wp-info">
+          <span>4K &middot; 3840&times;2160</span>
+          <a href="assets/wallpapers/flame-01.png" download>Download</a>
+        </div>
+      </div>
+      <div class="wp-card">
+        <img src="assets/wallpapers/flame-02.png" alt="Flame wallpaper" loading="lazy" />
+        <div class="wp-info">
+          <span>4K &middot; 3840&times;2160</span>
+          <a href="assets/wallpapers/flame-02.png" download>Download</a>
+        </div>
+      </div>
+      <div class="wp-card">
+        <img src="assets/wallpapers/flame-03.png" alt="Flame wallpaper" loading="lazy" />
+        <div class="wp-info">
+          <span>4K &middot; 3840&times;2160</span>
+          <a href="assets/wallpapers/flame-03.png" download>Download</a>
+        </div>
+      </div>
+      <div class="wp-card">
+        <img src="assets/wallpapers/flame-04.png" alt="Flame wallpaper" loading="lazy" />
+        <div class="wp-info">
+          <span>4K &middot; 3840&times;2160</span>
+          <a href="assets/wallpapers/flame-04.png" download>Download</a>
+        </div>
       </div>
     </div>
   </div>
