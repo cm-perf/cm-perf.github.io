@@ -352,6 +352,32 @@
     text-transform: uppercase; color: var(--secondary);
   }
 
+  /* ── gallery ──────────────────────────────────────────────────────────────── */
+  .gallery-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4px;
+    margin-top: 40px;
+  }
+  .gallery-item {
+    position: relative; overflow: hidden;
+    aspect-ratio: 9/16;
+    background: var(--bg-1);
+    cursor: pointer;
+  }
+  .gallery-item img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform .5s cubic-bezier(.22,1,.36,1);
+  }
+  .gallery-item:hover img { transform: scale(1.03); }
+  .gallery-item .caption {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 20px 16px 16px;
+    background: linear-gradient(to top, rgba(0,0,0,.70), transparent);
+    font-size: 10px; font-weight: 300; letter-spacing: 0.28em;
+    text-transform: uppercase; color: var(--secondary);
+    opacity: 0; transition: opacity .3s;
+  }
+  .gallery-item:hover .caption { opacity: 1; }
+
   /* ── about ─────────────────────────────────────────────────────────────────── */
   .about-grid {
     display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
@@ -462,6 +488,7 @@
     .products-grid { grid-template-columns: 1fr; }
     .services-grid { grid-template-columns: 1fr; }
     .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .gallery-grid { grid-template-columns: 1fr; }
     .footer-grid { grid-template-columns: 1fr 1fr; }
     .footer-bottom { flex-direction: column; align-items: flex-start; }
     section { padding: 80px 0; }
@@ -534,7 +561,7 @@
   <div class="wrap-lg">
     <div class="featured-card">
       <div class="featured-image">
-        <img src="flink/promo/flamelink-enclosure.webp" alt="FlameLink controller in its automotive enclosure" style="width:100%;height:100%;object-fit:cover" loading="lazy" />
+        <img src="assets/gallery/flame-02.jpg" alt="FlameLink exhaust flames" style="width:100%;height:100%;object-fit:cover" loading="lazy" />
       </div>
       <div class="featured-content">
         <span class="label-accent">Featured</span>
@@ -626,6 +653,26 @@
     </div>
     <div class="services-footer">
       <span class="loc">Ghana &middot; Worldwide product</span>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────────────────────────────────── GALLERY -->
+<section data-reveal>
+  <div class="wrap">
+    <div class="section-header">
+      <span class="label">Through the shop</span>
+      <div class="heading">Gallery</div>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="assets/gallery/flame-01.jpg" alt="FlameLink dual exhaust flames at night" loading="lazy" />
+        <div class="caption">FlameLink install</div>
+      </div>
+      <div class="gallery-item">
+        <img src="assets/gallery/flame-02.jpg" alt="Exhaust flames from FlameLink" loading="lazy" />
+        <div class="caption">Night flames</div>
+      </div>
     </div>
   </div>
 </section>
