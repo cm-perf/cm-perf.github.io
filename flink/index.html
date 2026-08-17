@@ -130,9 +130,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <!-- Fonts load async (print-media swap): text paints immediately in the system
      font instead of blocking first render ~1s on mobile. -->
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" /></noscript>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500&display=swap" />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+<noscript><link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500&display=swap" rel="stylesheet" /></noscript>
 <!-- The hero poster is the mobile LCP image — fetch it eagerly. -->
 <link rel="preload" as="image" href="promo/poster.jpg" fetchpriority="high" />
 <!-- Turnstile is NOT loaded here: ~300 KB of challenge scripts only needed at
@@ -196,7 +196,7 @@ document.addEventListener('DOMContentLoaded', function () {
   html { scroll-behavior: smooth; }
   body {
     background: var(--bg); color: var(--text);
-    font-family: 'Inter', system-ui, sans-serif; line-height: 1.6;
+    font-family: 'Geist', system-ui, sans-serif; font-weight: 300; line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
   a { color: inherit; text-decoration: none; }
@@ -840,7 +840,7 @@ document.addEventListener('DOMContentLoaded', function () {
   body {
     overflow-x: hidden;
     background: #050505;
-    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-family: 'Geist', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     letter-spacing: -.008em;
   }
   ::selection { background: rgba(232,93,4,.35); color: #fff; }
