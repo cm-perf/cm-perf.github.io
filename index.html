@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CM Performance — BMW specialists. Diagnostics, retrofits, engineering.</title>
+<meta name="description" content="CM Performance is a BMW specialist shop building FlameLink and offering diagnostics, retrofits and performance engineering. Ghana-based, worldwide product." />
+<link rel="canonical" href="https://cm-perf.github.io/" />
+
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://cm-perf.github.io/" />
+<meta property="og:site_name" content="CM Performance" />
+<meta property="og:title" content="CM Performance — BMW specialists" />
+<meta property="og:description" content="Diagnostics, retrofits and engineering for BMW F & G Series. Building FlameLink." />
+<meta name="theme-color" content="#000000" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "CM Performance",
+  "url": "https://cm-perf.github.io/",
+  "email": "cmperformancegh@gmail.com",
+  "description": "BMW specialist shop: diagnostics, retrofits and performance engineering. Building FlameLink."
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" /></noscript>
+
+<style>
+  :root {
+    --bg: #000000;
+    --surface: #0c0c0c;
+    --elevated: #161616;
+    --text: #ffffff;
+    --dim: #888888;
+    --muted: #7d7d7d;
+    --border: #1c1c1c;
+    --border-hi: #2e2e2e;
+    --flame: #e85d04;
+    --bmw: #1c69d4;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif; line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 940px; margin: 0 auto; padding: 0 20px; }
+  .dim { color: var(--dim); }
+  .flame { color: var(--flame); }
+  .label {
+    font-size: 9px; font-weight: 600; letter-spacing: 2.5px;
+    text-transform: uppercase; color: var(--dim);
+  }
+  .tag {
+    display: inline-block; font-size: 9px; font-weight: 600; letter-spacing: 2.5px;
+    text-transform: uppercase; color: var(--dim);
+    border: 1px solid var(--border); border-radius: 3px; padding: 5px 9px;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 13px; font-weight: 700; letter-spacing: .2px;
+    padding: 10px 18px; border-radius: 4px; border: 1px solid transparent;
+    cursor: pointer; transition: opacity .15s, background .15s, border-color .15s;
+  }
+  .btn-flame { background: var(--flame); color: #000; }
+  .btn-flame:hover { opacity: .9; }
+  .btn-line { background: transparent; color: var(--text); border-color: var(--border-hi); }
+  .btn-line:hover { background: var(--elevated); }
+
+  /* ── nav ────────────────────────────────────────────────────────────────── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(0,0,0,.85); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 56px; }
+  nav .logo { font-weight: 800; font-size: 15px; letter-spacing: -.02em; }
+  nav .logo .flame { margin-right: 1px; }
+  nav .links { display: flex; gap: 28px; }
+  nav .links a {
+    font-size: 13px; font-weight: 500; color: var(--dim);
+    transition: color .15s;
+  }
+  nav .links a:hover { color: var(--text); }
+
+  /* ── hero ───────────────────────────────────────────────────────────────── */
+  .hero {
+    min-height: 100vh; display: flex; align-items: center;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; z-index: 0; pointer-events: none;
+    right: 0; top: 50%; transform: translateY(-50%);
+    width: 760px; height: 760px; max-width: 92vw;
+    background: radial-gradient(circle, rgba(232,93,4,.10), transparent 60%);
+  }
+  .hero-inner { position: relative; z-index: 1; }
+  .hero .eyebrow {
+    display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 4px;
+    text-transform: uppercase; color: var(--flame); margin-bottom: 22px;
+  }
+  .hero h1 {
+    font-size: clamp(28px, 5.5vw, 58px);
+    font-weight: 800; letter-spacing: -.04em; line-height: 1.05;
+  }
+  .hero p {
+    color: var(--dim); font-size: clamp(14px, 1.6vw, 16px);
+    line-height: 1.7; max-width: 520px; margin: 22px 0 32px;
+  }
+  .hero .ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  /* ── cards / products ───────────────────────────────────────────────────── */
+  section { padding: 96px 0; }
+  section:first-of-type { padding-top: 0; }
+  .section-label { margin-bottom: 32px; }
+  .section-title {
+    font-size: clamp(22px, 3.5vw, 36px);
+    font-weight: 800; letter-spacing: -.03em; line-height: 1.15;
+    margin-top: 10px;
+  }
+  .products { display: grid; gap: 16px; }
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; padding: 32px; position: relative;
+    transition: border-color .2s;
+  }
+  .card:hover { border-color: var(--border-hi); }
+  .card .card-label { margin-bottom: 16px; }
+  .card h3 {
+    font-size: 20px; font-weight: 700; letter-spacing: -.02em;
+    margin-bottom: 8px;
+  }
+  .card p { color: var(--dim); font-size: 14px; line-height: 1.7; max-width: 480px; }
+  .card .card-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 24px;
+  }
+  .card .price { font-size: 13px; font-weight: 700; }
+  .card .price .flame { font-size: 18px; }
+
+  /* ── about / services ───────────────────────────────────────────────────── */
+  .services-grid { display: grid; gap: 16px; }
+  .svc {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; padding: 24px 28px;
+    transition: border-color .2s;
+  }
+  .svc:hover { border-color: var(--border-hi); }
+  .svc h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+  .svc p { color: var(--dim); font-size: 13px; line-height: 1.7; }
+
+  /* ── contact ─────────────────────────────────────────────────────────────── */
+  .contact { text-align: center; padding: 96px 0 120px; }
+  .contact .section-title { margin-bottom: 16px; }
+  .contact p { color: var(--dim); font-size: 15px; margin-bottom: 32px; }
+  .contact a { color: var(--flame); font-weight: 600; }
+
+  /* ── footer ─────────────────────────────────────────────────────────────── */
+  footer {
+    border-top: 1px solid var(--border); padding: 32px 0;
+    text-align: center;
+  }
+  footer .copy { font-size: 12px; color: var(--muted); }
+
+  @media (max-width: 600px) {
+    nav .links { gap: 20px; }
+    nav .links a { font-size: 12px; }
+    .hero .ctas { flex-direction: column; }
+    .card .card-footer { flex-direction: column; align-items: flex-start; gap: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="/" class="logo"><span class="flame">CM</span> Performance</a>
+    <div class="links">
+      <a href="#products">Products</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ──────────────────────────────────────────────────────────────────────────── HERO -->
+<section class="hero">
+  <div class="wrap hero-inner">
+    <span class="eyebrow">BMW Specialists</span>
+    <h1>Diagnostics. Retrofits.<br /><span class="flame">Engineering.</span></h1>
+    <p>
+      We build systems that don't exist yet for BMW. From CAN bus diagnostics
+      to full product development — if it involves BMW, we probably do it.
+    </p>
+    <div class="ctas">
+      <a href="#products" class="btn btn-flame">View products</a>
+      <a href="#contact" class="btn btn-line">Get in touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────────────────────────────────── PRODUCTS -->
+<section id="products">
+  <div class="wrap">
+    <div class="section-label label">Products</div>
+    <div class="section-title">Built by us. <span class="dim">Shipping now.</span></div>
+    <div class="products" style="margin-top: 32px;">
+
+      <!-- FlameLink -->
+      <div class="card">
+        <span class="label card-label flame">Available now</span>
+        <h3>FlameLink</h3>
+        <p>
+          Standalone exhaust flame kit for any 12V car. Real flames — no ECU flash, no tune,
+          no engine calibration changes. FlameLink Pro adds automatic lift-off flames for
+          BMW F &amp; G Series.
+        </p>
+        <div class="card-footer">
+          <span class="price">From <span class="flame">$499</span></span>
+          <a href="https://cm-perf.github.io/flink/" class="btn btn-line">Learn more &rarr;</a>
+        </div>
+      </div>
+
+      <!-- future product placeholder -->
+      <div class="card">
+        <span class="tag">Coming soon</span>
+        <h3>bmw-can</h3>
+        <p>
+          An open-source CAN bus decoder for BMW F & G Series — real-time engine data
+          logging, module diagnostics and reverse engineering tools. Built in-house.
+        </p>
+        <div class="card-footer">
+          <span class="price dim">In development</span>
+          <a href="https://github.com/cm-perf/flink" class="btn btn-line">GitHub &rarr;</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────────────────────────────────── SERVICES -->
+<section id="services">
+  <div class="wrap">
+    <div class="section-label label">Services</div>
+    <div class="section-title">What we do <span class="dim">every day.</span></div>
+    <div class="services-grid" style="margin-top: 32px;">
+
+      <div class="svc">
+        <h3>BMW Diagnostics</h3>
+        <p>Full system scans, fault-code analysis and live data logging. We read what the ECU and every module on the bus is doing — no generic OBD-II gimmicks.</p>
+      </div>
+
+      <div class="svc">
+        <h3>Retrofit &amp; Coding</h3>
+        <p>Paddle shifters, navigation, ambient lighting, M Sport upgrades — if BMW made it for your chassis, we can retrofit it. VO coding, expert coding and module programming.</p>
+      </div>
+
+      <div class="svc">
+        <h3>Product Development</h3>
+        <p>CAN bus controllers, firmware, mobile apps, PCBs — we build the whole stack. FlameLink started as a CAN bus project and grew into a full product line.</p>
+      </div>
+
+      <div class="svc">
+        <h3>Performance Engineering</h3>
+        <p>Data-driven tuning support, dyno-free diagnostics, and CAN bus analysis for race builds. If you need to understand what the car is doing at 5000 frames a second, we do that.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────────────────────────────────── CONTACT -->
+<section id="contact" class="contact">
+  <div class="wrap">
+    <div class="section-label label">Get in touch</div>
+    <div class="section-title">Let's talk about your car.</div>
+    <p>cmperformancegh@gmail.com</p>
+    <a href="mailto:cmperformancegh@gmail.com" class="btn btn-flame">Email us</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="copy">&copy; 2026 CM Performance. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>
