@@ -1703,6 +1703,288 @@ document.addEventListener('DOMContentLoaded', function () {
     .build-panel { padding: 12px 28px; }
     #order .build-aftercare { display: none; }
   }
+
+  /* CM Performance bridge: keep FlameLink dramatic, but share the company shell. */
+  .top-nav {
+    height: 64px;
+    padding-left: max(24px, calc((100vw - 976px) / 2));
+    padding-right: max(24px, calc((100vw - 976px) / 2));
+    background: rgba(0,0,0,.85);
+    border-bottom: 1px solid rgba(255,255,255,.06);
+  }
+  .nav-brand {
+    min-width: 0;
+    color: #fff;
+  }
+  .nav-company {
+    font-size: 15px;
+    font-weight: 300;
+    white-space: nowrap;
+  }
+  .nav-company em {
+    color: #e85d04;
+    font-style: normal;
+  }
+  .top-nav .nav-name {
+    margin-left: 4px;
+    padding-left: 14px;
+    border-left: 1px solid rgba(255,255,255,.14);
+    color: rgba(255,255,255,.66);
+    font-size: 11px;
+    font-weight: 300;
+    text-transform: uppercase;
+  }
+  .top-nav .nav-name em {
+    color: #e85d04;
+    font-style: normal;
+  }
+  .nav-links a {
+    color: rgba(255,255,255,.66);
+    font-weight: 300;
+    text-transform: uppercase;
+  }
+  .nav-links a:hover { color: #fff; }
+  .btn,
+  .build-continue,
+  .build-choice-body,
+  .install-options,
+  .install-choice span,
+  .build-summary-card,
+  .build-configurator,
+  #order .order-form input[type=text],
+  #order .order-form input[type=tel],
+  #order .order-form input[type=email],
+  #order .order-form textarea,
+  #order #otpStep input {
+    border-radius: 0;
+  }
+  .btn {
+    font-weight: 300;
+    text-transform: uppercase;
+    box-shadow: none;
+  }
+  .btn:hover { transform: none; }
+  .btn-flame,
+  .top-nav .nav-cta,
+  .build-continue {
+    background: #e85d04;
+    color: #fff;
+    box-shadow: none;
+  }
+  .btn-flame:hover,
+  .top-nav .nav-cta:hover,
+  .build-continue:hover {
+    background: transparent;
+    color: #e85d04;
+    border-color: #e85d04;
+    box-shadow: none;
+    transform: none;
+  }
+  .top-nav .nav-cta {
+    min-height: 36px;
+    border: 1px solid #e85d04;
+    padding: 10px 18px;
+  }
+  .btn-line {
+    background: transparent;
+    border-color: rgba(255,255,255,.14);
+  }
+  .hero {
+    padding-top: 128px;
+    background: #000;
+  }
+  .hero h1 {
+    font-weight: 300;
+  }
+  .hero h1 .flame {
+    background: none;
+    color: #e85d04;
+    -webkit-text-fill-color: currentColor;
+  }
+  .hero .eyebrow,
+  .hero-proof {
+    color: rgba(255,255,255,.68);
+  }
+
+  #order {
+    background: #000;
+    color: #fff;
+    border-top: 1px solid rgba(255,255,255,.08);
+  }
+  #order .wrap {
+    max-width: 1024px;
+  }
+  #order .sec-label {
+    text-align: left;
+  }
+  #order .sec-label .label,
+  .build-step-kicker {
+    color: #e85d04;
+    font-weight: 300;
+  }
+  #order .sec-label h2 {
+    color: #fff;
+    font-weight: 300;
+  }
+  #order .sec-label p {
+    margin-left: 0;
+    color: rgba(255,255,255,.70);
+  }
+  .build-configurator {
+    max-width: none;
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.08);
+    box-shadow: none;
+  }
+  .build-stage {
+    background: #060606;
+  }
+  .build-stage::before {
+    background: radial-gradient(ellipse, rgba(232,93,4,.18), transparent 68%);
+  }
+  .build-product-name {
+    background: rgba(0,0,0,.70);
+    color: #fff;
+    border-color: rgba(255,255,255,.12);
+  }
+  .build-status {
+    color: rgba(255,255,255,.78);
+  }
+  .build-stage-caption {
+    border-radius: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,.88));
+    box-shadow: none;
+  }
+  .build-panel {
+    background: rgba(255,255,255,.04);
+  }
+  .build-progress span {
+    color: rgba(255,255,255,.46);
+  }
+  .build-progress span::before {
+    background: rgba(255,255,255,.12);
+  }
+  .build-progress span.on {
+    color: #fff;
+  }
+  .build-panel h3,
+  .choice-copy strong,
+  .choice-price,
+  .build-substep-title,
+  .build-summary-card strong,
+  .reserve-summary strong {
+    color: #fff;
+  }
+  .build-panel h3 {
+    font-weight: 300;
+  }
+  .build-intro,
+  .choice-copy span,
+  .choice-price small,
+  .build-no-pay,
+  .reserve-back,
+  .reserve-summary span,
+  #order .form-status {
+    color: rgba(255,255,255,.68);
+  }
+  .build-choice-body,
+  .install-options,
+  .build-summary-card {
+    background: #000;
+    border: 1px solid rgba(255,255,255,.10);
+  }
+  .build-choice:hover .build-choice-body {
+    border-color: rgba(255,255,255,.24);
+    transform: none;
+  }
+  .build-choice input:checked + .build-choice-body {
+    border-color: #e85d04;
+    box-shadow: 0 0 0 1px #e85d04;
+  }
+  .install-options {
+    padding: 0;
+  }
+  .install-choice span {
+    color: rgba(255,255,255,.62);
+  }
+  .install-choice input:checked + span {
+    background: #e85d04;
+    color: #fff;
+    box-shadow: none;
+  }
+  .build-total,
+  .build-total small {
+    color: #fff;
+  }
+  .reserve-summary {
+    border-color: rgba(255,255,255,.12);
+  }
+  #order .order-form input[type=text],
+  #order .order-form input[type=tel],
+  #order .order-form input[type=email],
+  #order .order-form textarea,
+  #order #otpStep input {
+    background: #000;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,.12);
+  }
+  #order .order-form ::placeholder {
+    color: rgba(255,255,255,.42);
+  }
+  #order .order-form input:focus,
+  #order .order-form textarea:focus,
+  #order #otpStep input:focus {
+    border-color: #e85d04;
+    box-shadow: none;
+  }
+  #order .build-aftercare,
+  #order .build-aftercare div {
+    background: transparent;
+  }
+
+  @media (min-width: 901px) {
+    #order {
+      padding-top: clamp(74px, 9vh, 92px);
+    }
+  }
+  @media (min-width: 901px) and (max-height: 800px) {
+    #order { padding-top: 68px; }
+  }
+  @media (min-width: 901px) and (max-height: 690px) {
+    #order { padding-top: 64px; }
+  }
+  @media (max-width: 900px) {
+    .hero { padding-top: 112px; }
+  }
+  @media (max-width: 640px) {
+    .top-nav {
+      height: 64px;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+    .top-nav .nav-name {
+      display: none;
+    }
+    .top-nav .nav-cta {
+      min-height: 34px;
+      padding: 8px 12px;
+      font-size: 10px;
+    }
+    .hero {
+      padding-top: 88px;
+    }
+    #order {
+      padding-top: 82px;
+    }
+    .build-aftercare {
+      border-radius: 0;
+      background: transparent;
+      border-color: rgba(255,255,255,.10);
+    }
+    .build-aftercare div {
+      background: transparent;
+    }
+  }
 </style>
 </head>
 <body>
@@ -1710,11 +1992,8 @@ document.addEventListener('DOMContentLoaded', function () {
 <canvas id="embers"></canvas>
 
 <nav class="top-nav">
-  <a class="nav-brand" href="#top" aria-label="FlameLink home">
-    <svg class="nav-logo" viewBox="0 0 80 80" fill="none">
-      <circle cx="40" cy="40" r="38" stroke="#1c69d4" stroke-width="1.5" opacity=".3"/>
-      <path d="M44 8L24 44h14l-4 30 28-38H43l4-30z" fill="url(#bolt)" opacity=".9"/>
-    </svg>
+  <a class="nav-brand" href="../" aria-label="CM Performance home">
+    <span class="nav-company"><em>CM</em>&nbsp;Performance</span>
     <span class="nav-name">Flame<em>Link</em></span>
   </a>
   <div class="nav-links">

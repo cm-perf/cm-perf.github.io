@@ -13,6 +13,8 @@
 <meta property="og:title" content="CM Performance — BMW specialists" />
 <meta property="og:description" content="Diagnostics, retrofits and engineering for BMW F & G Series. Building FlameLink." />
 <meta name="theme-color" content="#000000" />
+<link rel="icon" type="image/svg+xml" href="flink/favicon.svg" />
+<link rel="apple-touch-icon" href="flink/favicon.svg" />
 
 <script type="application/ld+json">
 {
@@ -40,13 +42,14 @@
     --dim: rgba(255,255,255,.7);
     --accent: #e85d04;
     --border: rgba(255,255,255,.08);
+    --sans: 'Geist', system-ui, sans-serif;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
   body {
     background: var(--bg); color: var(--text);
-    font-family: 'Geist', system-ui, sans-serif;
+    font-family: var(--sans);
     font-weight: 300; line-height: 1.6;
     min-height: 100vh; display: flex; flex-direction: column;
   }
@@ -100,7 +103,12 @@
     overflow: hidden;
   }
   .mobile-menu.open { grid-template-rows: 1fr; }
-  .mobile-menu > div { display: flex; flex-direction: column; padding: 16px 24px 32px; min-height: 0; overflow: hidden; }
+  .mobile-menu > div {
+    display: flex; flex-direction: column; padding: 0 24px;
+    min-height: 0; overflow: hidden;
+    transition: padding .4s cubic-bezier(.22,1,.36,1);
+  }
+  .mobile-menu.open > div { padding: 16px 24px 32px; }
   .mobile-menu a {
     font-size: 12px; font-weight: 300; letter-spacing: .2em;
     text-transform: uppercase; color: rgba(255,255,255,.7);
@@ -194,6 +202,13 @@
     margin-top: 28px; font-size: 14px; color: var(--dim);
   }
   .card .meta strong { color: var(--text); font-size: 22px; }
+  .card-actions {
+    margin-top: 20px; display: flex; gap: 12px; flex-wrap: wrap;
+  }
+  .card-actions .btn {
+    flex: 1 1 140px; justify-content: center; text-align: center;
+    padding-left: 18px; padding-right: 18px;
+  }
 
   /* ── services ────────────────────────────────────────────────────── */
   .svc-grid {
@@ -280,49 +295,6 @@
   }
   [data-reveal="on"] { opacity: 1; transform: none; }
 
-  /* ── order modal ─────────────────────────────────────────────────── */
-  .modal-overlay {
-    display: none; position: fixed; inset: 0; z-index: 1000;
-    background: rgba(0,0,0,.8); backdrop-filter: blur(6px);
-    align-items: center; justify-content: center; padding: 24px;
-  }
-  .modal-box {
-    background: var(--surface); border: 1px solid var(--border);
-    max-width: 480px; width: 100%; padding: 48px 40px;
-    position: relative;
-  }
-  .modal-box h2 {
-    font-size: 22px; font-weight: 300; letter-spacing: .04em; margin-bottom: 8px;
-  }
-  .modal-box .modal-tag {
-    font-size: 12px; font-weight: 300; letter-spacing: .2em;
-    text-transform: uppercase; color: var(--dim); margin-bottom: 32px; display: block;
-  }
-  .modal-box .close-btn {
-    position: absolute; top: 20px; right: 20px;
-    background: none; border: none; color: var(--dim); font-size: 24px;
-    cursor: pointer; transition: color .15s; line-height: 1;
-  }
-  .modal-box .close-btn:hover { color: var(--text); }
-  .modal-box label {
-    display: block; font-size: 11px; font-weight: 300; letter-spacing: .15em;
-    text-transform: uppercase; color: var(--dim); margin-bottom: 8px;
-  }
-  .modal-box input, .modal-box select, .modal-box textarea {
-    width: 100%; background: var(--bg); border: 1px solid var(--border);
-    color: var(--text); font-family: var(--sans); font-weight: 300;
-    font-size: 14px; padding: 12px 16px; margin-bottom: 20px;
-    outline: none; transition: border-color .2s;
-  }
-  .modal-box input:focus, .modal-box select:focus, .modal-box textarea:focus {
-    border-color: var(--accent);
-  }
-  .modal-box textarea { resize: vertical; min-height: 80px; }
-  .modal-box select { appearance: none; cursor: pointer; }
-  .modal-box .btn-submit {
-    width: 100%; margin-top: 8px; cursor: pointer;
-  }
-
   /* ── responsive ──────────────────────────────────────────────────── */
   @media (max-width: 1024px) {
     .nav { display: none; }
@@ -361,16 +333,16 @@
       <a href="#gallery">Gallery</a>
       <a href="#contact">Contact</a>
     </div>
-    <button class="menu-btn" onclick="var m=document.querySelector('.mobile-menu');var o=m.classList.toggle('open');m.inert=!o" aria-label="Menu">Menu</button>
+    <button class="menu-btn" type="button" onclick="toggleMobileMenu()" aria-label="Menu" aria-controls="mobile-menu" aria-expanded="false">Menu</button>
   </div>
 </header>
 
-<div class="mobile-menu" inert>
+<div class="mobile-menu" id="mobile-menu" inert aria-hidden="true">
   <div>
-    <a href="#products" onclick="var m=this.closest('.mobile-menu');m.classList.remove('open');m.inert=true">Products</a>
-    <a href="#services" onclick="var m=this.closest('.mobile-menu');m.classList.remove('open');m.inert=true">Services</a>
-    <a href="#gallery" onclick="var m=this.closest('.mobile-menu');m.classList.remove('open');m.inert=true">Gallery</a>
-    <a href="#contact" onclick="var m=this.closest('.mobile-menu');m.classList.remove('open');m.inert=true">Contact</a>
+    <a href="#products" onclick="closeMobileMenu()">Products</a>
+    <a href="#services" onclick="closeMobileMenu()">Services</a>
+    <a href="#gallery" onclick="closeMobileMenu()">Gallery</a>
+    <a href="#contact" onclick="closeMobileMenu()">Contact</a>
   </div>
 </div>
 
@@ -410,9 +382,9 @@
         <h3>FlameLink</h3>
         <p>Standalone exhaust flame kit for any 12V car. Real flames — no ECU flash, no tune, no engine calibration changes. FlameLink Pro adds automatic lift-off flames for BMW F &amp; G Series.</p>
         <div class="meta">From <strong>$499</strong></div>
-        <div style="margin-top:20px;display:flex;gap:12px;">
-          <a href="#" class="btn btn-fill" onclick="document.getElementById('order-modal').style.display='flex';return false;" style="text-align:center;">Buy Now</a>
-          <a href="flink/" class="btn" style="text-align:center;border:1px solid var(--border);">Learn More</a>
+        <div class="card-actions">
+          <a href="flink/#order" class="btn btn-fill">Buy Now</a>
+          <a href="flink/" class="btn" style="border:1px solid var(--border);">Learn More</a>
         </div>
       </div>
       <div class="card">
@@ -519,49 +491,36 @@
   </div>
 </footer>
 
-<div class="modal-overlay" id="order-modal" onclick="if(event.target===this)this.style.display='none'">
-  <div class="modal-box">
-    <button class="close-btn" onclick="document.getElementById('order-modal').style.display='none'">&times;</button>
-    <span class="modal-tag">Order FlameLink</span>
-    <h2>FlameLink <span style="color:var(--accent)">$499</span></h2>
-    <form id="order-form" onsubmit="handleOrder(event)">
-      <label for="o-name">Full Name</label>
-      <input type="text" id="o-name" name="name" required placeholder="Your name">
-      <label for="o-email">Email</label>
-      <input type="email" id="o-email" name="email" required placeholder="you@email.com">
-      <label for="o-phone">Phone / WhatsApp</label>
-      <input type="tel" id="o-phone" name="phone" placeholder="+233 ...">
-      <label for="o-car">Car ( chassis / model )</label>
-      <input type="text" id="o-car" name="car" placeholder="e.g. F30 335i">
-      <label for="o-version">Version</label>
-      <select id="o-version" name="version">
-        <option value="flamelink">FlameLink — $499</option>
-        <option value="flamelink-pro">FlameLink Pro — $699</option>
-      </select>
-      <label for="o-note">Note ( optional )</label>
-      <textarea id="o-note" name="note" placeholder="Anything we should know..."></textarea>
-      <button type="submit" class="btn btn-fill btn-submit">Send Order</button>
-    </form>
-  </div>
-</div>
-
 <script>
+function setMobileMenu(open) {
+  var menu = document.getElementById('mobile-menu');
+  var button = document.querySelector('.menu-btn');
+  if (!menu) return;
+  menu.classList.toggle('open', open);
+  menu.inert = !open;
+  menu.setAttribute('aria-hidden', open ? 'false' : 'true');
+  if (button) button.setAttribute('aria-expanded', open ? 'true' : 'false');
+}
+function toggleMobileMenu() {
+  var menu = document.getElementById('mobile-menu');
+  setMobileMenu(!(menu && menu.classList.contains('open')));
+}
+function closeMobileMenu() {
+  setMobileMenu(false);
+}
 document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') document.getElementById('order-modal').style.display = 'none';
+  if (e.key === 'Escape') {
+    closeMobileMenu();
+  }
 });
-function handleOrder(e) {
-  e.preventDefault();
-  var f = e.target;
-  var d = new FormData(f);
-  var body = 'FlameLink Order\n\n';
-  body += 'Name: ' + d.get('name') + '\n';
-  body += 'Email: ' + d.get('email') + '\n';
-  body += 'Phone: ' + (d.get('phone') || 'N/A') + '\n';
-  body += 'Car: ' + (d.get('car') || 'N/A') + '\n';
-  body += 'Version: ' + d.get('version') + '\n';
-  body += 'Note: ' + (d.get('note') || 'N/A');
-  window.location.href = 'mailto:cmperformancegh@gmail.com?subject=FlameLink%20Order&body=' + encodeURIComponent(body);
-  document.getElementById('order-modal').style.display = 'none';
+var menuBreakpoint = window.matchMedia('(min-width: 1025px)');
+function syncMobileMenuToViewport(e) {
+  if (e.matches) closeMobileMenu();
+}
+if (menuBreakpoint.addEventListener) {
+  menuBreakpoint.addEventListener('change', syncMobileMenuToViewport);
+} else {
+  menuBreakpoint.addListener(syncMobileMenuToViewport);
 }
 </script>
 
