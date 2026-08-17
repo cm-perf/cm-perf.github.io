@@ -1,0 +1,2962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FlameLink — exhaust flame kit. Real flames, zero engine mods | CM Performance</title>
+<meta name="description" content="FlameLink is a standalone exhaust flame kit for 12V cars: real flames with no ECU flash, tune or engine calibration changes. App-tuned, from $499. FlameLink Pro adds automatic lift-off flames for BMW F & G Series. Free to reserve." />
+<link rel="canonical" href="https://cm-perf.github.io/flink/" />
+
+<!-- Open Graph / social previews (og-image.png is generated, 1200×630) -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://cm-perf.github.io/flink/" />
+<meta property="og:site_name" content="CM Performance" />
+<meta property="og:title" content="Your car. Breathing fire. 🔥" />
+<meta property="og:description" content="A standalone exhaust flame system from $499. No ECU flash or engine calibration changes. Free to reserve." />
+<meta property="og:image" content="https://cm-perf.github.io/flink/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="FlameLink — a standalone exhaust flame system for 12V cars." />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Your car. Breathing fire. 🔥" />
+<meta name="twitter:description" content="A standalone exhaust flame system from $499. No ECU flash or engine calibration changes. BMW Pro adds automatic lift-off flames." />
+<meta name="twitter:image" content="https://cm-perf.github.io/flink/og-image.png" />
+<meta name="theme-color" content="#000000" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="apple-touch-icon" href="favicon.svg" />
+<link rel="preload" as="image" href="promo/flamelink-enclosure.webp" type="image/webp" />
+
+<!-- Structured data: helps Google understand this FlameLink is a car product,
+     distinct from the software CMS that owns the bare-name SERP. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "FlameLink Exhaust Flame Kit",
+  "brand": { "@type": "Brand", "name": "CM Performance" },
+  "description": "Standalone exhaust flame kit for 12V cars. Real flames — no ECU flash, no tune and no engine calibration changes. Tuned from your phone. FlameLink ($499) fires from a dash-mounted button; FlameLink Pro ($650) adds automatic lift-off flames for BMW F & G Series.",
+  "image": "https://cm-perf.github.io/flink/og-image.png",
+  "url": "https://cm-perf.github.io/flink/",
+  "category": "Vehicle Exhaust Accessories",
+  "offers": {
+    "@type": "AggregateOffer",
+    "lowPrice": "499",
+    "highPrice": "650",
+    "offerCount": "2",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/PreOrder",
+    "url": "https://cm-perf.github.io/flink/#order"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "CM Performance",
+  "url": "https://cm-perf.github.io/flink/",
+  "email": "cmperformancegh@gmail.com",
+  "description": "Automotive engineering team building FlameLink, a standalone exhaust flame kit — real exhaust flames with no ECU flash and no engine modifications."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Will an exhaust flame kit hurt my engine or reliability?",
+      "acceptedAnswer": { "@type": "Answer", "text": "FlameLink does not create flames by changing engine timing, fueling or the factory calibration. It works downstream in the exhaust with its own controller, fuel and spark. As with any aftermarket system, correct professional installation and responsible use matter." }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need an ECU flash or a tune for exhaust flames?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. FlameLink does not reflash, control or change your ECU calibration. FlameLink Pro only reads the vehicle signals needed for automatic lift-off triggering; the flame system runs on its own controller, fuel and spark." }
+    },
+    {
+      "@type": "Question",
+      "name": "Why choose a bolt-on flame kit instead of a flame tune?",
+      "acceptedAnswer": { "@type": "Answer", "text": "A flame tune creates the effect through the engine by adding fuel and retarding timing. FlameLink creates it downstream instead, so there is no ECU reflash or engine-calibration change to reverse." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is FlameLink safe?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Real fire is inherently risky, so FlameLink is for show, off-road and private-property use only. The system adds hard burn-time limits, a hardware watchdog, fused power and a sealed fuel feed. Professional installation and responsible use are essential." }
+    },
+    {
+      "@type": "Question",
+      "name": "How does FlameLink know when it's safe to fire?",
+      "acceptedAnswer": { "@type": "Answer", "text": "It depends on the model. FlameLink Pro reads live vehicle data — RPM, gear, vehicle speed, engine and coolant temperature, and battery voltage — over the CAN bus to gate flame operation, firing automatically on lift-off and downshift. On FlameLink the button fires it, so you are responsible for when it flames, but either way the flames need exhaust gas to be driven, so you have to be on the throttle." }
+    },
+    {
+      "@type": "Question",
+      "name": "How does the FlameLink fuel system work?",
+      "acceptedAnswer": { "@type": "Answer", "text": "FlameLink runs on its own dedicated pressurized fuel system — regulated fuel pressure and an atomizing nozzle — independent from your engine's fuel system. It is built for short-duration injection events, not continuous flow: a minimum of roughly 0.9 mL per activation, about 1.9 mL per second, and a full 3-second activation uses only ~5.6 mL of fuel." }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I use FlameLink in short bursts?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes — use short bursts with breaks in between. Heat builds with every repeated operation, and back-to-back running can build serious heat in the exhaust tip and surrounding panels, enough to potentially damage paint or anything near the flame. Burst, let it cool, burst again." }
+    },
+    {
+      "@type": "Question",
+      "name": "Will FlameLink affect my catalytic converter or exhaust?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. The flames happen at the tail end of the car or motorbike, well behind the catalytic converters and other exhaust components. Installation only modifies the far rear end of the exhaust to mount the kit, so everything upstream stays untouched." }
+    },
+    {
+      "@type": "Question",
+      "name": "Which cars does FlameLink fit?",
+      "acceptedAnswer": { "@type": "Answer", "text": "FlameLink is designed for 12V cars and is not tied to one engine platform. The standard kit fires from a dash-mounted flame button. BMW F and G Series get FlameLink Pro, which reads vehicle signals through a plug-in harness and fires automatically on lift-off. Exact fitment is confirmed before payment." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between FlameLink and FlameLink Pro?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Both make the same flames from the same standalone system. FlameLink ($499) is designed for 12V cars and puts a momentary flame button on your dash — you fire it. FlameLink Pro ($650) is engineered for BMW F and G Series: a plug-in harness reads the car so flames fire automatically on lift-off and downshift, no button needed." }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does FlameLink cost?",
+      "acceptedAnswer": { "@type": "Answer", "text": "FlameLink for 12V cars is $499. FlameLink Pro for BMW F and G Series, with automatic flames on lift-off, is $650. Professional installation is an optional $150 where available. Reserving is free — you only pay after your build is confirmed." }
+    }
+  ]
+}
+</script>
+
+<!-- Orders run through the Supabase form in #order (email-OTP verified). Keys are
+      set in the module script at the bottom. -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<!-- Fonts load async (print-media swap): text paints immediately in the system
+     font instead of blocking first render ~1s on mobile. -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" /></noscript>
+<!-- The hero poster is the mobile LCP image — fetch it eagerly. -->
+<link rel="preload" as="image" href="promo/poster.jpg" fetchpriority="high" />
+<!-- Turnstile is NOT loaded here: ~300 KB of challenge scripts only needed at
+     checkout. The order module lazy-loads it when #order approaches. -->
+<script>
+/* ── Analytics: Microsoft Clarity (free, unlimited) ──────────────────────────
+   Recordings + scroll heatmaps + the custom events fired around the page
+   (video plays, section views, order funnel). Loads ONLY when a project ID
+   is set — create one at clarity.microsoft.com and paste it below. */
+var CLARITY_ID = 'xs0g1o36th';
+if (CLARITY_ID) {
+  (function (c, l, a, r, i, t, y) {
+    c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); };
+    t = l.createElement(r); t.async = 1; t.src = 'https://www.clarity.ms/tag/' + i;
+    y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+  })(window, document, 'clarity', 'script', CLARITY_ID);
+}
+/* Safe no-op event helper — usable everywhere, harmless when analytics is off */
+window.trackEvent = function (name) {
+  try { if (window.clarity) window.clarity('event', name); } catch (_) {}
+};
+
+/* Section-view tracking: which parts of the page people actually reach */
+document.addEventListener('DOMContentLoaded', function () {
+  var seen = {};
+  var obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting && !seen[e.target.id]) {
+        seen[e.target.id] = true;
+        window.trackEvent('seen_' + e.target.id);
+      }
+    });
+  }, { threshold: 0.4 });
+  ['system', 'faq', 'why', 'order'].forEach(function (id) {
+    var el = document.getElementById(id);
+    if (el) obs.observe(el);
+  });
+  document.querySelectorAll('[data-track]').forEach(function (el) {
+    el.addEventListener('click', function () {
+      window.trackEvent(el.getAttribute('data-track'));
+    });
+  });
+});
+</script>
+
+<style>
+  :root {
+    --bg: #000000;
+    --surface: #0c0c0c;
+    --elevated: #161616;
+    --text: #ffffff;
+    --dim: #888888;
+    --muted: #7d7d7d; /* ≥4.5:1 on both #000 and #0c0c0c (WCAG AA small text) */
+    --border: #1c1c1c;
+    --border-hi: #2e2e2e;
+    --flame: #e85d04;
+    --bmw: #1c69d4;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  [hidden] { display: none !important; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif; line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 940px; margin: 0 auto; padding: 0 20px; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+
+  /* Animated flame "starlight" — drifting embers behind everything */
+  #embers { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+  section, footer { position: relative; z-index: 1; }
+  .flame { color: var(--flame); }
+  .dim { color: var(--dim); }
+
+  /* tiny shared label, like the app */
+  .label {
+    font-size: 9px; font-weight: 600; letter-spacing: 2.5px;
+    text-transform: uppercase; color: var(--dim);
+  }
+  .tag {
+    display: inline-block; font-size: 9px; font-weight: 600; letter-spacing: 2.5px;
+    text-transform: uppercase; color: var(--dim);
+    border: 1px solid var(--border); border-radius: 3px; padding: 5px 9px;
+  }
+
+  /* buttons */
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 13px; font-weight: 700; letter-spacing: .2px;
+    padding: 10px 18px; border-radius: 4px; border: 1px solid transparent;
+    cursor: pointer; transition: opacity .15s, background .15s, border-color .15s;
+  }
+  .btn-flame { background: var(--flame); color: #000; }
+  .btn-flame:hover { opacity: .9; }
+  .btn-line { background: transparent; color: var(--text); border-color: var(--border-hi); }
+  .btn-line:hover { background: var(--elevated); }
+
+  /* hero */
+  .hero { position: relative; overflow: hidden; min-height: 100vh; display: flex; align-items: center; padding: 48px 0 64px; }
+  .hero::before {
+    content: ''; position: absolute; z-index: -1; pointer-events: none;
+    right: 0; top: 50%; transform: translateY(-50%);
+    width: 760px; height: 760px; max-width: 92vw;
+    background: radial-gradient(circle, rgba(232,93,4,.18), transparent 60%);
+  }
+  .hrow { display: flex; align-items: center; gap: 48px; width: 100%; }
+  .hero-copy { flex: 1; min-width: 0; }
+  .hero .eyebrow {
+    display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 4px;
+    text-transform: uppercase; color: var(--flame); margin-bottom: 22px;
+  }
+  .hero h1 { font-size: clamp(26px, 5vw, 54px); font-weight: 800; letter-spacing: -.04em; line-height: 1.05; }
+  .hero p { color: var(--dim); font-size: clamp(14px, 1.6vw, 16px); line-height: 1.7; max-width: 480px; margin: 22px 0 30px; }
+  .hero .ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 28px; }
+
+  /* Hero video pod */
+  .hero-vid {
+    flex-shrink: 0;
+    height: clamp(300px, 62vh, 520px);
+    aspect-ratio: 9/16;
+    border-radius: 18px; overflow: hidden; position: relative; z-index: 0;
+    box-shadow: 0 0 70px rgba(232,93,4,.28), 0 0 160px rgba(232,93,4,.1);
+  }
+  .hero-vid video { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .promo-overlay {
+    position: absolute; inset: 0; z-index: 1;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 14px; cursor: pointer;
+    background: rgba(0,0,0,.3); transition: background .2s;
+  }
+  .promo-overlay:hover { background: rgba(0,0,0,.15); }
+  .promo-overlay.hidden { display: none; }
+  .play-btn {
+    width: 68px; height: 68px; border-radius: 50%; border: none;
+    background: var(--flame); cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 30px rgba(232,93,4,.6);
+    transition: transform .15s, box-shadow .15s;
+  }
+  .play-btn:hover { transform: scale(1.1); box-shadow: 0 0 48px rgba(232,93,4,.8); }
+  .play-btn svg { width: 26px; height: 26px; fill: #000; margin-left: 3px; }
+  .play-hint { font-size: 11px; color: rgba(255,255,255,.4); letter-spacing: 1px; }
+
+  /* ── Hero flame chaos (desktop/tablet ≥861px): three runs burning at once ──
+     Mobile keeps the single tap-to-load hero + the runs section below. */
+  .hero-vids { display: flex; align-items: center; flex-shrink: 0; }
+  .chaos-pod, .chaos-hint { display: none; }
+  @media (min-width: 861px) {
+    /* Chaos mode earns a wider stage: the hero band (and the nav above it)
+       stretch out while text sections keep their comfortable reading width. */
+    .hero .wrap, .top-nav { max-width: 1360px; }
+    .hrow { gap: clamp(32px, 4vw, 64px); }
+    .hero::before { width: 900px; height: 900px; }
+    /* Pods scale with viewport WIDTH (vh sizing blew up on tall/narrow
+       tablets and crushed the copy). aspect-ratio derives the height. */
+    .hero-vids #heroVid { width: clamp(170px, 21vw, 320px); height: auto; }
+    .chaos-pod { display: block; }
+    .hero-vids.chaos .chaos-hint { display: block; }
+    .chaos-pod { width: clamp(140px, 18vw, 275px); height: auto; z-index: 0; }
+    .chaos-left  { transform: rotate(-5deg) translateY(16px); margin-right: clamp(-30px, -2vw, -16px); }
+    .chaos-right { transform: rotate(5deg)  translateY(16px); margin-left:  clamp(-30px, -2vw, -16px); }
+    .hero-vids #heroVid { z-index: 1; }
+  }
+  .hero-vids.chaos .chaos-pod { box-shadow: 0 0 50px rgba(232,93,4,.2), 0 0 120px rgba(232,93,4,.07); }
+  #runs { display: none; } /* all three clips live in the hero now */
+
+  /* Run clips — portrait pods, same treatment as the hero video */
+  .runs-grid {
+    display: flex; gap: 32px; justify-content: center; flex-wrap: wrap;
+  }
+  .run-pod {
+    position: relative; overflow: hidden;
+    height: clamp(300px, 58vh, 500px); aspect-ratio: 9/16;
+    border-radius: 18px;
+    box-shadow: 0 0 70px rgba(232,93,4,.22), 0 0 160px rgba(232,93,4,.08);
+  }
+  .run-pod video { width: 100%; height: 100%; object-fit: cover; display: block; cursor: pointer; }
+  .sound-hint {
+    position: absolute; left: 12px; bottom: 10px; z-index: 1; pointer-events: none;
+    font-size: 10px; letter-spacing: 1px; color: rgba(255,255,255,.55);
+    background: rgba(0,0,0,.45); border-radius: 999px; padding: 4px 10px;
+  }
+
+  /* Buffering spinner — videos load on demand, and on mobile data (especially
+     in-app browsers) a clip can take seconds to start. Without this, a tap
+     appears to do nothing and people just keep tapping. */
+  .vid-spinner {
+    position: absolute; top: 50%; left: 50%; margin: -19px 0 0 -19px;
+    width: 38px; height: 38px; z-index: 2; pointer-events: none;
+    border: 3px solid rgba(255,255,255,.22); border-top-color: var(--flame);
+    border-radius: 50%; opacity: 0; transition: opacity .2s;
+  }
+  .vid-spinner.on { opacity: 1; animation: vspin .8s linear infinite; }
+  @keyframes vspin { to { transform: rotate(360deg); } }
+
+  /* Mini sticky player */
+  .hero-vid.mini {
+    position: fixed; bottom: 24px; right: 20px; z-index: 98;
+    height: 210px; aspect-ratio: 9/16;
+    border-radius: 12px;
+    box-shadow: 0 8px 40px rgba(0,0,0,.55), 0 0 20px rgba(232,93,4,.2);
+    animation: miniSlideIn .3s cubic-bezier(.22,1,.36,1);
+  }
+  @keyframes miniSlideIn {
+    from { transform: translateX(120%) scale(.85); opacity: 0; }
+    to   { transform: translateX(0)   scale(1);    opacity: 1; }
+  }
+  .hero-vid.mini .play-btn { width: 36px; height: 36px; box-shadow: none; }
+  .hero-vid.mini .play-btn svg { width: 14px; height: 14px; }
+  .hero-vid.mini .play-hint { display: none; }
+  /* overlay must not swallow clicks in mini mode — close button sits above it */
+  .hero-vid.mini .promo-overlay { pointer-events: none; }
+
+  /* Close button — fixed, sits above the mini player (outside the video container) */
+  .vid-close {
+    display: none;
+    position: fixed;
+    /* top-right corner of the mini player: bottom 24+210-7-22=205, right 20+7=27 */
+    bottom: 205px; right: 27px;
+    z-index: 200;
+    width: 24px; height: 24px; border-radius: 50%; border: none;
+    background: rgba(0,0,0,.82); color: #fff;
+    font-size: 15px; line-height: 1; cursor: pointer;
+    align-items: center; justify-content: center;
+    transition: background .15s;
+  }
+  .vid-close:hover { background: rgba(0,0,0,.95); }
+  .vid-close.visible { display: flex; }
+
+  @media (max-width: 860px) {
+    .hero { min-height: 0; padding: 56px 0 64px; text-align: center; }
+    .hrow { flex-direction: column; gap: 28px; }
+    .hero h1 { font-size: clamp(26px, 7.5vw, 40px); }
+    .hero p { margin-left: auto; margin-right: auto; }
+    .hero .ctas { justify-content: center; }
+    .hero-vid { height: auto; width: clamp(160px, 52vw, 240px); }
+    /* Mobile chaos: the trio fans edge-to-edge under the copy — every
+       angle flaming without scrolling to a separate section. Full-bleed
+       (cancels .wrap padding) and totals ≤100vw so nothing overflows. */
+    .hero-vids { justify-content: center; margin: 0 -20px; max-width: 100vw; }
+    .hero-vids #heroVid { width: 42vw; max-width: 230px; z-index: 1; }
+    .chaos-pod { display: block; width: 32vw; max-width: 180px; }
+    .chaos-left  { transform: rotate(-7deg) translateY(12px); margin-right: -9vw; }
+    .chaos-right { transform: rotate(7deg)  translateY(12px); margin-left: -9vw; }
+  }
+
+  /* sections */
+  section { padding: 64px 0; border-top: 1px solid var(--border); }
+  .sec-label { text-align: center; margin-bottom: 40px; }
+  .sec-label h2 { font-size: clamp(24px, 4vw, 34px); font-weight: 800; letter-spacing: -.02em; margin-top: 10px; }
+
+  /* features — three honest blocks */
+  .feats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .feat { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 26px 22px; }
+  .feat .ico { width: 44px; height: 44px; margin-bottom: 18px; position: relative; display: flex; align-items: center; justify-content: center; }
+  .feat .ico::after { content: ''; position: absolute; width: 64px; height: 64px; background: radial-gradient(circle, rgba(232,93,4,.12), transparent 70%); pointer-events: none; }
+  .feat .ico svg { width: 44px; height: 44px; stroke: url(#bolt); fill: none; stroke-width: 1.4; filter: drop-shadow(0 0 6px rgba(232,93,4,.3)); }
+  .feat .ico svg line, .feat .ico svg rect { stroke: url(#bolt); }
+  .feat h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+  .feat p { font-size: 13px; color: var(--dim); line-height: 1.55; }
+
+  /* specs — plain rows, mono values */
+  .specs { max-width: 620px; margin: 0 auto; }
+  .row { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--border); }
+  .row .k { font-size: 13px; color: var(--dim); }
+  .row .v { font-size: 13px; font-weight: 600; text-align: right; }
+
+  /* after-order steps */
+  .steps-bar { display: flex; align-items: flex-start; justify-content: center; gap: 0; max-width: 720px; margin: 0 auto 48px; }
+  .step-item { flex: 1; text-align: center; position: relative; padding: 0 8px; }
+  .step-num {
+    width: 36px; height: 36px; margin: 0 auto 10px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%; font-size: 13px; font-weight: 700;
+    background: var(--surface); border: 1px solid var(--border-hi); color: var(--dim);
+  }
+  .step-item.active .step-num { background: var(--flame); color: #000; border-color: var(--flame); }
+  .step-item h3 { font-size: 11px; font-weight: 600; margin-bottom: 4px; }
+  .step-item p { font-size: 10px; color: var(--dim); line-height: 1.4; }
+  .step-arrow { color: var(--muted); font-size: 18px; align-self: center; padding-top: 6px; flex-shrink: 0; }
+  @media (max-width: 640px) { .steps-bar { flex-wrap: wrap; gap: 16px; } .step-arrow { display: none; } }
+
+  /* offers — ready-now vs custom */
+  .offers { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 900px; margin: 0 auto 22px; }
+  .offers .order-card { max-width: none; margin: 0; text-align: left; display: flex; flex-direction: column; }
+  .offers .incl { flex: 1; }
+  .badge { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 5px 11px; border-radius: 999px; margin-bottom: 12px; }
+  .badge.now { background: rgba(232,93,4,.16); color: var(--flame); }
+  .badge.req { border: 1px solid var(--border-hi); color: var(--dim); }
+  /* Dim the custom-build card via color, not opacity — a blanket opacity
+     dragged the badge/fine print below WCAG contrast. */
+  .order-card.req-card { background: var(--bg); border-color: var(--border); }
+  .order-card.req-card .price { color: var(--dim); }
+  #reserve { scroll-margin-top: 24px; }
+  @media (max-width: 720px) { .offers { grid-template-columns: 1fr; } }
+
+  /* premium build configurator */
+  #order {
+    position: relative; overflow: hidden; padding: 92px 0 104px;
+    background: #f5f5f7; color: #121317; border-top: 0;
+  }
+  #order::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(circle at 8% 42%, rgba(232,93,4,.09), transparent 30%),
+      radial-gradient(circle at 92% 72%, rgba(255,172,69,.13), transparent 25%);
+  }
+  #order .wrap { position: relative; }
+  #order .sec-label { margin-bottom: 38px; }
+  #order .sec-label .label { color: #b94800; }
+  #order .sec-label h2 {
+    color: #121317; font-size: clamp(36px, 6vw, 64px);
+    font-weight: 750; letter-spacing: -.055em; line-height: .98;
+  }
+  #order .sec-label p {
+    max-width: 560px; margin: 18px auto 0; color: #676970;
+    font-size: 16px; line-height: 1.55;
+  }
+  .build-configurator {
+    display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(390px, .92fr);
+    min-height: 680px; max-width: 1120px; margin: 0 auto;
+    background: #fff; border: 1px solid rgba(18,19,23,.08);
+    border-radius: 34px; overflow: hidden;
+    box-shadow: 0 30px 90px rgba(29,25,20,.11), 0 2px 10px rgba(29,25,20,.05);
+  }
+  .build-stage {
+    position: relative; min-height: 680px; overflow: hidden; background: #ececee;
+  }
+  .build-stage::before {
+    content: ''; position: absolute; inset: auto 6% 8% 6%; height: 30%;
+    background: radial-gradient(ellipse, rgba(232,93,4,.20), transparent 68%);
+    filter: blur(22px); z-index: 1; pointer-events: none;
+  }
+  .build-stage img {
+    width: 100%; height: 100%; display: block; object-fit: cover;
+    object-position: 50% 50%; transform: scale(1.015);
+    transition: transform .55s cubic-bezier(.2,.75,.2,1), filter .4s ease;
+  }
+  .build-stage[data-build="custom"] img {
+    transform: scale(1.035); filter: saturate(.78) contrast(1.04);
+  }
+  .build-visual-top {
+    position: absolute; top: 28px; left: 28px; right: 28px; z-index: 2;
+    display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  }
+  .build-product-name {
+    padding: 8px 12px; border-radius: 999px;
+    background: rgba(255,255,255,.78); color: #17181b;
+    border: 1px solid rgba(0,0,0,.07); backdrop-filter: blur(14px);
+    font-size: 11px; font-weight: 750; letter-spacing: .11em; text-transform: uppercase;
+  }
+  .build-status {
+    display: inline-flex; align-items: center; gap: 7px; color: #35363a;
+    font-size: 11px; font-weight: 650;
+  }
+  .build-status::before {
+    content: ''; width: 7px; height: 7px; border-radius: 50%;
+    background: #38a866; box-shadow: 0 0 0 4px rgba(56,168,102,.12);
+  }
+  .build-stage-caption {
+    position: absolute; z-index: 2; left: 28px; right: 28px; bottom: 26px;
+    padding: 18px 20px; border-radius: 20px;
+    background: rgba(18,19,23,.88); color: #fff; backdrop-filter: blur(18px);
+    box-shadow: 0 16px 40px rgba(0,0,0,.16);
+  }
+  .build-stage-caption strong {
+    display: block; font-size: 15px; letter-spacing: -.015em; margin-bottom: 5px;
+  }
+  .build-stage-caption span { display: block; color: #b8bbc2; font-size: 12px; line-height: 1.45; }
+  .build-panel {
+    display: flex; flex-direction: column; padding: 38px 40px 34px; background: #fff;
+  }
+  .build-progress {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 44px;
+  }
+  .build-progress span {
+    position: relative; padding-top: 11px; color: #9a9ca2;
+    font-size: 10px; font-weight: 700; letter-spacing: .11em; text-transform: uppercase;
+  }
+  .build-progress span::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    border-radius: 99px; background: #e8e8eb;
+  }
+  .build-progress span.on { color: #1a1b1f; }
+  .build-progress span.on::before { background: #e85d04; }
+  .build-step-kicker {
+    display: block; color: #9a450d; font-size: 11px; font-weight: 750;
+    letter-spacing: .13em; text-transform: uppercase; margin-bottom: 8px;
+  }
+  .build-panel h3 {
+    color: #16171a; font-size: 27px; line-height: 1.12;
+    letter-spacing: -.035em; margin-bottom: 9px;
+  }
+  .build-intro { color: #74767d; font-size: 13px; line-height: 1.5; margin-bottom: 22px; }
+  .build-choices { display: grid; gap: 10px; }
+  .build-choice { position: relative; cursor: pointer; }
+  .build-choice input { position: absolute; opacity: 0; pointer-events: none; }
+  .build-choice-body {
+    display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 18px;
+    min-height: 94px; padding: 18px 18px 18px 20px;
+    border: 1px solid #dedfe3; border-radius: 18px; background: #fff;
+    transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+  }
+  .build-choice:hover .build-choice-body { border-color: #b7b9bf; transform: translateY(-1px); }
+  .build-choice input:focus-visible + .build-choice-body {
+    outline: 3px solid rgba(232,93,4,.22); outline-offset: 2px;
+  }
+  .build-choice input:checked + .build-choice-body {
+    border-color: #e85d04; box-shadow: 0 0 0 1px #e85d04, 0 12px 30px rgba(232,93,4,.09);
+  }
+  .choice-copy strong { display: block; color: #191a1e; font-size: 15px; margin-bottom: 5px; }
+  .choice-copy span { color: #797b82; font-size: 12px; line-height: 1.4; }
+  .choice-price { color: #191a1e; text-align: right; font-size: 15px; font-weight: 750; white-space: nowrap; }
+  .choice-price small {
+    display: block; color: #93959b; font-size: 9px; font-weight: 700;
+    letter-spacing: .1em; text-transform: uppercase; margin-bottom: 4px;
+  }
+  .choice-recommended {
+    display: inline-block; margin-bottom: 7px; padding: 4px 7px;
+    border-radius: 99px; background: #fff0e7; color: #b94800;
+    font-size: 9px; font-weight: 750; letter-spacing: .08em; text-transform: uppercase;
+  }
+  .build-substep { margin-top: 26px; }
+  .build-substep-title { color: #34353a; font-size: 12px; font-weight: 700; margin-bottom: 10px; }
+  .install-options {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+    padding: 5px; background: #f2f2f4; border-radius: 15px;
+  }
+  .install-choice { position: relative; cursor: pointer; }
+  .install-choice input { position: absolute; opacity: 0; }
+  .install-choice span {
+    display: flex; min-height: 54px; padding: 8px 10px; align-items: center; justify-content: center;
+    border-radius: 11px; color: #696b71; font-size: 11px; font-weight: 700;
+    line-height: 1.3; text-align: center; transition: .2s ease;
+  }
+  .install-choice input:checked + span {
+    color: #18191c; background: #fff; box-shadow: 0 3px 12px rgba(22,22,25,.10);
+  }
+  .build-summary { margin-top: auto; padding-top: 26px; }
+  .build-summary-card {
+    display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: center;
+    padding: 18px 19px; border-radius: 18px; color: #fff; background: #15161a;
+  }
+  .build-summary-card small { display: block; color: #9fa2aa; font-size: 10px; margin-bottom: 4px; }
+  .build-summary-card strong { display: block; font-size: 13px; line-height: 1.4; }
+  .build-total { text-align: right; font-size: 23px; font-weight: 780; letter-spacing: -.03em; }
+  .build-total small { color: #d3d5da; font-size: 9px; letter-spacing: .08em; text-transform: uppercase; }
+  .build-continue {
+    width: 100%; justify-content: center; margin-top: 10px; padding: 15px 20px;
+    border-radius: 999px; border: 0; background: #e85d04; color: #090909;
+    font-size: 13px; font-weight: 780; cursor: pointer;
+    box-shadow: 0 9px 24px rgba(232,93,4,.22); transition: .2s ease;
+  }
+  .build-continue:hover { transform: translateY(-1px); background: #f06a12; }
+  .build-no-pay {
+    display: flex; justify-content: center; gap: 7px; align-items: center;
+    margin-top: 11px; color: #7d7f85; font-size: 10px; text-align: center;
+  }
+  .build-no-pay::before { content: '✓'; color: #2d9a5a; font-weight: 800; }
+  .reserve-drawer[hidden], .build-config-step[hidden] { display: none !important; }
+  .reserve-drawer { animation: buildIn .35s ease both; }
+  @keyframes buildIn { from { opacity: 0; transform: translateY(8px); } }
+  .reserve-back {
+    border: 0; padding: 0; margin-bottom: 26px; background: none; color: #6f7177;
+    font: inherit; font-size: 11px; font-weight: 700; cursor: pointer;
+  }
+  .reserve-back:hover { color: #17181b; }
+  #order .order-form { gap: 11px; margin-top: 22px; }
+  #order .order-form input[type=text], #order .order-form input[type=tel],
+  #order .order-form input[type=email], #order .order-form textarea, #order #otpStep input {
+    background: #f7f7f8; color: #191a1e; border: 1px solid #dedfe3;
+    border-radius: 12px; padding: 13px 14px; font-size: 13px;
+  }
+  #order .order-form textarea { min-height: 74px; }
+  #order .order-form input:focus, #order .order-form textarea:focus, #order #otpStep input:focus {
+    border-color: #e85d04; box-shadow: 0 0 0 3px rgba(232,93,4,.11);
+  }
+  #order .order-form .btn { border-radius: 999px; justify-content: center; padding: 15px; }
+  #order .form-status { color: #75777d; }
+  #order .form-status.err { color: #bc2e22; }
+  #order .form-status.ok { color: #25784a; }
+  .reserve-summary {
+    display: flex; justify-content: space-between; gap: 18px; align-items: center;
+    margin: 20px 0 0; padding: 14px 0; border-top: 1px solid #e5e5e7;
+    border-bottom: 1px solid #e5e5e7;
+  }
+  .reserve-summary span { color: #777980; font-size: 11px; }
+  .reserve-summary strong { color: #17181b; font-size: 13px; text-align: right; }
+  .build-aftercare {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+    max-width: 900px; margin: 28px auto 0; overflow: hidden;
+    border: 1px solid #dedfe3; border-radius: 18px; background: #dedfe3;
+  }
+  .build-aftercare div { padding: 18px; background: rgba(255,255,255,.78); text-align: center; }
+  .build-aftercare strong { display: block; color: #242529; font-size: 11px; margin-bottom: 4px; }
+  .build-aftercare span { color: #7c7e84; font-size: 10px; line-height: 1.4; }
+  @media (max-width: 900px) {
+    #order { padding: 74px 0 82px; }
+    .build-configurator { grid-template-columns: 1fr; max-width: 650px; }
+    .build-stage { min-height: 520px; }
+    .build-panel { min-height: 640px; }
+  }
+  @media (max-width: 600px) {
+    #order { padding: 62px 0 68px; }
+    #order .wrap { padding-left: 14px; padding-right: 14px; }
+    .build-configurator { border-radius: 25px; }
+    .build-stage { min-height: 430px; }
+    .build-visual-top { top: 18px; left: 18px; right: 18px; }
+    .build-stage-caption { left: 16px; right: 16px; bottom: 16px; padding: 15px 16px; }
+    .build-panel { min-height: 0; padding: 29px 22px 25px; }
+    .build-progress { margin-bottom: 32px; }
+    .build-panel h3 { font-size: 24px; }
+    .build-choice-body { min-height: 88px; padding: 15px; }
+    .install-options { grid-template-columns: 1fr; }
+    .build-summary { margin-top: 24px; }
+    .build-aftercare { grid-template-columns: 1fr; }
+  }
+
+  /* compare — tune vs FlameLink */
+  .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width: 760px; margin: 0 auto; }
+  .cmp { border: 1px solid var(--border); border-radius: 12px; padding: 26px 24px; background: var(--surface); }
+  .cmp.good { border-color: rgba(232,93,4,.45); }
+  .cmp h3 { font-size: 16px; font-weight: 700; }
+  .cmp-badge { display: inline-block; font-size: 8px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 3px 9px; border-radius: 3px; margin-bottom: 10px; }
+  .cmp-badge.good { background: rgba(232,93,4,.15); color: var(--flame); }
+  .cmp-badge.bad { background: rgba(255,107,93,.1); color: #ff6b5d; }
+  .cmp .sub { display: block; font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--dim); margin: 3px 0 18px; }
+  .cmp ul { list-style: none; display: grid; gap: 12px; }
+  .cmp li { font-size: 13px; line-height: 1.5; display: flex; gap: 10px; align-items: flex-start; color: var(--dim); }
+  .cmp li::before { flex-shrink: 0; font-weight: 700; }
+  .cmp.bad li::before { content: '✕'; color: #ff6b5d; }
+  .cmp.good li { color: var(--text); }
+  .cmp.good li::before { content: '✓'; color: var(--flame); }
+  @media (max-width: 640px) { .compare { grid-template-columns: 1fr; } }
+
+  /* faq */
+  .faq { max-width: 660px; margin: 0 auto; }
+  .faq details { border-bottom: 1px solid var(--border); }
+  .faq summary {
+    list-style: none; cursor: pointer; padding: 18px 0; font-size: 15px; font-weight: 600;
+    display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: '+'; color: var(--flame); font-weight: 700; font-size: 20px; line-height: 1; }
+  .faq details[open] summary::after { content: '–'; }
+  .faq details p { font-size: 13px; color: var(--dim); line-height: 1.65; padding: 0 0 18px; max-width: 64ch; }
+
+  /* batch / lead-time banner */
+  .batch-banner {
+    max-width: 760px; margin: 0 auto 36px; background: var(--surface);
+    border: 1px solid var(--border); border-left: 3px solid var(--flame);
+    border-radius: 8px; padding: 16px 20px; font-size: 13px; color: var(--dim); line-height: 1.6;
+  }
+  .batch-banner strong { color: var(--text); }
+
+  /* cost-comparison — "do the math" (mobile-first cards, 4-up on desktop) */
+  .tco-intro { color: var(--dim); font-size: 14px; max-width: 62ch; margin: -6px 0 24px; line-height: 1.6; }
+  .tco-cards { display: grid; grid-template-columns: 1fr; gap: 14px; }
+  @media (min-width: 640px)  { .tco-cards { grid-template-columns: repeat(2, 1fr); gap: 18px; align-items: start; } }
+  @media (min-width: 1100px) { #cost .wrap { max-width: 1440px; } .tco-cards { grid-template-columns: repeat(4, 1fr); gap: 20px; } }
+  .tco-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px 24px 16px; position: relative; }
+  .tco-save { position: absolute; top: 12px; right: 12px; width: 30px; height: 30px; display: inline-flex; align-items: center; justify-content: center; padding: 0; background: var(--elevated); border: 1px solid var(--border-hi); border-radius: 7px; color: var(--dim); cursor: pointer; transition: color .15s, border-color .15s; }
+  .tco-save:hover { color: var(--flame); border-color: rgba(232,93,4,.45); }
+  .tco-save:disabled { opacity: .45; cursor: default; }
+  .tco-save svg { width: 15px; height: 15px; }
+  .tco-card.fl { border-color: rgba(232,93,4,.45); background: rgba(232,93,4,.05); }
+  .tco-badge { display: inline-block; background: var(--flame); color: #0a0a0a; font-size: 9px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; margin-bottom: 10px; }
+  .tco-name { font-size: 14px; font-weight: 700; color: var(--text); }
+  .tco-sub { font-size: 11px; color: var(--dim); margin-top: 2px; }
+  .tco-card.fl .tco-sub { color: var(--flame); }
+  .tco-allin { margin: 14px 0 2px; font-size: 10px; color: var(--dim); letter-spacing: .6px; text-transform: uppercase; }
+  .tco-allin b { display: block; font-size: 23px; font-weight: 800; color: var(--text); letter-spacing: -.02em; margin-top: 3px; }
+  .tco-card.fl .tco-allin b { color: var(--flame); }
+  .tco-allin small { display: block; font-size: 11px; font-weight: 600; text-transform: none; letter-spacing: 0; color: #e74c3c; margin-top: 4px; }
+  .tco-rows { list-style: none; margin: 12px 0 0; padding: 0; }
+  .tco-rows li { padding: 10px 0; border-top: 1px solid var(--border); }
+  .tco-rows .k { display: block; color: var(--dim); font-size: 10.5px; letter-spacing: .4px; text-transform: uppercase; margin-bottom: 4px; }
+  .tco-rows .v { display: block; color: var(--text); font-size: 13.5px; font-weight: 600; line-height: 1.45; }
+  .tco-rows .v.yes { color: #2ecc71; }
+  .tco-rows .v.no  { color: #e74c3c; }
+  .tco-rows .v.warn { color: #e8a020; }
+  .tco-note { font-size: 11px; color: var(--muted); margin: 18px auto 0; line-height: 1.6; max-width: 90ch; text-align: center; }
+
+  /* order */
+  .order-card {
+    max-width: 440px; margin: 0 auto; text-align: center; position: relative; overflow: hidden;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 38px 36px;
+  }
+  .order-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, transparent, var(--flame), transparent);
+  }
+  .order-card .price { font-size: 48px; font-weight: 800; letter-spacing: -.02em; margin-top: 16px; }
+  .order-card .price small { font-size: 17px; color: var(--dim); font-weight: 600; }
+  .order-card .incl { list-style: none; text-align: left; margin: 26px 0 28px; display: grid; gap: 12px; }
+  .order-card .incl li { font-size: 13px; color: var(--text); display: flex; gap: 10px; align-items: flex-start; }
+  .order-card .incl li::before { content: '✓'; color: var(--flame); font-weight: 700; flex-shrink: 0; }
+  .order-card .price small { display: block; font-size: 11px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: var(--dim); margin-bottom: 4px; }
+  .order-card .btn { width: 100%; justify-content: center; padding: 14px; font-size: 14px; }
+  .order-card .btn + .btn { margin-top: 10px; }
+  .order-card .note { font-size: 11px; color: var(--muted); margin-top: 16px; }
+
+  .addon {
+    max-width: 440px; margin: 14px auto 0; display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; text-align: left;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px 20px;
+  }
+  .addon .a-name { font-size: 13px; font-weight: 600; }
+  .addon .a-sub { display: block; font-size: 11px; color: var(--dim); margin-top: 2px; }
+  .addon .a-price { font-size: 15px; font-weight: 700; white-space: nowrap; font-family: 'JetBrains Mono', monospace; }
+
+  /* order form */
+  .order-form { display: grid; gap: 10px; text-align: left; margin-top: 6px; }
+  .order-form input[type=text], .order-form input[type=tel], .order-form input[type=email], .order-form select, .order-form textarea, #otpStep input {
+    width: 100%; background: var(--bg); color: var(--text);
+    border: 1px solid var(--border-hi); border-radius: 6px; padding: 11px 13px;
+    font-size: 13px; font-family: inherit;
+  }
+  .order-form textarea { min-height: 60px; resize: vertical; }
+  .order-form ::placeholder { color: var(--muted); }
+  .order-form input:focus, .order-form textarea:focus, #otpStep input:focus {
+    outline: none; border-color: var(--flame);
+  }
+  .check { display: flex; align-items: center; gap: 9px; font-size: 12px; color: var(--dim); cursor: pointer; }
+  .check input { width: 15px; height: 15px; accent-color: var(--flame); flex-shrink: 0; }
+  #otpStep { text-align: left; margin-top: 6px; }
+  #otpStep p { font-size: 12px; color: var(--dim); margin-bottom: 10px; }
+  #otpStep input { margin-bottom: 10px; letter-spacing: 6px; text-align: center;
+    font-family: 'JetBrains Mono', monospace; font-size: 18px; }
+  .form-status { font-size: 12px; margin-top: 12px; min-height: 1em; }
+  .form-status.err { color: #ff6b5d; }
+  .form-status.ok { color: var(--flame); }
+  .order-done { padding: 8px 0; }
+  .order-done h3 { font-size: 19px; margin-bottom: 8px; }
+  .order-done p { font-size: 13px; color: var(--dim); }
+
+  /* Full-page thank you screen */
+  #thankyou {
+    position: fixed; inset: 0; z-index: 200;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: transparent; text-align: center; padding: 40px 20px;
+  }
+  #thankyou::before {
+    content: ''; position: absolute; z-index: -1; pointer-events: none;
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 700px; height: 700px; max-width: 100vw;
+    background: radial-gradient(circle, rgba(232,93,4,.15), transparent 60%);
+  }
+  #thankyou .flame-logo {
+    width: 80px; height: 80px; margin-bottom: 32px;
+  }
+  #thankyou h1 {
+    font-size: clamp(32px, 6vw, 52px); font-weight: 800; letter-spacing: -.03em; line-height: 1.1;
+  }
+  #thankyou p {
+    font-size: 15px; color: var(--dim); max-width: 380px; margin: 16px 0 32px; line-height: 1.6;
+  }
+  #thankyou .btn { font-size: 12px; }
+
+  /* sticky nav */
+  .top-nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    height: 52px; display: flex; align-items: center; gap: 10px;
+    padding: 0 20px; max-width: 980px; margin: 0 auto;
+    background: rgba(0,0,0,.85); backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .top-nav .nav-logo { width: 22px; height: 22px; flex-shrink: 0; }
+  .top-nav .nav-name { font-size: 13px; font-weight: 700; letter-spacing: -.2px; }
+  .top-nav .nav-name em { color: var(--flame); font-style: normal; }
+  .top-nav .nav-cta { margin-left: auto; font-size: 11px; padding: 6px 14px; font-weight: 600; }
+  .hero { scroll-margin-top: 60px; }
+  section, #documents { scroll-margin-top: 60px; }
+  @media (max-width: 720px) { .top-nav .nav-name { display: none; } }
+
+  /* footer */
+  footer { border-top: 1px solid var(--border); padding: 40px 0 44px; }
+  .foot-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+  .links { display: flex; gap: 20px; flex-wrap: wrap; }
+  .links a { color: var(--dim); font-size: 13px; }
+  .links a:hover { color: var(--flame); }
+  .totop { color: var(--dim); font-size: 12px; letter-spacing: .5px; white-space: nowrap; }
+  .totop:hover { color: var(--flame); }
+  .disclaimer { color: var(--muted); font-size: 11px; line-height: 1.5; margin-top: 26px; max-width: 560px; }
+  .copy { color: var(--muted); font-size: 11px; margin-top: 14px; }
+
+  @media (max-width: 720px) {
+    .feats { grid-template-columns: 1fr; }
+    section { padding: 52px 0; }
+  }
+
+  /* ── FlameLink premium product system ─────────────────────────────────── */
+  :root {
+    --bg: #050505;
+    --surface: #101012;
+    --elevated: #171719;
+    --text: #f5f5f7;
+    --dim: #a1a1a6;
+    --muted: #76767b;
+    --border: rgba(255,255,255,.09);
+    --border-hi: rgba(255,255,255,.17);
+  }
+  body {
+    overflow-x: hidden;
+    background: #050505;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    letter-spacing: -.008em;
+  }
+  ::selection { background: rgba(232,93,4,.35); color: #fff; }
+  #embers { opacity: .18; }
+  .wrap { width: 100%; max-width: 1180px; padding-left: 30px; padding-right: 30px; }
+  section { padding: 112px 0; border-top: 0; }
+  .label {
+    color: #a0a0a5; font-size: 10px; font-weight: 700;
+    letter-spacing: .16em;
+  }
+  .btn {
+    min-height: 44px; justify-content: center; padding: 11px 21px;
+    border-radius: 999px; font-size: 12px; font-weight: 700;
+    transition: transform .25s ease, background .25s ease, border-color .25s ease, box-shadow .25s ease;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-flame {
+    color: #111; background: #f06a12;
+    box-shadow: 0 10px 28px rgba(232,93,4,.18);
+  }
+  .btn-flame:hover { opacity: 1; background: #ff7a20; box-shadow: 0 14px 34px rgba(232,93,4,.25); }
+  .btn-line { background: rgba(255,255,255,.055); border-color: rgba(255,255,255,.14); }
+  .btn-line:hover { background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.22); }
+
+  .top-nav {
+    top: 14px; left: 50%; right: auto; transform: translateX(-50%);
+    width: calc(100% - 32px); height: 58px; max-width: 1160px;
+    padding: 0 10px 0 17px; gap: 14px;
+    border: 1px solid rgba(255,255,255,.11); border-radius: 999px;
+    background: rgba(13,13,14,.74);
+    box-shadow: 0 12px 34px rgba(0,0,0,.28);
+    backdrop-filter: saturate(150%) blur(22px);
+  }
+  .nav-brand { display: inline-flex; align-items: center; gap: 9px; }
+  .top-nav .nav-logo { width: 25px; height: 25px; }
+  .top-nav .nav-name { font-size: 13px; font-weight: 720; letter-spacing: -.025em; }
+  .top-nav .nav-name em { color: #f06a12; }
+  .nav-links {
+    display: flex; align-items: center; gap: 28px;
+    position: absolute; left: 50%; transform: translateX(-50%);
+  }
+  .nav-links a { color: #a7a7ac; font-size: 11px; font-weight: 600; transition: color .2s ease; white-space: nowrap; }
+  .nav-links a:hover { color: #fff; }
+  .top-nav .nav-cta { min-height: 38px; margin-left: auto; padding: 8px 17px; font-size: 11px; }
+
+  .hero {
+    min-height: 0; padding: 158px 0 116px; text-align: center;
+    isolation: isolate; overflow: hidden;
+  }
+  .hero::before {
+    right: auto; left: 50%; top: 48%; transform: translate(-50%,-50%);
+    width: min(1250px, 110vw); height: min(950px, 100vw);
+    background:
+      radial-gradient(circle at 50% 64%, rgba(232,93,4,.17), transparent 39%),
+      radial-gradient(circle at 50% 50%, rgba(28,105,212,.07), transparent 58%);
+    filter: blur(12px);
+  }
+  .hero .wrap { max-width: 1240px; }
+  .hrow { flex-direction: column; gap: 62px; }
+  .hero-copy { max-width: 920px; margin: 0 auto; }
+  .hero .eyebrow {
+    margin-bottom: 24px; color: #b5b5ba; font-size: 10px;
+    font-weight: 700; letter-spacing: .19em;
+  }
+  .hero h1 {
+    max-width: 900px; margin: 0 auto; color: #f5f5f7;
+    font-size: clamp(48px, 7.2vw, 88px); line-height: .98;
+    font-weight: 760; letter-spacing: -.062em;
+  }
+  .hero h1 .flame {
+    color: #f3f3f5;
+    background: linear-gradient(90deg, #ffb05b 2%, #f06a12 48%, #c53d22 98%);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero p {
+    max-width: 650px; margin: 27px auto 31px; color: #a1a1a6;
+    font-size: clamp(16px, 1.8vw, 20px); line-height: 1.55; letter-spacing: -.018em;
+  }
+  .hero .ctas { justify-content: center; gap: 10px; margin-bottom: 28px; }
+  .hero-assurance {
+    margin: -14px auto 25px; color: #77777c;
+    font-size: 10px; font-weight: 620; letter-spacing: .02em;
+  }
+  .hero-proof { display: flex; justify-content: center; flex-wrap: wrap; gap: 9px; }
+  .hero-proof span {
+    display: inline-flex; align-items: center; gap: 7px; padding: 7px 11px;
+    border: 1px solid rgba(255,255,255,.09); border-radius: 999px;
+    color: #8f8f94; background: rgba(255,255,255,.025);
+    font-size: 10px; font-weight: 620;
+  }
+  .hero-proof span::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: #45b06f; }
+
+  .hero-vids {
+    display: grid; grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 12px; width: min(100%, 940px); margin: 0 auto; padding: 12px;
+    border: 1px solid rgba(255,255,255,.09); border-radius: 32px;
+    background: rgba(255,255,255,.035);
+    box-shadow: 0 34px 100px rgba(0,0,0,.52), 0 0 80px rgba(232,93,4,.08);
+    backdrop-filter: blur(16px);
+  }
+  .hero-vid, .chaos-pod, .hero-vids #heroVid {
+    display: block; width: 100%; height: auto; aspect-ratio: 9 / 16;
+    max-width: none; border-radius: 22px; transform: none;
+    margin: 0; overflow: hidden; box-shadow: none;
+    background: #111;
+  }
+  .hero-vid video {
+    transform: scale(1.002);
+    transition: filter .45s ease, transform .65s cubic-bezier(.2,.7,.2,1);
+  }
+  .hero-vids .hero-vid:not(#heroVid) video { filter: saturate(.85) brightness(.78); }
+  .hero-vids .hero-vid:hover video { filter: saturate(1) brightness(1); transform: scale(1.018); }
+  .sound-hint {
+    left: 50%; bottom: 13px; transform: translateX(-50%);
+    padding: 6px 10px; border: 1px solid rgba(255,255,255,.13);
+    color: rgba(255,255,255,.78); background: rgba(10,10,11,.58);
+    backdrop-filter: blur(12px); white-space: nowrap;
+  }
+  .hero-vids.chaos .chaos-hint { display: block; }
+  .play-btn { background: rgba(255,255,255,.92); box-shadow: 0 14px 36px rgba(0,0,0,.25); }
+  .play-btn:hover { box-shadow: 0 17px 44px rgba(0,0,0,.32); }
+
+  .system-story { color: #16171a; background: #f5f5f7; overflow: hidden; }
+  .system-grid {
+    display: grid; grid-template-columns: minmax(0,.9fr) minmax(460px,1.1fr);
+    align-items: center; gap: clamp(52px,8vw,110px);
+  }
+  .system-copy { padding: 28px 0; }
+  .system-copy .label { color: #a34508; }
+  .system-copy h2 {
+    max-width: 590px; margin: 17px 0 24px; color: #17181b;
+    font-size: clamp(38px,5.2vw,65px); font-weight: 760;
+    letter-spacing: -.058em; line-height: 1.01;
+  }
+  .system-copy p { max-width: 520px; color: #6f7177; font-size: 16px; line-height: 1.65; }
+  .text-link {
+    display: inline-flex; align-items: center; gap: 9px; margin-top: 27px;
+    color: #b34805; font-size: 13px; font-weight: 700;
+  }
+  .text-link span { transition: transform .2s ease; }
+  .text-link:hover span { transform: translateX(4px); }
+  .system-product {
+    position: relative; min-height: 600px; overflow: hidden;
+    border: 1px solid rgba(20,20,23,.08); border-radius: 34px;
+    background: #e5e3e1; box-shadow: 0 32px 80px rgba(42,36,31,.13);
+  }
+  .system-product img {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; object-position: 50% 50%;
+    transition: transform .8s cubic-bezier(.2,.7,.2,1);
+  }
+  .system-product:hover img { transform: scale(1.015); }
+  .system-product-label {
+    position: absolute; left: 22px; right: 22px; bottom: 22px;
+    padding: 17px 19px; border: 1px solid rgba(255,255,255,.16);
+    border-radius: 18px; color: #fff; background: rgba(15,15,17,.78);
+    backdrop-filter: blur(18px); box-shadow: 0 18px 42px rgba(0,0,0,.18);
+  }
+  .system-product-label span { display: block; color: #aaaab0; font-size: 10px; margin-bottom: 3px; }
+  .system-product-label strong { display: block; font-size: 13px; }
+  .system-points {
+    display: grid; grid-template-columns: repeat(3,1fr); gap: 1px;
+    margin-top: 72px; overflow: hidden; border-top: 1px solid #d9d9dc;
+  }
+  .system-points article { padding: 28px 34px 0 0; }
+  .system-points article + article { padding-left: 34px; border-left: 1px solid #d9d9dc; }
+  .system-points article > span { color: #b44a08; font-size: 10px; font-weight: 750; letter-spacing: .12em; }
+  .system-points h3 { margin: 11px 0 7px; color: #25262a; font-size: 15px; }
+  .system-points p { color: #777980; font-size: 12px; line-height: 1.55; }
+
+  #faq { background: #050505; }
+  .sec-label { margin-bottom: 52px; }
+  .sec-label h2 {
+    margin-top: 13px; color: #f5f5f7;
+    font-size: clamp(36px,5vw,58px); font-weight: 740;
+    letter-spacing: -.052em; line-height: 1.03;
+  }
+  .faq { max-width: 900px; }
+  .faq details {
+    margin-bottom: 10px; overflow: hidden;
+    border: 1px solid rgba(255,255,255,.08); border-radius: 18px;
+    background: rgba(255,255,255,.035);
+    transition: background .2s ease, border-color .2s ease;
+  }
+  .faq details:hover, .faq details[open] { background: rgba(255,255,255,.055); border-color: rgba(255,255,255,.14); }
+  .faq summary { padding: 22px 24px; font-size: 14px; }
+  .faq summary::after { color: #f06a12; font-weight: 500; }
+  .faq details p { max-width: 72ch; padding: 0 54px 23px 24px; color: #a1a1a6; font-size: 13px; line-height: 1.72; }
+
+  #why {
+    background:
+      radial-gradient(circle at 78% 38%, rgba(232,93,4,.09), transparent 28%),
+      #0d0d0f;
+  }
+  .compare { max-width: 1040px; gap: 15px; }
+  .cmp {
+    min-height: 460px; padding: 38px 36px; border-radius: 28px;
+    background: rgba(255,255,255,.035); border-color: rgba(255,255,255,.09);
+  }
+  .cmp h3 { font-size: 25px; letter-spacing: -.035em; }
+  .cmp .sub { margin: 5px 0 31px; color: #777980; }
+  .cmp li { gap: 13px; padding: 11px 0; border-top: 1px solid rgba(255,255,255,.07); font-size: 13px; }
+  .cmp.good {
+    color: #17181b; background: #f5f5f7; border-color: #f5f5f7;
+    box-shadow: 0 28px 70px rgba(0,0,0,.26);
+  }
+  .cmp.good .sub, .cmp.good li { color: #65676d; }
+  .cmp.good li { border-color: rgba(20,20,23,.09); }
+  .cmp.good .cmp-badge.good { background: #ffeadc; color: #a94408; }
+  #why > .wrap > div:last-child .btn { margin-top: 8px; }
+
+  #order { padding-top: 118px; padding-bottom: 118px; }
+  #order .sec-label { margin-bottom: 48px; }
+  #order .build-configurator { box-shadow: 0 34px 100px rgba(31,25,19,.13); }
+
+  footer { padding: 72px 0 52px; border-top: 1px solid rgba(255,255,255,.08); background: #050505; }
+  .footer-brand { padding-bottom: 48px; margin-bottom: 28px; border-bottom: 1px solid rgba(255,255,255,.08); }
+  .footer-brand span { display: block; color: #f06a12; font-size: 11px; font-weight: 750; margin-bottom: 12px; }
+  .footer-brand strong {
+    display: block; max-width: 620px; color: #f5f5f7;
+    font-size: clamp(29px,4.2vw,48px); line-height: 1.04; letter-spacing: -.05em;
+  }
+  .links { gap: 24px; }
+  .links a, .totop { color: #919196; font-size: 11px; }
+  .links a:hover, .totop:hover { color: #fff; }
+  .disclaimer { max-width: 690px; color: #6f6f74; }
+
+  @media (max-width: 900px) {
+    section { padding: 86px 0; }
+    .nav-links { display: none; }
+    .hero { padding: 138px 0 92px; }
+    .hrow { gap: 48px; }
+    .hero-vids { width: min(100%,760px); }
+    .system-grid { grid-template-columns: 1fr; gap: 42px; }
+    .system-copy { text-align: center; }
+    .system-copy h2, .system-copy p { margin-left: auto; margin-right: auto; }
+    .system-product { min-height: 560px; }
+  }
+
+  @media (max-width: 640px) {
+    .wrap { padding-left: 18px; padding-right: 18px; }
+    section { padding: 72px 0; }
+    #embers { opacity: .10; }
+    .top-nav { top: 10px; width: calc(100% - 20px); height: 54px; padding-left: 14px; }
+    .top-nav .nav-name { display: inline; }
+    .top-nav .nav-cta { min-height: 36px; padding: 7px 14px; }
+    .hero { padding: 122px 0 76px; }
+    .hero h1 { font-size: clamp(42px,13vw,62px); }
+    .hero p { font-size: 16px; }
+    .hero .ctas { align-items: stretch; flex-direction: column; max-width: 310px; margin-left: auto; margin-right: auto; }
+    .hero-assurance { max-width: 280px; line-height: 1.5; }
+    .hero-proof { gap: 6px; }
+    .hero-proof span { padding: 6px 9px; font-size: 9px; }
+    .hrow { gap: 43px; }
+    .hero-vids {
+      display: flex; justify-content: flex-start; width: calc(100vw - 18px);
+      max-width: none; margin-right: -18px; margin-left: 0; padding: 9px;
+      gap: 9px; overflow-x: auto; scroll-snap-type: x mandatory;
+      scrollbar-width: none; border-radius: 26px;
+    }
+    .hero-vids::-webkit-scrollbar { display: none; }
+    .hero-vid, .chaos-pod, .hero-vids #heroVid {
+      flex: 0 0 66vw; width: 66vw; max-width: 270px;
+      scroll-snap-align: center; border-radius: 18px;
+    }
+    .hero-vids .hero-vid:not(#heroVid) video { filter: none; }
+    .system-copy { padding: 0; text-align: left; }
+    .system-copy h2 { font-size: 42px; }
+    .system-product { min-height: 470px; border-radius: 26px; }
+    .system-product-label { left: 14px; right: 14px; bottom: 14px; }
+    .system-points { grid-template-columns: 1fr; margin-top: 44px; border-top: 0; }
+    .system-points article, .system-points article + article {
+      padding: 23px 0; border-left: 0; border-top: 1px solid #d9d9dc;
+    }
+    .sec-label { margin-bottom: 36px; }
+    .faq details { border-radius: 15px; }
+    .faq summary { padding: 20px 18px; }
+    .faq details p { padding: 0 42px 20px 18px; }
+    .compare { grid-template-columns: 1fr; }
+    .cmp { min-height: 0; padding: 29px 24px; border-radius: 23px; }
+    #order { padding-top: 76px; padding-bottom: 76px; }
+    footer { padding-top: 58px; }
+    .footer-brand { padding-bottom: 38px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-vid video, .system-product img, .btn, .text-link span { transition: none; }
+  }
+
+  /* Editorial correction: fewer containers, one continuous visual rhythm. */
+  #embers { display: none; }
+  body { background: #000; }
+  section { padding: 132px 0; }
+  .wrap { max-width: 1160px; }
+
+  .top-nav {
+    top: 0; left: 0; right: 0; transform: none;
+    width: 100%; height: 54px; max-width: none; margin: 0;
+    padding-left: max(24px, calc((100vw - 1120px) / 2));
+    padding-right: max(24px, calc((100vw - 1120px) / 2));
+    border: 0; border-bottom: 1px solid rgba(255,255,255,.08);
+    border-radius: 0; background: rgba(0,0,0,.78);
+    box-shadow: none; backdrop-filter: saturate(140%) blur(18px);
+  }
+  .nav-links { gap: 34px; }
+  .top-nav .nav-cta {
+    min-height: 30px; padding: 6px 14px;
+    color: #fff; background: #d95308; box-shadow: none;
+  }
+
+  .hero {
+    padding: 168px 0 132px;
+    background: #000;
+  }
+  .hero::before { display: none; }
+  .hero-copy { max-width: 930px; }
+  .hero .eyebrow { color: #86868b; margin-bottom: 28px; }
+  .hero h1 { max-width: 920px; font-size: clamp(52px,7.4vw,90px); }
+  .hero p { max-width: 620px; margin-top: 30px; color: #a1a1a6; }
+  .hero .ctas { margin-bottom: 26px; }
+  .hero-proof { gap: 0; color: #77777c; }
+  .hero-proof span {
+    padding: 0; border: 0; border-radius: 0;
+    background: none; color: inherit; font-size: 10px;
+  }
+  .hero-proof span::before { display: none; }
+  .hero-proof span + span::before {
+    content: '·'; display: inline; width: auto; height: auto;
+    margin: 0 10px; color: #4f4f53; background: none;
+  }
+  .hrow { gap: 76px; }
+
+  .hero-vids {
+    width: min(100%,1080px); gap: 2px; padding: 0;
+    overflow: hidden; border: 0; border-radius: 28px;
+    background: #111; box-shadow: none; backdrop-filter: none;
+  }
+  .hero-vid, .chaos-pod, .hero-vids #heroVid {
+    border-radius: 0; background: #0a0a0a;
+  }
+  .hero-vid:first-child { border-radius: 28px 0 0 28px; }
+  .hero-vid:last-child { border-radius: 0 28px 28px 0; }
+  .hero-vids .hero-vid:not(#heroVid) video { filter: none; }
+  .hero-vids .hero-vid:hover video { transform: none; }
+  .sound-hint {
+    bottom: 16px; padding: 5px 9px;
+    border: 0; color: rgba(255,255,255,.66);
+    background: rgba(0,0,0,.55); backdrop-filter: blur(10px);
+  }
+
+  .system-story {
+    padding-top: 148px; padding-bottom: 148px;
+    color: #f5f5f7; background: #000;
+  }
+  .system-grid {
+    grid-template-columns: minmax(0,.82fr) minmax(500px,1.18fr);
+    gap: clamp(70px,9vw,132px);
+  }
+  .system-copy .label { color: #86868b; }
+  .system-copy h2 { color: #f5f5f7; }
+  .system-copy .system-accent { color: #f06a12; }
+  .system-copy p { color: #a1a1a6; }
+  .text-link { color: #e6671b; }
+  .system-product {
+    min-height: 640px; border: 0; border-radius: 28px;
+    background: #e6e4e2; box-shadow: none;
+  }
+  .system-product-label {
+    left: 0; right: 0; bottom: 0; padding: 23px 25px;
+    border: 0; border-radius: 0;
+    background: linear-gradient(transparent,rgba(0,0,0,.82));
+    box-shadow: none; backdrop-filter: none;
+  }
+  .system-points {
+    margin-top: 92px; gap: 0;
+    border-top: 1px solid rgba(255,255,255,.16);
+  }
+  .system-points article { padding-top: 31px; }
+  .system-points article + article { border-left-color: rgba(255,255,255,.12); }
+  .system-points article > span { color: #77777c; }
+  .system-points h3 { color: #f5f5f7; }
+  .system-points p { color: #8d8d92; }
+
+  #why {
+    background: #000;
+    border-top: 1px solid rgba(255,255,255,.08);
+  }
+  .compare {
+    gap: 0; max-width: 1000px;
+    border-top: 1px solid rgba(255,255,255,.15);
+    border-bottom: 1px solid rgba(255,255,255,.15);
+  }
+  .cmp, .cmp.good {
+    min-height: 0; padding: 42px 44px 46px;
+    color: #f5f5f7; background: transparent;
+    border: 0; border-radius: 0; box-shadow: none;
+  }
+  .cmp + .cmp { border-left: 1px solid rgba(255,255,255,.15); }
+  .cmp .sub, .cmp.good .sub { color: #77777c; }
+  .cmp li, .cmp.good li {
+    color: #a1a1a6; border-color: rgba(255,255,255,.09);
+  }
+  .cmp-badge, .cmp.good .cmp-badge.good {
+    padding: 0; border: 0; border-radius: 0; background: none;
+  }
+  .cmp.good .cmp-badge.good { color: #e6671b; }
+  .why-action { margin-top: 35px; text-align: center; }
+  .why-action .text-link { margin-top: 0; }
+
+  #faq {
+    padding-top: 132px; padding-bottom: 148px;
+    background: #000;
+  }
+  .faq { max-width: 820px; }
+  .faq details, .faq details:hover, .faq details[open] {
+    margin: 0; border: 0; border-bottom: 1px solid rgba(255,255,255,.13);
+    border-radius: 0; background: transparent;
+  }
+  .faq details:first-of-type { border-top: 1px solid rgba(255,255,255,.13); }
+  .faq summary { padding: 24px 2px; font-size: 15px; }
+  .faq details p { padding: 0 50px 25px 2px; color: #929297; }
+
+  #order { border-radius: 0; }
+  #order::before { display: none; }
+  #order .build-configurator {
+    border-color: rgba(18,19,23,.08);
+    box-shadow: 0 24px 70px rgba(31,25,19,.10);
+  }
+
+  footer { background: #000; }
+  .footer-brand strong { max-width: 560px; font-size: clamp(27px,3.8vw,43px); }
+
+  @media (max-width: 900px) {
+    section { padding: 104px 0; }
+    .hero { padding: 142px 0 104px; }
+    .system-story { padding: 112px 0; }
+    .system-grid { grid-template-columns: 1fr; gap: 60px; }
+    .system-copy { text-align: left; }
+    .system-copy h2, .system-copy p { margin-left: 0; margin-right: 0; }
+  }
+
+  @media (max-width: 640px) {
+    section { padding: 82px 0; }
+    .top-nav {
+      top: 0; width: 100%; height: 52px;
+      padding-left: 16px; padding-right: 10px;
+    }
+    .hero { padding: 116px 0 84px; }
+    .hero .eyebrow { margin-bottom: 22px; }
+    .hero p { margin-top: 24px; }
+    .hrow { gap: 52px; }
+    .hero-vids {
+      width: calc(100vw - 18px); margin-right: -18px;
+      padding: 0; gap: 2px; border-radius: 22px 0 0 22px;
+    }
+    .hero-vid, .chaos-pod, .hero-vids #heroVid {
+      flex-basis: 72vw; width: 72vw; max-width: 290px;
+      border-radius: 0;
+    }
+    .hero-vid:first-child { border-radius: 22px 0 0 22px; }
+    .hero-vid:last-child { border-radius: 0; }
+    .system-story { padding: 94px 0; }
+    .system-product { min-height: 500px; }
+    .system-points { margin-top: 60px; }
+    .system-points article, .system-points article + article {
+      border-color: rgba(255,255,255,.13);
+    }
+    .cmp, .cmp.good { padding: 31px 0 35px; }
+    .cmp + .cmp { border-left: 0; border-top: 1px solid rgba(255,255,255,.15); }
+    #faq { padding: 86px 0 100px; }
+  }
+
+  /* Flame-first hero and continuous dark purchase transition. */
+  .hero {
+    padding: 54px 0 0;
+    min-height: 100svh;
+  }
+  .hero .wrap { max-width: none; padding: 0; }
+  .hero .hrow {
+    position: relative; display: block;
+    min-height: calc(100svh - 54px);
+  }
+  .hero .hrow::after {
+    content: ''; position: absolute; z-index: 1; inset: 0; pointer-events: none;
+    background:
+      linear-gradient(to bottom, rgba(0,0,0,.88) 0%, rgba(0,0,0,.53) 31%, transparent 57%),
+      linear-gradient(to bottom, transparent 78%, rgba(0,0,0,.20) 100%);
+  }
+  .hero-copy {
+    position: absolute; z-index: 2; left: 30px; right: 30px; top: 58px;
+    max-width: 850px; margin: 0 auto;
+    text-shadow: 0 2px 24px rgba(0,0,0,.55);
+  }
+  .hero .eyebrow {
+    margin-bottom: 17px; color: rgba(255,255,255,.70);
+    text-shadow: 0 1px 10px rgba(0,0,0,.75);
+  }
+  .hero h1 { max-width: 820px; font-size: clamp(46px,6.4vw,78px); }
+  .hero p {
+    max-width: 590px; margin-top: 20px; margin-bottom: 23px;
+    color: rgba(255,255,255,.76); font-size: clamp(14px,1.5vw,17px);
+  }
+  .hero .ctas { margin-bottom: 18px; }
+  .hero .btn-line {
+    background: rgba(0,0,0,.35); border-color: rgba(255,255,255,.30);
+    backdrop-filter: blur(10px);
+  }
+  .hero-proof { color: rgba(255,255,255,.58); }
+  .hero-proof span + span::before { color: rgba(255,255,255,.27); }
+  .hero-vids {
+    position: absolute; inset: 0; z-index: 0;
+    width: 100%; height: 100%; max-width: none;
+    display: grid; grid-template-columns: repeat(3,1fr);
+    gap: 1px; border-radius: 0;
+  }
+  .hero-vid, .chaos-pod, .hero-vids #heroVid {
+    width: 100%; height: 100%; max-width: none;
+    aspect-ratio: auto; border-radius: 0;
+  }
+  .hero-vid:first-child, .hero-vid:last-child { border-radius: 0; }
+  .hero-vid video {
+    width: 100%; height: 100%; object-fit: cover;
+    object-position: center center;
+  }
+  .sound-hint { top: auto; bottom: 18px; }
+
+  .system-story { padding-top: 154px; }
+
+  #order {
+    color: #f5f5f7;
+    background: #111113;
+    border-top: 1px solid rgba(255,255,255,.08);
+  }
+  #order .sec-label .label { color: #e6671b; }
+  #order .sec-label h2 { color: #f5f5f7; }
+  #order .sec-label p { color: #9c9ca2; }
+  #order .build-aftercare {
+    border-color: rgba(255,255,255,.10);
+    background: rgba(255,255,255,.10);
+  }
+  #order .build-aftercare div { background: #18181b; }
+  #order .build-aftercare strong { color: #f5f5f7; }
+  #order .build-aftercare span { color: #8e8e93; }
+
+  @media (max-width: 640px) {
+    .hero { padding-top: 52px; min-height: 100svh; }
+    .hero .hrow { min-height: calc(100svh - 52px); }
+    .hero-copy { left: 18px; right: 18px; top: 35px; text-align: left; }
+    .hero .eyebrow { margin-bottom: 14px; }
+    .hero h1 { font-size: clamp(39px,12.5vw,58px); }
+    .hero p { margin: 16px 0 19px; font-size: 14px; }
+    .hero .ctas {
+      max-width: none; margin: 0 0 15px;
+      flex-direction: row; align-items: center; justify-content: flex-start;
+    }
+    .hero .ctas .btn { min-height: 40px; padding: 9px 14px; font-size: 10px; }
+    .hero-proof { justify-content: flex-start; }
+    .hero-vids {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      display: block; margin: 0; overflow: hidden; border-radius: 0;
+    }
+    .hero-vids .chaos-pod { display: none; }
+    .hero-vids #heroVid { display: block; width: 100%; height: 100%; max-width: none; }
+    .hero-vids #heroVid video { object-position: 50% 50%; }
+    .system-story { padding-top: 100px; }
+    #order { padding-top: 88px; }
+  }
+
+  /* Keep proof and message separate: flame reel first, editorial copy second. */
+  .hero { min-height: 0; padding-top: 54px; }
+  .hero .hrow {
+    display: flex; flex-direction: column;
+    min-height: 0; background: #000;
+  }
+  .hero .hrow::after { display: none; }
+  .hero-vids {
+    position: relative; inset: auto; order: 1;
+    height: 76svh; min-height: 560px; max-height: 860px;
+  }
+  .hero-copy {
+    position: relative; inset: auto; order: 2;
+    width: 100%; max-width: 900px;
+    padding: 94px 30px 118px; margin: 0 auto;
+    text-align: center; text-shadow: none;
+  }
+  .hero .eyebrow { color: #86868b; text-shadow: none; }
+  .hero p { margin-left: auto; margin-right: auto; color: #a1a1a6; }
+  .hero .ctas { justify-content: center; }
+  .hero .btn-line {
+    background: rgba(255,255,255,.055);
+    border-color: rgba(255,255,255,.14);
+    backdrop-filter: none;
+  }
+  .hero-proof { justify-content: center; color: #77777c; }
+  .hero-proof span + span::before { color: #4f4f53; }
+  .system-story { padding-top: 116px; }
+
+  @media (max-width: 640px) {
+    .hero { min-height: 0; padding-top: 52px; }
+    .hero .hrow { min-height: 0; }
+    .hero-vids {
+      position: relative; inset: auto;
+      height: 70svh; min-height: 500px; max-height: 720px;
+    }
+    .hero-copy {
+      position: relative; inset: auto;
+      padding: 68px 18px 88px; text-align: center;
+    }
+    .hero .ctas {
+      justify-content: center;
+      max-width: 310px; margin-left: auto; margin-right: auto;
+    }
+    .hero-proof { justify-content: center; }
+    .system-story { padding-top: 88px; }
+  }
+
+  /* Final hero direction: original three-card flame stack, refined. */
+  .hero {
+    min-height: 100svh;
+    padding: 124px 0 104px;
+  }
+  .hero .wrap {
+    max-width: 1340px;
+    padding-left: 30px; padding-right: 30px;
+  }
+  .hero .hrow {
+    display: grid;
+    grid-template-columns: minmax(380px,.82fr) minmax(560px,1.18fr);
+    align-items: center; gap: clamp(38px,5vw,76px);
+    min-height: calc(100svh - 228px);
+  }
+  .hero-copy {
+    position: relative; inset: auto; order: 1;
+    width: auto; max-width: 610px; padding: 0; margin: 0;
+    text-align: left;
+  }
+  .hero h1 {
+    max-width: 610px;
+    font-size: clamp(44px,5.5vw,72px);
+  }
+  .hero p { max-width: 530px; margin-left: 0; margin-right: 0; }
+  .hero .ctas { justify-content: flex-start; }
+  .hero-proof { justify-content: flex-start; }
+
+  .hero-vids {
+    position: relative; inset: auto; order: 2;
+    display: flex; align-items: center; justify-content: center;
+    width: 100%; height: auto; min-height: 0; max-height: none;
+    overflow: visible; gap: 0; background: transparent;
+  }
+  .hero-vid, .chaos-pod, .hero-vids #heroVid {
+    display: block;
+    flex: 0 0 auto; width: auto;
+    height: clamp(390px,66vh,610px);
+    aspect-ratio: 9 / 16;
+    overflow: hidden; border-radius: 24px;
+    box-shadow: 0 28px 80px rgba(0,0,0,.58), 0 0 44px rgba(232,93,4,.10);
+  }
+  .hero-vid:first-child, .hero-vid:last-child { border-radius: 24px; }
+  .hero-vids #heroVid { position: relative; z-index: 3; }
+  .hero-vids .chaos-left {
+    z-index: 1; margin-right: -54px;
+    transform: rotate(-4deg) translateY(20px);
+  }
+  .hero-vids .chaos-right {
+    z-index: 1; margin-left: -54px;
+    transform: rotate(4deg) translateY(20px);
+  }
+  .hero-vid video { width: 100%; height: 100%; object-fit: cover; }
+  .hero-vids .hero-vid:not(#heroVid) video { filter: brightness(.82) saturate(.88); }
+  .hero-vids .hero-vid:hover video { filter: brightness(1) saturate(1); }
+  .sound-hint { top: auto; bottom: 12px; }
+
+  .faq-action {
+    display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    margin-top: 42px; padding-top: 30px;
+    color: #a1a1a6; font-size: 13px;
+  }
+  .faq-action .btn { min-width: 112px; }
+
+  @media (max-width: 900px) {
+    .hero { min-height: 0; padding: 122px 0 94px; }
+    .hero .hrow {
+      display: flex; flex-direction: column;
+      min-height: 0; gap: 58px;
+    }
+    .hero-copy {
+      width: 100%; max-width: 760px;
+      text-align: center;
+    }
+    .hero h1, .hero p { margin-left: auto; margin-right: auto; }
+    .hero .ctas, .hero-proof { justify-content: center; }
+    .hero-vids { width: min(100%,720px); }
+    .hero-vid, .chaos-pod, .hero-vids #heroVid {
+      height: auto; width: clamp(180px,31vw,250px);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hero { padding: 72px 0 52px; }
+    .hero .wrap { padding-left: 18px; padding-right: 18px; }
+    .hero .hrow { gap: 26px; }
+    .hero-copy { padding: 0; text-align: center; }
+    .hero .ctas {
+      max-width: 310px; margin-left: auto; margin-right: auto;
+      justify-content: center;
+    }
+    .hero-proof { justify-content: center; }
+    .hero-vids {
+      display: flex; width: calc(100vw - 18px);
+      margin: 0 -9px; overflow: visible;
+    }
+    .hero-vids .chaos-pod { display: block; }
+    .hero-vid, .chaos-pod, .hero-vids #heroVid {
+      width: 43vw; max-width: 210px;
+      height: auto; aspect-ratio: 9 / 16;
+    }
+    .hero-vids .chaos-left {
+      margin-right: -13vw;
+      transform: rotate(-6deg) translateY(15px);
+    }
+    .hero-vids .chaos-right {
+      margin-left: -13vw;
+      transform: rotate(6deg) translateY(15px);
+    }
+    .faq-action {
+      align-items: flex-start; flex-direction: column;
+      margin-top: 34px; padding-top: 26px;
+    }
+
+    #order { padding-top: 70px; padding-bottom: 70px; }
+    #order .sec-label { margin-bottom: 30px; }
+    .build-stage {
+      height: 290px; min-height: 290px;
+    }
+    .build-stage img {
+      object-position: 50% 50%;
+      transform: none;
+    }
+    .build-stage[data-build="custom"] img { transform: scale(1.015); }
+    .build-stage-caption { display: none; }
+    .build-panel { padding: 25px 18px 22px; }
+    .build-progress { margin-bottom: 24px; }
+    .build-choice-body { min-height: 78px; padding: 13px 14px; }
+    .build-substep { margin-top: 18px; }
+    .install-options { grid-template-columns: 1fr 1fr; }
+    .install-choice span { min-height: 50px; padding: 7px; font-size: 10px; }
+    .build-summary { margin-top: 20px; padding-top: 0; }
+    .build-aftercare div { padding: 14px 12px; }
+    #system {
+      padding-top: 24px;
+      scroll-margin-top: 52px;
+    }
+  }
+
+  /* ── Order section: one viewport, Apple buy-flow density (desktop) ──────
+     The whole "Build your FlameLink" step — heading, configurator, fine
+     print — fits a laptop screen with no scrolling. Type and spacing scale
+     with viewport height (vh clamps) so short displays compress gracefully. */
+  @media (min-width: 901px) {
+    #order {
+      box-sizing: border-box; min-height: 100svh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding-top: clamp(62px, 8vh, 84px);   /* clears the fixed nav */
+      padding-bottom: clamp(14px, 3vh, 32px);
+      /* the padding above already clears the nav — an extra anchor offset
+         would push the section's bottom off-screen */
+      scroll-margin-top: 0;
+    }
+    #order .sec-label { margin-bottom: clamp(10px, 2vh, 18px); }
+    #order .sec-label h2 { font-size: clamp(30px, 4.8vh, 46px); }
+    #order .sec-label p { margin-top: 8px; font-size: 14px; max-width: 620px; }
+    .build-configurator { min-height: 0; }
+    .build-stage { min-height: 0; }
+    /* The stage photo must not drive the row height — its portrait intrinsic
+       size was stretching the whole configurator past 1000px. Absolute fill:
+       the options panel now defines the height, the photo covers whatever
+       stage that leaves. */
+    .build-stage img { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .build-panel { padding: clamp(20px, 3.4vh, 30px) 34px; min-height: 0; }
+    .build-progress { margin-bottom: clamp(10px, 1.8vh, 16px); }
+    .build-step-kicker { margin-bottom: 5px; }
+    .build-panel h3 { font-size: clamp(19px, 2.8vh, 24px); margin-bottom: 5px; }
+    .build-intro { margin-bottom: clamp(8px, 1.6vh, 14px); }
+    .build-choices { gap: 8px; }
+    .build-choice-body {
+      min-height: 0; padding: clamp(9px, 1.6vh, 13px) 16px;
+      border-radius: 14px;
+    }
+    .choice-copy strong { font-size: 14px; margin-bottom: 3px; }
+    .choice-copy span { font-size: 11.5px; }
+    .build-substep { margin-top: clamp(8px, 1.6vh, 14px); }
+    .build-substep-title { margin-bottom: 6px; }
+    .install-options { padding: 4px; }
+    .install-choice span { min-height: 40px; padding: 6px 10px; }
+    .build-summary { padding-top: clamp(8px, 1.6vh, 14px); }
+    .build-summary-card { padding: 11px 15px; border-radius: 14px; }
+    .build-total { font-size: 20px; }
+    .build-continue { margin-top: 7px; padding: 11px 18px; }
+    .build-no-pay { margin-top: 6px; }
+    /* Step 2 (reserve drawer) must fit the same envelope */
+    .reserve-back { margin-bottom: 14px; }
+    .reserve-summary { margin-top: 12px; padding: 10px 0; }
+    #order .order-form { gap: 8px; margin-top: 14px; }
+    #order .order-form input[type=text], #order .order-form input[type=tel],
+    #order .order-form input[type=email], #order #otpStep input { padding: 10px 12px; }
+    #order .order-form textarea { min-height: 52px; }
+    #order .order-form .btn { padding: 12px; }
+    /* Aftercare collapses from a boxed strip to one quiet caption row */
+    #order .build-aftercare {
+      display: flex; justify-content: center; gap: 36px;
+      margin-top: clamp(10px, 1.8vh, 16px);
+      border: 0; border-radius: 0; background: none; overflow: visible;
+    }
+    #order .build-aftercare div {
+      display: flex; gap: 6px; align-items: baseline;
+      padding: 0; background: none;
+    }
+    #order .build-aftercare strong { margin-bottom: 0; }
+  }
+
+  /* Short laptop screens (e.g. 1080p at 125% scaling): trim the non-essentials
+     so the configurator still lands on one screen. */
+  @media (min-width: 901px) and (max-height: 800px) {
+    #order { padding-top: 62px; padding-bottom: 16px; }
+    #order .sec-label { margin-bottom: 12px; }
+    #order .sec-label h2 { font-size: 30px; }
+    #order .sec-label p { display: none; }   /* the panel intro carries it */
+    .build-panel { padding: 16px 30px; }
+    .build-progress { margin-bottom: 12px; }
+    .build-panel h3 { font-size: 19px; }
+    .build-intro { margin-bottom: 10px; }
+    .build-choice-body { padding: 8px 14px; }
+    .build-substep { margin-top: 8px; }
+    .install-choice span { min-height: 38px; }
+    .build-summary { padding-top: 10px; }
+    .build-summary-card { padding: 10px 14px; }
+    .build-continue { margin-top: 7px; padding: 11px 16px; }
+    .build-no-pay { margin-top: 6px; }
+    #order .build-aftercare { margin-top: 10px; }
+    #order .build-aftercare span { display: none; } /* keep the three bold facts */
+    /* Reserve drawer: same envelope, tighter form */
+    .reserve-back { margin-bottom: 10px; }
+    .reserve-drawer .build-intro { display: none; } /* the summary row carries it */
+    .reserve-summary { margin-top: 8px; padding: 8px 0; }
+    #order .order-form { gap: 7px; margin-top: 10px; }
+    #order .order-form input[type=text], #order .order-form input[type=tel],
+    #order .order-form input[type=email], #order #otpStep input { padding: 8px 12px; }
+    #order .order-form textarea { min-height: 40px; }
+    #order .order-form .btn { padding: 10px; }
+  }
+
+  /* Very short screens (~11" laptops, small browser windows): drop the
+     garnish, keep the buy flow. */
+  @media (min-width: 901px) and (max-height: 690px) {
+    #order { padding-top: 58px; padding-bottom: 12px; }
+    #order .sec-label { margin-bottom: 8px; }
+    #order .sec-label h2 { font-size: 26px; }
+    .build-step-kicker { display: none; }
+    .build-panel { padding: 12px 28px; }
+    #order .build-aftercare { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="embers"></canvas>
+
+<nav class="top-nav">
+  <a class="nav-brand" href="#top" aria-label="FlameLink home">
+    <svg class="nav-logo" viewBox="0 0 80 80" fill="none">
+      <circle cx="40" cy="40" r="38" stroke="#1c69d4" stroke-width="1.5" opacity=".3"/>
+      <path d="M44 8L24 44h14l-4 30 28-38H43l4-30z" fill="url(#bolt)" opacity=".9"/>
+    </svg>
+    <span class="nav-name">Flame<em>Link</em></span>
+  </a>
+  <div class="nav-links">
+    <a href="#system">The system</a>
+    <a href="#why">Why FlameLink</a>
+    <a href="#faq">Questions</a>
+  </div>
+  <a class="btn btn-flame nav-cta" href="#order" data-track="nav_reserve_click">Reserve free</a>
+</nav>
+
+<!-- Reusable logo: bolt inside a BMW-blue ring, flame-gradient bolt (matches the app) -->
+<svg width="0" height="0" style="position:absolute"><defs>
+  <linearGradient id="bolt" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#1c69d4"/>
+    <stop offset="0.28" stop-color="#9bb8f0"/>
+    <stop offset="0.50" stop-color="#ffb340"/>
+    <stop offset="0.75" stop-color="#e85d04"/>
+    <stop offset="1" stop-color="#c03030"/>
+  </linearGradient>
+</defs></svg>
+
+<main id="mainContent">
+
+<a id="top"></a>
+
+<section class="hero" style="border-top:0">
+  <div class="wrap">
+    <div class="hrow">
+      <div class="hero-copy">
+        <span class="eyebrow">FlameLink · From $499 · Free to reserve</span>
+        <h1>Real exhaust flames.<br><span class="flame">No ECU flash. No engine mods.</span></h1>
+        <p>A standalone system for 12V cars. Fire on command with FlameLink, or add automatic lift-off flames on BMW F &amp; G Series with FlameLink Pro. No ECU flash or engine calibration changes.</p>
+        <div class="ctas">
+          <a class="btn btn-flame" href="#order" data-track="hero_reserve_click">Choose your FlameLink</a>
+          <a class="btn btn-line" href="#system" data-track="hero_learn_click">See how it works</a>
+        </div>
+        <div class="hero-assurance">No card or deposit · We confirm fitment before you pay</div>
+        <div class="hero-proof" role="list" aria-label="Product highlights">
+          <span role="listitem">Designed for 12V cars</span>
+          <span role="listitem">No ECU flash</span>
+          <span role="listitem">90-day parts warranty</span>
+        </div>
+      </div>
+
+      <div class="hero-vids" id="heroVids">
+        <div class="hero-vid chaos-pod chaos-left">
+          <video controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" preload="none" poster="promo/poster_002.jpg" playsinline loop muted>
+            <source src="promo/run_002_web.webm" type="video/webm">
+            <source src="promo/run_002_web.mp4" type="video/mp4">
+          </video>
+          <span class="sound-hint chaos-hint">🔊 tap for sound</span>
+        </div>
+        <div class="hero-vid" id="heroVid">
+          <video id="promoVid" controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" preload="metadata" poster="promo/poster.jpg" playsinline loop>
+            <source src="promo/run_001_web.webm" type="video/webm">
+            <source src="promo/run_001_web.mp4" type="video/mp4">
+          </video>
+          <div class="promo-overlay" id="promoOverlay">
+            <button class="play-btn" aria-label="Play flame video">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </button>
+            <span class="play-hint">~2 MB · tap to load</span>
+          </div>
+          <span class="sound-hint chaos-hint">🔊 tap for sound</span>
+        </div>
+        <div class="hero-vid chaos-pod chaos-right">
+          <video controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" preload="none" poster="promo/poster_003.jpg" playsinline loop muted>
+            <source src="promo/run_003_web.webm" type="video/webm">
+            <source src="promo/run_003_web.mp4" type="video/mp4">
+          </video>
+          <span class="sound-hint chaos-hint">🔊 tap for sound</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="system" class="system-story">
+  <div class="wrap">
+    <div class="system-grid">
+      <div class="system-copy">
+        <span class="label">Designed as a complete system</span>
+        <h2>The drama stays outside.<br><span class="system-accent">Your ECU stays factory.</span></h2>
+        <p>FlameLink creates the effect downstream in the exhaust with its own controller, fuel and spark. It never asks your engine to do something it was not designed to do.</p>
+        <a class="text-link" href="#why" data-track="system_compare_click">Compare it with a flame tune <span>→</span></a>
+      </div>
+      <div class="system-product">
+        <img src="promo/flamelink-enclosure.webp" alt="FlameLink controller in its automotive enclosure" loading="lazy" />
+        <div class="system-product-label">
+          <span>FlameLink controller</span>
+          <strong>Purpose-built. Compact. Serviceable.</strong>
+        </div>
+      </div>
+    </div>
+    <div class="system-points">
+      <article>
+        <span>01</span>
+        <h3>Standalone by design</h3>
+        <p>No ECU flash, no timing tricks and no changes to your factory calibration.</p>
+      </article>
+      <article>
+        <span>02</span>
+        <h3>Built around safeguards</h3>
+        <p>Hard burn limits, fused power and a hardware watchdog protect every activation.</p>
+      </article>
+      <article>
+        <span>03</span>
+        <h3>Tuned from your phone</h3>
+        <p>Adjust the character, save your setup and keep control close at hand.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="runs">
+  <div class="wrap">
+    <div class="sec-label">
+      <span class="label">Fresh from the road</span>
+      <h2>Two more runs. Same result.</h2>
+    </div>
+    <div class="runs-grid" id="runsGrid">
+      <div class="run-pod">
+        <video class="run-auto" controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" preload="metadata" poster="promo/poster_002.jpg" playsinline loop muted>
+          <source src="promo/run_002_web.webm" type="video/webm">
+          <source src="promo/run_002_web.mp4" type="video/mp4">
+        </video>
+        <span class="sound-hint">🔊 tap for sound</span>
+      </div>
+      <div class="run-pod">
+        <video class="run-auto" controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" preload="metadata" poster="promo/poster_003.jpg" playsinline loop muted>
+          <source src="promo/run_003_web.webm" type="video/webm">
+          <source src="promo/run_003_web.mp4" type="video/mp4">
+        </video>
+        <span class="sound-hint">🔊 tap for sound</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="why">
+  <div class="wrap">
+    <div class="sec-label">
+      <span class="label">Tune vs. FlameLink</span>
+      <h2>“Can’t I just get a tune?”</h2>
+    </div>
+    <div class="compare">
+      <div class="cmp bad">
+        <div class="cmp-badge bad">✕ Risky</div>
+        <h3>A flame tune</h3>
+        <span class="sub">The hard way</span>
+        <ul>
+          <li>Reflashes your ECU and leans on fuel-dumping and timing tricks</li>
+          <li>Pumps extra heat and stress into an engine that wasn’t built for it</li>
+          <li>Puts your reliability, your warranty and your resale on the line</li>
+          <li>Pricey — and not something you undo on a whim</li>
+        </ul>
+      </div>
+      <div class="cmp good">
+        <div class="cmp-badge good">Recommended</div>
+        <h3>FlameLink</h3>
+        <span class="sub">The smart way</span>
+        <ul>
+          <li>Standalone — bolts on, never touches your ECU or engine</li>
+          <li>Creates the effect downstream while your engine stays on its factory calibration</li>
+          <li>No ECU reflash to reverse when you want the car back to stock</li>
+          <li>From $499, tuned from your phone, flames whenever you call for them</li>
+        </ul>
+      </div>
+    </div>
+    <div class="why-action">
+      <a class="text-link" href="#order" data-track="why_reserve_click">Configure your FlameLink <span>→</span></a>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap faq">
+    <div class="sec-label">
+      <span class="label">Questions</span>
+      <h2>Before you ask.</h2>
+    </div>
+    <details>
+      <summary>Will it hurt my engine or reliability?</summary>
+      <p>FlameLink does not make flames by changing engine timing, fueling or the factory calibration. It works downstream in the exhaust with its own controller, fuel and spark. As with any aftermarket system, correct professional installation and responsible use matter.</p>
+    </details>
+    <details>
+      <summary>Do I need an ECU flash or a tune?</summary>
+      <p>No. FlameLink does not reflash, control or change your ECU calibration. FlameLink Pro only reads the vehicle signals it needs for automatic lift-off triggering; the flame system still runs on its own controller, fuel and spark.</p>
+    </details>
+    <details>
+      <summary>Why not just get a flame tune instead?</summary>
+      <p>A flame tune creates the effect through the engine by adding fuel and retarding timing. FlameLink creates it downstream instead, so there is no ECU reflash or engine-calibration change to reverse. Same show, without asking the engine to make it.</p>
+    </details>
+    <details>
+      <summary>Is it safe?</summary>
+      <p>Real fire is inherently risky, so FlameLink is for show, off-road and private-property use only. The system adds hard burn-time limits, a hardware watchdog, fused power and a sealed fuel feed. Professional installation and the supplied safety instructions are essential.</p>
+    </details>
+    <details>
+      <summary>What fuel does it use?</summary>
+      <p>A small, sealed gasoline feed. The lines stay closed — nothing leaks, drips or pools, on a hot exhaust or anywhere else.</p>
+    </details>
+    <details>
+      <summary>How does the fuel system work?</summary>
+      <p>FlameLink runs on its own <strong>dedicated pressurized fuel system</strong> — regulated fuel pressure and an atomizing nozzle — independent from your engine's fuel system. It's built for <strong>short-duration injection events</strong>, not continuous flow: a minimum of roughly 0.9 mL per activation, about 1.9 mL per second, and a full 3-second activation uses only ~5.6 mL of fuel.</p>
+    </details>
+    <details>
+      <summary>Will it flame on its own, or catch fire?</summary>
+      <p>Only when you fire it — the flame button on FlameLink, a lift-off or downshift on FlameLink Pro, or the app. Parked with the engine off it's completely inert; there's no open flame sitting there waiting.</p>
+    </details>
+    <details>
+      <summary>How does FlameLink know when it's safe to fire?</summary>
+      <p>It depends on the model. <strong>FlameLink Pro</strong> reads live vehicle data — <strong>RPM, gear, vehicle speed, engine &amp; coolant temperature and battery voltage</strong> — over the CAN bus to gate flame operation, firing automatically on lift-off and downshift. On <strong>FlameLink</strong> the button fires it, so you're responsible for when it flames — but either way the flames need exhaust gas to be driven, so you've got to be on the throttle.</p>
+    </details>
+    <details>
+      <summary>Should I use it in short bursts, or can I hold it?</summary>
+      <p>Use short bursts with breaks in between. Heat builds with every repeated operation, so running it back-to-back can build serious heat in the exhaust tip and surrounding panels — enough to potentially damage paint or anything else near the flame. Burst, let it cool, burst again. Fire is fire.</p>
+    </details>
+    <details>
+      <summary>Will it affect my catalytic converter or exhaust?</summary>
+      <p>No. The flames happen at the tail end of the car or motorbike, well behind the catalytic converters and other exhaust components. Installation only modifies the far rear end of the exhaust to mount the kit, so everything upstream — cats, resonators, muffler — stays untouched.</p>
+    </details>
+    <details>
+      <summary>Which cars does it fit?</summary>
+      <p>FlameLink is designed for <strong>12V cars</strong> and is not tied to one engine platform. The standard kit fires from a momentary flame button on your dash. Driving a <strong>BMW F &amp; G Series</strong>? FlameLink Pro reads vehicle signals through a plug-in harness and fires automatically on lift-off. We confirm exact fitment before you pay.</p>
+    </details>
+    <details>
+      <summary>What's the difference between FlameLink and FlameLink Pro?</summary>
+      <p>The flames are identical — same controller, same safeguards, same app. The difference is the trigger. <strong>FlameLink ($499)</strong> puts a flame button on your dash: you press, it breathes fire, on a compatible 12V car. <strong>FlameLink Pro ($650)</strong> is engineered for BMW F &amp; G Series — a plug-in harness reads the car, so flames fire themselves on lift-off and downshift. No button, no thought, just fire.</p>
+    </details>
+    <details>
+      <summary>Can I control how big the flames are?</summary>
+      <p>Yes. Tune flame size, intensity and crackle from the app, save your setups and switch on the fly — from a subtle daily crackle to full send.</p>
+    </details>
+    <details>
+      <summary>Is it legal?</summary>
+      <p>Off-road and show use only. A flame kit may be illegal on public roads where you live — check your local laws and run it responsibly.</p>
+    </details>
+    <details>
+      <summary>How is it installed?</summary>
+      <p>A competent professional should install the system and verify the fuel feed before use. It ships with the harness and installation guide for your installer. Professional installation by our team is $150 where available — add it when you configure your kit.</p>
+    </details>
+    <div class="faq-action">
+      <span>Both models are ready to configure — FlameLink from $499, Pro for BMW F &amp; G Series at $650.</span>
+      <a class="btn btn-flame" href="#order" data-track="faq_reserve_click">Reserve free</a>
+    </div>
+  </div>
+</section>
+
+<section id="order">
+  <div class="wrap">
+    <div class="sec-label">
+      <span class="label">Configured for your car</span>
+      <h2>Build your FlameLink.</h2>
+      <p>Reserving is free — we confirm your build and price before you pay.</p>
+    </div>
+
+    <div class="build-configurator">
+      <div class="build-stage" id="buildStage" data-build="pro">
+        <img src="promo/flamelink-enclosure.webp" alt="FlameLink automotive controller enclosure" />
+        <div class="build-visual-top">
+          <span class="build-product-name">FlameLink</span>
+          <span class="build-status" id="buildStatus">BMW ready</span>
+        </div>
+        <div class="build-stage-caption">
+          <strong id="buildVisualTitle">FlameLink Pro — automatic flames</strong>
+          <span id="buildVisualCopy">Controller, plug-in BMW harness and app setup support. Fires on every lift-off.</span>
+        </div>
+      </div>
+
+      <div class="build-panel">
+        <div class="build-progress" role="list" aria-label="Build progress">
+          <span class="on" id="progressVehicle" role="listitem">01 Vehicle</span>
+          <span class="on" id="progressSetup" role="listitem">02 Setup</span>
+          <span id="progressReserve" role="listitem">03 Reserve</span>
+        </div>
+
+        <div class="build-config-step" id="buildConfigStep">
+          <span class="build-step-kicker">Choose your model</span>
+          <h3>Which FlameLink is yours?</h3>
+          <p class="build-intro">Same flames, same app — choose your trigger.</p>
+
+          <div class="build-choices">
+            <label class="build-choice">
+              <input type="radio" name="buildChoice" value="FlameLink Pro — BMW F &amp; G Series" data-mode="pro" checked />
+              <span class="build-choice-body">
+                <span class="choice-copy">
+                  <strong>FlameLink Pro · BMW F &amp; G Series</strong>
+                  <span>Plugs in. Flames on every lift-off, automatically.</span>
+                </span>
+                <span class="choice-price"><small>Complete kit</small>$650</span>
+              </span>
+            </label>
+            <label class="build-choice">
+              <input type="radio" name="buildChoice" value="FlameLink — universal (flame button)" data-mode="std" />
+              <span class="build-choice-body">
+                <span class="choice-copy">
+                  <strong>FlameLink · 12V cars</strong>
+                  <span>Flame button on your dash. You call the fire.</span>
+                </span>
+                <span class="choice-price"><small>Complete kit</small>$499</span>
+              </span>
+            </label>
+          </div>
+
+          <div class="build-substep">
+            <div class="build-substep-title">How would you like it fitted?</div>
+            <div class="install-options">
+              <label class="install-choice">
+                <input type="radio" name="fitmentChoice" value="ship" checked />
+                <span>Ship the complete kit</span>
+              </label>
+              <label class="install-choice">
+                <input type="radio" name="fitmentChoice" value="install" />
+                <span>Professional installation · +$150</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="build-summary">
+            <div class="build-summary-card">
+              <div>
+                <small>Your configuration</small>
+                <strong id="buildSummaryText">FlameLink Pro · BMW F &amp; G Series · Complete kit</strong>
+              </div>
+              <div class="build-total">
+                <small id="buildPriceLabel">USD</small>
+                <span id="buildTotal">$650</span>
+              </div>
+            </div>
+            <button type="button" class="build-continue" id="buildContinue" aria-expanded="false">Continue to reserve</button>
+            <div class="build-no-pay">Nothing to pay today</div>
+          </div>
+        </div>
+
+        <div class="reserve-drawer" id="reserve" hidden>
+          <button type="button" class="reserve-back" id="reserveBack">← Edit configuration</button>
+          <span class="build-step-kicker" id="reserveLabel">Reserve your FlameLink</span>
+          <h3>Tell us where to reach you.</h3>
+          <p class="build-intro">We’ll confirm your exact car, fitment and timeline before asking for payment.</p>
+          <div class="reserve-summary">
+            <span>Selected build</span>
+            <strong id="reserveSummaryText">FlameLink Pro · BMW F &amp; G Series · Complete kit · $650</strong>
+          </div>
+
+          <form id="orderForm" class="order-form" novalidate>
+            <select name="kind" id="orderKind" aria-label="What are you after?" hidden>
+              <option value="FlameLink Pro — BMW F &amp; G Series">FlameLink Pro for BMW F &amp; G Series — $650</option>
+              <option value="FlameLink — universal (flame button)">FlameLink — 12V cars, flame button — $499</option>
+            </select>
+            <input type="text" name="name" placeholder="Full name" autocomplete="name" required />
+            <input type="email" name="email" placeholder="Email — we'll send a code to verify" autocomplete="email" required />
+            <input type="tel" name="phone" placeholder="WhatsApp number — include country code" autocomplete="tel" required />
+            <input type="text" name="model" id="buildModelInput" placeholder="Your car — e.g. F30 335i" required />
+            <textarea name="note" id="buildNoteInput" placeholder="Anything we should know? (optional)"></textarea>
+            <input type="checkbox" name="install" id="installInput" hidden />
+            <div class="cf-turnstile" data-sitekey="0x4AAAAAADrBTjHpERpNTuz8" data-size="invisible" id="turnstileWidget"></div>
+            <button type="submit" class="btn btn-flame" id="sendCodeBtn">Reserve free — no payment today</button>
+          </form>
+
+          <div id="otpStep" hidden>
+            <p>Enter the code we emailed to <span id="otpDest" class="mono"></span>.</p>
+            <input id="otpCode" inputmode="numeric" autocomplete="one-time-code" maxlength="8" placeholder="••••••••" />
+            <button class="btn btn-flame" id="verifyBtn">Confirm — Lock My Slot</button>
+            <button class="btn btn-line" id="resendBtn" type="button">Use a different email</button>
+          </div>
+
+          <p id="orderStatus" class="form-status" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="build-aftercare">
+      <div><strong>Reserve free</strong><span>No card or deposit today.</span></div>
+      <div><strong>We confirm fitment</strong><span>Your car, final price and timeline.</span></div>
+      <div><strong>90-day limited warranty</strong><span>Parts defects covered. <a href="safety.html">Terms apply.</a></span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-brand">
+      <span>FlameLink</span>
+      <strong>Engineered for the moment<br>everyone remembers.</strong>
+    </div>
+    <div class="foot-row">
+      <div class="links">
+        <a href="#faq">FAQ</a>
+        <a href="#order" data-track="footer_reserve_click">Order</a>
+        <a href="safety.html">Safety &amp; Terms</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="mailto:cmperformancegh@gmail.com">Email</a>
+      </div>
+      <a class="totop" href="#top">Back to top ↑</a>
+    </div>
+    <p class="disclaimer">For off-road and show use only. A flame kit may be illegal on public roads where you live — check your local laws. Operate away from people, fuel and structures. Full <a href="safety.html">safety, disclaimer &amp; terms</a>.</p>
+    <p class="copy mono">© <span id="yr"></span> CM Performance · Accra, Ghana</p>
+  </div>
+</footer>
+
+</main><!-- /mainContent -->
+
+<!-- Full-page thank you screen (shown after successful order) -->
+<div id="thankyou" hidden>
+  <svg class="flame-logo" viewBox="0 0 80 80" fill="none">
+    <circle cx="40" cy="40" r="38" stroke="#1c69d4" stroke-width="1.5" opacity="0.3"/>
+    <path d="M44 8L24 44h14l-4 30 28-38H43l4-30z" fill="url(#bolt)" opacity="0.9"/>
+  </svg>
+  <h1>Slot locked. 🔥</h1>
+  <p>Your reservation is in — nothing to pay yet. We'll reach out to confirm your build, price and timeline.</p>
+  <button class="btn btn-line" id="backHomeBtn">Back to home</button>
+</div>
+
+<script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+
+
+<script>
+/* Flame starlight — embers drift up and twinkle behind the page */
+(function () {
+  var canvas = document.getElementById('embers');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var COLORS = ['#e85d04', '#ff8c1a', '#ffb340', '#ffe08a', '#c0392b'];
+  var w, h, dpr, parts;
+
+  function size() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = canvas.clientWidth; h = canvas.clientHeight;
+    canvas.width = w * dpr; canvas.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  function spawn(fromBottom) {
+    return {
+      x: Math.random() * w,
+      y: fromBottom ? h + Math.random() * 30 : Math.random() * h,
+      r: Math.random() * 2.1 + 0.5,
+      vy: Math.random() * 0.5 + 0.14,
+      drift: (Math.random() - 0.5) * 0.4,
+      tw: Math.random() * Math.PI * 2,
+      tws: Math.random() * 0.045 + 0.01,
+      a: Math.random() * 0.55 + 0.32,
+      c: COLORS[(Math.random() * COLORS.length) | 0]
+    };
+  }
+  function init() {
+    size();
+    var count = Math.min(120, Math.round((w * h) / 11000));
+    parts = [];
+    for (var i = 0; i < count; i++) parts.push(spawn(false));
+  }
+
+  /* Backfire pulse — the page breathes like the clips do: dark idle, a
+     burst from below, a decaying afterglow. Bloom colors sampled from
+     run_001's fireball (white core → orange → red fringe). */
+  var pulseE = 0, pulseX = 0.5, sparks = [], framesToPulse = 110; // first bang ~1.8s in
+  function ignite(strength) {
+    pulseE = Math.min(1, Math.max(pulseE, strength));
+    pulseX = 0.35 + Math.random() * 0.3;
+    for (var i = 0, n = Math.round(26 * strength); i < n; i++) {
+      sparks.push({
+        x: pulseX * w + (Math.random() - 0.5) * 44,
+        y: h + 6,
+        vx: (Math.random() - 0.5) * 3.2,
+        vy: -(Math.random() * 5 + 2.5) * strength - 1,
+        life: 1,
+        decay: Math.random() * 0.012 + 0.006,
+        r: Math.random() * 1.6 + 0.7,
+        c: COLORS[(Math.random() * COLORS.length) | 0]
+      });
+    }
+  }
+  function drawPulse() {
+    if (pulseE > 0.012) {
+      var g = ctx.createRadialGradient(pulseX * w, h + 30, 0, pulseX * w, h + 30, Math.max(w, h) * 0.6);
+      g.addColorStop(0,    'rgba(255,248,230,' + (0.42 * pulseE).toFixed(3) + ')');
+      g.addColorStop(0.18, 'rgba(255,179,64,'  + (0.30 * pulseE).toFixed(3) + ')');
+      g.addColorStop(0.45, 'rgba(232,93,4,'    + (0.16 * pulseE).toFixed(3) + ')');
+      g.addColorStop(1,    'rgba(192,48,48,0)');
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, w, h);
+      pulseE *= 0.965; // ~1.5s decay, like the real fireball
+    } else pulseE = 0;
+    for (var s = sparks.length - 1; s >= 0; s--) {
+      var k = sparks[s];
+      k.x += k.vx; k.y += k.vy; k.vy += 0.055; k.life -= k.decay;
+      if (k.life <= 0 || k.y > h + 20) { sparks.splice(s, 1); continue; }
+      ctx.globalAlpha = k.life * (0.6 + 0.4 * Math.random()); // crackle flicker
+      ctx.fillStyle = k.c;
+      ctx.beginPath(); ctx.arc(k.x, k.y, k.r, 0, 6.283); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+  }
+  function draw() {
+    ctx.clearRect(0, 0, w, h);
+    for (var i = 0; i < parts.length; i++) {
+      var p = parts[i];
+      p.y -= p.vy; p.x += p.drift + Math.sin(p.tw) * 0.18; p.tw += p.tws;
+      if (p.y < -12) parts[i] = p = spawn(true);
+      var tw = 0.45 + 0.55 * Math.sin(p.tw);
+      ctx.globalAlpha = p.a * tw * 0.28;
+      ctx.fillStyle = p.c;
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r * 3, 0, 6.283); ctx.fill();
+      ctx.globalAlpha = p.a * tw;
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.283); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    drawPulse();
+  }
+  function loop() {
+    if (--framesToPulse <= 0) {
+      ignite(0.55 + Math.random() * 0.45);
+      framesToPulse = Math.round((4 + Math.random() * 5) * 60); // next bang in 4–9s
+    }
+    draw();
+    requestAnimationFrame(loop);
+  }
+  // Deliberate bangs at decision moments (order section, reserve taps).
+  window.__ignite = reduce ? function () {} : ignite;
+
+  window.addEventListener('resize', init);
+  init();
+  draw(); // static first frame — free to paint
+  // Animation waits for the load event: no rAF churn competing with the
+  // critical render path on throttled mobile CPUs.
+  if (!reduce) {
+    if (document.readyState === 'complete') requestAnimationFrame(loop);
+    else window.addEventListener('load', function () { requestAnimationFrame(loop); });
+  }
+})();
+
+/* A small backfire right at the decision points. */
+(function () {
+  var order = document.getElementById('order');
+  if (order && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) {
+      if (es.some(function (e) { return e.isIntersecting; })) { io.disconnect(); window.__ignite(1); }
+    }, { threshold: 0.25 });
+    io.observe(order);
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('.offer-cta, #sendCodeBtn'), function (el) {
+    el.addEventListener('click', function () { window.__ignite(0.6); });
+  });
+})();
+</script>
+<script>
+/* Cinematic three-clip showcase. All runs autoplay muted only while the hero
+   is visible, and visitors can tap one clip at a time for sound. */
+var SHOWCASE_MODE = true;
+
+/* Every video pod gets a buffering spinner: visible whenever the clip is
+   trying to play but has no frames yet (slow mobile data, in-app browsers).
+   Clarity showed users rage-tapping clips that were silently loading. */
+(function () {
+  document.querySelectorAll('.hero-vid video, .run-pod video').forEach(function (v) {
+    var sp = document.createElement('div');
+    sp.className = 'vid-spinner';
+    v.parentElement.appendChild(sp);
+    function show() { if (!v.paused) sp.classList.add('on'); }
+    function hide() { sp.classList.remove('on'); }
+    ['loadstart', 'waiting', 'stalled', 'seeking'].forEach(function (ev) { v.addEventListener(ev, show); });
+    ['playing', 'canplay', 'pause', 'error'].forEach(function (ev) { v.addEventListener(ev, hide); });
+  });
+})();
+(function () {
+  var overlay = document.getElementById('promoOverlay');
+  var vid = document.getElementById('promoVid');
+  if (!overlay || !vid) return;
+
+  if (SHOWCASE_MODE) {
+    var wrap = document.getElementById('heroVids');
+    wrap.classList.add('chaos');
+    overlay.classList.add('hidden');
+    var pods = Array.prototype.slice.call(wrap.querySelectorAll('video'));
+    var compactScreen = window.matchMedia('(max-width: 640px)');
+    // Desktop runs the full trio. Mobile animates the centre card and leaves
+    // the side cards on their flame posters until tapped, saving two decoders
+    // and roughly 1.7 MB on the first visit.
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        pods.forEach(function (v) {
+          var shouldRun = entry.isIntersecting && (!compactScreen.matches || v === vid);
+          if (shouldRun) v.play().catch(function () {});
+          else v.pause();
+        });
+      });
+    }, { threshold: 0.15 }).observe(wrap);
+    pods.forEach(function (v) {
+      v.muted = true;
+      v.style.cursor = 'pointer';
+      v.addEventListener('click', function () {
+        var wasMuted = v.muted;
+        pods.forEach(function (other) {
+          other.muted = true;
+          if (compactScreen.matches && other !== v) other.pause();
+        }); // one voice and one decoder at a time on mobile
+        v.muted = !wasMuted;
+        if (v.paused) v.play().catch(function () {});
+        if (!v.muted) window.trackEvent('hero_chaos_unmuted');
+        pods.forEach(function (other) {
+          var hint = other.parentElement.querySelector('.chaos-hint');
+          if (hint) hint.textContent = other.muted ? '🔊 tap for sound' : '🔇 tap to mute';
+        });
+      });
+    });
+    window.trackEvent('hero_chaos_autoplay');
+    return;
+  }
+
+  overlay.addEventListener('click', function () {
+    overlay.classList.add('hidden');
+    // play() can reject (in-app browsers, power-saver mode) — bring the
+    // overlay back instead of leaving a dead poster + an uncaught error.
+    vid.play().catch(function () { overlay.classList.remove('hidden'); });
+    window.trackEvent('video_hero_play');
+  });
+  vid.addEventListener('ended', function () {
+    if (!vid.loop) overlay.classList.remove('hidden');
+  });
+})();
+
+/* Run clips: autoplay (muted) the moment the section scrolls into view,
+   pause when it scrolls out. Tap a clip for sound. */
+(function () {
+  var grid = document.getElementById('runsGrid');
+  if (!grid) return;
+  var vids = Array.prototype.slice.call(grid.querySelectorAll('video.run-auto'));
+
+  new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      vids.forEach(function (vid) {
+        if (entry.isIntersecting) vid.play().catch(function () {});
+        else vid.pause();
+      });
+    });
+  }, { threshold: 0.3 }).observe(grid);
+
+  vids.forEach(function (vid) {
+    vid.addEventListener('click', function () {
+      // Not started yet (still buffering / autoplay blocked): the tap means
+      // "play this" — start it with sound, don't flip mute on a black frame.
+      if (vid.paused || vid.readyState < 2) {
+        vid.muted = false;
+        vid.play().catch(function () {});
+        window.trackEvent('run_video_unmuted');
+      } else {
+        vid.muted = !vid.muted;
+        if (!vid.muted) { vid.play().catch(function () {}); window.trackEvent('run_video_unmuted'); }
+      }
+      var hint = vid.parentElement.querySelector('.sound-hint');
+      if (hint) hint.textContent = vid.muted ? '🔊 tap for sound' : '🔇 tap to mute';
+    });
+  });
+})();
+
+/* Mini sticky player is only used by the single-video fallback. The showcase
+   keeps all three clips together as one product composition. */
+(function () {
+  if (SHOWCASE_MODE) return;
+  var pod      = document.getElementById('heroVid');
+  var closeBtn = document.getElementById('vidClose');
+  var hero     = document.querySelector('.hero');
+  if (!pod || !closeBtn || !hero) return;
+
+  var dismissed = false;
+
+  function setMini(on) {
+    pod.classList.toggle('mini', on);
+    closeBtn.classList.toggle('visible', on);
+  }
+
+  function update() {
+    if (dismissed) return;
+    setMini(hero.getBoundingClientRect().bottom < 0);
+  }
+
+  // rAF-throttled: getBoundingClientRect on every scroll event forces
+  // layout (flagged by Lighthouse as forced reflow).
+  var ticking = false;
+  window.addEventListener('scroll', function () {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () { ticking = false; update(); });
+  }, { passive: true });
+
+  closeBtn.addEventListener('click', function () {
+    dismissed = true;
+    pod.style.transition = 'opacity .2s, transform .2s';
+    pod.style.opacity = '0';
+    pod.style.transform = 'translateX(30px) scale(.9)';
+    closeBtn.classList.remove('visible');
+    setTimeout(function () {
+      pod.classList.remove('mini');
+      pod.style.cssText = '';
+    }, 220);
+  });
+})();
+
+/* Safety net: the whole order flow lives in the ES module below (Supabase via
+   esm.sh). If that import fails — flaky network, in-app browser blocking it —
+   the form would fall back to a native GET submit: page reloads, everything
+   the customer typed is gone, no error shown. Catch that here (the module
+   sets __orderReady once its handlers are attached). */
+(function () {
+  var f = document.getElementById('orderForm');
+  if (!f) return;
+  f.addEventListener('submit', function (e) {
+    if (window.__orderReady) return;
+    e.preventDefault();
+    var s = document.getElementById('orderStatus');
+    if (s) {
+      s.textContent = "The order system couldn't load — check your connection and try again, or email cmperformancegh@gmail.com and we'll sort you out.";
+      s.className = 'form-status err';
+    }
+    window.trackEvent('order_module_missing');
+  });
+})();
+</script>
+<script type="module">
+/*
+  ORDERS — Supabase + EMAIL-OTP. Every order is from a human who verified a real
+  email (6-digit code). Email OTP uses Supabase's built-in email — no Twilio, no
+  paid SMS, nothing extra to run. (Phone number is still collected as a contact.)
+
+  SECURITY LAYERS:
+    - Cloudflare Turnstile CAPTCHA (prevents automated bots)
+    - Email OTP verification (proves a real human with email access)
+    - HTML stripped from all text inputs (prevents XSS/CSV injection)
+    - 60s cooldown on OTP re-send (rate limiting)
+    - Supabase RLS: only authenticated users can insert, only their own row
+    - Session not persisted in browser (no lingering auth tokens)
+
+  ONE-TIME SETUP in your Supabase project:
+    1. Edge Function: supabase functions deploy verify-turnstile
+       (requires Cloudflare Turnstile site key + secret key — set with
+        supabase secrets set TURNSTILE_SECRET_KEY=<your_secret>)
+       Test keys (always pass): site=1x000... secret=1x000...
+       Get real keys: https://dash.cloudflare.com/?to=/:account/turnstile
+    2. Authentication → Email Templates → "Magic Link" → include the token:
+       Your FlameLink code is {{ .Token }}
+       (Built-in email is rate-limited — fine to launch on; add a free SMTP tier
+       like Resend later. Still no SMS cost.)
+    3. Database table + RLS are in supabase/migrations/*_create_orders.sql.
+       Apply: supabase link && supabase db push
+       (or paste the SQL in the dashboard SQL editor).
+    4. The publishable key below is safe to ship — RLS protects the table.
+*/
+const SUPABASE_URL = 'https://jmdqqgftsfmavwnbqitx.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_HYkDj6F6n6byI8l76vh-VQ_s2hGFfFS';
+
+const form = document.getElementById('orderForm');
+const otpStep = document.getElementById('otpStep');
+const statusEl = document.getElementById('orderStatus');
+const sendBtn = document.getElementById('sendCodeBtn');
+const verifyBtn = document.getElementById('verifyBtn');
+const resendBtn = document.getElementById('resendBtn');
+const otpCode = document.getElementById('otpCode');
+const otpDest = document.getElementById('otpDest');
+
+const configured = !SUPABASE_URL.includes('PASTE_') && !SUPABASE_ANON_KEY.includes('PASTE_');
+
+// In-app browsers (Snapchat, Instagram…) can run with storage disabled, where
+// merely touching sessionStorage THROWS and would kill this whole module —
+// i.e. the order form. Never access it raw.
+const store = {
+  get(k) { try { return sessionStorage.getItem(k); } catch (_) { return null; } },
+  set(k, v) { try { sessionStorage.setItem(k, v); } catch (_) {} },
+};
+// One-shot order form: we only need the session long enough to verify the email
+// and insert the row. Don't persist it (no lingering auth/refresh loop on every
+// visitor who ever ordered). The in-memory session from verifyOtp still authorizes
+// the insert that immediately follows.
+// Keep the Supabase project awake: free-tier projects pause after days of no
+// API activity, which would silently kill the order form. Every visit fires
+// one tiny REST request (once per browser session). The scheduled GitHub
+// Action in .github/workflows/supabase-keepalive.yml covers visitor-free weeks.
+if (configured && !store.get('supaPinged')) {
+  store.set('supaPinged', '1');
+  fetch(SUPABASE_URL + '/auth/v1/health', { headers: { apikey: SUPABASE_ANON_KEY } })
+    .catch(() => {}); // fire-and-forget; a failed ping must never affect the page
+}
+
+// Supabase (~100 KB via esm.sh) and Turnstile (~300 KB of challenge scripts)
+// are checkout-only — lazy-loaded when the visitor nears #order (prefetch
+// observer below) or on first submit, instead of taxing every page load.
+let supaPromise = null;
+function getSupabase() {
+  if (!configured) return Promise.resolve(null);
+  if (!supaPromise) {
+    supaPromise = import('https://esm.sh/@supabase/supabase-js@2')
+      .then((m) => m.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+        auth: { persistSession: false, autoRefreshToken: false },
+      }))
+      .catch(() => { supaPromise = null; return null; }); // retry on next call
+  }
+  return supaPromise;
+}
+
+let tsPromise = null;
+function loadTurnstile() {
+  if (window.turnstile) return Promise.resolve(true);
+  if (!tsPromise) {
+    tsPromise = new Promise((resolve) => {
+      const s = document.createElement('script');
+      s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
+      s.async = true;
+      s.onload = () => { try { window.turnstile.ready(() => resolve(true)); } catch (_) { resolve(true); } };
+      s.onerror = () => { tsPromise = null; resolve(false); };
+      document.head.appendChild(s);
+    });
+  }
+  return tsPromise;
+}
+
+// Warm both the moment the order section approaches the viewport, so the
+// checkout feels instant without the homepage paying for it.
+{
+  const orderSec = document.getElementById('order');
+  if (orderSec && 'IntersectionObserver' in window) {
+    const warm = new IntersectionObserver((entries) => {
+      if (entries.some((e) => e.isIntersecting)) {
+        warm.disconnect();
+        getSupabase();
+        loadTurnstile();
+      }
+    }, { rootMargin: '800px' });
+    warm.observe(orderSec);
+  } else {
+    getSupabase(); loadTurnstile();
+  }
+}
+
+let pending = null; // the order, held until the email is verified
+
+// ── Email-domain sanity (kills OTP bounce spam) ─────────────────────────────
+// Mail hosts used by domain-parking / catch-all-bounce services: a domain
+// whose ONLY mail server is one of these cannot receive real mail.
+const PARKED_MAIL_HOSTS = ['mailerhost.net', 'h-email.net', 'above.com', 'bodis.com', 'sedoparking.com', 'parklogic.com'];
+// Shared TEMP-MAIL infrastructure: disposable services rotate their domains
+// daily, but they all route through the same mail hosts — block the host and
+// the whole rotating family dies (wabblywabble/wallywatts serve diarshop.com
+// and hundreds of siblings).
+const DISPOSABLE_MAIL_HOSTS = ['wabblywabble.com', 'wallywatts.com', 'yopmail.com', 'guerrillamail.com', 'temp-mail.org'];
+const KNOWN_GOOD_DOMAINS = new Set(['gmail.com', 'googlemail.com', 'yahoo.com', 'outlook.com', 'hotmail.com', 'icloud.com', 'live.com', 'proton.me', 'protonmail.com']);
+
+// Community disposable-domain blocklist (~8k domains) — fetched lazily only
+// when someone actually submits an order, cached for the page's lifetime.
+let dispoSet = null;
+async function loadDisposableList() {
+  if (dispoSet !== null) return dispoSet;
+  try {
+    const r = await fetch('https://cdn.jsdelivr.net/gh/disposable-email-domains/disposable-email-domains@master/disposable_email_blocklist.conf',
+      { signal: AbortSignal.timeout(5000) });
+    dispoSet = new Set((await r.text()).split('\n').map(s => s.trim().toLowerCase()).filter(Boolean));
+  } catch (_) { dispoSet = new Set(); } // fail open
+  return dispoSet;
+}
+
+const hostMatches = (host, list) => list.some(h => host === h || host.endsWith('.' + h));
+
+// Returns 'ok' | 'dead' | 'disposable'
+async function classifyEmailDomain(email) {
+  const domain = email.split('@')[1].toLowerCase();
+  if (KNOWN_GOOD_DOMAINS.has(domain)) return 'ok';
+  const cached = store.get('mxc:' + domain);
+  if (cached) return cached;
+  let verdict = 'ok'; // fail open
+  try {
+    if ((await loadDisposableList()).has(domain)) {
+      verdict = 'disposable';
+    } else {
+      const resolve = async type => {
+        const r = await fetch(`https://dns.google/resolve?name=${encodeURIComponent(domain)}&type=${type}`,
+          { signal: AbortSignal.timeout(4000) });
+        return r.json();
+      };
+      const mx = await resolve('MX');
+      const mxHosts = (mx.Answer || []).filter(a => a.type === 15)
+        .map(a => a.data.split(/\s+/).pop().replace(/\.$/, '').toLowerCase());
+      if (mxHosts.length) {
+        if (mxHosts.some(h => hostMatches(h, DISPOSABLE_MAIL_HOSTS))) verdict = 'disposable';
+        else if (mxHosts.every(h => hostMatches(h, PARKED_MAIL_HOSTS))) verdict = 'dead';
+      } else {
+        // No MX: RFC fallback is the bare A record — allow only if one exists.
+        const a = await resolve('A');
+        if (!(a.Answer || []).some(rec => rec.type === 1)) verdict = 'dead';
+      }
+    }
+    store.set('mxc:' + domain, verdict);
+  } catch (_) { /* network/DoH blocked — let it through */ }
+  return verdict;
+}
+
+function stripHtml(s) {
+  const el = document.createElement('div');
+  el.textContent = s;
+  return el.innerHTML;
+}
+
+function setStatus(msg, kind) {
+  statusEl.textContent = msg || '';
+  statusEl.className = 'form-status' + (kind ? ' ' + kind : '');
+}
+
+function normPhone(v) {
+  v = v.trim().replace(/[\s\-()]/g, '');
+  if (v.startsWith('00')) v = '+' + v.slice(2);
+  else if (v.startsWith('0')) v = '+233' + v.slice(1);
+  else if (/^233/.test(v)) v = '+' + v;
+  return v;
+}
+
+// Client-side rate limiter — prevent re-sending OTP for 60s
+let cooldownTimer = null;
+function cooldownBtn(seconds) {
+  sendBtn.disabled = true;
+  const orig = sendBtn.textContent;
+  let remaining = seconds;
+  sendBtn.textContent = 'Wait ' + remaining + 's';
+  cooldownTimer = setInterval(() => {
+    remaining--;
+    if (remaining <= 0) {
+      clearInterval(cooldownTimer);
+      cooldownTimer = null;
+      sendBtn.disabled = false;
+      sendBtn.textContent = orig;
+    } else {
+      sendBtn.textContent = 'Wait ' + remaining + 's';
+    }
+  }, 1000);
+}
+
+async function verifyTurnstile() {
+  setStatus('Security check…');
+  if (!(await loadTurnstile())) {
+    setStatus('Security check unavailable — check your connection and try again.', 'err');
+    return false;
+  }
+  try { window.turnstile.reset(); window.turnstile.execute(); } catch (_) {}
+  const token = await new Promise((resolve) => {
+    const check = setInterval(() => {
+      let t = null;
+      try { t = window.turnstile.getResponse(); } catch (_) {}
+      if (t) { clearInterval(check); resolve(t); }
+    }, 200);
+    setTimeout(() => { clearInterval(check); resolve(null); }, 15000);
+  });
+  if (!token) {
+    setStatus('Security check did not complete — try again.', 'err');
+    return false;
+  }
+  setStatus('Verifying…');
+  try {
+    const res = await fetch(
+      SUPABASE_URL + '/functions/v1/verify-turnstile',
+      { method: 'POST', headers: { 'Content-Type': 'application/json', 'apiKey': SUPABASE_ANON_KEY }, body: JSON.stringify({ token }) }
+    );
+    const data = await res.json();
+    if (!data.valid) {
+      setStatus('Security check failed — try again.', 'err');
+      return false;
+    }
+    return true;
+  } catch {
+    setStatus('Security check unavailable — try again.', 'err');
+    return false;
+  }
+}
+
+// Guided build configurator. The submitted field names remain unchanged so this
+// visual refresh stays compatible with the existing reservation backend.
+{
+  const buildChoices = document.querySelectorAll('input[name="buildChoice"]');
+  const fitmentChoices = document.querySelectorAll('input[name="fitmentChoice"]');
+  const orderKind = document.getElementById('orderKind');
+  const installInput = document.getElementById('installInput');
+  const buildStage = document.getElementById('buildStage');
+  const buildStatus = document.getElementById('buildStatus');
+  const buildVisualTitle = document.getElementById('buildVisualTitle');
+  const buildVisualCopy = document.getElementById('buildVisualCopy');
+  const buildSummaryText = document.getElementById('buildSummaryText');
+  const buildPriceLabel = document.getElementById('buildPriceLabel');
+  const buildTotal = document.getElementById('buildTotal');
+  const reserveSummaryText = document.getElementById('reserveSummaryText');
+  const reserveLabel = document.getElementById('reserveLabel');
+  const buildModelInput = document.getElementById('buildModelInput');
+  const buildNoteInput = document.getElementById('buildNoteInput');
+  const buildConfigStep = document.getElementById('buildConfigStep');
+  const reserveDrawer = document.getElementById('reserve');
+  const buildContinue = document.getElementById('buildContinue');
+  const reserveBack = document.getElementById('reserveBack');
+  const progressReserve = document.getElementById('progressReserve');
+
+  const selected = (name) => document.querySelector(`input[name="${name}"]:checked`);
+
+  function syncBuild() {
+    const build = selected('buildChoice');
+    const fitment = selected('fitmentChoice');
+    if (!build || !fitment) return;
+
+    const pro = build.dataset.mode === 'pro';
+    const installed = fitment.value === 'install';
+    const fitmentLabel = installed ? 'Professional installation' : 'Complete kit';
+    const price = pro ? (installed ? '$800' : '$650') : (installed ? '$649' : '$499');
+    const summary = pro
+      ? `FlameLink Pro · BMW F & G Series · ${fitmentLabel}`
+      : `FlameLink · 12V car · ${fitmentLabel}`;
+
+    orderKind.value = build.value;
+    installInput.checked = installed;
+    buildStage.dataset.build = pro ? 'pro' : 'std';
+    buildStatus.textContent = pro ? 'BMW ready' : '12V fitment';
+    buildVisualTitle.textContent = pro ? 'FlameLink Pro — automatic flames' : 'FlameLink — flames on your command';
+    buildVisualCopy.textContent = pro
+      ? 'Controller, plug-in BMW harness and app setup support. Fires on every lift-off.'
+      : 'Controller, universal harness, dash flame button and app setup support.';
+    buildSummaryText.textContent = summary;
+    buildPriceLabel.textContent = 'USD';
+    buildTotal.textContent = price;
+    reserveSummaryText.textContent = `${summary} · ${price}`;
+    reserveLabel.textContent = pro ? 'Reserve your FlameLink Pro' : 'Reserve your FlameLink';
+    buildModelInput.placeholder = pro ? 'Your BMW — e.g. F30 335i' : 'Your car — make, model and year';
+    buildNoteInput.placeholder = 'Anything we should know? (optional)';
+  }
+
+  buildChoices.forEach((choice) => choice.addEventListener('change', () => {
+    syncBuild();
+    window.trackEvent?.('build_configuration_selected', { build: choice.dataset.mode });
+  }));
+  fitmentChoices.forEach((choice) => choice.addEventListener('change', () => {
+    syncBuild();
+    window.trackEvent?.('build_fitment_selected', { fitment: choice.value });
+  }));
+
+  buildContinue?.addEventListener('click', () => {
+    syncBuild();
+    buildConfigStep.hidden = true;
+    reserveDrawer.hidden = false;
+    progressReserve.classList.add('on');
+    buildContinue.setAttribute('aria-expanded', 'true');
+    reserveDrawer.querySelector('input:not([type="hidden"])')?.focus({ preventScroll: true });
+    window.__ignite?.(0.5);
+    window.trackEvent?.('build_reservation_started');
+  });
+
+  reserveBack?.addEventListener('click', () => {
+    reserveDrawer.hidden = true;
+    buildConfigStep.hidden = false;
+    progressReserve.classList.remove('on');
+    buildContinue.setAttribute('aria-expanded', 'false');
+    buildContinue.focus({ preventScroll: true });
+  });
+
+  syncBuild();
+}
+
+if (!configured) {
+  setStatus('Ordering isn\'t switched on yet — check back shortly.', 'err');
+  if (sendBtn) sendBtn.disabled = true;
+}
+
+form?.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  if (!configured) return;
+
+  const d = new FormData(form);
+  const name = stripHtml((d.get('name') || '').toString().trim());
+  const email = (d.get('email') || '').toString().trim();
+  const phone = normPhone((d.get('phone') || '').toString());
+  const model = stripHtml((d.get('model') || '').toString().trim());
+  const note = stripHtml((d.get('note') || '').toString().trim());
+  const install = d.get('install') === 'on';
+  const kind = (d.get('kind') || '').toString();
+
+  if (!name || !model) { setStatus('Please add your name and your car.', 'err'); return; }
+  if (!/^\S+@\S+\.\S+$/.test(email)) { setStatus('Enter a valid email — that is where your code goes.', 'err'); return; }
+  if (!/^\+\d{8,15}$/.test(phone)) { setStatus('Enter a valid phone number with your country code.', 'err'); return; }
+
+  // Troll filters: our own contact details entered as "theirs", and junk
+  // number patterns (someone literally ordered using our shop number).
+  const OUR_CONTACTS = ['+233206187456', '+233245858875', 'cmperformancegh@gmail.com'];
+  if (OUR_CONTACTS.includes(phone) || OUR_CONTACTS.includes(email.toLowerCase())) {
+    window.trackEvent?.('order_own_contact_rejected');
+    setStatus("That's our number 🙂 — enter YOUR contact details so we can reach you about your build.", 'err');
+    return;
+  }
+  const nationalDigits = phone.slice(1);
+  if (/(\d)\1{6,}/.test(nationalDigits) || '01234567890123456789'.includes(nationalDigits.slice(-8))) {
+    window.trackEvent?.('order_phone_rejected');
+    setStatus('That phone number doesn\'t look real — we need it to arrange your build.', 'err');
+    return;
+  }
+
+  // The regex only proves the SHAPE of an address. Junk domains still pass
+  // (ssggh@ggjj.com), the OTP send then bounces, and every bounce lands in our
+  // inbox. Two DNS-over-HTTPS layers before we send anything:
+  //   1. domain must have mail servers at all;
+  //   2. its mail server must not be a known domain-parking catch-all
+  //      (parked domains happily accept DNS and bounce every message).
+  // Fails OPEN on lookup errors — a blocked resolver must never cost an order.
+  window.trackEvent?.('order_attempt');
+  setStatus('Checking your email…');
+  const emailVerdict = await classifyEmailDomain(email);
+  if (emailVerdict === 'dead') {
+    window.trackEvent?.('order_email_rejected');
+    setStatus("That email address can't receive mail — double-check it. Your order code goes there.", 'err');
+    return;
+  }
+  if (emailVerdict === 'disposable') {
+    window.trackEvent?.('order_email_disposable');
+    setStatus('Temp-mail addresses can\'t be used — your order updates and warranty are tied to this email.', 'err');
+    return;
+  }
+
+  // Security check 1: CAPTCHA
+  const captchaOk = await verifyTurnstile();
+  try { window.turnstile?.reset(); } catch (_) {}
+  if (!captchaOk) return;
+
+  const supabase = await getSupabase();
+  if (!supabase) {
+    setStatus("Couldn't reach the order service — check your connection and try again.", 'err');
+    return;
+  }
+
+  pending = { name, email, phone, model, note, install, kind };
+  sendBtn.disabled = true;
+  setStatus('Emailing you a code…');
+  const { error } = await supabase.auth.signInWithOtp({ email });
+  if (error) { sendBtn.disabled = false; setStatus(error.message || 'Could not send the code — try again.', 'err'); return; }
+  window.trackEvent?.('order_otp_sent');
+
+  // Security check 3: 60s cooldown on re-send
+  cooldownBtn(60);
+
+  otpDest.textContent = email;
+  form.hidden = true;
+  otpStep.hidden = false;
+  setStatus('');
+  otpCode.focus();
+});
+
+verifyBtn?.addEventListener('click', async () => {
+  if (!pending) return;
+  const supabase = await getSupabase(); // cached — the OTP send already loaded it
+  if (!supabase) { setStatus("Couldn't reach the order service — try again.", 'err'); return; }
+  const token = otpCode.value.trim();
+  if (!/^\d{4,8}$/.test(token)) { setStatus('Enter the code we emailed you.', 'err'); return; }
+  verifyBtn.disabled = true;
+  setStatus('Verifying…');
+  const { error: vErr } = await supabase.auth.verifyOtp({ email: pending.email, token, type: 'email' });
+  if (vErr) { verifyBtn.disabled = false; setStatus(vErr.message || 'That code didn’t work — try again.', 'err'); return; }
+
+  const { error: iErr } = await supabase.from('orders').insert({
+    name: pending.name, phone: pending.phone, email: pending.email,
+    model: pending.model, install: pending.install,
+    kind: pending.kind,
+    note: pending.note || null,
+  });
+  verifyBtn.disabled = false;
+  if (iErr) { setStatus(iErr.message || 'Verified, but the order didn’t save — try again.', 'err'); return; }
+
+  window.trackEvent?.('order_completed');
+  otpStep.hidden = true;
+  document.getElementById('mainContent').hidden = true;
+  document.getElementById('thankyou').hidden = false;
+  setStatus('');
+});
+
+resendBtn?.addEventListener('click', () => {
+  otpStep.hidden = true;
+  form.hidden = false;
+  otpCode.value = '';
+  setStatus('');
+  try { window.turnstile?.reset(); } catch (_) {}
+});
+
+document.getElementById('backHomeBtn')?.addEventListener('click', () => {
+  // Relative, not '/': the site lives under /flink/ on GitHub Pages, so an
+  // absolute root would land on the org page. './' reloads THIS site fresh
+  // (also correct locally and under any future custom domain).
+  location.href = './';
+});
+
+// Handlers attached — tell the non-module safety net the form is live.
+window.__orderReady = true;
+</script>
+
+<!-- Save a comparison card as a clean PNG for socials (html2canvas, lazy-loaded on first click) -->
+<script>
+(function () {
+  function cardFilename(card) {
+    if (card.classList.contains('fl')) return 'flame-link.png';
+    var n = card.querySelector('.tco-name');
+    var base = (n ? n.textContent : 'card').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+    return 'flame-link-vs-' + base + '.png';
+  }
+
+  function load(src) {
+    return new Promise(function (resolve, reject) {
+      if (window.html2canvas) return resolve();
+      var s = document.createElement('script');
+      s.src = src; s.crossOrigin = 'anonymous';
+      s.onload = resolve; s.onerror = reject;
+      document.head.appendChild(s);
+    });
+  }
+
+  function capture(card, btn) {
+    var bg = getComputedStyle(document.body).backgroundColor || '#000';
+    return window.html2canvas(card, {
+      backgroundColor: bg,
+      scale: Math.min(3, (window.devicePixelRatio || 1) * 2),
+      useCORS: true,
+      ignoreElements: function (el) { return el.classList && el.classList.contains('tco-save'); }
+    }).then(function (canvas) {
+      return new Promise(function (resolve) {
+        canvas.toBlob(function (blob) {
+          var url = URL.createObjectURL(blob);
+          var a = document.createElement('a');
+          a.href = url; a.download = cardFilename(card);
+          document.body.appendChild(a); a.click(); a.remove();
+          setTimeout(function () { URL.revokeObjectURL(url); }, 1500);
+          resolve();
+        }, 'image/png');
+      });
+    });
+  }
+
+  document.querySelectorAll('.tco-save').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var card = btn.closest('.tco-card');
+      if (!card || btn.disabled) return;
+      btn.disabled = true;
+      load('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js')
+        .then(function () { return capture(card, btn); })
+        .catch(function () {})
+        .then(function () { btn.disabled = false; });
+    });
+  });
+})();
+</script>
+<button class="vid-close" id="vidClose" aria-label="Close video">×</button>
+</body>
+</html>

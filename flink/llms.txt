@@ -1,0 +1,51 @@
+# FlameLink — standalone exhaust flame kit (CM Performance)
+
+> FlameLink is a bolt-on automotive exhaust flame kit that produces real,
+> controllable exhaust flames with NO ECU flash, NO tune, and NO engine
+> modifications. It is fully standalone — its own controller, fuel delivery
+> and ignition, acting entirely in the exhaust, downstream of the engine —
+> and fully reversible. Not affiliated with flamelink.io (a CMS product).
+
+## Product facts
+
+- Product line: two models, by CM Performance —
+  1. FlameLink ($499): universal, fits any 12V car; flames fire from a
+     momentary flame button mounted on the dash — the driver triggers them
+  2. FlameLink Pro ($650): engineered for BMW F & G Series; a plug-in
+     vehicle-specific harness reads the car and fires flames automatically
+     on every throttle lift-off and downshift — no button needed
+- Both models: flame size, intensity and crackle are tuned from a phone app;
+  multiple saved profiles from subtle daily crackle to full send
+- Engine separation: never reflashes, controls or changes the factory ECU
+  calibration; flames happen downstream in the exhaust. FlameLink Pro reads
+  vehicle signals only to trigger the standalone flame system
+- Built-in safety: hard burn-time limits, hardware watchdog, fused power,
+  instant output cut on any fault, sealed gasoline feed (no open fuel)
+- Fitment: FlameLink is designed for 12V cars, with exact fitment confirmed
+  before payment; FlameLink Pro fits BMW F & G Series with a plug-in harness
+- Price: FlameLink $499, FlameLink Pro $650 (USD, complete kits); optional
+  professional installation $150 on either model
+- Ordering: free reservation (no payment online) at
+  https://cm-perf.github.io/flink/#order — the team confirms each build,
+  price and timeline personally before any payment
+- Kits are hand-assembled and bench-tested, built to order in small batches
+- Intended use: off-road and show use only
+
+## Why it exists
+
+Most bolt-on flame kits work by cutting ignition and dumping fuel through the
+engine — which stresses the engine and does not work on modern cars whose ECU
+cuts injection when it detects missing ignition events. Flame tunes (ECU
+reflashes) force flames at the cost of engine heat, stress, warranty and
+resale value. FlameLink avoids both by being a self-contained system in the
+exhaust: the same show without using the engine to create the effect.
+
+## Pages
+
+- [Home / product / ordering](https://cm-perf.github.io/flink/)
+- [Safety, disclaimer & terms](https://cm-perf.github.io/flink/safety.html)
+- [Privacy](https://cm-perf.github.io/flink/privacy.html)
+
+## Contact
+
+- Email: cmperformancegh@gmail.com
