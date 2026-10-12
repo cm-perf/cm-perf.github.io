@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>BMW ECU Development & 2-Step Rev Limiter | CM Performance</title>
-<meta name="description" content="Custom BMW ECU software and the 2-step secondary rev limiter: variable-RPM launch control on your M1/M2 buttons for N20, N26, N55, N63 and S55. Delivered worldwide through Bootmod3. UK-based BMW engineering." />
+<title>BMW 2-Step Launch Control & ECU Tuning | CM Performance</title>
+<meta name="description" content="BMW 2-step launch control and custom ECU software for N20, N26, N55, N63 and S55. Set your launch RPM with M1/M2 and adjust it on the move. Delivered worldwide via Bootmod3. Check compatibility and pricing." />
 <meta name="robots" content="index, follow" />
 <meta name="author" content="CM Performance" />
 <link rel="canonical" href="https://cmperf.uk/" />
@@ -14,15 +14,15 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="CM Performance" />
-<meta property="og:title" content="BMW ECU Development & 2-Step Rev Limiter | CM Performance" />
-<meta property="og:description" content="Custom BMW ECU software and the 2-step secondary rev limiter, for N20, N26, N55, N63 and S55. Delivered worldwide through Bootmod3." />
+<meta property="og:title" content="BMW 2-Step Launch Control & ECU Tuning | CM Performance" />
+<meta property="og:description" content="BMW 2-step launch control and custom ECU software for N20, N26, N55, N63 and S55. Delivered worldwide via Bootmod3." />
 <meta property="og:url" content="https://cmperf.uk/" />
 <meta property="og:image" content="https://cmperf.uk/og-cmperf.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="BMW ECU Development & 2-Step Rev Limiter | CM Performance" />
-<meta name="twitter:description" content="Custom BMW ECU software and the 2-step secondary rev limiter, delivered worldwide through Bootmod3." />
+<meta name="twitter:title" content="BMW 2-Step Launch Control & ECU Tuning | CM Performance" />
+<meta name="twitter:description" content="BMW 2-step launch control and custom ECU software, delivered worldwide via Bootmod3." />
 <meta name="twitter:image" content="https://cmperf.uk/og-cmperf.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -113,6 +113,10 @@ section{padding:62px 0;border-bottom:1px solid var(--line)}
 .local-strip strong{color:var(--text);font-weight:400}
 .local-strip .btn{flex:none}
 
+.proof{display:flex;align-items:center;justify-content:space-between;gap:28px}
+.proof p{color:var(--dim);font-size:15px;max-width:58ch;margin-top:10px}
+.proof .btn{flex:none}
+@media (max-width:820px){.proof{flex-direction:column;align-items:flex-start;gap:18px}}
 .caps{border-top:1px solid var(--line)}
 .cap{display:grid;grid-template-columns:34px 220px 1fr;gap:24px;align-items:start;padding:22px 0;border-bottom:1px solid var(--line-2)}
 .cap .no{font-family:var(--mono);font-size:12px;color:var(--faint);padding-top:3px}
@@ -139,7 +143,8 @@ section{padding:62px 0;border-bottom:1px solid var(--line)}
 .cform label{display:flex;flex-direction:column;gap:7px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
 .cform .opt{color:var(--faint);text-transform:none;letter-spacing:.02em}
 .cform .req{color:var(--accent)}
-.cform input,.cform textarea{font-family:var(--sans);font-size:16px;font-weight:300;color:var(--text);background:#0a0a0b;border:1px solid var(--line);border-radius:4px;padding:11px 12px;width:100%;resize:vertical}
+.cform input,.cform textarea,.cform select{font-family:var(--sans);font-size:16px;font-weight:300;color:var(--text);background:#0a0a0b;border:1px solid var(--line);border-radius:4px;padding:11px 12px;width:100%;resize:vertical}
+.cform select:focus{outline:none;border-color:var(--accent)}
 .cform input::placeholder,.cform textarea::placeholder{color:var(--faint)}
 .cform input:focus,.cform textarea:focus{outline:none;border-color:var(--accent)}
 .cform button{align-self:flex-start;cursor:pointer}
@@ -180,14 +185,14 @@ footer .copy{font-family:var(--mono);font-size:11px;color:var(--faint);width:100
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
-{"@type":"Organization","@id":"https://cmperf.uk/#org","name":"CM Performance","url":"https://cmperf.uk/","email":"contact@cmperf.uk","logo":"https://cmperf.uk/favicon-192.png","image":"https://cmperf.uk/og-cmperf.png","description":"UK-based BMW engineering: custom ECU software, the 2-step secondary rev limiter, diagnostics, retrofit and coding, and product development.","areaServed":"Worldwide","address":{"@type":"PostalAddress","addressCountry":"GB"}},
+{"@type":"Organization","@id":"https://cmperf.uk/#org","name":"CM Performance","url":"https://cmperf.uk/","email":"contact@cmperf.uk","logo":"https://cmperf.uk/favicon-192.png","image":"https://cmperf.uk/og-cmperf.png","description":"UK-based BMW engineering: custom ECU software, the 2-step secondary rev limiter, diagnostics, retrofit and coding, and product development.","areaServed":"Worldwide","address":{"@type":"PostalAddress","addressCountry":"GB"},"sameAs":["https://www.instagram.com/cm.perf/"]},
 {"@type":"WebSite","@id":"https://cmperf.uk/#site","url":"https://cmperf.uk/","name":"CM Performance","publisher":{"@id":"https://cmperf.uk/#org"}},
 {"@type":"Service","name":"BMW 2-Step Secondary Rev Limiter","serviceType":"Custom ECU software / BMW tuning","provider":{"@id":"https://cmperf.uk/#org"},"areaServed":"Worldwide","description":"Variable-RPM launch control on the M1/M2 buttons for BMW N20, N26, N55, N63 and S55, triggered by brake plus throttle. Delivered worldwide through Bootmod3.","offers":{"@type":"Offer","price":"200","priceCurrency":"USD","availability":"https://schema.org/InStock"}},
 {"@type":"FAQPage","mainEntity":[
 {"@type":"Question","name":"What is a 2-step secondary rev limiter?","acceptedAnswer":{"@type":"Answer","text":"A launch-control rev limit on your M1/M2 buttons. Hold the brake and throttle to hold a set RPM and build boost, then launch. It sits below your main redline as a secondary limit."}},
 {"@type":"Question","name":"Which BMW engines do you support?","acceptedAnswer":{"@type":"Answer","text":"N20, N26, N55, N63 and S55 are live now. B-series engines are in active development. If your engine is not listed, ask us."}},
 {"@type":"Question","name":"How is the 2-step delivered?","acceptedAnswer":{"@type":"Answer","text":"Worldwide through Bootmod3. Find us in the Bootmod3 tuner directory, or send an enquiry and we flash a map to your account. No shipping and no workshop visit."}},
-{"@type":"Question","name":"What do I need for it?","acceptedAnswer":{"@type":"Answer","text":"A Bootmod3 licence for your car and the usual flash hardware. It works with factory or aftermarket M-button wheels, using stock pedals only."}},
+{"@type":"Question","name":"What do I need for it?","acceptedAnswer":{"@type":"Answer","text":"A Bootmod3 licence for your car and the usual flash hardware. It works with factory or aftermarket M-button wheels, using stock pedals only."}},{"@type":"Question","name":"Can I keep my current tune, and go back to stock?","acceptedAnswer":{"@type":"Answer","text":"Bootmod3 keeps your stock map, so you can switch back any time. Whether we build on your current tune depends on your car and software."}},{"@type":"Question","name":"Who flashes it, and what if I get stuck?","acceptedAnswer":{"@type":"Answer","text":"You flash it yourself through Bootmod3. We supply the map and clear instructions and help you through it. If something is not right, we revise the map."}},
 {"@type":"Question","name":"What does it cost?","acceptedAnswer":{"@type":"Answer","text":"From 200 USD for a standard 2-step. Stage builds and bespoke ECU ROM work are quoted per car. Email contact@cmperf.uk."}}
 ]}
 ]}
@@ -224,15 +229,15 @@ footer .copy{font-family:var(--mono);font-size:11px;color:var(--faint);width:100
       <div>
         <span class="eyebrow">BMW diagnostics &middot; retrofits &middot; engineering</span>
         <h1 style="margin-top:18px">We build systems<br />that don't yet exist,<br />for <b class="accent">BMWs</b>.</h1>
-        <p>Custom ECU software and the 2-step secondary rev limiter, plus diagnostics, retrofits and product development. If it involves a BMW and a problem no one else has solved, that is the work we take.</p>
+        <p>Custom ECU software and the 2-step secondary rev limiter. Set your launch RPM with M1/M2 and adjust it on the move, delivered worldwide through Bootmod3. Diagnostics, retrofits and product development too.</p>
         <div class="specline">
-          <span>Chassis</span> E · F · G series
-          <span>Bus</span> CAN / CAN-FD
-          <span>Base</span> United Kingdom · worldwide
+          <span>Engines</span> N20 · N26 · N55 · N63 · S55
+          <span>Delivery</span> Bootmod3 · worldwide
+          <span>From</span> $200 USD
         </div>
         <div class="actions">
-          <a href="#products" class="btn btn-fill">View the 2-step</a>
-          <a href="#contact" class="link">Enquire &rarr;</a>
+          <a href="#contact" class="btn btn-fill">Check my BMW</a>
+          <a href="https://www.instagram.com/cm.perf/" class="link" target="_blank" rel="noopener">Watch on Instagram &#8599;</a>
         </div>
       </div>
       <div class="slideshow" id="twostep" role="group" aria-label="2-step secondary rev limiter">
@@ -257,7 +262,7 @@ footer .copy{font-family:var(--mono);font-size:11px;color:var(--faint);width:100
             <span class="k">Engine coverage</span>
             <div class="st">N20 · N26 · N55 · N63 · S55</div>
             <div class="cov">
-              <span>N20 ✓</span><span>N26 ✓</span><span>N55 ✓</span><span>N63 ✓</span><span>S55 ✓</span><span class="wip">B-series · in progress</span>
+              <span>N20 ✓</span><span>N26 ✓</span><span>N55 ✓</span><span>N63 ✓</span><span>S55 ✓</span><span class="wip">B-series · in development</span>
             </div>
           </article>
         </div>
@@ -287,21 +292,28 @@ footer .copy{font-family:var(--mono);font-size:11px;color:var(--faint);width:100
             <div>From <b>$200 USD</b></div>
           </div>
           <div class="buy">
-            <a href="#contact" class="btn btn-fill">Start a build</a>
+            <a href="#contact" class="btn btn-fill">Check my BMW</a>
           </div>
         </div>
         <div class="card">
-          <span class="status dev">○ In development</span>
-          <h3>Performance Tracker</h3>
-          <p>Vehicle telemetry for performance cars and rental fleets. Redline events, engine and coolant temperatures, driving-style analysis and trip reconstruction.</p>
+          <span class="status live">● Per-car · worldwide via Bootmod3</span>
+          <h3>Custom ECU Software</h3>
+          <p>Bespoke calibrations for your BMW: stage builds, fuelling and boost, burbles and pops, and 2-step tailored to your setup. We confirm what your car supports and the price before you pay.</p>
           <div class="specs">
-            <div>Target <b>Performance / fleet</b></div>
-            <div>Records <b>Redline · temps · trips</b></div>
-            <div>Link <b>CAN telemetry</b></div>
-            <div>Status <b>In development</b></div>
+            <div>Work <b>Stage · fuel · boost · ROM</b></div>
+            <div>Basis <b>Your car's software</b></div>
+            <div>Delivery <b>Bootmod3 · worldwide</b></div>
+            <div>Price <b>Quoted per car</b></div>
           </div>
-          <div class="buy"><a href="#contact" class="btn">Register interest</a></div>
+          <div class="buy"><a href="#contact" class="btn btn-fill">Discuss my setup</a></div>
         </div>
+      </div>
+      <div class="local-strip">
+        <div>
+          <span class="status dev">○ In development</span>
+          <strong>Performance Tracker</strong> is our upcoming BMW telemetry unit: redline events, temperatures, driving-style analysis and trip reconstruction.
+        </div>
+        <a href="#contact" class="btn">Register interest</a>
       </div>
       <div class="local-strip">
         <div>
@@ -310,6 +322,16 @@ footer .copy{font-family:var(--mono);font-size:11px;color:var(--faint);width:100
         </div>
         <a href="flink/" class="btn">FlameLink site</a>
       </div>
+    </div>
+  </section>
+
+  <section id="proof">
+    <div class="wrap proof">
+      <div>
+        <span class="eyebrow">Proof</span>
+        <p>Customer cars, launches and flashes are on our Instagram. See the 2-step and custom builds running on real BMWs, then tell us about yours.</p>
+      </div>
+      <a href="https://www.instagram.com/cm.perf/" class="btn btn-fill" target="_blank" rel="noopener">@cm.perf on Instagram &#8599;</a>
     </div>
   </section>
 
@@ -338,7 +360,7 @@ footer .copy{font-family:var(--mono);font-size:11px;color:var(--faint);width:100
         <div class="cap">
           <span class="no">04</span>
           <h3>Product Development</h3>
-          <p>CAN controllers, firmware, mobile apps and PCBs. The whole stack, built in-house. FlameLink began as a CAN project and grew into a product line.
+          <p>CAN controllers, firmware, mobile apps and PCBs, built in-house. FlameLink began as a CAN project and grew into a product line.
           <span class="det">Hardware · firmware · app · PCB</span></p>
         </div>
       </div>
@@ -355,19 +377,27 @@ footer .copy{font-family:var(--mono);font-size:11px;color:var(--faint);width:100
         </details>
         <details>
           <summary>Which BMW engines do you support?</summary>
-          <p class="a">N20, N26, N55, N63 and S55 are live now. B-series engines are in active development, advancing quickly. If your engine is not listed, ask us.</p>
+          <p class="a">N20, N26, N55, N63 and S55 are live now. B-series engines are in development. Tell us your model, year and current software and we confirm support before you pay.</p>
         </details>
         <details>
           <summary>How is it delivered?</summary>
-          <p class="a">Worldwide through Bootmod3. Find us in the Bootmod3 tuner directory, or send an enquiry and we flash a map to your account. No shipping, no workshop visit.</p>
+          <p class="a">Worldwide through Bootmod3. Send an enquiry, we confirm your car and supply the map to your Bootmod3 account, and you flash it yourself at home. No shipping, no workshop visit.</p>
         </details>
         <details>
           <summary>What do I need for it?</summary>
-          <p class="a">A Bootmod3 licence for your car and the usual flash hardware. It works with factory or aftermarket M-button wheels, using stock pedals only.</p>
+          <p class="a">A Bootmod3 licence for your car and the usual Bootmod3 flashing setup. It works with factory or aftermarket M-button wheels, using stock pedals only.</p>
+        </details>
+        <details>
+          <summary>Can I keep my current tune, and go back to stock?</summary>
+          <p class="a">Bootmod3 keeps your stock map, so you can switch back any time. Whether we build on your current tune depends on your car and software. Tell us what you run and we confirm.</p>
+        </details>
+        <details>
+          <summary>Who flashes it, and what if I get stuck?</summary>
+          <p class="a">You flash it yourself through Bootmod3. We supply the map and clear instructions, and we help you through it. If something is not right, we revise the map.</p>
         </details>
         <details>
           <summary>What does it cost?</summary>
-          <p class="a">From $200 USD for a standard 2-step. Stage builds and bespoke ECU ROM work are quoted per car. Email contact@cmperf.uk.</p>
+          <p class="a">From $200 USD for a standard 2-step, confirmed for your exact car before you pay. Stage builds and bespoke ECU ROM work are quoted per car. Email contact@cmperf.uk.</p>
         </details>
       </div>
     </div>
@@ -376,12 +406,13 @@ footer .copy{font-family:var(--mono);font-size:11px;color:var(--faint);width:100
   <section id="contact" class="contact">
     <div class="wrap">
       <div>
-        <span class="eyebrow">Contact</span>
-        <h2 style="margin-top:16px">Start a build,<br />or ask us a hard question.</h2>
-        <p>Tell us the car and what you want. 2-step and ECU work, retrofits, CAN&nbsp;bus projects. We answer every enquiry.</p>
+        <span class="eyebrow">Check my BMW</span>
+        <h2 style="margin-top:16px">Check compatibility<br />and get a quote.</h2>
+        <p>Tell us your BMW model and year. We confirm what your car supports, what it needs and the price, before you pay.</p>
         <a href="mailto:contact@cmperf.uk" class="mail">contact@cmperf.uk &rarr;</a>
         <div class="meta-list" style="margin-top:28px">
-          <div><span class="k">Bootmod3</span> Search &ldquo;CM Performance&rdquo; in the tuner directory</div>
+          <div><span class="k">Instagram</span> <a href="https://www.instagram.com/cm.perf/" class="accent" target="_blank" rel="noopener">@cm.perf</a> · proof videos &amp; DMs</div>
+          <div><span class="k">Bootmod3</span> Find &ldquo;CM Performance&rdquo; in the tuner directory</div>
           <div><span class="k">Location</span> United Kingdom · worldwide</div>
           <div><span class="k">Hours</span> Mon-Fri · 10:00-18:00 UK time</div>
         </div>
@@ -390,13 +421,16 @@ footer .copy{font-family:var(--mono);font-size:11px;color:var(--faint);width:100
         <input type="hidden" name="_subject" value="New enquiry via cmperf.uk" />
         <input type="hidden" name="_template" value="table" />
         <input type="hidden" name="_captcha" value="true" />
+        <input type="hidden" name="_next" value="https://cmperf.uk/thanks.html" />
         <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
         <label>Name <span class="req">*</span><input type="text" name="name" required autocomplete="name" /></label>
         <label>Email <span class="req">*</span><input type="email" name="email" required autocomplete="email" /></label>
-        <label>Car <span class="opt">chassis · engine (optional)</span><input type="text" name="car" placeholder="e.g. F32 428i · N20" /></label>
-        <label>What do you need? <span class="req">*</span><textarea name="message" rows="4" required placeholder="2-step RPM, stage, retrofit, project"></textarea></label>
-        <button type="submit" class="btn btn-fill">Send enquiry</button>
-        <p class="cform-note">We reply from contact@cmperf.uk. Sent via FormSubmit; your details are used only to answer your enquiry.</p>
+        <label>BMW model &amp; year <span class="req">*</span><input type="text" name="car" required placeholder="e.g. 2015 F32 428i" /></label>
+        <label>Engine <span class="opt">if you know it (optional)</span><input type="text" name="engine" placeholder="e.g. N20" /></label>
+        <label>Bootmod3 licence?<select name="bootmod3"><option>Not sure</option><option>Yes, licensed</option><option>Not yet</option></select></label>
+        <label>What are you after? <span class="req">*</span><textarea name="message" rows="3" required placeholder="2-step, stage build, retrofit, diagnostics"></textarea></label>
+        <button type="submit" class="btn btn-fill">Check my BMW</button>
+        <p class="cform-note">We reply from contact@cmperf.uk, usually within one business day. Sent via FormSubmit; your details are used only to answer your enquiry.</p>
       </form>
     </div>
   </section>
