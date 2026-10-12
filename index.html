@@ -113,6 +113,14 @@ section{padding:62px 0;border-bottom:1px solid var(--line)}
 .local-strip strong{color:var(--text);font-weight:400}
 .local-strip .btn{flex:none}
 
+.demo-grid{display:grid;grid-template-columns:minmax(0,280px) 1fr;gap:44px;align-items:center}
+.demo-video{border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#000;position:relative}
+.demo-video video{width:100%;display:block;aspect-ratio:9/16;object-fit:cover;background:#000}
+.demo-copy h2{font-size:clamp(24px,3.2vw,32px);font-weight:300;letter-spacing:-.01em;line-height:1.1}
+.demo-copy p{margin-top:16px;color:var(--dim);max-width:46ch}
+.demo-copy .hint{font-family:var(--mono);font-size:11px;color:var(--faint);margin-top:12px}
+.demo-copy .actions{margin-top:26px}
+@media (max-width:820px){.demo-grid{grid-template-columns:1fr}.demo-video{max-width:280px;margin:0 auto}}
 .proof{display:flex;align-items:center;justify-content:space-between;gap:28px}
 .proof p{color:var(--dim);font-size:15px;max-width:58ch;margin-top:10px}
 .proof .btn{flex:none}
@@ -321,6 +329,26 @@ footer .copy{font-family:var(--mono);font-size:11px;color:var(--faint);width:100
           <strong>FlameLink</strong> is our standalone exhaust flame kit. Real flames, no ECU change, supplied and fitted in Ghana.
         </div>
         <a href="flink/" class="btn">FlameLink site</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="demo">
+    <div class="wrap demo-grid">
+      <figure class="demo-video">
+        <video poster="/cmp-2step-demo-poster.jpg" controls playsinline preload="metadata" muted loop>
+          <source src="/cmp-2step-demo.mp4" type="video/mp4" />
+        </video>
+      </figure>
+      <div class="demo-copy">
+        <span class="eyebrow">See it run</span>
+        <h2>2-step on a real 428i.</h2>
+        <p>OEM M1/M2 activation on an N20, flashed by us. One flash, launch control on the buttons, no bolt-on box. More builds and launches are on our Instagram.</p>
+        <p class="hint">Tap play for sound.</p>
+        <div class="actions">
+          <a href="#contact" class="btn btn-fill">Check my BMW</a>
+          <a href="https://www.instagram.com/cm.perf/" class="link" target="_blank" rel="noopener">More on Instagram &#8599;</a>
+        </div>
       </div>
     </div>
   </section>
