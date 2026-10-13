@@ -17,13 +17,14 @@
     $('order-main').classList.toggle('picker-only', !next);
     $('platform-choices').hidden = !!next;
     $('change-platform').hidden = !next;
-    $('order-heading').textContent = next === 'bootmod3' ? 'Request through Bootmod3' : next === 'mhd' ? 'MHD request' : next === 'bench' ? 'ECU file request' : 'Choose your tuning platform.';
-    $('order-stage').textContent = next ? 'BMW 2-STEP / ' + (next === 'bootmod3' ? 'BOOTMOD3' : next === 'mhd' ? 'MHD' : 'ECU READ / BENCH') : 'BMW 2-STEP / START YOUR REQUEST';
+    $('order-heading').textContent = next === 'bootmod3' ? 'Request through Bootmod3' : next === 'mhd' ? 'MHD request' : next === 'bench' ? 'ECU tool file request' : 'Choose your tuning platform.';
+    $('order-stage').textContent = next ? 'BMW 2-STEP / ' + (next === 'bootmod3' ? 'BOOTMOD3' : next === 'mhd' ? 'MHD' : 'ECU TOOLS / OBD · BENCH · BOOT') : 'BMW 2-STEP / START YOUR REQUEST';
     $('order-intro').textContent = next === 'bootmod3' ? 'Your next launch starts in the app.' : next ? 'Your car. Your setup. Tell us what you have in mind.' : 'We’ll show you the right way to send your 2-step request.';
     $('bootmod-panel').hidden = next !== 'bootmod3';
     $('verify-panel').hidden = next === 'bootmod3' || !next;
     $('order-form').hidden = true;
     $('mhd-files').hidden = next !== 'mhd'; $('bench-files').hidden = next !== 'bench';
+    $('note').placeholder = next === 'bench' ? 'Tool (e.g. KESS3 Master), ECU/DME, OBD/bench/boot, fuel and hardware' : 'Fuel, hardware or your current tune';
     history.replaceState(null, '', next ? `?platform=${next}` : location.pathname);
     if (next && next !== 'bootmod3') restoreSession();
   }
