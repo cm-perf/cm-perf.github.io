@@ -62,6 +62,21 @@ header .wrap{display:flex;align-items:center;justify-content:space-between;heigh
 
 section{padding:62px 0;border-bottom:1px solid var(--line)}
 .hero{padding:0;position:relative;overflow:hidden}
+.order-entry{padding:48px 0;background:var(--bg);border-bottom:1px solid var(--line);scroll-margin-top:60px}
+.order-entry h1{font-size:clamp(28px,4vw,42px);font-weight:300;line-height:1.12;letter-spacing:-.015em;margin:9px 0 8px}
+.order-entry .intro{color:var(--dim);font-size:15px;margin-bottom:28px}
+.order-choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.order-choices a{display:flex;flex-direction:column;justify-content:center;position:relative;padding:19px 44px 19px 19px;border:1px solid var(--line);border-radius:6px;background:var(--panel);min-height:116px;transition:border-color .15s,background .15s}
+.order-choices a:hover,.order-choices a:focus-visible{border-color:var(--accent);background:#161619}
+.order-choices a::after{content:'↗';position:absolute;right:18px;top:18px;color:var(--accent);font-family:var(--mono);font-size:15px}
+.order-choices strong{display:block;font-size:18px;font-weight:400;line-height:1.2}
+.order-choices span{display:block;color:var(--dim);font-size:13px;line-height:1.4;margin-top:7px}
+.order-entry h1 b{font-weight:500;color:var(--accent)}
+.order-choices em{display:block;font-family:var(--mono);font-size:10px;font-style:normal;letter-spacing:.1em;color:var(--accent);margin-bottom:12px}
+.order-choices a{overflow:hidden;background:linear-gradient(120deg,#151517,var(--panel));padding-top:24px;padding-bottom:24px}
+.order-choices a::after{content:'→';top:24px;transition:transform .15s}
+.order-choices a:hover::after{transform:translateX(3px)}
+.order-entry-foot{display:none}
 .hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;padding-top:72px;padding-bottom:72px}
 .hero h1{font-size:clamp(34px,5.2vw,58px);font-weight:300;line-height:1.02;letter-spacing:-.015em}
 .hero h1 b{font-weight:500}
@@ -182,7 +197,29 @@ footer .copy{font-family:var(--mono);font-size:11px;color:var(--faint);width:100
   .cap .no{grid-row:1}
   .cap p{grid-column:2}
   .products,.contact .wrap{grid-template-columns:1fr}
+  .order-choices{grid-template-columns:1fr}
+  .order-entry{min-height:calc(100vh - 60px);min-height:calc(100svh - 60px);padding:0}
+  .order-entry .wrap{height:calc(100vh - 60px);height:calc(100svh - 60px);min-height:500px;display:flex;flex-direction:column;padding-top:clamp(22px,5svh,42px);padding-bottom:calc(18px + env(safe-area-inset-bottom,0px))}
+  .order-entry h1{font-size:clamp(34px,10vw,44px);line-height:1.02;margin:13px 0 12px;max-width:14ch}
+  .order-entry .intro{font-size:14px;line-height:1.4;margin-bottom:18px;max-width:34ch}
+  .order-choices{grid-template-rows:repeat(3,clamp(96px,14svh,120px));align-content:center;flex:1;min-height:0;gap:16px}
+  .order-choices a{min-height:0;padding:11px 40px 11px 17px}
+  .order-choices a::after{right:16px;top:13px}
+  .order-choices em{font-size:9px;margin-bottom:6px}
+  .order-choices strong{font-size:19px}
+  .order-choices span{font-size:12.5px;line-height:1.35;margin-top:5px}
+  .order-entry-foot{display:block;align-self:center;color:var(--faint);font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin-top:15px}
   .local-strip{flex-direction:column;align-items:flex-start}
+}
+@media (max-width:820px) and (max-height:620px){
+  .order-entry .wrap{padding-top:16px;padding-bottom:10px}
+  .order-entry h1{font-size:28px;margin:4px 0 5px}
+  .order-entry .intro{font-size:12px;margin-bottom:10px}
+  .order-choices{grid-template-rows:repeat(3,90px);gap:8px}
+  .order-choices a{padding:8px 38px 8px 14px}
+  .order-choices strong{font-size:15px}
+  .order-choices span{font-size:11px;margin-top:3px}
+  .order-entry-foot{margin-top:8px}
 }
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto}
@@ -213,6 +250,7 @@ footer .copy{font-family:var(--mono);font-size:11px;color:var(--faint);width:100
   <div class="wrap">
     <a href="/" class="brand"><img src="/favicon-192.png" alt="CM Performance" /><span class="wordmark">CM&nbsp;Performance</span></a>
     <nav class="nav" aria-label="Primary">
+      <a href="#start-order">Start request</a>
       <a href="#products">2-Step</a>
       <a href="#capabilities">Capabilities</a>
       <a href="#faq">FAQ</a>
@@ -223,6 +261,7 @@ footer .copy{font-family:var(--mono);font-size:11px;color:var(--faint);width:100
 </header>
 <div class="mobile-menu" id="mobile-menu" inert aria-hidden="true">
   <div class="inner">
+    <a href="#start-order" onclick="closeMenu()">Start request</a>
     <a href="#products" onclick="closeMenu()">2-Step</a>
     <a href="#capabilities" onclick="closeMenu()">Capabilities</a>
     <a href="#faq" onclick="closeMenu()">FAQ</a>
@@ -231,6 +270,20 @@ footer .copy{font-family:var(--mono);font-size:11px;color:var(--faint);width:100
 </div>
 
 <main id="main" style="flex:1">
+
+  <section id="start-order" class="order-entry">
+    <div class="wrap">
+      <span class="eyebrow"><span class="accent">BMW 2-STEP</span> / START YOUR REQUEST</span>
+      <h1>Choose your<br><b>tuning platform.</b></h1>
+      <p class="intro">We’ll show you the right way to send your 2-step request.</p>
+      <div class="order-choices">
+        <a href="/order.html?platform=bootmod3"><em>01 / IN-APP REQUEST</em><strong>Bootmod3</strong><span>Find CM Performance in the tuner directory.</span></a>
+        <a href="/order.html?platform=mhd"><em>02 / FILE UPLOAD</em><strong>MHD</strong><span>Start with your stock BIN + flashoptions file.</span></a>
+        <a href="/order.html?platform=bench"><em>03 / DIRECT ECU READ</em><strong>ECU read / bench</strong><span>Start with a raw BIN or MPC file.</span></a>
+      </div>
+      <span class="order-entry-foot" aria-hidden="true">More about us ↓</span>
+    </div>
+  </section>
 
   <section class="hero">
     <div class="wrap">
@@ -244,7 +297,7 @@ footer .copy{font-family:var(--mono);font-size:11px;color:var(--faint);width:100
           <span>From</span> $200 USD
         </div>
         <div class="actions">
-          <a href="#contact" class="btn btn-fill">Check my BMW</a>
+          <a href="#start-order" class="btn btn-fill">Check my BMW</a>
           <a href="https://www.instagram.com/cm.perf/" class="link" target="_blank" rel="noopener">Watch on Instagram &#8599;</a>
         </div>
       </div>
@@ -291,7 +344,7 @@ footer .copy{font-family:var(--mono);font-size:11px;color:var(--faint);width:100
         <div class="card lead">
           <span class="status live">● Available worldwide · via Bootmod3</span>
           <h3>2-Step Secondary Rev Limiter</h3>
-          <p>Launch control flashed to your BMW: a variable-RPM secondary rev limiter, triggered by brake and throttle, with launch RPM set on the cruise stalk. Stage builds and bespoke ECU&nbsp;ROM work on the same platform. Find us in the Bootmod3 tuner directory, or send the form below.</p>
+          <p>Launch control flashed to your BMW: a variable-RPM secondary rev limiter, triggered by brake and throttle, with launch RPM set on the cruise stalk. Stage builds and bespoke ECU&nbsp;ROM work on the same platform. Choose your tuning platform to start your request.</p>
           <div class="specs">
             <div>Trigger <b>Brake + throttle</b></div>
             <div>RPM <b>Variable · cruise stalk</b></div>
@@ -300,7 +353,7 @@ footer .copy{font-family:var(--mono);font-size:11px;color:var(--faint);width:100
             <div>From <b>$200 USD</b></div>
           </div>
           <div class="buy">
-            <a href="#contact" class="btn btn-fill">Check my BMW</a>
+            <a href="#start-order" class="btn btn-fill">Check my BMW</a>
           </div>
         </div>
         <div class="card">
@@ -346,7 +399,7 @@ footer .copy{font-family:var(--mono);font-size:11px;color:var(--faint);width:100
         <p>OEM M1/M2 activation on an N20, flashed by us. One flash, launch control on the buttons, no bolt-on box. More builds and launches are on our Instagram.</p>
         <p class="hint">Tap play for sound.</p>
         <div class="actions">
-          <a href="#contact" class="btn btn-fill">Check my BMW</a>
+          <a href="#start-order" class="btn btn-fill">Check my BMW</a>
           <a href="https://www.instagram.com/cm.perf/" class="link" target="_blank" rel="noopener">More on Instagram &#8599;</a>
         </div>
       </div>

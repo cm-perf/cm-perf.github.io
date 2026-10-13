@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0a0a0b"><title>Start a request | CM Performance</title>
+<link rel="icon" href="/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@300..600&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;--bg:#0a0a0b;--panel:#101012;--edge:rgba(255,255,255,.09);--text:#f2f2f0;--dim:#8c8c90;--accent:#e85d04;--sans:'Geist',system-ui,-apple-system,sans-serif;--mono:'Geist Mono',ui-monospace,monospace;font-family:var(--sans)}
+*{box-sizing:border-box}[hidden]{display:none!important}body{margin:0;background:var(--bg);color:var(--text);line-height:1.45}a{color:var(--accent)}button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{opacity:.55;cursor:wait}
+header{border-bottom:1px solid var(--edge);padding:16px max(20px,calc((100vw - 920px)/2));display:flex;align-items:center;gap:11px;height:60px}header img{width:26px;height:26px;border-radius:6px}header a{text-decoration:none;color:var(--text);font-family:var(--mono);font-size:13px;font-weight:400;letter-spacing:.14em;text-transform:uppercase}
+main{max-width:920px;margin:auto;padding:40px 20px 70px}h1{font-size:clamp(28px,5vw,42px);font-weight:300;line-height:1.13;letter-spacing:-.015em;margin:0 0 10px}h2{font-size:22px;font-weight:400;margin:0 0 12px}.muted{color:var(--dim)}.intro{margin:0 0 25px;max-width:65ch}
+.choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:22px}.choice{display:block;text-align:left;border:1px solid var(--edge);border-radius:6px;padding:18px;background:var(--panel);color:var(--text);min-height:108px}.choice strong{display:block;font-size:18px;font-weight:400}.choice span{display:block;color:var(--dim);font-size:13px;margin-top:6px}.choice[aria-pressed=true]{border-color:var(--accent)}
+.panel{border:1px solid var(--edge);border-radius:6px;padding:22px;background:var(--panel);margin-top:18px}.panel[hidden],.field[hidden],#order-form[hidden]{display:none}label{display:block;font-family:var(--mono);font-size:11px;font-weight:400;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin:15px 0 7px}input,select,textarea{width:100%;background:#0a0a0b;color:var(--text);border:1px solid var(--edge);border-radius:4px;padding:12px;min-height:46px}input[type=checkbox]{width:auto;min-height:0;margin-right:10px}input[type=file]{padding:9px}.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}.check{display:flex;align-items:center;font-family:var(--sans);font-size:14px;text-transform:none;letter-spacing:0;color:var(--text)}.actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:20px}.primary{background:var(--accent);border:1px solid var(--accent);color:#0a0a0b;border-radius:4px;padding:12px 20px;font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;min-height:46px}.secondary{background:transparent;color:var(--text);border:1px solid var(--edge);border-radius:4px;padding:11px 17px;font-family:var(--mono);font-size:12px}.status{color:var(--dim);margin-top:14px;min-height:22px}.status.error{color:#ff9d83}.status.ok{color:#9fdfa7}.hint{font-size:13px;color:var(--dim);margin-top:5px}.price{font-size:18px;margin:20px 0 0}.price strong{color:var(--accent)}.steps{padding-left:22px}.steps li{margin:10px 0}
+#change-platform{background:none;border:0;color:var(--accent);font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:0;margin:0 0 6px}
+@media(max-width:680px){main{padding:25px 16px 55px}.choices,.row{grid-template-columns:1fr}.choice{min-height:0}.panel{padding:18px}main.picker-only{min-height:calc(100vh - 60px);min-height:calc(100svh - 60px);display:flex;flex-direction:column;padding-bottom:calc(18px + env(safe-area-inset-bottom,0px))}main.picker-only .choices{flex:1;grid-template-rows:repeat(3,clamp(104px,14svh,124px));align-content:center;gap:16px}main.picker-only .choice{display:flex;flex-direction:column;justify-content:center}main.picker-only .intro{margin-bottom:20px}}
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin:0 0 15px}
+.choice{position:relative;padding:22px 36px 22px 18px;background:linear-gradient(120deg,#151517,var(--panel));transition:border-color .15s,background .15s}
+.choice::after{content:'→';position:absolute;right:17px;top:20px;color:var(--accent)}
+.choice em{display:block;font-family:var(--mono);font-size:9px;font-style:normal;letter-spacing:.08em;color:var(--accent);margin-bottom:10px}
+.choice:hover{border-color:var(--accent)}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.panel{padding:28px;border-top:2px solid var(--accent)}
+.panel>p.muted{font-size:14px;line-height:1.6}
+.steps{list-style:none;counter-reset:step;padding:0;margin:24px 0}
+.steps li{counter-increment:step;position:relative;padding:0 0 18px 40px;margin:0 0 18px;border-bottom:1px solid var(--edge);font-size:15px;line-height:1.6}
+.steps li::before{content:'0' counter(step);position:absolute;left:0;top:2px;font-family:var(--mono);font-size:11px;color:var(--accent)}
+#change-platform{min-height:36px}
+.primary:hover{background:#ff6a0d;border-color:#ff6a0d}
+input,select,textarea{font-size:16px}
+@media(max-width:680px){main{padding:28px 22px 50px}.panel{padding:22px 18px}.panel h2{font-size:24px}.eyebrow{font-size:9px}.choice strong{font-size:19px}main.picker-only{height:calc(100svh - 60px);min-height:500px}main.picker-only h1{font-size:clamp(34px,10vw,44px);max-width:none}main.picker-only .choices{min-height:0;margin-bottom:0}.actions .primary{width:100%}.row{gap:0}.panel .eyebrow{letter-spacing:.06em}#turnstile{margin-top:16px}}
+@media(max-width:680px) and (max-height:620px){main.picker-only{padding-top:16px;padding-bottom:10px}main.picker-only .intro{font-size:12px;margin-bottom:10px}main.picker-only .choices{grid-template-rows:repeat(3,90px);gap:8px}main.picker-only .choice{padding-top:8px;padding-bottom:8px}}
+</style>
+<script src="/order-config.js" defer></script><script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" defer></script><script src="/order.js" defer></script>
+</head>
+<body>
+<header><img src="/favicon-192.png" alt=""><a href="/">CM PERFORMANCE</a></header>
+<main id="order-main">
+  <p class="eyebrow" id="order-stage">BMW 2-STEP / START YOUR REQUEST</p>
+  <h1 id="order-heading">Choose your tuning platform.</h1><p class="intro muted" id="order-intro">We’ll show you the right way to send your 2-step request.</p>
+  <button id="change-platform" type="button" hidden>← Change platform</button>
+  <div class="choices" id="platform-choices" role="group" aria-label="Tuning platform">
+    <button class="choice" type="button" data-platform="bootmod3"><em>01 / IN-APP REQUEST</em><strong>Bootmod3</strong><span>Find CM Performance in the tuner directory.</span></button>
+    <button class="choice" type="button" data-platform="mhd"><em>02 / FILE UPLOAD</em><strong>MHD</strong><span>Start with your stock BIN + flashoptions file.</span></button>
+    <button class="choice" type="button" data-platform="bench"><em>03 / DIRECT ECU READ</em><strong>ECU read / bench</strong><span>Start with a raw BIN or MPC file.</span></button>
+  </div>
+  <section class="panel" id="bootmod-panel" hidden><p class="eyebrow">YOUR NEXT STEP</p><h2>Find us in Bootmod3.</h2><ol class="steps"><li>Open Bootmod3 and go to the <strong>Tuners</strong> directory.</li><li>Find and select <strong>CM Performance</strong>.</li><li>Send a tune request with your desired 2-step RPM and what you want us to build.</li></ol><p class="muted">Your conversation and map stay in Bootmod3. You do not need to upload files here.</p></section>
+  <section class="panel" id="verify-panel" hidden>
+    <p class="eyebrow">01 / EMAIL · 02 / YOUR CAR &amp; FILES</p><h2>First, let’s connect.</h2><p class="muted">Verify your email, then tell us about your car and upload your files.</p>
+    <div class="verify-content">
+    <label for="email">Email address</label><input id="email" type="email" autocomplete="email" required>
+    <div id="turnstile"></div><div class="actions"><button id="send-code" class="primary" type="button">Email me a code</button></div>
+    <div id="code-fields" hidden><label for="code">8-digit code</label><input id="code" inputmode="numeric" pattern="[0-9]{8}" maxlength="8" autocomplete="one-time-code"><div class="actions"><button id="verify-code" class="primary" type="button">Verify email</button></div></div>
+    </div>
+    <p id="verify-status" class="status" role="status"></p>
+  </section>
+  <form class="panel" id="order-form" hidden>
+    <p class="eyebrow">02 / YOUR CAR &amp; FILES</p><h2>Make it yours.</h2><p class="muted">Verified email: <strong id="verified-email"></strong> <button class="secondary" type="button" id="change-email">Change</button></p>
+    <div class="row"><div><label for="name">Name</label><input id="name" required autocomplete="name" maxlength="160"></div><div><label for="vin">VIN</label><input id="vin" required minlength="17" maxlength="17" autocapitalize="characters" placeholder="17 characters"></div></div>
+    <div class="row"><div><label for="vehicle">Car model and year</label><input id="vehicle" required placeholder="e.g. 2015 428i" maxlength="160"></div><div><label for="engine">Engine</label><select id="engine" required><option value="">Choose engine</option><option>N20</option><option>N26</option><option>N55</option><option>N63</option><option>S55</option><option>B58</option><option>B58 Gen 2</option></select><p class="hint">B58 requests are reviewed before we confirm support.</p></div></div>
+    <div class="row"><div class="field" id="single-rpm"><label for="rpm">2-step RPM</label><input id="rpm" type="number" inputmode="numeric" min="2000" max="7000" step="100" required placeholder="e.g. 4500"></div><div><label for="trigger">How do you activate it?</label><select id="trigger"><option value="brake-pedal">Brake + accelerator</option><option value="m-buttons">M1/M2 buttons</option></select></div></div>
+    <div class="row field" id="m-buttons" hidden><div><label for="m1-rpm">M1 RPM</label><input id="m1-rpm" type="number" inputmode="numeric" min="2000" max="7000" step="100"></div><div><label for="m2-rpm">M2 RPM</label><input id="m2-rpm" type="number" inputmode="numeric" min="2000" max="7000" step="100"></div></div>
+    <label class="check"><input id="remap" type="checkbox">Add a performance remap (+$100)</label><p class="price">Estimated price: <strong id="price">from $200</strong></p><p class="hint">We confirm the final price and what your car supports before payment.</p>
+    <div id="mhd-files" hidden><label for="stock">Stock BIN exported by MHD</label><input id="stock" type="file" accept=".bin"><p class="hint">Export your stock file in MHD, then choose the saved BIN from your phone’s Files app.</p><label for="flashoptions">MHD flashoptions file</label><input id="flashoptions" type="file" accept=".xml"><p class="hint">Android: Android/media/com.mhd.flasher.fseries/{VIN}_flashoptions.xml<br>iPhone: Locations → On My iPhone → MHD Flasher → {VIN}_flashoptions.xml<br>Maximum 1 MB.</p></div>
+    <div id="bench-files" hidden><label for="raw">Raw ECU file</label><input id="raw" type="file" accept=".bin,.mpc"><p class="hint">Choose one BIN or MPC read from your ECU.</p></div>
+    <label for="note">Anything else we should know? (optional)</label><textarea id="note" rows="3" maxlength="2000" placeholder="Fuel, hardware or your current tune"></textarea>
+    <div class="actions"><button class="primary" type="submit" id="submit-order">Submit request</button><button class="secondary" type="button" id="new-order" hidden>Start another request</button></div><p class="hint">No payment is taken now. We’ll review your files and contact you by email.</p><p id="order-status" class="status" role="status"></p>
+  </form>
+</main>
+</body></html>
