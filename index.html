@@ -193,6 +193,7 @@ footer .flinks a:hover{color:var(--text)}
 footer .copy{font-family:var(--mono);font-size:11px;color:var(--faint);width:100%;border-top:1px solid var(--line-2);padding-top:18px}
 
 @media (max-width:820px){
+  .wrap{padding-left:max(32px,env(safe-area-inset-left));padding-right:max(32px,env(safe-area-inset-right))}
   .nav{display:none}
   .menu-btn{display:block}
   .mobile-menu{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease;position:fixed;inset:60px 0 auto 0;z-index:39;background:rgba(10,10,11,.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}

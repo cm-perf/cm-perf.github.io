@@ -29,7 +29,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 #change-platform{min-height:36px}
 .primary:hover{background:#ff6a0d;border-color:#ff6a0d}
 input,select,textarea{font-size:16px}
-@media(max-width:680px){main{padding:28px 22px 50px}.panel{padding:22px 18px}.panel h2{font-size:24px}.eyebrow{font-size:9px}.choice strong{font-size:19px}main.picker-only{height:calc(100svh - 60px);min-height:500px}main.picker-only h1{font-size:clamp(34px,10vw,44px);max-width:none}main.picker-only .choices{min-height:0;margin-bottom:0}.actions .primary{width:100%}.row{gap:0}.panel .eyebrow{letter-spacing:.06em}#turnstile{margin-top:16px}}
+@media(max-width:680px){main{padding:32px max(32px,env(safe-area-inset-right)) 50px max(32px,env(safe-area-inset-left))}.panel{padding:22px 18px}.panel h2{font-size:24px}.eyebrow{font-size:9px}.choice strong{font-size:19px}main.picker-only{height:calc(100svh - 60px);min-height:500px}main.picker-only h1{font-size:clamp(34px,10vw,44px);max-width:none}main.picker-only .choices{min-height:0;margin-bottom:0}.actions .primary{width:100%}.row{gap:0}.panel .eyebrow{letter-spacing:.06em}#turnstile{margin-top:16px}}
 @media(max-width:680px) and (max-height:620px){main.picker-only{padding-top:16px;padding-bottom:10px}main.picker-only .intro{font-size:12px;margin-bottom:10px}main.picker-only .choices{grid-template-rows:repeat(3,90px);gap:8px}main.picker-only .choice{padding-top:8px;padding-bottom:8px}}
 </style>
 <script src="/order-config.js" defer></script><script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" defer></script><script src="/order.js" defer></script>
