@@ -3,6 +3,7 @@
 Run: python tests/test_order_form.py (requires Chromium on PATH).
 """
 import html
+import os
 import json
 from pathlib import Path
 import re
@@ -11,7 +12,7 @@ import subprocess
 import tempfile
 import unittest
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(os.environ.get('WEBSITE_TEST_ROOT', Path(__file__).resolve().parents[1])).resolve()
 
 MOCK_API = """
 window.CMP_ORDER_CONFIG = {api: 'https://mock.invalid'};
