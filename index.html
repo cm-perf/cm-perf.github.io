@@ -97,6 +97,13 @@ section{padding:62px 0;border-bottom:1px solid var(--line)}
 .slides{position:relative;flex:1;display:grid}
 .slide{grid-area:1/1;display:flex;flex-direction:column;justify-content:center;padding:26px 28px;opacity:0;transform:translateY(8px);transition:opacity .5s ease,transform .5s ease}
 .slide.is-active{opacity:1;transform:none}
+.slide-wheel{position:relative;isolation:isolate;min-height:430px;justify-content:flex-end}
+.slide-wheel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 58%;z-index:-2}
+.slide-wheel::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.12) 15%,rgba(0,0,0,.3) 44%,rgba(0,0,0,.94) 100%);z-index:-1}
+.slide.slide-wheel .st{color:#ff8a29;font-size:clamp(30px,3vw,40px);max-width:14ch}
+.slide.slide-wheel p{color:#ededed;max-width:38ch;text-shadow:0 1px 8px #000}
+.slide-wheel .k{color:#ff9b49}
+.specs b{text-align:right;max-width:70%}
 .slide .k{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
 .slide .st{margin:12px 0 12px;font-size:clamp(22px,2.6vw,30px);font-weight:400;letter-spacing:-.01em;line-height:1.1}
 .slide p{color:var(--dim);font-size:15px;max-width:42ch}
@@ -232,9 +239,9 @@ footer .copy{font-family:var(--mono);font-size:11px;color:var(--faint);width:100
 {"@context":"https://schema.org","@graph":[
 {"@type":"Organization","@id":"https://cmperf.uk/#org","name":"CM Performance","url":"https://cmperf.uk/","email":"contact@cmperf.uk","logo":"https://cmperf.uk/favicon-192.png","image":"https://cmperf.uk/og-cmperf.png","description":"UK-based BMW engineering: custom ECU software, the 2-step secondary rev limiter, diagnostics, retrofit and coding, and product development.","areaServed":"Worldwide","address":{"@type":"PostalAddress","addressCountry":"GB"},"sameAs":["https://www.instagram.com/cm.perf/"]},
 {"@type":"WebSite","@id":"https://cmperf.uk/#site","url":"https://cmperf.uk/","name":"CM Performance","publisher":{"@id":"https://cmperf.uk/#org"}},
-{"@type":"Service","name":"BMW 2-Step Secondary Rev Limiter","serviceType":"Custom ECU software / BMW tuning","provider":{"@id":"https://cmperf.uk/#org"},"areaServed":"Worldwide","description":"Variable-RPM 2-step launch control for BMW N20, N26, N55, N63 and S55, triggered by brake plus throttle with launch RPM set on the cruise stalk. Available worldwide for Bootmod3, MHD and compatible ECU tools, including KESS3.","offers":{"@type":"Offer","price":"200","priceCurrency":"USD","availability":"https://schema.org/InStock"}},
+{"@type":"Service","name":"BMW 2-Step Secondary Rev Limiter","serviceType":"Custom ECU software / BMW tuning","provider":{"@id":"https://cmperf.uk/#org"},"areaServed":"Worldwide","description":"2-step launch control for BMW N20, N26, N55, N63 and S55. Choose M1/M2 activation, including aftermarket sport steering wheels, with a launch RPM for each button, or brake plus gas with a fixed launch RPM. Experimental cruise-control RPM adjustment is optional. Available worldwide for Bootmod3, MHD and compatible ECU tools, including KESS3.","offers":{"@type":"Offer","price":"200","priceCurrency":"USD","availability":"https://schema.org/InStock"}},
 {"@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"What is a 2-step secondary rev limiter?","acceptedAnswer":{"@type":"Answer","text":"A launch rev limit below your redline. Hold the brake and throttle to hold a set RPM and build boost, then launch. Set the RPM on the cruise stalk; cars with M1/M2 buttons also get preset steps."}},
+{"@type":"Question","name":"What is a 2-step secondary rev limiter?","acceptedAnswer":{"@type":"Answer","text":"A launch rev limit below your redline. Choose M1/M2 buttons with a separate RPM for each, or brake + gas pedal with one launch RPM. We also support aftermarket sport steering wheels with M1/M2 buttons. Experimental cruise-control RPM adjustment is available as an option; we confirm your setup before building."}},
 {"@type":"Question","name":"Which BMW engines do you support?","acceptedAnswer":{"@type":"Answer","text":"N20, N26, N55, N63 and S55 are live now. B-series engines are in active development. If your engine is not listed, ask us."}},
 {"@type":"Question","name":"How is the 2-step delivered?","acceptedAnswer":{"@type":"Answer","text":"We deliver worldwide through Bootmod3, MHD or files for compatible ECU tools such as Alientech KESS3, AutoTuner and Magicmotorsport FLEX. Choose your platform when you start your request. We confirm support for your car and software before preparing your file."}},
 {"@type":"Question","name":"Can I use KESS3, AutoTuner or FLEX?","acceptedAnswer":{"@type":"Answer","text":"Tell us which tool you use, your ECU/DME and whether the file was read by OBD, bench or boot. We’ll check whether we can work with the file for your BMW before you pay. Our upload form takes unencrypted BIN or MPC files. If you use a Slave tool, contact us first."}},
@@ -291,7 +298,7 @@ footer .copy{font-family:var(--mono);font-size:11px;color:var(--faint);width:100
       <div>
         <span class="eyebrow">BMW diagnostics &middot; retrofits &middot; engineering</span>
         <h1 style="margin-top:18px">We build systems<br />that don't yet exist,<br />for <b class="accent">BMWs</b>.</h1>
-        <p>Custom ECU software, including our OEM+ 2-step flash. Set your launch RPM on the cruise stalk and hold it on brake and throttle. Available worldwide for Bootmod3, MHD and compatible ECU tools, including KESS3. Diagnostics, retrofits and product development too.</p>
+        <p>Custom ECU software, including our OEM+ 2-step flash. Choose M1/M2 button activation—including aftermarket sport wheels—or brake + gas, with launch RPM tailored to your build. Available worldwide for Bootmod3, MHD and compatible ECU tools, including KESS3. Diagnostics, retrofits and product development too.</p>
         <div class="specline">
           <span>Engines</span> N20 · N26 · N55 · N63 · S55
           <span>Delivery</span> Bootmod3 · MHD · ECU tools
@@ -305,20 +312,21 @@ footer .copy{font-family:var(--mono);font-size:11px;color:var(--faint);width:100
       <div class="slideshow" id="twostep" role="group" aria-label="2-step secondary rev limiter">
         <div class="slide-head"><span>2-STEP SECONDARY REV LIMITER</span><span class="slide-no" id="slide-no">01 / 04</span></div>
         <div class="slides">
-          <article class="slide is-active">
-            <span class="k">Launch control</span>
-            <div class="st">2-step launch control</div>
-            <p>An OEM+ ECU flash, not a bolt-on box. It enables a secondary launch rev limiter using your BMW's own hardware, so you can hold revs and build boost, then launch.</p>
+          <article class="slide slide-wheel is-active">
+            <img src="assets/steering-wheels/m1-m2-sport-wheel.jpg" alt="BMW sport steering wheel with red M1 and M2 buttons" width="1632" height="1524" decoding="async">
+            <span class="k">Your wheel. Your launch.</span>
+            <div class="st">M1 / M2.<br>Your launch RPMs.</div>
+            <p>Choose a launch RPM for each button. We make aftermarket sport steering wheels with M1/M2 buttons work too.</p>
           </article>
           <article class="slide">
             <span class="k">Activation</span>
             <div class="st">Brake + gas pedal</div>
-            <p>Hold the brake, press the throttle, then release the brake to launch. Works on any supported BMW with stock pedals. Cars with M1/M2 buttons get preset steps too.</p>
+            <p>Hold the brake, press the throttle, then release the brake to launch. Choose a fixed launch RPM for brake + gas activation, using your stock pedals.</p>
           </article>
           <article class="slide">
-            <span class="k">Variable RPM</span>
+            <span class="k">Optional · experimental</span>
             <div class="st">Set it on the cruise stalk</div>
-            <p>Dial your launch RPM up or down from the cruise-control stalk, between runs, with no laptop.</p>
+            <p>Want adjustable launch RPM? Ask for experimental cruise-control RPM adjustment when we confirm your build requirements.</p>
           </article>
           <article class="slide">
             <span class="k">Engine coverage</span>
@@ -329,7 +337,7 @@ footer .copy{font-family:var(--mono);font-size:11px;color:var(--faint);width:100
           </article>
         </div>
         <div class="dots" aria-label="Choose slide">
-          <button class="dot is-active" type="button" aria-label="Launch control"></button>
+          <button class="dot is-active" type="button" aria-label="M1/M2 buttons and aftermarket sport wheels"></button>
           <button class="dot" type="button" aria-label="Activation"></button>
           <button class="dot" type="button" aria-label="Variable RPM"></button>
           <button class="dot" type="button" aria-label="Engine coverage"></button>
@@ -345,10 +353,12 @@ footer .copy{font-family:var(--mono);font-size:11px;color:var(--faint);width:100
         <div class="card lead">
           <span class="status live">● Available worldwide</span>
           <h3>2-Step Secondary Rev Limiter</h3>
-          <p>Launch control flashed to your BMW: a variable-RPM secondary rev limiter, triggered by brake and throttle, with launch RPM set on the cruise stalk. Stage builds and bespoke ECU&nbsp;ROM work are also available. Choose your tuning platform to start your request.</p>
+          <p>Your launch, your controls. Activate 2-step with <strong>M1/M2 buttons</strong> or <strong>brake + gas pedal</strong>. Choose an RPM for each M button, or one for pedal activation. We also make aftermarket sport steering wheels with M1/M2 buttons work.</p>
           <div class="specs">
-            <div>Trigger <b>Brake + throttle</b></div>
-            <div>RPM <b>Variable · cruise stalk</b></div>
+            <div>Activation <b>M1/M2 or brake + gas</b></div>
+            <div>RPM <b>Per-button presets or pedal RPM</b></div>
+            <div>Sport wheels <b>Aftermarket M1/M2 supported</b></div>
+            <div>Optional <b>Cruise RPM · experimental</b></div>
             <div>Engines <b>N20 · N26 · N55 · N63 · S55</b></div>
             <div>Delivery <b>Bootmod3 · MHD · ECU tools</b></div>
             <div>From <b>$200 USD</b></div>
@@ -455,7 +465,7 @@ footer .copy{font-family:var(--mono);font-size:11px;color:var(--faint);width:100
       <div class="faq">
         <details open>
           <summary>What is a 2-step secondary rev limiter?</summary>
-          <p class="a">A launch rev limit below your redline. Hold the brake and throttle to hold a set RPM and build boost, then launch. Set the RPM on the cruise stalk; cars with M1/M2 buttons also get preset steps.</p>
+          <p class="a">A launch rev limit below your redline. Choose M1/M2 buttons with a separate RPM for each, or brake + gas pedal with one launch RPM. We also support aftermarket sport steering wheels with M1/M2 buttons. Experimental cruise-control RPM adjustment is available as an option; we confirm your setup before building.</p>
         </details>
         <details>
           <summary>Which BMW engines do you support?</summary>
