@@ -10,6 +10,7 @@
 :root{color-scheme:dark;--bg:#0a0a0b;--panel:#101012;--edge:rgba(255,255,255,.09);--text:#f2f2f0;--dim:#8c8c90;--accent:#e85d04;--sans:'Geist',system-ui,-apple-system,sans-serif;--mono:'Geist Mono',ui-monospace,monospace;font-family:var(--sans)}
 *{box-sizing:border-box}[hidden]{display:none!important}body{margin:0;background:var(--bg);color:var(--text);line-height:1.45}a{color:var(--accent)}button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{opacity:.55;cursor:wait}
 header{border-bottom:1px solid var(--edge);padding:16px max(20px,calc((100vw - 920px)/2));display:flex;align-items:center;gap:11px;height:60px}header img{width:26px;height:26px;border-radius:6px}header a{text-decoration:none;color:var(--text);font-family:var(--mono);font-size:13px;font-weight:400;letter-spacing:.14em;text-transform:uppercase}
+header .sent-link{margin-left:auto;color:var(--dim);font-family:var(--sans);font-size:12px;letter-spacing:0;text-transform:none;white-space:nowrap}header .sent-link:hover{color:var(--text)}
 main{max-width:920px;margin:auto;padding:40px 20px 70px}h1{font-size:clamp(28px,5vw,42px);font-weight:300;line-height:1.13;letter-spacing:-.015em;margin:0 0 10px}h2{font-size:22px;font-weight:400;margin:0 0 12px}.muted{color:var(--dim)}.intro{margin:0 0 25px;max-width:65ch}
 .choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:22px}.choice{display:block;text-align:left;border:1px solid var(--edge);border-radius:6px;padding:18px;background:var(--panel);color:var(--text);min-height:108px}.choice strong{display:block;font-size:18px;font-weight:400}.choice span{display:block;color:var(--dim);font-size:13px;margin-top:6px}.choice[aria-pressed=true]{border-color:var(--accent)}
 .panel{border:1px solid var(--edge);border-radius:6px;padding:22px;background:var(--panel);margin-top:18px}.panel[hidden],.field[hidden],#order-form[hidden]{display:none}label{display:block;font-family:var(--mono);font-size:11px;font-weight:400;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin:15px 0 7px}input,select,textarea{width:100%;background:#0a0a0b;color:var(--text);border:1px solid var(--edge);border-radius:4px;padding:12px;min-height:46px}input[type=checkbox]{width:auto;min-height:0;margin-right:10px}input[type=file]{padding:9px}.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}.check{display:flex;align-items:center;font-family:var(--sans);font-size:14px;text-transform:none;letter-spacing:0;color:var(--text)}.actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:20px}.primary{background:var(--accent);border:1px solid var(--accent);color:#0a0a0b;border-radius:4px;padding:12px 20px;font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;min-height:46px}.secondary{background:transparent;color:var(--text);border:1px solid var(--edge);border-radius:4px;padding:11px 17px;font-family:var(--mono);font-size:12px}.status{color:var(--dim);margin-top:14px;min-height:22px}.status.error{color:#ff9d83}.status.ok{color:#9fdfa7}.hint{font-size:13px;color:var(--dim);margin-top:5px}.price{font-size:18px;margin:20px 0 0}.price strong{color:var(--accent)}.steps{padding-left:22px}.steps li{margin:10px 0}
@@ -34,11 +35,13 @@ input,select,textarea{font-size:16px}
 .order-fields{border:0;margin:0;padding:0;min-width:0}.order-fields:disabled input,.order-fields:disabled select,.order-fields:disabled textarea{opacity:.7;cursor:wait}
 .button-spinner{display:none;width:13px;height:13px;border:2px solid rgba(10,10,11,.3);border-top-color:#0a0a0b;border-radius:50%;vertical-align:-2px;margin-right:9px;animation:button-spin .8s linear infinite}#submit-order[aria-busy=true] .button-spinner{display:inline-block}@keyframes button-spin{to{transform:rotate(360deg)}}@media(prefers-reduced-motion:reduce){.button-spinner{animation:none;border-color:#0a0a0b}}
 #success-panel{border-top-color:#9fdfa7;background:linear-gradient(145deg,rgba(75,135,88,.11),var(--panel) 55%)}.success-mark{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:rgba(159,223,167,.13);color:#9fdfa7;font-size:25px;margin-bottom:22px}.success-reference{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:18px 0;padding:16px;border:1px solid rgba(159,223,167,.25);border-radius:6px;background:#0a0a0b}.success-reference code{font-family:var(--mono);font-size:clamp(13px,2.5vw,17px);color:#f2f2f0;overflow-wrap:anywhere;user-select:all;flex:1 1 270px}.success-reference .secondary{flex:none}.success-next{max-width:62ch;line-height:1.65}#success-heading:focus{outline:none}@media(max-width:680px){.success-reference .secondary{width:100%}}
+.sent-item{border-top:1px solid var(--edge);padding:20px 0}.sent-item:first-child{margin-top:16px}.sent-item-title{font-size:17px;overflow-wrap:anywhere}.sent-item-meta{color:var(--dim);font-size:13px;margin:4px 0 10px}.sent-item code{font-family:var(--mono);font-size:13px;overflow-wrap:anywhere;user-select:all}.sent-item .actions{margin-top:12px}.sent-item .secondary{min-height:38px}.sent-item .status{margin-top:8px}.sent-empty{padding:24px 0}.local-note{font-size:13px;line-height:1.6}
+.sent-item .status:empty,#sent-status:empty{display:none}
 </style>
 <script src="/order-config.js" defer></script><script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" defer></script><script src="/order.js" defer></script>
 </head>
 <body>
-<header><img src="/favicon-192.png" alt=""><a href="/">CM PERFORMANCE</a></header>
+<header><img src="/favicon-192.png" alt=""><a href="/">CM PERFORMANCE</a><a class="sent-link" id="sent-link" href="/order.html?view=sent">Sent requests</a></header>
 <main id="order-main">
   <p class="eyebrow" id="order-stage">BMW 2-STEP / START YOUR REQUEST</p>
   <h1 id="order-heading">Choose your tuning platform.</h1><p class="intro muted" id="order-intro">We’ll show you the right way to send your 2-step request.</p>
@@ -50,7 +53,7 @@ input,select,textarea{font-size:16px}
   </div>
   <section class="panel" id="bootmod-panel" hidden><p class="eyebrow">YOUR NEXT STEP</p><h2>Find us in Bootmod3.</h2><ol class="steps"><li>Open Bootmod3 and go to the <strong>Tuners</strong> directory.</li><li>Find and select <strong>CM Performance</strong>.</li><li>Send a tune request with your desired 2-step RPM and what you want us to build.</li></ol><p class="muted">Your conversation and map stay in Bootmod3. You do not need to upload files here.</p></section>
   <section class="panel" id="verify-panel" hidden>
-    <p class="eyebrow">01 / EMAIL · 02 / YOUR CAR &amp; FILES</p><h2>First, let’s connect.</h2><p class="muted">Verify your email, then tell us about your car and upload your files.</p>
+    <p class="eyebrow" id="verify-stage">01 / EMAIL · 02 / YOUR CAR &amp; FILES</p><h2 id="verify-heading">First, let’s connect.</h2><p class="muted" id="verify-intro">Verify your email, then tell us about your car and upload your files.</p>
     <div class="verify-content">
     <label for="email">Email address</label><input id="email" type="email" autocomplete="email" required>
     <div id="turnstile"></div><div class="actions"><button id="send-code" class="primary" type="button">Email me a code</button></div>
@@ -79,7 +82,15 @@ input,select,textarea{font-size:16px}
     <div class="success-reference"><code id="success-reference"></code><button class="secondary" type="button" id="copy-reference">Copy reference</button></div>
     <p id="copy-status" class="status" role="status" hidden></p>
     <p class="success-next">We’ll review your files and email you at <strong id="success-email"></strong> about support and the final price. No payment has been taken.</p>
-    <div class="actions"><button class="secondary" type="button" id="new-order">Start another request</button></div>
+    <p id="save-status" class="status" role="status"></p>
+    <div class="actions"><button class="secondary" type="button" id="new-order">Start another request</button><button class="secondary" type="button" id="view-sent">View sent requests</button></div>
+  </section>
+  <section class="panel" id="sent-panel" aria-labelledby="sent-heading" hidden>
+    <p class="eyebrow">SAVED ON THIS DEVICE</p><h2 id="sent-heading" tabindex="-1">Sent requests</h2>
+    <p class="muted">Requests saved in this browser for <strong id="sent-email"></strong>. These references are receipts, not live order status.</p>
+    <div id="sent-list"></div><p id="sent-status" class="status" role="status"></p>
+    <p class="muted local-note">Only this browser keeps this list. Clearing its site data removes it. Your files and VIN are never saved here.</p>
+    <div class="actions"><button class="secondary" type="button" id="sent-change-email">Use another email</button><button class="secondary" type="button" id="sent-start">Start a request</button></div>
   </section>
 </main>
 </body></html>
