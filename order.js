@@ -9,7 +9,7 @@
   const cleanVehicle = value => String(value || '').replace(/\b[A-HJ-NPR-Z0-9]{17}\b/gi, '[VIN removed]').replace(/[\x00-\x1f\x7f]/g, ' ').trim().slice(0,160) || 'Vehicle not specified';
   const validReceipt = record => record && record.version === 1 && validReference(record.reference) && validEmail(record.email) && record.email === record.email.toLowerCase() && typeof record.vehicle === 'string' && record.vehicle.length <= 160 && engines.includes(record.engine) && ['mhd','bench'].includes(record.platform) && Number.isSafeInteger(record.submittedAt) && record.submittedAt > 0 && record.submittedAt <= Date.now() + 86_400_000;
   const status = (id, message, error = false, neutral = false) => { const el = $(id); el.textContent = message; el.className = `status ${error ? 'error' : neutral ? '' : 'ok'}`; };
-  let platform = '', challenge = '', turnstileId, uploading = false, historyView = false, verifiedHistoryEmail = '', historyCheck = 0;
+  let platform = '', challenge = '', turnstileId, uploading = false, switchingEmail = false, historyView = false, verifiedHistoryEmail = '', historyCheck = 0;
   function saveReceipt(reference, email, details) {
     const record = {version:1, reference, email:email.toLowerCase(), vehicle:cleanVehicle(details.vehicle), engine:details.engine, platform:details.platform, submittedAt:Date.now()};
     if (!validReceipt(record)) return false;
@@ -41,7 +41,7 @@
     return body;
   }
   function choose(next) {
-    if (uploading) return;
+    if (uploading || switchingEmail) return;
     historyCheck++; historyView = false; verifiedHistoryEmail = '';
     platform = next;
     document.querySelectorAll('[data-platform]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.platform === next)));
@@ -71,7 +71,7 @@
     catch { /* A fresh verification is available below. */ }
   }
   async function openHistory() {
-    if (uploading) return;
+    if (uploading || switchingEmail) return;
     const check = ++historyCheck;
     historyView = true; verifiedHistoryEmail = ''; platform = '';
     $('sent-list').replaceChildren(); status('sent-status', '');
@@ -188,8 +188,23 @@
   $('view-sent').addEventListener('click', openHistory);
   $('sent-start').addEventListener('click', () => choose(''));
   $('sent-change-email').addEventListener('click', async () => {
-    try { await api('/v1/email/logout', {method:'POST'}); verifiedHistoryEmail = ''; $('sent-list').replaceChildren(); $('sent-panel').hidden = true; $('verify-panel').hidden = false; $('code-fields').hidden = true; $('email').value = ''; challenge = ''; status('verify-status', ''); }
-    catch { status('sent-status', 'Could not switch email. Try again.', true); }
+    if (switchingEmail) return;
+    switchingEmail = true;
+    historyCheck++; verifiedHistoryEmail = '';
+    $('sent-list').replaceChildren(); $('sent-panel').hidden = true;
+    $('sent-change-email').disabled = true; $('sent-start').disabled = true; $('change-platform').disabled = true;
+    $('sent-link').setAttribute('aria-disabled', 'true');
+    try {
+      await api('/v1/email/logout', {method:'POST'});
+      $('verify-panel').hidden = false; $('code-fields').hidden = true; $('email').value = ''; challenge = ''; status('verify-status', '');
+    } catch {
+      $('verify-panel').hidden = false; $('code-fields').hidden = true; challenge = '';
+      status('verify-status', 'Could not switch email. Verify your email to continue.', true);
+    } finally {
+      switchingEmail = false;
+      $('sent-change-email').disabled = false; $('sent-start').disabled = false; $('change-platform').disabled = false;
+      $('sent-link').setAttribute('aria-disabled', 'false');
+    }
   });
   window.addEventListener('storage', event => { if (event.key && event.key.startsWith(receiptPrefix)) renderHistory(); });
   $('send-code').addEventListener('click', async () => {

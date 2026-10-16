@@ -29,8 +29,14 @@ window.fetch = async (url, options) => {
     });
   }
   if (url.endsWith('/v1/session')) {
+    window.sessionCount = (window.sessionCount || 0) + 1;
     const email = sessionStorage.getItem('mock-email') || 'review@example.invalid';
+    if (window.delaySession) return await new Promise(resolve => {window.finishSession = () => resolve({ok:true, json:async()=>({verified: true, email})});});
     return {ok: true, json: async () => ({verified: email !== 'none', email})};
+  }
+  if (url.endsWith('/v1/email/logout')) {
+    if (window.delayLogout) return await new Promise(resolve => {window.finishLogout = () => resolve({ok:true, json:async()=>({})});});
+    return {ok:true, json:async()=>({})};
   }
   if (url.endsWith('/v1/email/start')) {
     return {ok: true, json: async () => ({challenge: 'test-challenge'})};
@@ -55,6 +61,15 @@ BROWSER_TEST = """
     const earlier = JSON.parse(sessionStorage.getItem('mock-results'));
     results.push(...earlier);
     check('saved request survives page refresh', !$('sent-panel').hidden && $('sent-list').textContent.includes(reference) && $('sent-email').textContent === 'review@example.invalid');
+    window.delayLogout = true; window.delaySession = true;
+    const sessionsBeforeLogout = window.sessionCount;
+    $('sent-change-email').click(); await wait(); $('sent-link').click(); await wait();
+    check('switching email blocks overlapping history session checks', window.sessionCount === sessionsBeforeLogout && $('sent-panel').hidden);
+    window.finishLogout(); await wait();
+    check('logout clears prior email receipts from the page', !$('verify-panel').hidden && $('sent-panel').hidden && !$('sent-list').textContent.includes(reference));
+    window.delayLogout = false; window.delaySession = false;
+    $('sent-link').click(); await wait();
+    check('verified email can reopen its local receipts', !$('sent-panel').hidden && $('sent-list').textContent.includes(reference));
     window.confirm = () => true;
     [...$('sent-list').querySelectorAll('article')].find(item => item.textContent.includes(reference)).querySelectorAll('button')[1].click();
     check('request can be removed from this browser', !$('sent-list').textContent.includes(reference) && !$('sent-panel').hidden);
