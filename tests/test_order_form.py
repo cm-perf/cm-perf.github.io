@@ -60,25 +60,40 @@ BROWSER_TEST = """
   }
   $('order-form').requestSubmit(); await wait();
   check('valid request starts upload', window.uploadCount === 1);
+  check('editable controls lock during upload', $('order-fields').disabled && [...$('order-fields').querySelectorAll('input,select,textarea')].every(el => el.matches(':disabled')));
+  check('submit button shows loading and form is busy', $('submit-order').disabled && $('submit-label').textContent.includes('Sending') && $('order-form').getAttribute('aria-busy') === 'true');
+  check('upload guidance is visible', $('order-status').textContent.includes('Keep this page open'));
+  $('order-form').requestSubmit(); await wait();
+  check('second submit does not upload again', window.uploadCount === 1);
   $('change-platform').click(); choose('bench'); await wait();
   check('platform cannot change during upload', $('order-heading').textContent === 'MHD request');
   check('email cannot change during upload', $('change-email').disabled);
   window.finishUpload(); await wait();
   check('confirmation stored for original platform', sessionStorage.getItem('cm-order-mhd-reference') === 'MHD-TEST-123');
+  check('receipt replaces editable form and shows reference', $('order-form').hidden && !$('success-panel').hidden && $('success-reference').textContent === 'MHD-TEST-123');
+  check('receipt shows verified email and next step', $('success-email').textContent === 'review@example.invalid' && $('success-panel').textContent.includes('review your files'));
   check('other platform has no false confirmation', !sessionStorage.getItem('cm-order-bench-reference'));
-  check('controls restored after upload', !$('change-platform').disabled && !$('change-email').disabled);
+  check('controls restored after upload', !$('change-platform').disabled && !$('order-fields').disabled && $('submit-label').textContent === 'Submit request');
   $('change-platform').click(); choose('bench'); await wait();
-  check('other platform allows submission', !$('submit-order').hidden && !$('submit-order').disabled);
-  check('other platform does not show stale success', $('order-status').textContent === '');
+  check('other platform allows submission', !$('order-form').hidden && !$('submit-order').disabled);
+  check('other platform does not show stale success', $('success-panel').hidden && $('order-status').textContent === '');
   $('change-platform').click(); choose('mhd'); await wait();
-  check('original confirmation restored on return', $('submit-order').hidden && $('order-status').textContent.includes('MHD-TEST-123'));
-  sessionStorage.removeItem('cm-order-mhd-reference');
-  $('change-platform').click(); choose('mhd'); await wait();
+  check('original receipt restored on return', !$('success-panel').hidden && $('order-form').hidden && $('success-reference').textContent === 'MHD-TEST-123');
+  $('new-order').click(); await wait();
+  check('new request resets form and confirmation', !$('order-form').hidden && $('success-panel').hidden && !sessionStorage.getItem('cm-order-mhd-reference') && !$('stock').files.length);
+  $('name').value = 'Review'; $('vin').value = 'WBA12345678901234';
+  $('vehicle').value = '2015 428i'; $('engine').value = 'N20'; $('rpm').value = '4500';
+  for (const [id, name] of [['stock', 'stock.bin'], ['flashoptions', 'stock_flashoptions.xml']]) {
+    const transfer = new DataTransfer(); transfer.items.add(new File(['test'], name));
+    $(id).files = transfer.files;
+  }
   $('order-form').requestSubmit(); await wait(); window.finishUpload(409); await wait();
   check('conflict clears retry key', !sessionStorage.getItem('cm-order-mhd-key'));
-  check('conflict permits retry and navigation', !$('submit-order').disabled && !$('change-platform').disabled && $('order-status').textContent.includes('interrupted'));
+  check('conflict permits retry and navigation', !$('order-fields').disabled && !$('submit-order').disabled && !$('change-platform').disabled && $('order-status').textContent.includes('interrupted'));
+  check('failed upload retains entered fields and files', $('name').value === 'Review' && $('stock').files.length === 1);
+  check('conditional RPM validation survives failure', $('m1-rpm').matches(':disabled') && $('order-form').checkValidity());
   $('order-form').requestSubmit(); await wait(); window.finishUpload(401); await wait();
-  check('expired session offers verification and restores navigation', !$('verify-panel').hidden && $('order-form').hidden && !$('change-platform').disabled);
+  check('expired session offers verification and restores navigation', !$('verify-panel').hidden && $('order-form').hidden && $('success-panel').hidden && !$('change-platform').disabled);
   const output = document.createElement('pre'); output.id = 'test-results';
   output.textContent = JSON.stringify(results); document.body.append(output);
 })().catch(error => {

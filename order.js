@@ -2,7 +2,7 @@
   const config = window.CMP_ORDER_CONFIG || {};
   const $ = id => document.getElementById(id);
   const stored = (name, selectedPlatform = platform) => `cm-order-${selectedPlatform}-${name}`;
-  const status = (id, message, error = false) => { const el = $(id); el.textContent = message; el.className = `status ${error ? 'error' : 'ok'}`; };
+  const status = (id, message, error = false, neutral = false) => { const el = $(id); el.textContent = message; el.className = `status ${error ? 'error' : neutral ? '' : 'ok'}`; };
   let platform = '', challenge = '', turnstileId, uploading = false;
   async function api(path, options = {}) {
     const response = await fetch(config.api + path, {credentials:'include', ...options});
@@ -23,6 +23,7 @@
     $('bootmod-panel').hidden = next !== 'bootmod3';
     $('verify-panel').hidden = next === 'bootmod3' || !next;
     $('order-form').hidden = true;
+    $('success-panel').hidden = true;
     $('mhd-files').hidden = next !== 'mhd'; $('bench-files').hidden = next !== 'bench';
     $('note').placeholder = next === 'bench' ? 'Tool (e.g. KESS3 Master), ECU/DME, OBD/bench/boot, fuel and hardware' : 'Fuel, hardware or your current tune';
     history.replaceState(null, '', next ? `?platform=${next}` : location.pathname);
@@ -33,7 +34,7 @@
     try { const data = await api('/v1/session'); if (data.verified && selected === platform) showForm(data.email); }
     catch { /* A fresh verification is available below. */ }
   }
-  function showForm(email) {
+  function showForm(email, focus = false) {
     const prior = sessionStorage.getItem('cm-order-verified-email');
     if (prior && prior !== email) for (const option of ['mhd', 'bench']) {
       sessionStorage.removeItem(stored('key', option));
@@ -42,14 +43,28 @@
     sessionStorage.setItem('cm-order-verified-email', email);
     $('verified-email').textContent = email;
     $('verify-panel').hidden = true;
-    $('order-form').hidden = false;
     const saved = sessionStorage.getItem(stored('reference'));
-    $('submit-order').hidden = !!saved;
-    $('new-order').hidden = !saved;
-    status('order-status', saved ? `Submitted. Your reference is ${saved}. We’ll email you when we receive it.` : '');
+    if (saved) showReceipt(saved, email, focus);
+    else { $('success-panel').hidden = true; $('order-form').hidden = false; status('order-status', ''); if (focus) $('name').focus(); }
+  }
+  function showReceipt(reference, email, focus = false) {
+    $('success-reference').textContent = reference;
+    $('success-email').textContent = email;
+    $('copy-status').hidden = true;
+    $('copy-status').textContent = '';
+    $('order-form').hidden = true;
+    $('success-panel').hidden = false;
+    if (focus) {
+      $('success-panel').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block:'start'});
+      $('success-heading').focus({preventScroll:true});
+    }
   }
   function setUploading(active) {
     uploading = active;
+    $('order-fields').disabled = active;
+    $('order-form').setAttribute('aria-busy', String(active));
+    $('submit-order').setAttribute('aria-busy', String(active));
+    $('submit-label').textContent = active ? 'Sending request…' : 'Submit request';
     for (const id of ['submit-order', 'change-platform', 'change-email', 'new-order']) $(id).disabled = active;
     document.querySelectorAll('[data-platform]').forEach(button => { button.disabled = active; });
   }
@@ -80,12 +95,17 @@
   $('verify-code').addEventListener('click', async () => {
     const code = $('code').value.trim(); if (!/^\d{8}$/.test(code)) { status('verify-status','Enter the 8-digit code.',true); return; }
     $('verify-code').disabled = true;
-    try { const data = await api('/v1/email/verify', {method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify({challenge,code})}); showForm(data.email); }
+    try { const data = await api('/v1/email/verify', {method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify({challenge,code})}); showForm(data.email, true); }
     catch (error) { status('verify-status',error.message,true); }
     finally { $('verify-code').disabled = false; }
   });
   $('change-email').addEventListener('click', async () => { await api('/v1/email/logout',{method:'POST'}); $('order-form').hidden = true; $('verify-panel').hidden = false; $('code-fields').hidden = true; challenge = ''; });
-  $('new-order').addEventListener('click', () => {sessionStorage.removeItem(stored('key'));sessionStorage.removeItem(stored('reference'));$('order-form').reset();syncFormState();$('submit-order').hidden=false;$('new-order').hidden=true;status('order-status','');});
+  $('new-order').addEventListener('click', () => {sessionStorage.removeItem(stored('key'));sessionStorage.removeItem(stored('reference'));$('order-form').reset();syncFormState();$('success-panel').hidden=true;$('order-form').hidden=false;status('order-status','');$('name').focus();});
+  $('copy-reference').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText($('success-reference').textContent); status('copy-status', 'Reference copied.'); }
+    catch { status('copy-status', 'Select the reference above to copy it.', true); }
+    $('copy-status').hidden = false;
+  });
   $('trigger').addEventListener('change', syncFormState);
   $('remap').addEventListener('change', syncFormState);
   $('order-form').addEventListener('submit', async event => {
@@ -103,13 +123,11 @@
     if (platform === 'mhd') { form.set('stock',files[0]); form.set('flashoptions',files[1]); } else form.set('raw',files[0]);
     let key = sessionStorage.getItem(keyStorage); if (!key) { key = [...crypto.getRandomValues(new Uint8Array(16))].map(x=>x.toString(16).padStart(2,'0')).join(''); sessionStorage.setItem(keyStorage,key); }
     setUploading(true);
-    status('order-status','Uploading your files…');
+    status('order-status','Uploading your files. Keep this page open.', false, true);
     try {
       const result = await api('/v1/order',{method:'POST',headers:{'x-order-key':key},body:form});
       sessionStorage.setItem(referenceStorage, result.reference);
-      status('order-status',`Submitted. Your reference is ${result.reference}. We’ll email you when we receive it.`);
-      $('submit-order').hidden = true;
-      $('new-order').hidden = false;
+      showReceipt(result.reference, $('verified-email').textContent, true);
     } catch (error) {
       if (error.status === 401) {
         $('order-form').hidden = true;
