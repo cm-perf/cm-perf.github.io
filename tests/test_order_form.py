@@ -80,7 +80,7 @@ BROWSER_TEST = """
   }
   choose('mhd'); await wait();
   $('name').value = 'Review'; $('vin').value = 'WBA12345678901234';
-  $('vehicle').value = '2015 428i'; $('engine').value = 'N20';
+  $('vehicle').value = '2015 428i'; $('engine').value = 'B48';
   $('rpm').value = '1500'; $('trigger').value = 'm-buttons';
   $('trigger').dispatchEvent(new Event('change'));
   $('m1-rpm').value = '4000'; $('m2-rpm').value = '4500';
@@ -109,7 +109,7 @@ BROWSER_TEST = """
   check('confirmation stored for original platform', sessionStorage.getItem('cm-order-mhd-reference') === reference);
   check('receipt replaces editable form and shows reference', $('order-form').hidden && !$('success-panel').hidden && $('success-reference').textContent === reference);
   const saved = JSON.parse(localStorage.getItem('cmperf:sent-request:v1:' + reference));
-  check('browser receipt saves only needed summary fields', saved && saved.reference === reference && saved.email === 'review@example.invalid' && saved.vehicle === '2015 428i' && saved.engine === 'N20' && saved.platform === 'mhd' && !('vin' in saved) && !('name' in saved) && !('note' in saved) && !('files' in saved));
+  check('browser receipt saves only needed summary fields', saved && saved.reference === reference && saved.email === 'review@example.invalid' && saved.vehicle === '2015 428i' && saved.engine === 'B48' && saved.platform === 'mhd' && !('vin' in saved) && !('name' in saved) && !('note' in saved) && !('files' in saved));
   check('receipt shows verified email and next step', $('success-email').textContent === 'review@example.invalid' && $('success-panel').textContent.includes('review your files'));
   check('other platform has no false confirmation', !sessionStorage.getItem('cm-order-bench-reference'));
   check('controls restored after upload', !$('change-platform').disabled && !$('order-fields').disabled && $('submit-label').textContent === 'Submit request');

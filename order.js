@@ -3,7 +3,7 @@
   const $ = id => document.getElementById(id);
   const stored = (name, selectedPlatform = platform) => `cm-order-${selectedPlatform}-${name}`;
   const receiptPrefix = 'cmperf:sent-request:v1:';
-  const engines = ['N20', 'N26', 'N55', 'N63', 'S55', 'B58', 'B58 Gen 2'];
+  const engines = ['N20', 'N26', 'N55', 'N63', 'S55', 'B48', 'B58', 'B58 Gen 2'];
   const validReference = value => typeof value === 'string' && /^[a-f0-9]{32}$/.test(value);
   const validEmail = value => typeof value === 'string' && value.length <= 254 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
   const cleanVehicle = value => String(value || '').replace(/\b[A-HJ-NPR-Z0-9]{17}\b/gi, '[VIN removed]').replace(/[\x00-\x1f\x7f]/g, ' ').trim().slice(0,160) || 'Vehicle not specified';
