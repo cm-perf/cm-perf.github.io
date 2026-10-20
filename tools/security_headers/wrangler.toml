@@ -1,0 +1,8 @@
+name = "cmperf-site-headers"
+main = "worker.js"
+compatibility_date = "2026-10-20"
+workers_dev = false
+
+[[routes]]
+pattern = "cmperf.uk/*"
+zone_name = "cmperf.uk"
