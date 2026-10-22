@@ -14,7 +14,7 @@
   function saveReceipt(reference, email, details) {
     const record = {version:1, reference, email:email.toLowerCase(), vehicle:cleanVehicle(details.vehicle), engine:details.engine, platform:details.platform, submittedAt:Date.now()};
     if (!validReceipt(record)) return false;
-    try { localStorage.setItem(receiptPrefix + reference, JSON.stringify(record)); return true; }
+    try { localStorage.setItem(receiptPrefix + reference, JSON.stringify(record)); syncHistoryLink(email); return true; }
     catch { return false; }
   }
   function savedReceipts(email) {
@@ -24,10 +24,15 @@
       if (!key || !key.startsWith(receiptPrefix)) continue;
       try {
         const record = JSON.parse(localStorage.getItem(key));
-        if (validReceipt(record) && key === receiptPrefix + record.reference && record.email === email) records.push(record);
+        if (validReceipt(record) && key === receiptPrefix + record.reference && (!email || record.email === email)) records.push(record);
       } catch { /* Ignore corrupt records. */ }
     }
     return records.sort((a,b) => b.submittedAt - a.submittedAt || a.reference.localeCompare(b.reference));
+  }
+
+  function syncHistoryLink(email = verifiedHistoryEmail) {
+    try { $('sent-link').hidden = savedReceipts(email).length === 0; }
+    catch { $('sent-link').hidden = true; }
   }
 
   async function api(path, options = {}) {
@@ -101,6 +106,7 @@
   }
   function renderHistory() {
     if (!historyView || !verifiedHistoryEmail) return;
+    syncHistoryLink();
     const list = $('sent-list'); list.replaceChildren();
     let records;
     try { records = savedReceipts(verifiedHistoryEmail); }
@@ -134,6 +140,7 @@
     }
   }
   function showForm(email, focus = false) {
+    syncHistoryLink(email);
     const prior = sessionStorage.getItem('cm-order-verified-email');
     if (prior && prior !== email) for (const option of ['mhd', 'bench']) {
       sessionStorage.removeItem(stored('key', option));
@@ -295,7 +302,7 @@
       $('sent-link').setAttribute('aria-disabled', 'false');
     }
   });
-  window.addEventListener('storage', event => { if (event.key && event.key.startsWith(receiptPrefix)) renderHistory(); });
+  window.addEventListener('storage', event => { if (event.key === null || event.key.startsWith(receiptPrefix)) { syncHistoryLink(); renderHistory(); } });
   $('send-code').addEventListener('click', async () => {
     if (!ensureTurnstile()) return;
     const email = $('email').value.trim(); if (!$('email').checkValidity()) { $('email').reportValidity(); return; }
@@ -359,6 +366,7 @@
       setUploading(false);
     }
   });
+  syncHistoryLink();
   const params = new URLSearchParams(location.search);
   const initial = params.get('platform');
   const returnReference = params.get('reference');

@@ -74,11 +74,14 @@ BROWSER_TEST = """
     window.confirm = () => true;
     [...$('sent-list').querySelectorAll('article')].find(item => item.textContent.includes(reference)).querySelectorAll('button')[1].click();
     check('request can be removed from this browser', !$('sent-list').textContent.includes(reference) && !$('sent-panel').hidden);
+    [...$('sent-list').querySelectorAll('article')].forEach(item => item.querySelectorAll('button')[1].click());
+    check('removing final saved request hides navigation', $('sent-link').hidden);
     sessionStorage.removeItem('mock-reload'); sessionStorage.removeItem('mock-results');
     const output = document.createElement('pre'); output.id = 'test-results';
     output.textContent = JSON.stringify(results); document.body.append(output);
     return;
   }
+  check('empty browser hides sent requests navigation', $('sent-link').hidden);
   $('whatsapp').value = '+233245858875';
   check('international WhatsApp number passes native validation', $('whatsapp').checkValidity());
   $('whatsapp').value = 'invalid';
@@ -143,6 +146,7 @@ BROWSER_TEST = """
   const wa = new URL($('success-whatsapp').href);
   check('WhatsApp handoff carries exact request and payment context', wa.hostname === 'wa.me' && wa.pathname === '/233245858875' && wa.searchParams.get('text').includes(reference) && wa.searchParams.get('text').includes('payment'));
   check('handoff is explicit and files already saved', $('success-whatsapp').textContent === 'Continue on WhatsApp' && $('success-panel').textContent.includes('Files received'));
+  check('submitted request reveals sent requests navigation', !$('sent-link').hidden);
   const saved = JSON.parse(localStorage.getItem('cmperf:sent-request:v1:' + reference));
   check('browser receipt saves only needed summary fields', saved && saved.reference === reference && saved.email === 'review@example.invalid' && saved.vehicle === '2015 428i' && saved.engine === 'N-series' && saved.platform === 'mhd' && !('vin' in saved) && !('name' in saved) && !('note' in saved) && !('files' in saved));
   check('receipt shows verified email and next step', $('success-email').textContent === 'review@example.invalid' && $('success-panel').textContent.includes('confirm your setup'));
