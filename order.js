@@ -177,12 +177,58 @@
     $('rpm').disabled = buttons; $('m1-rpm').disabled = !buttons; $('m2-rpm').disabled = !buttons;
     $('price').textContent = $('remap').checked ? 'from $300' : 'from $200';
   }
-  function ensureTurnstile() {
-    if (!config.turnstileSiteKey) { status('verify-status', 'Email verification is being set up. Please check back shortly.', true); return false; }
-    if (!window.turnstile) { status('verify-status', 'Verification is loading. Try again in a moment.', true); return false; }
-    if (turnstileId === undefined) turnstileId = turnstile.render('#turnstile', {sitekey:config.turnstileSiteKey});
+  let checkTimer, sendingCode = false;
+  function checkState(message, ready = false, failed = false) {
+    $('send-code').disabled = !ready || sendingCode;
+    status('check-status', message, failed);
+    $('retry-check').hidden = !failed;
+  }
+  function checkFailed() {
+    clearTimeout(checkTimer);
+    checkState('Verification could not load. Retry, or allow challenges.cloudflare.com in your browser’s content blocker.', false, true);
     return true;
   }
+  function ensureTurnstile() {
+    if ($('verify-panel').hidden) return false;
+    if (!config.turnstileSiteKey) { checkFailed(); return false; }
+    if (typeof window.turnstile?.render !== 'function') {
+      checkState('Loading verification…');
+      if (!checkTimer) checkTimer = setTimeout(checkFailed, 12000);
+      return false;
+    }
+    clearTimeout(checkTimer); checkTimer = null;
+    if (turnstileId === undefined) {
+      checkState('Verification is loading…');
+      try {
+        turnstileId = turnstile.render('#turnstile', {
+          sitekey:config.turnstileSiteKey, size:'flexible', appearance:'always',
+          callback:() => { clearTimeout(checkTimer); checkState('Verification complete.', true); },
+          'error-callback':checkFailed,
+          'expired-callback':() => { checkState('Verification expired. Checking again…'); turnstile.reset(turnstileId); },
+          'timeout-callback':() => checkState('Verification timed out. Please retry.', false, true),
+          'before-interactive-callback':() => checkState('Complete the verification check below.'),
+        });
+      } catch { checkFailed(); return false; }
+    }
+    return true;
+  }
+  const checkScript = $('turnstile-script');
+  checkScript.addEventListener('load', ensureTurnstile);
+  checkScript.addEventListener('error', checkFailed);
+  new MutationObserver(() => { if (!$('verify-panel').hidden) ensureTurnstile(); })
+    .observe($('verify-panel'), {attributes:true, attributeFilter:['hidden']});
+  $('retry-check').addEventListener('click', () => {
+    checkState('Loading verification…');
+    if (typeof window.turnstile?.render === 'function' && turnstileId !== undefined) turnstile.reset(turnstileId);
+    else if (typeof window.turnstile?.render === 'function') ensureTurnstile();
+    else {
+      checkScript.remove();
+      const script = document.createElement('script');
+      script.src = checkScript.src; script.async = true;
+      script.addEventListener('load', ensureTurnstile); script.addEventListener('error', checkFailed);
+      document.head.append(script); clearTimeout(checkTimer); checkTimer = null; ensureTurnstile();
+    }
+  });
   document.querySelectorAll('[data-platform]').forEach(button => button.addEventListener('click', () => choose(button.dataset.platform)));
   $('change-platform').addEventListener('click', () => choose(''));
   $('sent-link').addEventListener('click', event => { event.preventDefault(); openHistory(); });
@@ -212,10 +258,10 @@
     if (!ensureTurnstile()) return;
     const email = $('email').value.trim(); if (!$('email').checkValidity()) { $('email').reportValidity(); return; }
     const token = turnstile.getResponse(turnstileId); if (!token) { status('verify-status', 'Complete the verification check.', true); return; }
-    $('send-code').disabled = true;
+    sendingCode = true; $('send-code').disabled = true;
     try { const data = await api('/v1/email/start', {method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify({email, turnstile:token})}); challenge = data.challenge; $('code-fields').hidden = false; status('verify-status', 'Check your email for the 8-digit code.'); $('code').focus(); }
     catch (error) { status('verify-status', error.message, true); }
-    finally { $('send-code').disabled = false; turnstile.reset(turnstileId); }
+    finally { sendingCode = false; checkState('Checking verification…'); turnstile.reset(turnstileId); }
   });
   $('verify-code').addEventListener('click', async () => {
     const code = $('code').value.trim(); if (!/^\d{8}$/.test(code)) { status('verify-status','Enter the 8-digit code.',true); return; }

@@ -16,7 +16,7 @@ ROOT = Path(os.environ.get('WEBSITE_TEST_ROOT', Path(__file__).resolve().parents
 
 MOCK_API = """
 window.CMP_ORDER_CONFIG = {api: 'https://mock.invalid', turnstileSiteKey: 'test'};
-window.turnstile = {render: () => 1, getResponse: () => 'test-token', reset: () => {}};
+window.turnstile = {render: (selector, options) => {window.checkOptions=options; if(!window.holdCheck)queueMicrotask(()=>options.callback('test-token')); return 1;}, getResponse: () => 'test-token', reset: () => {queueMicrotask(()=>window.checkOptions.callback('test-token'));}};
 window.fetch = async (url, options) => {
   if (url.endsWith('/v1/order')) {
     window.uploadCount = (window.uploadCount || 0) + 1;
@@ -78,6 +78,24 @@ BROWSER_TEST = """
     output.textContent = JSON.stringify(results); document.body.append(output);
     return;
   }
+  sessionStorage.setItem('mock-email', 'none');
+  const apiScript = window.turnstile; delete window.turnstile;
+  choose('bench'); await Promise.resolve();
+  check('loading check visible before email click', $('send-code').disabled && $('check-status').textContent.includes('Loading'));
+  $('turnstile-script').dispatchEvent(new Event('error')); await wait();
+  check('blocked script shows retry and disables email send', !$('retry-check').hidden && $('send-code').disabled && $('check-status').textContent.includes('could not load'));
+  window.turnstile = apiScript; window.holdCheck = true;
+  $('retry-check').click(); await wait();
+  check('widget rendered before send and awaits completion', !!window.checkOptions && $('send-code').disabled);
+  window.checkOptions.callback('test-token'); await wait();
+  check('email send enabled only after check completes', !$('send-code').disabled && $('check-status').textContent.includes('complete'));
+  window.checkOptions['error-callback'](); await wait();
+  check('widget failure explains recovery', !$('retry-check').hidden && $('send-code').disabled);
+  $('retry-check').click(); await wait();
+  check('retry recovers without page reload', !$('send-code').disabled);
+  window.checkOptions['expired-callback'](); await wait();
+  check('expired token renews', !$('send-code').disabled);
+  window.holdCheck = false; sessionStorage.setItem('mock-email', 'review@example.invalid');
   choose('mhd'); await wait();
   $('whatsapp').value = '+233 245858875';
   $('name').value = 'Review'; $('vin').value = 'WBA12345678901234';
@@ -177,7 +195,7 @@ class OrderFormTests(unittest.TestCase):
         page = re.sub(r'<script[^>]*src=[^>]*></script>', '', page)
         page = re.sub(r'<link[^>]*>', '', page)
         scripts = MOCK_API + '\n' + (ROOT / 'order.js').read_text() + '\n' + BROWSER_TEST
-        page = page.replace('</body>', '<script>' + scripts + '</script></body>')
+        page = page.replace('</body>', '<script id="turnstile-script"></script><script>' + scripts + '</script></body>')
         with tempfile.TemporaryDirectory(prefix='cm-order-test-') as directory:
             path = Path(directory)
             (path / 'test.html').write_text(page)
