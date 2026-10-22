@@ -212,6 +212,7 @@
     }
     return true;
   }
+  window.cmOrderTurnstileReady = ensureTurnstile;
   const checkScript = $('turnstile-script');
   checkScript.addEventListener('load', ensureTurnstile);
   checkScript.addEventListener('error', checkFailed);
