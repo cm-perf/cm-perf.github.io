@@ -81,7 +81,9 @@ BROWSER_TEST = """
   choose('mhd'); await wait();
   $('whatsapp').value = '+233 245858875';
   $('name').value = 'Review'; $('vin').value = 'WBA12345678901234';
-  $('vehicle').value = '2015 428i'; $('engine').value = 'N20';
+  $('vehicle').value = '2015 428i'; document.querySelector('input[name=engine][value="N20"]').checked = true;
+  check('engine choices grouped in N B S rows', [...document.querySelectorAll('.engine-row')].map(r=>r.getAttribute('aria-label')).join(',') === 'N-series,B-series,S-series');
+  check('engine review caveat removed', !$('engine').textContent.includes('review'));
   $('rpm').value = '1500'; $('trigger').value = 'm-buttons';
   $('trigger').dispatchEvent(new Event('change'));
   $('m1-rpm').value = '4000'; $('m2-rpm').value = '4500';
@@ -131,7 +133,7 @@ BROWSER_TEST = """
   check('new request resets form and confirmation', !$('order-form').hidden && $('success-panel').hidden && !sessionStorage.getItem('cm-order-mhd-reference') && !$('stock').files.length);
   $('whatsapp').value = '+233 245858875';
   $('name').value = 'Review'; $('vin').value = 'WBA12345678901234';
-  $('vehicle').value = '2015 428i'; $('engine').value = 'N20'; $('rpm').value = '4500';
+  $('vehicle').value = '2015 428i'; document.querySelector('input[name=engine][value="N20"]').checked = true; $('rpm').value = '4500';
   for (const [id, name] of [['stock', 'stock.bin'], ['flashoptions', 'stock_flashoptions.xml']]) {
     const transfer = new DataTransfer(); transfer.items.add(new File(['test'], name));
     $(id).files = transfer.files;

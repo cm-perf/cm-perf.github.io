@@ -3,7 +3,7 @@
   const $ = id => document.getElementById(id);
   const stored = (name, selectedPlatform = platform) => `cm-order-${selectedPlatform}-${name}`;
   const receiptPrefix = 'cmperf:sent-request:v1:';
-  const engines = ['N20', 'N26', 'N55', 'N63', 'S55', 'B58', 'B58 Gen 2'];
+  const engines = ['N20', 'N26', 'N55', 'N63', 'S55', 'B48', 'B58', 'B58 Gen 2'];
   const validReference = value => typeof value === 'string' && /^[a-f0-9]{32}$/.test(value);
   const validEmail = value => typeof value === 'string' && value.length <= 254 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
   const cleanVehicle = value => String(value || '').replace(/\b[A-HJ-NPR-Z0-9]{17}\b/gi, '[VIN removed]').replace(/[\x00-\x1f\x7f]/g, ' ').trim().slice(0,160) || 'Vehicle not specified';
@@ -245,7 +245,7 @@
     if (platform === 'mhd' && files[1].size > 1_000_000) { status('order-status','The flashoptions file must be 1 MB or less.',true); return; }
     const whatsapp = $('whatsapp').value.replace(/[ ()-]/g, '');
     if (!/^\+?[1-9][0-9]{6,14}$/.test(whatsapp)) { status('order-status', 'Enter your WhatsApp number with country code, e.g. +233245858875.', true); $('whatsapp').focus(); return; }
-    const details = {whatsapp: '+' + whatsapp.replace(/^\+/, ''), name:$('name').value.trim(), vin:$('vin').value.trim().toUpperCase(), vehicle:$('vehicle').value.trim(), engine:$('engine').value, platform, rpm:Number($('rpm').value), trigger:$('trigger').value, m1Rpm:$('m1-rpm').value, m2Rpm:$('m2-rpm').value, remap:$('remap').checked, note:$('note').value.trim()};
+    const details = {whatsapp: '+' + whatsapp.replace(/^\+/, ''), name:$('name').value.trim(), vin:$('vin').value.trim().toUpperCase(), vehicle:$('vehicle').value.trim(), engine:document.querySelector('input[name=engine]:checked')?.value, platform, rpm:Number($('rpm').value), trigger:$('trigger').value, m1Rpm:$('m1-rpm').value, m2Rpm:$('m2-rpm').value, remap:$('remap').checked, note:$('note').value.trim()};
     const form = new FormData(); form.set('details',JSON.stringify(details));
     if (platform === 'mhd') { form.set('stock',files[0]); form.set('flashoptions',files[1]); } else form.set('raw',files[0]);
     let key = sessionStorage.getItem(keyStorage); if (!key) { key = [...crypto.getRandomValues(new Uint8Array(16))].map(x=>x.toString(16).padStart(2,'0')).join(''); sessionStorage.setItem(keyStorage,key); }
