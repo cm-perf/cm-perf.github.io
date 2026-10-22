@@ -190,6 +190,18 @@ BROWSER_TEST = """
 
 
 class OrderFormTests(unittest.TestCase):
+    def test_turnstile_runs_after_its_callback_registration(self):
+        page = (ROOT / 'order.html').read_text()
+        scripts = re.findall(r'<script\b[^>]*src=[^>]*>', page)
+        config = next(i for i, tag in enumerate(scripts) if '/order-config.js' in tag)
+        controller = next(i for i, tag in enumerate(scripts) if '/order.js' in tag)
+        widget = next(i for i, tag in enumerate(scripts) if 'challenges.cloudflare.com' in tag)
+        self.assertLess(config, controller)
+        self.assertLess(controller, widget)
+        for i in (config, controller, widget):
+            self.assertIn('defer', scripts[i])
+            self.assertNotRegex(scripts[i], r'\basync\b')
+
     def test_published_scripts_are_bound_to_content(self):
         if ROOT.name != 'dist':
             self.skipTest('Published build check')

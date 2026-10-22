@@ -253,7 +253,7 @@
     return true;
   }
   window.cmOrderTurnstileReady = ensureTurnstile;
-  const checkScript = $('turnstile-script');
+  let checkScript = $('turnstile-script');
   checkScript.addEventListener('load', ensureTurnstile);
   checkScript.addEventListener('error', checkFailed);
   new MutationObserver(() => { if (!$('verify-panel').hidden) ensureTurnstile(); })
@@ -265,7 +265,8 @@
     else {
       checkScript.remove();
       const script = document.createElement('script');
-      script.src = checkScript.src; script.async = true;
+      script.src = checkScript.src; script.id = 'turnstile-script'; script.async = true;
+      checkScript = script;
       script.addEventListener('load', ensureTurnstile); script.addEventListener('error', checkFailed);
       document.head.append(script); clearTimeout(checkTimer); checkTimer = null; ensureTurnstile();
     }
