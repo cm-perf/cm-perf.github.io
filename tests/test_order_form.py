@@ -190,6 +190,18 @@ BROWSER_TEST = """
 
 
 class OrderFormTests(unittest.TestCase):
+    def test_published_scripts_are_bound_to_content(self):
+        if ROOT.name != 'dist':
+            self.skipTest('Published build check')
+        import hashlib
+        for page in ROOT.rglob('*.html'):
+            for src in re.findall(r'<script\b[^>]*\bsrc=["\']([^"\']+)', page.read_text()):
+                if re.match(r'(?:[a-z]+:|//)', src):
+                    continue
+                pathname, query = src.split('?')
+                asset = ROOT / pathname.lstrip('/') if pathname.startswith('/') else page.parent / pathname
+                self.assertEqual(query, 'v=' + hashlib.sha256(asset.read_bytes()).hexdigest()[:16])
+
     def test_browser_regressions(self):
         chromium = shutil.which('chromium') or shutil.which('chromium-browser')
         self.assertIsNotNone(chromium, 'Chromium is required for browser regressions')
