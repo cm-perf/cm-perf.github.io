@@ -24,10 +24,11 @@ window.fetch = async (url, options) => {
     return await new Promise(resolve => {
       window.finishUpload = (status = 200) => resolve({
         ok: status === 200, status,
-        json: async () => status === 200 ? {reference: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'} : {error: 'Test failure'}
+        json: async () => status === 200 ? {reference: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', nextStep:{kind:'review'}} : {error: 'Test failure'}
       });
     });
   }
+  if (/\\/v1\\/order\\/[a-f0-9]{32}$/.test(url)) return {ok:true,json:async()=>({nextStep:{kind:'review'}})};
   if (url.endsWith('/v1/session')) {
     window.sessionCount = (window.sessionCount || 0) + 1;
     const email = sessionStorage.getItem('mock-email') || 'review@example.invalid';
@@ -99,8 +100,9 @@ BROWSER_TEST = """
   choose('mhd'); await wait();
   $('whatsapp').value = '+233 245858875';
   $('name').value = 'Review'; $('vin').value = 'WBA12345678901234';
-  $('vehicle').value = '2015 428i'; document.querySelector('input[name=engine][value="N20"]').checked = true;
-  check('engine choices grouped in N B S rows', [...document.querySelectorAll('.engine-row')].map(r=>r.getAttribute('aria-label')).join(',') === 'N-series,B-series,S-series');
+  $('vehicle').value = '2015 428i'; $('engine').value = 'N-series'; document.querySelector('input[name=transmission][value="manual"]').checked = true;
+  check('engine dropdown uses families', $('engine').tagName === 'SELECT' && [...$('engine').options].map(o=>o.value).join(',') === ',N-series,B-series,S55,S-series');
+  check('remap is not offered', !document.querySelector('#remap') && !$('order-form').textContent.includes('Add remap'));
   check('engine review caveat removed', !$('engine').textContent.includes('review'));
   $('rpm').value = '1500'; $('trigger').value = 'm-buttons';
   $('trigger').dispatchEvent(new Event('change'));
@@ -136,10 +138,10 @@ BROWSER_TEST = """
   check('receipt replaces editable form and shows reference', $('order-form').hidden && !$('success-panel').hidden && $('success-reference').textContent === reference);
   const wa = new URL($('success-whatsapp').href);
   check('WhatsApp handoff carries exact request and payment context', wa.hostname === 'wa.me' && wa.pathname === '/233245858875' && wa.searchParams.get('text').includes(reference) && wa.searchParams.get('text').includes('payment'));
-  check('handoff is explicit and files already saved', $('success-whatsapp').textContent === 'Continue on WhatsApp' && $('success-panel').textContent.includes('Your files are saved'));
+  check('handoff is explicit and files already saved', $('success-whatsapp').textContent === 'Continue on WhatsApp' && $('success-panel').textContent.includes('Files received'));
   const saved = JSON.parse(localStorage.getItem('cmperf:sent-request:v1:' + reference));
-  check('browser receipt saves only needed summary fields', saved && saved.reference === reference && saved.email === 'review@example.invalid' && saved.vehicle === '2015 428i' && saved.engine === 'N20' && saved.platform === 'mhd' && !('vin' in saved) && !('name' in saved) && !('note' in saved) && !('files' in saved));
-  check('receipt shows verified email and next step', $('success-email').textContent === 'review@example.invalid' && $('success-panel').textContent.includes('review your files'));
+  check('browser receipt saves only needed summary fields', saved && saved.reference === reference && saved.email === 'review@example.invalid' && saved.vehicle === '2015 428i' && saved.engine === 'N-series' && saved.platform === 'mhd' && !('vin' in saved) && !('name' in saved) && !('note' in saved) && !('files' in saved));
+  check('receipt shows verified email and next step', $('success-email').textContent === 'review@example.invalid' && $('success-panel').textContent.includes('confirm your setup'));
   check('other platform has no false confirmation', !sessionStorage.getItem('cm-order-bench-reference'));
   check('controls restored after upload', !$('change-platform').disabled && !$('order-fields').disabled && $('submit-label').textContent === 'Submit request');
   $('change-platform').click(); choose('bench'); await wait();
@@ -151,7 +153,7 @@ BROWSER_TEST = """
   check('new request resets form and confirmation', !$('order-form').hidden && $('success-panel').hidden && !sessionStorage.getItem('cm-order-mhd-reference') && !$('stock').files.length);
   $('whatsapp').value = '+233 245858875';
   $('name').value = 'Review'; $('vin').value = 'WBA12345678901234';
-  $('vehicle').value = '2015 428i'; document.querySelector('input[name=engine][value="N20"]').checked = true; $('rpm').value = '4500';
+  $('vehicle').value = '2015 428i'; $('engine').value = 'N-series'; document.querySelector('input[name=transmission][value="manual"]').checked = true; $('rpm').value = '4500';
   for (const [id, name] of [['stock', 'stock.bin'], ['flashoptions', 'stock_flashoptions.xml']]) {
     const transfer = new DataTransfer(); transfer.items.add(new File(['test'], name));
     $(id).files = transfer.files;

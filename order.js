@@ -1,9 +1,10 @@
 (() => {
+  let receiptRequest = 0;
   const config = window.CMP_ORDER_CONFIG || {};
   const $ = id => document.getElementById(id);
   const stored = (name, selectedPlatform = platform) => `cm-order-${selectedPlatform}-${name}`;
   const receiptPrefix = 'cmperf:sent-request:v1:';
-  const engines = ['N20', 'N26', 'N55', 'N63', 'S55', 'B48', 'B58', 'B58 Gen 2'];
+  const engines = ['N-series', 'B-series', 'S-series', 'N20', 'N26', 'N55', 'N63', 'S55', 'B48', 'B58', 'B58 Gen 2'];
   const validReference = value => typeof value === 'string' && /^[a-f0-9]{32}$/.test(value);
   const validEmail = value => typeof value === 'string' && value.length <= 254 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
   const cleanVehicle = value => String(value || '').replace(/\b[A-HJ-NPR-Z0-9]{17}\b/gi, '[VIN removed]').replace(/[\x00-\x1f\x7f]/g, ' ').trim().slice(0,160) || 'Vehicle not specified';
@@ -28,12 +29,7 @@
     }
     return records.sort((a,b) => b.submittedAt - a.submittedAt || a.reference.localeCompare(b.reference));
   }
-  function receiptSaved(reference, email) {
-    try {
-      const record = JSON.parse(localStorage.getItem(receiptPrefix + reference));
-      return validReceipt(record) && record.email === email.toLowerCase();
-    } catch { return false; }
-  }
+
   async function api(path, options = {}) {
     const response = await fetch(config.api + path, {credentials:'include', ...options});
     const body = await response.json();
@@ -129,7 +125,12 @@
         try { localStorage.removeItem(receiptPrefix + record.reference); renderHistory(); }
         catch { message.textContent = 'Could not remove this saved reference.'; message.classList.add('error'); }
       });
-      actions.append(copy, remove); item.append(title, meta, code, actions, message); list.append(item);
+      const open = document.createElement('button'); open.type = 'button'; open.className = 'secondary'; open.textContent = 'Open request';
+      open.addEventListener('click', () => {
+        sessionStorage.setItem(stored('reference',record.platform),record.reference);
+        choose(record.platform);
+      });
+      actions.append(copy, remove, open); item.append(title, meta, code, actions, message); list.append(item);
     }
   }
   function showForm(email, focus = false) {
@@ -145,14 +146,54 @@
     if (saved) showReceipt(saved, email, focus);
     else { $('success-panel').hidden = true; $('order-form').hidden = false; status('order-status', ''); if (focus) $('name').focus(); }
   }
-  function showReceipt(reference, email, focus = false) {
+  function showReceipt(reference, email, focus = false, nextStep = null) {
+    const request = ++receiptRequest;
     $('success-reference').textContent = reference;
     $('success-whatsapp').href = 'https://wa.me/233245858875?text=' + encodeURIComponent(`Hi, I’ve submitted request ${reference}. Please confirm my price and payment details.`);
     $('success-email').textContent = email;
     $('copy-status').hidden = true;
     $('copy-status').textContent = '';
-    const saved = receiptSaved(reference, email);
-    status('save-status', saved ? 'Saved in this browser. You can find this reference under Sent requests.' : 'This reference is not saved in this browser. Please copy it now.', !saved);
+    const action = $('success-whatsapp');
+    $('retry-next-step').hidden = true;
+    $('retry-next-step').textContent = 'Try again';
+    $('success-summary').hidden = true;
+    $('success-checkout-note').hidden = true;
+    $('retry-next-step').onclick = () => showReceipt(reference,email);
+    const render = step => {
+      if (request !== receiptRequest || $('success-reference').textContent !== reference) return;
+      if (step.kind === 'paid' || step.kind === 'processing') {
+        $('success-heading').textContent = step.kind === 'paid' ? 'Payment received!' : 'Payment processing.';
+        $('success-next').textContent = step.kind === 'paid' ? 'Your map will be ready within 4 hours. We’ll email you when it’s ready.' : 'Your files are saved. We’re waiting for payment confirmation.';
+        action.hidden = true;
+        if (step.kind === 'processing') { $('retry-next-step').textContent = 'Check payment status'; $('retry-next-step').hidden = false; }
+        return;
+      }
+      $('success-heading').textContent = step.kind === 'payment' ? 'Finish your order.' : 'Let’s confirm your setup.';
+      $('success-summary').hidden = step.kind !== 'payment';
+      $('success-checkout-note').hidden = step.kind !== 'payment';
+      $('success-next').textContent = step.kind === 'payment' ? 'Complete payment and we’ll get your build started.' : 'Your files are saved. Message us on WhatsApp to confirm your setup and payment details.';
+      action.textContent = step.kind === 'payment' ? 'Continue to payment' : 'Continue on WhatsApp';
+      if (step.kind === 'payment') {
+        const url = new URL(step.url);
+        if (url.origin !== 'https://checkout.stripe.com' || !url.pathname.startsWith('/c/pay/')) throw new Error('Invalid payment link');
+        action.href = url.href;
+      }
+      else {
+        const phone = step.whatsappNumber === '233248318611' ? step.whatsappNumber : '233245858875';
+        action.href = 'https://wa.me/' + phone + '?text=' + encodeURIComponent(`Hi, I’ve submitted request ${reference}. Please confirm my setup and payment details.`);
+      }
+      action.hidden = false;
+    };
+    if (nextStep) render(nextStep);
+    else {
+      action.hidden = true; $('success-next').textContent = 'Loading your next step…';
+      api('/v1/order/' + reference).then(data => render(data.nextStep || {kind:'review'})).catch(() => {
+        if (request === receiptRequest && $('success-reference').textContent === reference) {
+          $('success-next').textContent = 'Your files are saved. Could not load the next step.';
+          $('retry-next-step').hidden = false;
+        }
+      });
+    }
     $('order-form').hidden = true;
     $('success-panel').hidden = false;
     if (focus) {
@@ -175,7 +216,6 @@
     $('m-buttons').hidden = !buttons; $('single-rpm').hidden = buttons;
     $('rpm').required = !buttons; $('m1-rpm').required = buttons; $('m2-rpm').required = buttons;
     $('rpm').disabled = buttons; $('m1-rpm').disabled = !buttons; $('m2-rpm').disabled = !buttons;
-    $('price').textContent = $('remap').checked ? 'from $300' : 'from $200';
   }
   let checkTimer, sendingCode = false;
   function checkState(message, ready = false, failed = false) {
@@ -279,7 +319,6 @@
     $('copy-status').hidden = false;
   });
   $('trigger').addEventListener('change', syncFormState);
-  $('remap').addEventListener('change', syncFormState);
   $('order-form').addEventListener('submit', async event => {
     event.preventDefault();
     if (uploading) return;
@@ -292,7 +331,7 @@
     if (platform === 'mhd' && files[1].size > 1_000_000) { status('order-status','The flashoptions file must be 1 MB or less.',true); return; }
     const whatsapp = $('whatsapp').value.replace(/[ ()-]/g, '');
     if (!/^\+?[1-9][0-9]{6,14}$/.test(whatsapp)) { status('order-status', 'Enter your WhatsApp number with country code, e.g. +233245858875.', true); $('whatsapp').focus(); return; }
-    const details = {whatsapp: '+' + whatsapp.replace(/^\+/, ''), name:$('name').value.trim(), vin:$('vin').value.trim().toUpperCase(), vehicle:$('vehicle').value.trim(), engine:document.querySelector('input[name=engine]:checked')?.value, platform, rpm:Number($('rpm').value), trigger:$('trigger').value, m1Rpm:$('m1-rpm').value, m2Rpm:$('m2-rpm').value, remap:$('remap').checked, note:$('note').value.trim()};
+    const details = {whatsapp: '+' + whatsapp.replace(/^\+/, ''), name:$('name').value.trim(), vin:$('vin').value.trim().toUpperCase(), vehicle:$('vehicle').value.trim(), engine:$('engine').value, platform, rpm:Number($('rpm').value), trigger:$('trigger').value, m1Rpm:$('m1-rpm').value, m2Rpm:$('m2-rpm').value, transmission:document.querySelector('input[name=transmission]:checked')?.value, note:$('note').value.trim()};
     const form = new FormData(); form.set('details',JSON.stringify(details));
     if (platform === 'mhd') { form.set('stock',files[0]); form.set('flashoptions',files[1]); } else form.set('raw',files[0]);
     let key = sessionStorage.getItem(keyStorage); if (!key) { key = [...crypto.getRandomValues(new Uint8Array(16))].map(x=>x.toString(16).padStart(2,'0')).join(''); sessionStorage.setItem(keyStorage,key); }
@@ -302,7 +341,7 @@
       const result = await api('/v1/order',{method:'POST',headers:{'x-order-key':key},body:form});
       sessionStorage.setItem(referenceStorage, result.reference);
       saveReceipt(result.reference, $('verified-email').textContent, details);
-      showReceipt(result.reference, $('verified-email').textContent, true);
+      showReceipt(result.reference, $('verified-email').textContent, true, result.nextStep);
     } catch (error) {
       if (error.status === 401) {
         $('order-form').hidden = true;
@@ -321,6 +360,8 @@
   });
   const params = new URLSearchParams(location.search);
   const initial = params.get('platform');
+  const returnReference = params.get('reference');
+  if (['mhd','bench'].includes(initial) && /^[a-f0-9]{32}$/.test(returnReference || '')) sessionStorage.setItem(stored('reference',initial),returnReference);
   if (params.get('view') === 'sent') openHistory(); else choose(['bootmod3','mhd','bench'].includes(initial) ? initial : '');
   syncFormState();
 })();
