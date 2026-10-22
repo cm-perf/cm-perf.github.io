@@ -147,6 +147,7 @@
   }
   function showReceipt(reference, email, focus = false) {
     $('success-reference').textContent = reference;
+    $('success-whatsapp').href = 'https://wa.me/233245858875?text=' + encodeURIComponent(`Hi, I’ve submitted request ${reference}. Please confirm my price and payment details.`);
     $('success-email').textContent = email;
     $('copy-status').hidden = true;
     $('copy-status').textContent = '';
@@ -155,8 +156,8 @@
     $('order-form').hidden = true;
     $('success-panel').hidden = false;
     if (focus) {
-      $('success-panel').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block:'start'});
       $('success-heading').focus({preventScroll:true});
+      requestAnimationFrame(() => window.scrollTo({top:0, behavior:'instant'}));
     }
   }
   function setUploading(active) {
@@ -242,7 +243,9 @@
     if (files.some(f => !f)) { status('order-status', 'Choose the required file or files.', true); return; }
     if (files.reduce((n,f) => n+f.size,0) > 10_000_000 || files.some(f => !f.size)) { status('order-status','Files together must be nonempty and 10 MB or less.',true); return; }
     if (platform === 'mhd' && files[1].size > 1_000_000) { status('order-status','The flashoptions file must be 1 MB or less.',true); return; }
-    const details = {name:$('name').value.trim(), vin:$('vin').value.trim().toUpperCase(), vehicle:$('vehicle').value.trim(), engine:$('engine').value, platform, rpm:Number($('rpm').value), trigger:$('trigger').value, m1Rpm:$('m1-rpm').value, m2Rpm:$('m2-rpm').value, remap:$('remap').checked, note:$('note').value.trim()};
+    const whatsapp = $('whatsapp').value.replace(/[ ()-]/g, '');
+    if (!/^\+?[1-9][0-9]{6,14}$/.test(whatsapp)) { status('order-status', 'Enter your WhatsApp number with country code, e.g. +233245858875.', true); $('whatsapp').focus(); return; }
+    const details = {whatsapp: '+' + whatsapp.replace(/^\+/, ''), name:$('name').value.trim(), vin:$('vin').value.trim().toUpperCase(), vehicle:$('vehicle').value.trim(), engine:$('engine').value, platform, rpm:Number($('rpm').value), trigger:$('trigger').value, m1Rpm:$('m1-rpm').value, m2Rpm:$('m2-rpm').value, remap:$('remap').checked, note:$('note').value.trim()};
     const form = new FormData(); form.set('details',JSON.stringify(details));
     if (platform === 'mhd') { form.set('stock',files[0]); form.set('flashoptions',files[1]); } else form.set('raw',files[0]);
     let key = sessionStorage.getItem(keyStorage); if (!key) { key = [...crypto.getRandomValues(new Uint8Array(16))].map(x=>x.toString(16).padStart(2,'0')).join(''); sessionStorage.setItem(keyStorage,key); }

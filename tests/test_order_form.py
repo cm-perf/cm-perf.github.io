@@ -79,6 +79,7 @@ BROWSER_TEST = """
     return;
   }
   choose('mhd'); await wait();
+  $('whatsapp').value = '+233 245858875';
   $('name').value = 'Review'; $('vin').value = 'WBA12345678901234';
   $('vehicle').value = '2015 428i'; $('engine').value = 'N20';
   $('rpm').value = '1500'; $('trigger').value = 'm-buttons';
@@ -95,7 +96,12 @@ BROWSER_TEST = """
     const transfer = new DataTransfer(); transfer.items.add(new File(['test'], name));
     $(id).files = transfer.files;
   }
+  $('whatsapp').value = '123';
   $('order-form').requestSubmit(); await wait();
+  check('invalid contact blocked before upload', !window.uploadCount);
+  $('whatsapp').value = '+233 245858875';
+  $('order-form').requestSubmit(); await wait();
+  check('contact submitted without extra checkbox', window.lastDetails.whatsapp === '+233245858875' && !$('whatsapp-consent'));
   check('valid request starts upload', window.uploadCount === 1);
   check('editable controls lock during upload', $('order-fields').disabled && [...$('order-fields').querySelectorAll('input,select,textarea')].every(el => el.matches(':disabled')));
   check('submit button shows loading and form is busy', $('submit-order').disabled && $('submit-label').textContent.includes('Sending') && $('order-form').getAttribute('aria-busy') === 'true');
@@ -108,6 +114,9 @@ BROWSER_TEST = """
   window.finishUpload(); await wait();
   check('confirmation stored for original platform', sessionStorage.getItem('cm-order-mhd-reference') === reference);
   check('receipt replaces editable form and shows reference', $('order-form').hidden && !$('success-panel').hidden && $('success-reference').textContent === reference);
+  const wa = new URL($('success-whatsapp').href);
+  check('WhatsApp handoff carries exact request and payment context', wa.hostname === 'wa.me' && wa.pathname === '/233245858875' && wa.searchParams.get('text').includes(reference) && wa.searchParams.get('text').includes('payment'));
+  check('handoff is explicit and files already saved', $('success-whatsapp').textContent === 'Continue on WhatsApp' && $('success-panel').textContent.includes('Your files are saved'));
   const saved = JSON.parse(localStorage.getItem('cmperf:sent-request:v1:' + reference));
   check('browser receipt saves only needed summary fields', saved && saved.reference === reference && saved.email === 'review@example.invalid' && saved.vehicle === '2015 428i' && saved.engine === 'N20' && saved.platform === 'mhd' && !('vin' in saved) && !('name' in saved) && !('note' in saved) && !('files' in saved));
   check('receipt shows verified email and next step', $('success-email').textContent === 'review@example.invalid' && $('success-panel').textContent.includes('review your files'));
@@ -120,6 +129,7 @@ BROWSER_TEST = """
   check('original receipt restored on return', !$('success-panel').hidden && $('order-form').hidden && $('success-reference').textContent === reference);
   $('new-order').click(); await wait();
   check('new request resets form and confirmation', !$('order-form').hidden && $('success-panel').hidden && !sessionStorage.getItem('cm-order-mhd-reference') && !$('stock').files.length);
+  $('whatsapp').value = '+233 245858875';
   $('name').value = 'Review'; $('vin').value = 'WBA12345678901234';
   $('vehicle').value = '2015 428i'; $('engine').value = 'N20'; $('rpm').value = '4500';
   for (const [id, name] of [['stock', 'stock.bin'], ['flashoptions', 'stock_flashoptions.xml']]) {

@@ -28,7 +28,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 .steps li{counter-increment:step;position:relative;padding:0 0 18px 40px;margin:0 0 18px;border-bottom:1px solid var(--edge);font-size:15px;line-height:1.6}
 .steps li::before{content:'0' counter(step);position:absolute;left:0;top:2px;font-family:var(--mono);font-size:11px;color:var(--accent)}
 #change-platform{min-height:36px}
-.primary:hover{background:#ff6a0d;border-color:#ff6a0d}
+.primary{display:inline-flex;align-items:center;justify-content:center;text-decoration:none}.primary:hover{background:#ff6a0d;border-color:#ff6a0d}
 input,select,textarea{font-size:16px}
 @media(max-width:680px){main{padding:32px max(32px,env(safe-area-inset-right)) 50px max(32px,env(safe-area-inset-left))}.panel{padding:22px 18px}.panel h2{font-size:24px}.eyebrow{font-size:9px}.choice strong{font-size:19px}main.picker-only{height:calc(100svh - 60px);min-height:500px}main.picker-only h1{font-size:clamp(34px,10vw,44px);max-width:none}main.picker-only .choices{min-height:0;margin-bottom:0}.actions .primary{width:100%}.row{gap:0}.panel .eyebrow{letter-spacing:.06em}#turnstile{margin-top:16px}}
 @media(max-width:680px) and (max-height:620px){main.picker-only{padding-top:16px;padding-bottom:10px}main.picker-only .intro{font-size:12px;margin-bottom:10px}main.picker-only .choices{grid-template-rows:repeat(3,90px);gap:8px}main.picker-only .choice{padding-top:8px;padding-bottom:8px}}
@@ -37,6 +37,8 @@ input,select,textarea{font-size:16px}
 #success-panel{border-top-color:#9fdfa7;background:linear-gradient(145deg,rgba(75,135,88,.11),var(--panel) 55%)}.success-mark{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:rgba(159,223,167,.13);color:#9fdfa7;font-size:25px;margin-bottom:22px}.success-reference{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:18px 0;padding:16px;border:1px solid rgba(159,223,167,.25);border-radius:6px;background:#0a0a0b}.success-reference code{font-family:var(--mono);font-size:clamp(13px,2.5vw,17px);color:#f2f2f0;overflow-wrap:anywhere;user-select:all;flex:1 1 270px}.success-reference .secondary{flex:none}.success-next{max-width:62ch;line-height:1.65}#success-heading:focus{outline:none}@media(max-width:680px){.success-reference .secondary{width:100%}}
 .sent-item{border-top:1px solid var(--edge);padding:20px 0}.sent-item:first-child{margin-top:16px}.sent-item-title{font-size:17px;overflow-wrap:anywhere}.sent-item-meta{color:var(--dim);font-size:13px;margin:4px 0 10px}.sent-item code{font-family:var(--mono);font-size:13px;overflow-wrap:anywhere;user-select:all}.sent-item .actions{margin-top:12px}.sent-item .secondary{min-height:38px}.sent-item .status{margin-top:8px}.sent-empty{padding:24px 0}.local-note{font-size:13px;line-height:1.6}
 .sent-item .status:empty,#sent-status:empty{display:none}
+#order-main:has(#success-panel:not([hidden])) > #order-stage,#order-main:has(#success-panel:not([hidden])) > #order-heading,#order-main:has(#success-panel:not([hidden])) > #order-intro{display:none}
+#success-whatsapp{width:100%}#success-email{overflow-wrap:anywhere}.row>*{min-width:0}input[type=file]{max-width:100%;min-width:0}.check input{flex-shrink:0}
 </style>
 <script src="/order-config.js" defer></script><script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" defer></script><script src="/order.js" defer></script>
 </head>
@@ -65,6 +67,7 @@ input,select,textarea{font-size:16px}
     <p class="eyebrow">02 / YOUR CAR &amp; FILES</p><h2>Make it yours.</h2><p class="muted">Verified email: <strong id="verified-email"></strong> <button class="secondary" type="button" id="change-email">Change</button></p>
     <fieldset class="order-fields" id="order-fields">
     <div class="row"><div><label for="name">Name</label><input id="name" required autocomplete="name" maxlength="160"></div><div><label for="vin">VIN</label><input id="vin" required minlength="17" maxlength="17" autocapitalize="characters" placeholder="17 characters"></div></div>
+    <label for="whatsapp">WhatsApp number (include country code)</label><input id="whatsapp" type="tel" autocomplete="tel" required maxlength="24" pattern="[+]?[0-9 ()\-]{7,24}" placeholder="e.g. +233245858875"><p class="hint">We’ll use this number to confirm your request and arrange payment.</p>
     <div class="row"><div><label for="vehicle">Car model and year</label><input id="vehicle" required placeholder="e.g. 2015 428i" maxlength="160"></div><div><label for="engine">Engine</label><select id="engine" required><option value="">Choose engine</option><option>N20</option><option>N26</option><option>N55</option><option>N63</option><option>S55</option><option>B58</option><option>B58 Gen 2</option></select><p class="hint">B58 requests are reviewed before we confirm support.</p></div></div>
     <div class="row"><div class="field" id="single-rpm"><label for="rpm">2-step RPM</label><input id="rpm" type="number" inputmode="numeric" min="2000" max="7000" step="100" required placeholder="e.g. 4500"></div><div><label for="trigger">How do you activate it?</label><select id="trigger"><option value="brake-pedal">Brake + accelerator</option><option value="m-buttons">M1/M2 buttons</option></select></div></div>
     <div class="row field" id="m-buttons" hidden><div><label for="m1-rpm">M1 RPM</label><input id="m1-rpm" type="number" inputmode="numeric" min="2000" max="7000" step="100"></div><div><label for="m2-rpm">M2 RPM</label><input id="m2-rpm" type="number" inputmode="numeric" min="2000" max="7000" step="100"></div></div>
@@ -73,16 +76,16 @@ input,select,textarea{font-size:16px}
     <div id="bench-files" hidden><label for="raw">ECU file from KESS3 or another tool</label><input id="raw" type="file" accept=".bin,.mpc"><p class="hint">Upload one unencrypted BIN or MPC file. In the notes, include your tool, ECU/DME and whether you used OBD, bench or boot. Using a Slave tool or an encrypted file? <a href="mailto:contact@cmperf.uk">Contact us before uploading.</a></p></div>
     <label for="note">Anything else we should know? (optional)</label><textarea id="note" rows="3" maxlength="2000" placeholder="Fuel, hardware or your current tune"></textarea>
     </fieldset>
-    <div class="actions"><button class="primary" type="submit" id="submit-order"><span class="button-spinner" aria-hidden="true"></span><span id="submit-label">Submit request</span></button></div><p class="hint">No payment is taken now. We’ll review your files and contact you by email.</p><p id="order-status" class="status" role="status"></p>
+    <div class="actions"><button class="primary" type="submit" id="submit-order"><span class="button-spinner" aria-hidden="true"></span><span id="submit-label">Submit request</span></button></div><p class="hint">No payment is taken now. After uploading, continue on WhatsApp to confirm your request and arrange payment. Work starts after payment.</p><p id="order-status" class="status" role="status"></p>
   </form>
   <section class="panel" id="success-panel" aria-labelledby="success-heading" hidden>
     <div class="success-mark" aria-hidden="true">✓</div>
     <p class="eyebrow">REQUEST SUBMITTED</p><h2 id="success-heading" tabindex="-1">Request received.</h2>
-    <p class="muted">Keep this reference in case you need to contact us:</p>
+    <p class="success-next">Your files are saved. Continue on WhatsApp so we can review your files and confirm the price and payment details.</p>
+    <p class="success-next"><a id="success-whatsapp" class="primary" href="https://wa.me/233245858875" target="_blank" rel="noopener">Continue on WhatsApp</a></p>
+    <p class="hint">Work starts after payment. Receipt email: <strong id="success-email"></strong>.</p>
     <div class="success-reference"><code id="success-reference"></code><button class="secondary" type="button" id="copy-reference">Copy reference</button></div>
     <p id="copy-status" class="status" role="status" hidden></p>
-    <p class="success-next">We’ll review your files and email you at <strong id="success-email"></strong> about support and the final price. No payment has been taken.</p>
-    <p class="success-next">Questions? Reach us on WhatsApp at <a href="https://wa.me/233245858875">+233245858875</a>.</p>
     <p id="save-status" class="status" role="status"></p>
     <div class="actions"><button class="secondary" type="button" id="new-order">Start another request</button><button class="secondary" type="button" id="view-sent">View sent requests</button></div>
   </section>
