@@ -79,6 +79,10 @@ BROWSER_TEST = """
     output.textContent = JSON.stringify(results); document.body.append(output);
     return;
   }
+  $('whatsapp').value = '+233245858875';
+  check('international WhatsApp number passes native validation', $('whatsapp').checkValidity());
+  $('whatsapp').value = 'invalid';
+  check('invalid phone fails native validation', !$('whatsapp').checkValidity());
   sessionStorage.setItem('mock-email', 'none');
   const apiScript = window.turnstile; delete window.turnstile;
   choose('bench'); await Promise.resolve();
@@ -165,6 +169,10 @@ BROWSER_TEST = """
   check('conditional RPM validation survives failure', $('m1-rpm').matches(':disabled') && $('order-form').checkValidity());
   $('order-form').requestSubmit(); await wait(); window.finishUpload(401); await wait();
   check('expired session offers verification and restores navigation', !$('verify-panel').hidden && $('order-form').hidden && $('success-panel').hidden && !$('change-platform').disabled);
+  $('whatsapp').value = '+233245858875';
+  check('international WhatsApp number passes native validation', $('whatsapp').checkValidity());
+  $('whatsapp').value = 'invalid';
+  check('invalid phone fails native validation', !$('whatsapp').checkValidity());
   sessionStorage.setItem('mock-email', 'none'); $('sent-link').click(); await wait();
   check('history requires email verification before display', !$('verify-panel').hidden && $('sent-panel').hidden && !$('sent-list').textContent.includes(reference));
   $('email').value = 'review@example.invalid'; $('send-code').click(); await wait(); $('code').value = '12345678'; $('verify-code').click(); await wait();

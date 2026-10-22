@@ -175,7 +175,7 @@
       action.textContent = step.kind === 'payment' ? 'Continue to payment' : 'Continue on WhatsApp';
       if (step.kind === 'payment') {
         const url = new URL(step.url);
-        if (url.origin !== 'https://checkout.stripe.com' || !url.pathname.startsWith('/c/pay/')) throw new Error('Invalid payment link');
+        if (url.origin !== 'https://checkout.stripe.com' || url.pathname === '/' || !!url.username || !!url.password) throw new Error('Invalid payment link');
         action.href = url.href;
       }
       else {
