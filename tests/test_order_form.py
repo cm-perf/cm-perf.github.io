@@ -28,7 +28,7 @@ window.fetch = async (url, options) => {
       });
     });
   }
-  if (/\\/v1\\/order\\/[a-f0-9]{32}$/.test(url)) return {ok:true,json:async()=>({nextStep:{kind:'review'}})};
+  if (/\\/v1\\/order\\/[a-f0-9]{32}$/.test(url)) return {ok:true,json:async()=>({nextStep:window.receiptStep || {kind:'review'}})};
   if (url.endsWith('/v1/session')) {
     window.sessionCount = (window.sessionCount || 0) + 1;
     const email = sessionStorage.getItem('mock-email') || 'review@example.invalid';
@@ -157,6 +157,13 @@ BROWSER_TEST = """
   check('other platform does not show stale success', $('success-panel').hidden && $('order-status').textContent === '');
   $('change-platform').click(); choose('mhd'); await wait();
   check('original receipt restored on return', !$('success-panel').hidden && $('order-form').hidden && $('success-reference').textContent === reference);
+  window.receiptStep={kind:'payment',url:'https://checkout.stripe.com/c/pay/test',paymentExpiresAt:Date.now()+86400000};
+  $('change-platform').click(); choose('mhd'); await wait();
+  check('payment receipt shows deadline', $('success-next').textContent.includes('Pay by ') && $('success-next').textContent.includes('24 hours') && !$('success-whatsapp').hidden);
+  window.receiptStep={kind:'expired'};
+  $('change-platform').click(); choose('mhd'); await wait();
+  check('expired receipt removes payment action', $('success-heading').textContent === 'Payment window expired.' && $('success-whatsapp').hidden);
+  window.receiptStep=null;
   $('new-order').click(); await wait();
   check('new request resets form and confirmation', !$('order-form').hidden && $('success-panel').hidden && !sessionStorage.getItem('cm-order-mhd-reference') && !$('stock').files.length);
   $('whatsapp').value = '+233 245858875';

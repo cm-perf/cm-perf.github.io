@@ -175,10 +175,16 @@
         if (step.kind === 'processing') { $('retry-next-step').textContent = 'Check payment status'; $('retry-next-step').hidden = false; }
         return;
       }
+      if (step.kind === 'expired') {
+        $('success-heading').textContent = 'Payment window expired.';
+        $('success-next').textContent = 'This unpaid request and its files are scheduled for deletion. Start a new request to continue.';
+        $('success-summary').hidden = true; $('success-checkout-note').hidden = true;
+        action.hidden = true; return;
+      }
       $('success-heading').textContent = step.kind === 'payment' ? 'Finish your order.' : 'Let’s confirm your setup.';
       $('success-summary').hidden = step.kind !== 'payment';
       $('success-checkout-note').hidden = step.kind !== 'payment';
-      $('success-next').textContent = step.kind === 'payment' ? 'Complete payment and we’ll get your build started.' : 'Your files are saved. Message us on WhatsApp to confirm your setup and payment details.';
+      $('success-next').textContent = step.kind === 'payment' ? (step.paymentExpiresAt ? 'Pay by ' + new Date(step.paymentExpiresAt).toLocaleString([], {dateStyle:'medium',timeStyle:'short'}) + '. Unpaid requests and files are deleted after 24 hours.' : 'Complete payment and we’ll get your build started.') : 'Your files are saved. Message us on WhatsApp to confirm your setup and payment details.';
       action.textContent = step.kind === 'payment' ? 'Continue to payment' : 'Continue on WhatsApp';
       if (step.kind === 'payment') {
         const url = new URL(step.url);
@@ -196,7 +202,7 @@
       action.hidden = true; $('success-next').textContent = 'Loading your next step…';
       api('/v1/order/' + reference).then(data => render(data.nextStep || {kind:'review'})).catch(() => {
         if (request === receiptRequest && $('success-reference').textContent === reference) {
-          $('success-next').textContent = 'Your files are saved. Could not load the next step.';
+          $('success-next').textContent = 'Could not load this request. It may have expired or been removed.';
           $('retry-next-step').hidden = false;
         }
       });
