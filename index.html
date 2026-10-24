@@ -243,12 +243,12 @@ footer .copy{font-family:var(--mono);font-size:11px;color:var(--faint);width:100
 {"@context":"https://schema.org","@graph":[
 {"@type":"Organization","@id":"https://cmperf.uk/#org","name":"CM Performance","url":"https://cmperf.uk/","email":"contact@cmperf.uk","logo":"https://cmperf.uk/favicon-192.png","image":"https://cmperf.uk/og-cmperf.png","description":"UK-based BMW engineering: custom ECU software, the 2-step secondary rev limiter, diagnostics, retrofit and coding, and product development.","areaServed":"Worldwide","address":{"@type":"PostalAddress","addressCountry":"GB"},"sameAs":["https://www.instagram.com/cm.perf/"]},
 {"@type":"WebSite","@id":"https://cmperf.uk/#site","url":"https://cmperf.uk/","name":"CM Performance","publisher":{"@id":"https://cmperf.uk/#org"}},
-{"@type":"Service","name":"BMW 2-Step Secondary Rev Limiter","serviceType":"Custom ECU software / BMW tuning","provider":{"@id":"https://cmperf.uk/#org"},"areaServed":"Worldwide","description":"2-step launch control for BMW N20, N26, N55, N63 and S55. Choose M1/M2 activation, including aftermarket sport steering wheels, with a launch RPM for each button, or brake plus gas with a fixed launch RPM. Experimental cruise-control RPM adjustment is optional. Available worldwide for Bootmod3, MHD and compatible ECU tools, including KESS3.","offers":{"@type":"Offer","price":"200","priceCurrency":"USD","availability":"https://schema.org/InStock"}},
+{"@type":"Service","name":"BMW 2-Step Secondary Rev Limiter","serviceType":"Custom ECU software / BMW tuning","provider":{"@id":"https://cmperf.uk/#org"},"areaServed":"Worldwide","description":"2-step launch control for BMW N20, N26, N55, N63, S55, B48 and B58. Choose M1/M2 activation, including aftermarket sport steering wheels, with a launch RPM for each button, or brake plus gas with a fixed launch RPM. Experimental cruise-control RPM adjustment is optional. Available worldwide for Bootmod3, MHD and compatible ECU tools, including KESS3.","offers":{"@type":"Offer","price":"200","priceCurrency":"USD","availability":"https://schema.org/InStock"}},
 {"@type":"FAQPage","mainEntity":[
 {"@type":"Question","name":"What is a 2-step secondary rev limiter?","acceptedAnswer":{"@type":"Answer","text":"A launch rev limit below your redline. Choose M1/M2 buttons with a separate RPM for each, or brake + gas pedal with one launch RPM. We also support aftermarket sport steering wheels with M1/M2 buttons. Experimental cruise-control RPM adjustment is available as an option; we confirm your setup before building."}},
-{"@type":"Question","name":"Which BMW engines do you support?","acceptedAnswer":{"@type":"Answer","text":"N20, N26, N55, N63 and S55 are live now. B-series engines are in active development. If your engine is not listed, ask us."}},
-{"@type":"Question","name":"How is the 2-step delivered?","acceptedAnswer":{"@type":"Answer","text":"We deliver worldwide through Bootmod3, MHD or files for compatible ECU tools such as Alientech KESS3, AutoTuner and Magicmotorsport FLEX. Choose your platform when you start your request. We confirm support for your car and software before preparing your file."}},
-{"@type":"Question","name":"Can I use KESS3, AutoTuner or FLEX?","acceptedAnswer":{"@type":"Answer","text":"Tell us which tool you use, your ECU/DME and whether the file was read by OBD, bench or boot. We’ll check whether we can work with the file for your BMW before you pay. Our upload form takes unencrypted BIN or MPC files."}},
+{"@type":"Question","name":"Which BMW engines do you support?","acceptedAnswer":{"@type":"Answer","text":"N20, N26, N55, N63, S55, B48 and B58 requests are open. We confirm exact ECU software and file compatibility before payment."}},
+{"@type":"Question","name":"How is the 2-step delivered?","acceptedAnswer":{"@type":"Answer","text":"We deliver worldwide through Bootmod3, MHD or files for compatible ECU tools such as PCMFlash, KESS3, AutoTuner and FLEX. Choose your platform when you start your request. We confirm support for your car and software before preparing your file."}},
+{"@type":"Question","name":"Can I use PCMFlash, KESS3, AutoTuner or FLEX?","acceptedAnswer":{"@type":"Answer","text":"Tell us which tool you use, your ECU/DME and whether the file was read by OBD, bench or boot. We’ll check whether we can work with the file for your BMW before you pay. Our upload form takes unencrypted BIN or MPC files."}},
 {"@type":"Question","name":"What do I need for it?","acceptedAnswer":{"@type":"Answer","text":"For Bootmod3 or MHD, you need the matching licence and flashing setup. For OBD, bench or boot flashing with an ECU tool, you or your tuner need a compatible tool and the original ECU read. We confirm what your setup needs before you pay."}},{"@type":"Question","name":"Can I keep my current tune, and go back to stock?","acceptedAnswer":{"@type":"Answer","text":"We confirm whether we can work with your current tune and how to return to stock before you order. Keep a copy of your original file and tell us which flashing platform or tool you use."}},{"@type":"Question","name":"Who flashes it, and what if I get stuck?","acceptedAnswer":{"@type":"Answer","text":"Flash through Bootmod3 or MHD, or have your tuner write the file with a compatible ECU tool using the agreed OBD, bench or boot method. We supply the file and instructions for your setup. If you get stuck, contact us and we’ll help."}},
 {"@type":"Question","name":"What does it cost?","acceptedAnswer":{"@type":"Answer","text":"From 200 USD for a standard 2-step. Stage builds and bespoke ECU ROM work are quoted per car. Email contact@cmperf.uk."}}
 ]}
@@ -291,7 +291,7 @@ footer .copy{font-family:var(--mono);font-size:11px;color:var(--faint);width:100
       <div class="order-choices">
         <a href="/order.html?platform=bootmod3"><em>01 / IN-APP REQUEST</em><strong>Bootmod3</strong><span>Find CM Performance in the tuner directory.</span></a>
         <a href="/order.html?platform=mhd"><em>02 / FILE UPLOAD</em><strong>MHD</strong><span>Start with your stock BIN + flashoptions file.</span></a>
-        <a href="/order.html?platform=bench"><em>03 / OBD · BENCH · BOOT</em><strong>KESS3 / ECU tools</strong><span>AutoTuner, FLEX and other tools. File review first.</span></a>
+        <a href="/order.html?platform=bench"><em>03 / OBD · BENCH · BOOT</em><strong>ECU tools</strong><span>PCMFlash, KESS3, AutoTuner, FLEX. File review first.</span></a>
       </div>
       <span class="order-entry-foot" aria-hidden="true">More about us ↓</span>
     </div>
@@ -304,7 +304,7 @@ footer .copy{font-family:var(--mono);font-size:11px;color:var(--faint);width:100
         <h1 style="margin-top:18px">We build systems<br />that don't yet exist,<br />for <b class="accent">BMWs</b>.</h1>
         <p>Custom ECU software, including our OEM+ 2-step flash. Choose M1/M2 buttons or brake + gas activation, with launch RPM tailored to your build. Aftermarket sport wheels with M1/M2 buttons are supported too. Available worldwide for Bootmod3, MHD and compatible ECU tools, including KESS3. Diagnostics, retrofits and product development too.</p>
         <div class="specline">
-          <span>Engines</span> N20 · N26 · N55 · N63 · S55
+          <span>Engines</span> N20 · N26 · N55 · N63 · S55 · B48 · B58
           <span>Delivery</span> Bootmod3 · MHD · ECU tools
           <span>From</span> $200 USD
         </div>
@@ -337,9 +337,9 @@ footer .copy{font-family:var(--mono);font-size:11px;color:var(--faint);width:100
           <article class="slide slide-wheel">
             <img src="assets/steering-wheels/carbon-sport-wheel-960.webp" srcset="assets/steering-wheels/carbon-sport-wheel-480.webp 480w, assets/steering-wheels/carbon-sport-wheel-960.webp 960w" sizes="(max-width: 820px) calc(100vw - 64px), 460px" loading="lazy" alt="Aftermarket carbon sport steering wheel fitted in a BMW" decoding="async">
             <span class="k">Engine coverage</span>
-            <div class="st">N20 · N26 · N55 · N63 · S55</div>
+            <div class="st">N20 · N26 · N55 · N63 · S55 · B48 · B58</div>
             <div class="cov">
-              <span>N20 ✓</span><span>N26 ✓</span><span>N55 ✓</span><span>N63 ✓</span><span>S55 ✓</span><span class="wip">B-series · in development</span>
+              <span>N20 ✓</span><span>N26 ✓</span><span>N55 ✓</span><span>N63 ✓</span><span>S55 ✓</span><span>B48 ✓</span><span>B58 ✓</span>
             </div>
           </article>
         </div>
@@ -366,7 +366,7 @@ footer .copy{font-family:var(--mono);font-size:11px;color:var(--faint);width:100
             <div>RPM <b>Per-button presets or pedal RPM</b></div>
             <div>Sport wheels <b>Aftermarket M1/M2 supported</b></div>
             <div>Optional <b>Cruise RPM · experimental</b></div>
-            <div>Engines <b>N20 · N26 · N55 · N63 · S55</b></div>
+            <div>Engines <b>N20 · N26 · N55 · N63 · S55 · B48 · B58</b></div>
             <div>Delivery <b>Bootmod3 · MHD · ECU tools</b></div>
             <div>From <b>$200 USD</b></div>
           </div>
@@ -469,14 +469,14 @@ footer .copy{font-family:var(--mono);font-size:11px;color:var(--faint);width:100
         </details>
         <details>
           <summary>Which BMW engines do you support?</summary>
-          <p class="a">N20, N26, N55, N63 and S55 are live now. B-series engines are in development. Tell us your model, year and current software and we confirm support before you pay.</p>
+          <p class="a">N20, N26, N55, N63, S55, B48 and B58 requests are open. Tell us your model, year and current software; we confirm exact compatibility before you pay.</p>
         </details>
         <details>
           <summary>How is it delivered?</summary>
-          <p class="a">We deliver worldwide through Bootmod3, MHD or files for compatible ECU tools such as Alientech KESS3, AutoTuner and Magicmotorsport FLEX. Choose your platform when you start your request. We confirm support for your car and software before preparing your file.</p>
+          <p class="a">We deliver worldwide through Bootmod3, MHD or files for compatible ECU tools such as PCMFlash, KESS3, AutoTuner and FLEX. Choose your platform when you start your request. We confirm support for your car and software before preparing your file.</p>
         </details>
         <details>
-          <summary>Can I use KESS3, AutoTuner or FLEX?</summary>
+          <summary>Can I use PCMFlash, KESS3, AutoTuner or FLEX?</summary>
           <p class="a">Tell us which tool you use, your ECU/DME and whether the file was read by OBD, bench or boot. We’ll check whether we can work with the file for your BMW before you pay. Our upload form takes unencrypted BIN or MPC files.</p>
         </details>
         <details>
