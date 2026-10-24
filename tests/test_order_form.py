@@ -16,7 +16,7 @@ ROOT = Path(os.environ.get('WEBSITE_TEST_ROOT', Path(__file__).resolve().parents
 
 MOCK_API = """
 window.CMP_ORDER_CONFIG = {api: 'https://mock.invalid', turnstileSiteKey: 'test'};
-window.turnstile = {render: () => 1, getResponse: () => 'test-token', reset: () => {}};
+window.turnstile = {render: (selector, options) => {window.checkOptions=options; if(!window.holdCheck)queueMicrotask(()=>options.callback('test-token')); return 1;}, getResponse: () => 'test-token', reset: () => {queueMicrotask(()=>window.checkOptions.callback('test-token'));}};
 window.fetch = async (url, options) => {
   if (url.endsWith('/v1/order')) {
     window.uploadCount = (window.uploadCount || 0) + 1;
@@ -24,10 +24,11 @@ window.fetch = async (url, options) => {
     return await new Promise(resolve => {
       window.finishUpload = (status = 200) => resolve({
         ok: status === 200, status,
-        json: async () => status === 200 ? {reference: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'} : {error: 'Test failure'}
+        json: async () => status === 200 ? {reference: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', nextStep:{kind:'review'}} : {error: 'Test failure'}
       });
     });
   }
+  if (/\\/v1\\/order\\/[a-f0-9]{32}$/.test(url)) return {ok:true,json:async()=>({nextStep:window.receiptStep || {kind:'review'}})};
   if (url.endsWith('/v1/session')) {
     window.sessionCount = (window.sessionCount || 0) + 1;
     const email = sessionStorage.getItem('mock-email') || 'review@example.invalid';
@@ -73,14 +74,43 @@ BROWSER_TEST = """
     window.confirm = () => true;
     [...$('sent-list').querySelectorAll('article')].find(item => item.textContent.includes(reference)).querySelectorAll('button')[1].click();
     check('request can be removed from this browser', !$('sent-list').textContent.includes(reference) && !$('sent-panel').hidden);
+    [...$('sent-list').querySelectorAll('article')].forEach(item => item.querySelectorAll('button')[1].click());
+    check('removing final saved request hides navigation', $('sent-link').hidden);
     sessionStorage.removeItem('mock-reload'); sessionStorage.removeItem('mock-results');
     const output = document.createElement('pre'); output.id = 'test-results';
     output.textContent = JSON.stringify(results); document.body.append(output);
     return;
   }
+  check('empty browser hides sent requests navigation', $('sent-link').hidden);
+  $('whatsapp').value = '+233245858875';
+  check('international WhatsApp number passes native validation', $('whatsapp').checkValidity());
+  $('whatsapp').value = 'invalid';
+  check('invalid phone fails native validation', !$('whatsapp').checkValidity());
+  sessionStorage.setItem('mock-email', 'none');
+  const apiScript = window.turnstile; delete window.turnstile;
+  choose('bench'); await Promise.resolve();
+  check('loading check visible before email click', $('send-code').disabled && $('check-status').textContent.includes('Loading'));
+  $('turnstile-script').dispatchEvent(new Event('error')); await wait();
+  check('blocked script shows retry and disables email send', !$('retry-check').hidden && $('send-code').disabled && $('check-status').textContent.includes('could not load'));
+  window.turnstile = apiScript; window.holdCheck = true;
+  $('retry-check').click(); await wait();
+  check('widget rendered before send and awaits completion', !!window.checkOptions && $('send-code').disabled);
+  window.checkOptions.callback('test-token'); await wait();
+  check('email send enabled only after check completes', !$('send-code').disabled && $('check-status').textContent.includes('complete'));
+  window.checkOptions['error-callback'](); await wait();
+  check('widget failure explains recovery', !$('retry-check').hidden && $('send-code').disabled);
+  $('retry-check').click(); await wait();
+  check('retry recovers without page reload', !$('send-code').disabled);
+  window.checkOptions['expired-callback'](); await wait();
+  check('expired token renews', !$('send-code').disabled);
+  window.holdCheck = false; sessionStorage.setItem('mock-email', 'review@example.invalid');
   choose('mhd'); await wait();
+  $('whatsapp').value = '+233 245858875';
   $('name').value = 'Review'; $('vin').value = 'WBA12345678901234';
-  $('vehicle').value = '2015 428i'; $('engine').value = 'B48';
+  $('vehicle').value = '2015 428i'; $('engine').value = 'N-series'; document.querySelector('input[name=transmission][value="manual"]').checked = true;
+  check('engine dropdown uses families', $('engine').tagName === 'SELECT' && [...$('engine').options].map(o=>o.value).join(',') === ',N-series,B-series,S55,S-series');
+  check('remap is not offered', !document.querySelector('#remap') && !$('order-form').textContent.includes('Add remap'));
+  check('engine review caveat removed', !$('engine').textContent.includes('review'));
   $('rpm').value = '1500'; $('trigger').value = 'm-buttons';
   $('trigger').dispatchEvent(new Event('change'));
   $('m1-rpm').value = '4000'; $('m2-rpm').value = '4500';
@@ -95,7 +125,12 @@ BROWSER_TEST = """
     const transfer = new DataTransfer(); transfer.items.add(new File(['test'], name));
     $(id).files = transfer.files;
   }
+  $('whatsapp').value = '123';
   $('order-form').requestSubmit(); await wait();
+  check('invalid contact blocked before upload', !window.uploadCount);
+  $('whatsapp').value = '+233 245858875';
+  $('order-form').requestSubmit(); await wait();
+  check('contact submitted without extra checkbox', window.lastDetails.whatsapp === '+233245858875' && !$('whatsapp-consent'));
   check('valid request starts upload', window.uploadCount === 1);
   check('editable controls lock during upload', $('order-fields').disabled && [...$('order-fields').querySelectorAll('input,select,textarea')].every(el => el.matches(':disabled')));
   check('submit button shows loading and form is busy', $('submit-order').disabled && $('submit-label').textContent.includes('Sending') && $('order-form').getAttribute('aria-busy') === 'true');
@@ -108,9 +143,13 @@ BROWSER_TEST = """
   window.finishUpload(); await wait();
   check('confirmation stored for original platform', sessionStorage.getItem('cm-order-mhd-reference') === reference);
   check('receipt replaces editable form and shows reference', $('order-form').hidden && !$('success-panel').hidden && $('success-reference').textContent === reference);
+  const wa = new URL($('success-whatsapp').href);
+  check('WhatsApp handoff carries exact request and payment context', wa.hostname === 'wa.me' && wa.pathname === '/233245858875' && wa.searchParams.get('text').includes(reference) && wa.searchParams.get('text').includes('payment'));
+  check('handoff is explicit and files already saved', $('success-whatsapp').textContent === 'Continue on WhatsApp' && $('success-panel').textContent.includes('Files received'));
+  check('submitted request reveals sent requests navigation', !$('sent-link').hidden);
   const saved = JSON.parse(localStorage.getItem('cmperf:sent-request:v1:' + reference));
-  check('browser receipt saves only needed summary fields', saved && saved.reference === reference && saved.email === 'review@example.invalid' && saved.vehicle === '2015 428i' && saved.engine === 'B48' && saved.platform === 'mhd' && !('vin' in saved) && !('name' in saved) && !('note' in saved) && !('files' in saved));
-  check('receipt shows verified email and next step', $('success-email').textContent === 'review@example.invalid' && $('success-panel').textContent.includes('review your files'));
+  check('browser receipt saves only needed summary fields', saved && saved.reference === reference && saved.email === 'review@example.invalid' && saved.vehicle === '2015 428i' && saved.engine === 'N-series' && saved.platform === 'mhd' && !('vin' in saved) && !('name' in saved) && !('note' in saved) && !('files' in saved));
+  check('receipt shows verified email and next step', $('success-email').textContent === 'review@example.invalid' && $('success-panel').textContent.includes('confirm your setup'));
   check('other platform has no false confirmation', !sessionStorage.getItem('cm-order-bench-reference'));
   check('controls restored after upload', !$('change-platform').disabled && !$('order-fields').disabled && $('submit-label').textContent === 'Submit request');
   $('change-platform').click(); choose('bench'); await wait();
@@ -118,10 +157,18 @@ BROWSER_TEST = """
   check('other platform does not show stale success', $('success-panel').hidden && $('order-status').textContent === '');
   $('change-platform').click(); choose('mhd'); await wait();
   check('original receipt restored on return', !$('success-panel').hidden && $('order-form').hidden && $('success-reference').textContent === reference);
+  window.receiptStep={kind:'payment',url:'https://checkout.stripe.com/c/pay/test',paymentExpiresAt:Date.now()+86400000};
+  $('change-platform').click(); choose('mhd'); await wait();
+  check('payment receipt shows deadline', $('success-next').textContent.includes('Pay by ') && $('success-next').textContent.includes('24 hours') && !$('success-whatsapp').hidden);
+  window.receiptStep={kind:'expired'};
+  $('change-platform').click(); choose('mhd'); await wait();
+  check('expired receipt removes payment action', $('success-heading').textContent === 'Payment window expired.' && $('success-whatsapp').hidden);
+  window.receiptStep=null;
   $('new-order').click(); await wait();
   check('new request resets form and confirmation', !$('order-form').hidden && $('success-panel').hidden && !sessionStorage.getItem('cm-order-mhd-reference') && !$('stock').files.length);
+  $('whatsapp').value = '+233 245858875';
   $('name').value = 'Review'; $('vin').value = 'WBA12345678901234';
-  $('vehicle').value = '2015 428i'; $('engine').value = 'N20'; $('rpm').value = '4500';
+  $('vehicle').value = '2015 428i'; $('engine').value = 'N-series'; document.querySelector('input[name=transmission][value="manual"]').checked = true; $('rpm').value = '4500';
   for (const [id, name] of [['stock', 'stock.bin'], ['flashoptions', 'stock_flashoptions.xml']]) {
     const transfer = new DataTransfer(); transfer.items.add(new File(['test'], name));
     $(id).files = transfer.files;
@@ -133,6 +180,10 @@ BROWSER_TEST = """
   check('conditional RPM validation survives failure', $('m1-rpm').matches(':disabled') && $('order-form').checkValidity());
   $('order-form').requestSubmit(); await wait(); window.finishUpload(401); await wait();
   check('expired session offers verification and restores navigation', !$('verify-panel').hidden && $('order-form').hidden && $('success-panel').hidden && !$('change-platform').disabled);
+  $('whatsapp').value = '+233245858875';
+  check('international WhatsApp number passes native validation', $('whatsapp').checkValidity());
+  $('whatsapp').value = 'invalid';
+  check('invalid phone fails native validation', !$('whatsapp').checkValidity());
   sessionStorage.setItem('mock-email', 'none'); $('sent-link').click(); await wait();
   check('history requires email verification before display', !$('verify-panel').hidden && $('sent-panel').hidden && !$('sent-list').textContent.includes(reference));
   $('email').value = 'review@example.invalid'; $('send-code').click(); await wait(); $('code').value = '12345678'; $('verify-code').click(); await wait();
@@ -158,6 +209,30 @@ BROWSER_TEST = """
 
 
 class OrderFormTests(unittest.TestCase):
+    def test_turnstile_runs_after_its_callback_registration(self):
+        page = (ROOT / 'order.html').read_text()
+        scripts = re.findall(r'<script\b[^>]*src=[^>]*>', page)
+        config = next(i for i, tag in enumerate(scripts) if '/order-config.js' in tag)
+        controller = next(i for i, tag in enumerate(scripts) if '/order.js' in tag)
+        widget = next(i for i, tag in enumerate(scripts) if 'challenges.cloudflare.com' in tag)
+        self.assertLess(config, controller)
+        self.assertLess(controller, widget)
+        for i in (config, controller, widget):
+            self.assertIn('defer', scripts[i])
+            self.assertNotRegex(scripts[i], r'\basync\b')
+
+    def test_published_scripts_are_bound_to_content(self):
+        if ROOT.name != 'dist':
+            self.skipTest('Published build check')
+        import hashlib
+        for page in ROOT.rglob('*.html'):
+            for src in re.findall(r'<script\b[^>]*\bsrc=["\']([^"\']+)', page.read_text()):
+                if re.match(r'(?:[a-z]+:|//)', src):
+                    continue
+                pathname, query = src.split('?')
+                asset = ROOT / pathname.lstrip('/') if pathname.startswith('/') else page.parent / pathname
+                self.assertEqual(query, 'v=' + hashlib.sha256(asset.read_bytes()).hexdigest()[:16])
+
     def test_browser_regressions(self):
         chromium = shutil.which('chromium') or shutil.which('chromium-browser')
         self.assertIsNotNone(chromium, 'Chromium is required for browser regressions')
@@ -165,7 +240,7 @@ class OrderFormTests(unittest.TestCase):
         page = re.sub(r'<script[^>]*src=[^>]*></script>', '', page)
         page = re.sub(r'<link[^>]*>', '', page)
         scripts = MOCK_API + '\n' + (ROOT / 'order.js').read_text() + '\n' + BROWSER_TEST
-        page = page.replace('</body>', '<script>' + scripts + '</script></body>')
+        page = page.replace('</body>', '<script id="turnstile-script"></script><script>' + scripts + '</script></body>')
         with tempfile.TemporaryDirectory(prefix='cm-order-test-') as directory:
             path = Path(directory)
             (path / 'test.html').write_text(page)

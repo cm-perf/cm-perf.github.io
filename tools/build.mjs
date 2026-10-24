@@ -1,5 +1,6 @@
 // Publish only web assets. Keep source readable and minify the output, including inline scripts.
 import {transform} from 'esbuild';
+import {createHash} from 'node:crypto';
 import {readdir,readFile,writeFile,copyFile,mkdir,rm} from 'node:fs/promises';
 import {resolve,relative,extname} from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -34,4 +35,26 @@ async function visit(dir){
  }
 }
 await rm(out,{recursive:true,force:true});await mkdir(out,{recursive:true});await visit(root);
+// Bind each page to its exact script bytes so a warm browser cannot reuse an
+// older order form controller after the HTML changes.
+async function versionScripts(dir){
+ for(const entry of await readdir(dir,{withFileTypes:true})){
+  const file=resolve(dir,entry.name);
+  if(entry.isDirectory()){await versionScripts(file);continue;}
+  if(!entry.name.endsWith('.html'))continue;
+  let page=await readFile(file,'utf8');
+  const scripts=[...page.matchAll(/<script\b[^>]*\bsrc=["']([^"']+)["']/gi)];
+  for(const match of scripts){
+   const src=match[1];
+   if(/^(?:[a-z]+:|\/\/)/i.test(src))continue;
+   const pathname=src.split(/[?#]/)[0];
+   const asset=resolve(pathname.startsWith('/')?out:resolve(file,'..'),pathname.replace(/^\//,''));
+   if(!asset.startsWith(out+'/'))throw new Error('Script outside publish directory');
+   const hash=createHash('sha256').update(await readFile(asset)).digest('hex').slice(0,16);
+   page=page.replace(match[0],match[0].replace(src,pathname+'?v='+hash));
+  }
+  await writeFile(file,page);
+ }
+}
+await versionScripts(out);
 console.log(`Website JavaScript: ${before} -> ${after} bytes (${count} scripts)`);
