@@ -4,9 +4,10 @@ import {createHash} from 'node:crypto';
 import {readdir,readFile,writeFile,copyFile,mkdir,rm} from 'node:fs/promises';
 import {resolve,relative,extname} from 'node:path';
 import {fileURLToPath} from 'node:url';
+import {buildBlog} from './blog.mjs';
 const root=fileURLToPath(new URL('../',import.meta.url)),out=resolve(root,'dist');
 const extensions=new Set(['.html','.js','.css','.json','.xml','.txt','.png','.jpg','.jpeg','.webp','.svg','.ico','.mp4','.webm','.woff','.woff2','.webmanifest']);
-const ignored=new Set(['.git','.github','.cloudflare','node_modules','dist','tools','tests']);
+const ignored=new Set(['.git','.github','.cloudflare','node_modules','dist','tools','tests','content']);
 let before=0,after=0,count=0;
 async function minify(input,sourcefile){
  const {code}=await transform(input,{loader:'js',minify:true,legalComments:'inline',target:'es2020',sourcefile});
@@ -35,6 +36,7 @@ async function visit(dir){
  }
 }
 await rm(out,{recursive:true,force:true});await mkdir(out,{recursive:true});await visit(root);
+await buildBlog(root,out,{includeDrafts:process.env.BLOG_INCLUDE_DRAFTS==='1'});
 // Bind each page to its exact script bytes so a warm browser cannot reuse an
 // older order form controller after the HTML changes.
 async function versionScripts(dir){

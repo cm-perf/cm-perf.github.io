@@ -1,1 +1,17 @@
-{"private":true,"type":"module","scripts":{"build":"node tools/build.mjs","test":"npm run build && WEBSITE_TEST_ROOT=dist python3 tests/test_order_form.py && node --test tests/test_security_headers.mjs"},"devDependencies":{"esbuild":"0.28.2"}}
+{
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "test": "npm run build && WEBSITE_TEST_ROOT=dist python3 tests/test_order_form.py && node --test tests/test_security_headers.mjs && node --test tests/test_blog.mjs",
+    "build:preview": "BLOG_INCLUDE_DRAFTS=1 node tools/build.mjs",
+    "preview": "npm run build:preview && python3 -m http.server 4173 --bind 127.0.0.1 --directory dist"
+  },
+  "devDependencies": {
+    "@resvg/resvg-js": "2.6.2",
+    "esbuild": "0.28.2",
+    "highlight.js": "11.12.0",
+    "marked": "18.1.1",
+    "yaml": "2.9.1"
+  }
+}
