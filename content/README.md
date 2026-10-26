@@ -11,13 +11,14 @@ Changing the title/cover produces a new image filename. No separate social
 artwork or metadata step is required. Share previews work publicly once deployed;
 social networks cannot fetch the local preview server.
 
-Optional `readerCodes` front matter lists five distinct, already-created $50 USD
-Stripe promotion codes (letters and digits only, for Stripe URL prefilling).
+Optional `readerCodes` front matter lists five distinct, already-created Stripe
+promotion codes for $50 USD off 2-step (letters and digits only, for URL prefilling).
 Set `readerCheckout` to their shared `https://buy.stripe.com/…` Payment Link.
 Each Use code link opens that checkout with `prefilled_promo_code` set.
-Configure each coupon and code for one total redemption
-in Stripe before adding it. The reward appears at the bottom after the reader
-scrolls through at least 50% of the page's scrollable distance. This is local
+Configure each coupon and code for one total redemption in Stripe before adding
+it. Restrict the coupon’s `applies_to.products` to the BMW 2-step Rev-Limiter
+product. Remapping must remain full price, including in a combined order.
+The reward appears at the bottom after the reader scrolls through at least 50% of the page's scrollable distance. This is local
 visibility tracking, with no analytics or cookies; it does not prove reading or
 reserve a code. Codes remain public in page source. Stripe enforces redemption
 limits, and checkout confirms availability. No live availability is claimed on
