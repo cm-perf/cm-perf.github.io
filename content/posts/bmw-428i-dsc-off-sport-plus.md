@@ -1,7 +1,7 @@
 ---
-title: "DSC off. Sport+ stays: our BMW 428i development story"
+title: "BMW 428i: DSC off, Sport+ stays"
 date: "2026-10-26"
-description: "Keep the Sport+ engine calibration, including sound, throttle response and aggression, when a long press turns DSC fully off. Developed on our BMW 428i for drift use."
+description: "Keeping Sport+ sound, throttle response and aggression with DSC fully off. Our BMW 428i drift development story."
 tag: "428i · Development"
 image: "/assets/gallery/flames/test-car-428i_optimized_.jpg"
 imageAlt: "CM Performance BMW 428i development car"

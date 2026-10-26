@@ -35,7 +35,7 @@ export async function createPostImage(root,out,post){
   }
   const title=lines.map((line,i)=>`<text x="64" y="${222+i*(size*1.15)}" font-size="${size}" font-weight="700" fill="#f2f2f0">${xml(line)}</text>`).join('');
   const tag=(post.tag||'Workshop notes').toUpperCase().slice(0,45);
-  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630"><rect width="1200" height="630" fill="#0a0a0b"/>${photo}<g font-family="Liberation Sans"><text x="64" y="79" font-size="27" font-weight="700" fill="#f2f2f0">CM <tspan fill="#f26a21">PERFORMANCE</tspan></text><text x="64" y="144" font-size="20" fill="#f26a21" letter-spacing="2">${xml(tag)}</text>${title}<path d="M64 548 H696" stroke="#363639"/><text x="64" y="589" font-size="22" fill="#aaaab0">cmperf.uk/blog</text><text x="696" y="589" font-size="20" text-anchor="end" fill="#aaaab0">${xml(post.date)}</text></g></svg>`;
+  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630"><rect width="1200" height="630" fill="#0a0a0b"/>${photo}<g font-family="Liberation Sans"><text x="64" y="79" font-size="27" font-weight="700" fill="#f2f2f0">CM <tspan fill="#f26a21">PERFORMANCE</tspan></text><text x="64" y="144" font-size="20" fill="#f26a21" letter-spacing="2">${xml(tag)}</text>${title}<path d="M64 548 H696" stroke="#363639"/><text x="64" y="589" font-size="22" fill="#aaaab0">cmperf.uk/blog</text><text x="696" y="589" font-size="24" font-weight="700" text-anchor="end" fill="#f26a21">Read the story</text></g></svg>`;
   const hash=createHash('sha256').update(svg).digest('hex').slice(0,12);
   const url=`/assets/blog/${post.slug}-${hash}.png`;
   await mkdir(path.join(out,'assets/blog'),{recursive:true});
