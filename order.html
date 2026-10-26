@@ -54,7 +54,7 @@ input,select,textarea{font-size:16px}
   <div class="choices" id="platform-choices" role="group" aria-label="Tuning platform">
     <button class="choice" type="button" data-platform="bootmod3"><em>01 / IN-APP REQUEST</em><strong>Bootmod3</strong><span>Find CM Performance in the tuner directory.</span></button>
     <button class="choice" type="button" data-platform="mhd"><em>02 / FILE UPLOAD</em><strong>MHD</strong><span>Start with your stock BIN + flashoptions file.</span></button>
-    <button class="choice" type="button" data-platform="bench"><em>03 / OBD · BENCH · BOOT</em><strong>KESS3 / ECU tools</strong><span>AutoTuner, FLEX and other tools. File review first.</span></button>
+    <button class="choice" type="button" data-platform="bench"><em>03 / OBD · BENCH · BOOT</em><strong>ECU tools</strong><span>PCMFlash, KESS3, AutoTuner, FLEX. File review first.</span></button>
   </div>
   <section class="panel" id="bootmod-panel" hidden><p class="eyebrow">YOUR NEXT STEP</p><h2>Find us in Bootmod3.</h2><ol class="steps"><li>Open Bootmod3 and go to the <strong>Tuners</strong> directory.</li><li>Find and select <strong>CM Performance</strong>.</li><li>Send a tune request with your desired 2-step RPM and what you want us to build.</li></ol><p class="muted">Your conversation and map stay in Bootmod3. You do not need to upload files here.</p></section>
   <section class="panel" id="verify-panel" hidden>
@@ -78,7 +78,7 @@ input,select,textarea{font-size:16px}
     <fieldset class="engine-picker"><legend>Transmission</legend><div class="engine-options"><label><input type="radio" name="transmission" value="automatic" required><span>Automatic</span></label><label><input type="radio" name="transmission" value="manual" required><span>Manual</span></label></div></fieldset>
     <p class="price">2-step: <strong>$200</strong></p>
     <div id="mhd-files" hidden><label for="stock">Stock BIN exported by MHD</label><input id="stock" type="file" accept=".bin"><p class="hint">Export your stock file in MHD, then choose the saved BIN from your phone’s Files app.</p><label for="flashoptions">MHD flashoptions file</label><input id="flashoptions" type="file" accept=".xml"><p class="hint">Android: Android/media/com.mhd.flasher.fseries/{VIN}_flashoptions.xml<br>iPhone: Locations → On My iPhone → MHD Flasher → {VIN}_flashoptions.xml<br>Maximum 1 MB.</p></div>
-    <div id="bench-files" hidden><label for="raw">ECU file from KESS3 or another tool</label><input id="raw" type="file" accept=".bin,.mpc"><p class="hint">Upload one unencrypted BIN or MPC file. In the notes, include your tool, ECU/DME and whether you used OBD, bench or boot.</p></div>
+    <div id="bench-files" hidden><label for="raw">ECU file from PCMFlash, KESS3 or another tool</label><input id="raw" type="file" accept=".bin,.mpc"><p class="hint">Upload one unencrypted BIN or MPC file. In the notes, include your tool, ECU/DME and whether you used OBD, bench or boot.</p></div>
     <label for="note">Anything else we should know? (optional)</label><textarea id="note" rows="3" maxlength="2000" placeholder="Fuel, hardware or your current tune"></textarea>
     </fieldset>
     <div class="actions"><button class="primary" type="submit" id="submit-order"><span class="button-spinner" aria-hidden="true"></span><span id="submit-label">Submit request</span></button></div><p class="hint">Work starts after payment. If your request goes straight to checkout, pay within 24 hours to keep your request and files.</p><p id="order-status" class="status" role="status"></p>

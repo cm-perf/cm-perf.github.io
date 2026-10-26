@@ -243,9 +243,9 @@ footer .copy{font-family:var(--mono);font-size:11px;color:var(--faint);width:100
 {"@context":"https://schema.org","@graph":[
 {"@type":"Organization","@id":"https://cmperf.uk/#org","name":"CM Performance","url":"https://cmperf.uk/","email":"contact@cmperf.uk","logo":"https://cmperf.uk/favicon-192.png","image":"https://cmperf.uk/og-cmperf.png","description":"UK-based BMW engineering: custom ECU software, the 2-step secondary rev limiter, diagnostics, retrofit and coding, and product development.","areaServed":"Worldwide","address":{"@type":"PostalAddress","addressCountry":"GB"},"sameAs":["https://www.instagram.com/cm.perf/"]},
 {"@type":"WebSite","@id":"https://cmperf.uk/#site","url":"https://cmperf.uk/","name":"CM Performance","publisher":{"@id":"https://cmperf.uk/#org"}},
-{"@type":"Service","name":"BMW 2-Step Secondary Rev Limiter","serviceType":"Custom ECU software / BMW tuning","provider":{"@id":"https://cmperf.uk/#org"},"areaServed":"Worldwide","description":"2-step launch control for BMW N20, N26, N55, N63, S55, B48 and B58. Choose M1/M2 activation, including aftermarket sport steering wheels, with a launch RPM for each button, or brake plus gas with a fixed launch RPM. Experimental cruise-control RPM adjustment is optional. Available worldwide for Bootmod3, MHD and compatible ECU tools, including KESS3.","offers":{"@type":"Offer","price":"200","priceCurrency":"USD","availability":"https://schema.org/InStock"}},
+{"@type":"Service","name":"BMW 2-Step Secondary Rev Limiter","serviceType":"Custom ECU software / BMW tuning","provider":{"@id":"https://cmperf.uk/#org"},"areaServed":"Worldwide","description":"2-step launch control for BMW N20, N26, N55, N63, S55, B48 and B58. Choose M1/M2 activation, including aftermarket sport steering wheels, with a launch RPM for each button, or brake plus gas with a fixed launch RPM. RES +/− RPM selection is optional on compatible ECU software. Available worldwide for Bootmod3, MHD and compatible ECU tools, including KESS3.","offers":{"@type":"Offer","price":"200","priceCurrency":"USD","availability":"https://schema.org/InStock"}},
 {"@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"What is a 2-step secondary rev limiter?","acceptedAnswer":{"@type":"Answer","text":"A launch rev limit below your redline. Choose M1/M2 buttons with a separate RPM for each, or brake + gas pedal with one launch RPM. We also support aftermarket sport steering wheels with M1/M2 buttons. Experimental cruise-control RPM adjustment is available as an option; we confirm your setup before building."}},
+{"@type":"Question","name":"What is a 2-step secondary rev limiter?","acceptedAnswer":{"@type":"Answer","text":"A launch rev limit below your redline. Choose M1/M2 buttons with a separate RPM for each, or brake + gas pedal with one launch RPM. We also support aftermarket sport steering wheels with M1/M2 buttons. Optional RES +/− RPM selection is available on compatible ECU software; we confirm your setup before building."}},
 {"@type":"Question","name":"Which BMW engines do you support?","acceptedAnswer":{"@type":"Answer","text":"N20, N26, N55, N63, S55, B48 and B58 requests are open. We confirm exact ECU software and file compatibility before payment."}},
 {"@type":"Question","name":"How is the 2-step delivered?","acceptedAnswer":{"@type":"Answer","text":"We deliver worldwide through Bootmod3, MHD or files for compatible ECU tools such as PCMFlash, KESS3, AutoTuner and FLEX. Choose your platform when you start your request. We confirm support for your car and software before preparing your file."}},
 {"@type":"Question","name":"Can I use PCMFlash, KESS3, AutoTuner or FLEX?","acceptedAnswer":{"@type":"Answer","text":"Tell us which tool you use, your ECU/DME and whether the file was read by OBD, bench or boot. We’ll check whether we can work with the file for your BMW before you pay. Our upload form takes unencrypted BIN or MPC files."}},
@@ -266,6 +266,7 @@ footer .copy{font-family:var(--mono);font-size:11px;color:var(--faint);width:100
       <a href="#products">2-Step</a>
       <a href="#capabilities">Capabilities</a>
       <a href="#faq">FAQ</a>
+      <a href="/blog/">Blog</a>
       <a href="#contact">Contact</a>
     </nav>
     <button class="menu-btn" type="button" onclick="toggleMenu()" aria-controls="mobile-menu" aria-expanded="false">Menu</button>
@@ -277,6 +278,7 @@ footer .copy{font-family:var(--mono);font-size:11px;color:var(--faint);width:100
     <a href="#products" onclick="closeMenu()">2-Step</a>
     <a href="#capabilities" onclick="closeMenu()">Capabilities</a>
     <a href="#faq" onclick="closeMenu()">FAQ</a>
+    <a href="/blog/" onclick="closeMenu()">Blog</a>
     <a href="#contact" onclick="closeMenu()">Contact</a>
   </div>
 </div>
@@ -330,9 +332,9 @@ footer .copy{font-family:var(--mono);font-size:11px;color:var(--faint);width:100
           </article>
           <article class="slide slide-wheel">
             <img src="assets/steering-wheels/sport-wheel-cruise-960.webp" srcset="assets/steering-wheels/sport-wheel-cruise-480.webp 480w, assets/steering-wheels/sport-wheel-cruise-960.webp 960w" sizes="(max-width: 820px) calc(100vw - 64px), 460px" loading="lazy" alt="BMW sport steering wheel with cruise-control buttons" decoding="async">
-            <span class="k">Optional · experimental</span>
-            <div class="st">Set it on the cruise stalk</div>
-            <p>Want adjustable launch RPM? Ask for experimental cruise-control RPM adjustment when we confirm your build requirements.</p>
+            <span class="k">Optional · cruise control</span>
+            <div class="st">Set it with RES +/−</div>
+            <p>Hold RES to enter RPM selection, then use +/− to set your launch RPM. Ask us to include it in your build.</p>
           </article>
           <article class="slide slide-wheel">
             <img src="assets/steering-wheels/carbon-sport-wheel-960.webp" srcset="assets/steering-wheels/carbon-sport-wheel-480.webp 480w, assets/steering-wheels/carbon-sport-wheel-960.webp 960w" sizes="(max-width: 820px) calc(100vw - 64px), 460px" loading="lazy" alt="Aftermarket carbon sport steering wheel fitted in a BMW" decoding="async">
@@ -365,7 +367,7 @@ footer .copy{font-family:var(--mono);font-size:11px;color:var(--faint);width:100
             <div>Activation <b>M1/M2 or brake + gas</b></div>
             <div>RPM <b>Per-button presets or pedal RPM</b></div>
             <div>Sport wheels <b>Aftermarket M1/M2 supported</b></div>
-            <div>Optional <b>Cruise RPM · experimental</b></div>
+            <div>Optional <b>RES +/− RPM selection</b></div>
             <div>Engines <b>N20 · N26 · N55 · N63 · S55 · B48 · B58</b></div>
             <div>Delivery <b>Bootmod3 · MHD · ECU tools</b></div>
             <div>From <b>$200 USD</b></div>
@@ -465,7 +467,7 @@ footer .copy{font-family:var(--mono);font-size:11px;color:var(--faint);width:100
       <div class="faq">
         <details open>
           <summary>What is a 2-step secondary rev limiter?</summary>
-          <p class="a">A launch rev limit below your redline. Choose M1/M2 buttons with a separate RPM for each, or brake + gas pedal with one launch RPM. We also support aftermarket sport steering wheels with M1/M2 buttons. Experimental cruise-control RPM adjustment is available as an option; we confirm your setup before building.</p>
+          <p class="a">A launch rev limit below your redline. Choose M1/M2 buttons with a separate RPM for each, or brake + gas pedal with one launch RPM. We also support aftermarket sport steering wheels with M1/M2 buttons. Optional RES +/− RPM selection is available on compatible ECU software; we confirm your setup before building.</p>
         </details>
         <details>
           <summary>Which BMW engines do you support?</summary>
@@ -541,6 +543,7 @@ footer .copy{font-family:var(--mono);font-size:11px;color:var(--faint);width:100
       <a href="#products">2-Step</a>
       <a href="#capabilities">Capabilities</a>
       <a href="#faq">FAQ</a>
+      <a href="/blog/">Blog</a>
       <a href="gallery.html">Gallery</a>
       <a href="/order.html?view=sent">Sent requests</a>
       <a href="mailto:contact@cmperf.uk">Email</a>
