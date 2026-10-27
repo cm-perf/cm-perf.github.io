@@ -21,6 +21,7 @@ window.fetch = async (url, options) => {
   if (url.endsWith('/v1/order')) {
     window.uploadCount = (window.uploadCount || 0) + 1;
     window.lastDetails = JSON.parse(options.body.get('details'));
+    (window.uploadKeys ||= []).push(options.headers['x-order-key']);
     return await new Promise(resolve => {
       window.finishUpload = (status = 200) => resolve({
         ok: status === 200, status,
@@ -31,7 +32,7 @@ window.fetch = async (url, options) => {
   if (/\\/v1\\/order\\/[a-f0-9]{32}$/.test(url)) return {ok:true,json:async()=>({nextStep:window.receiptStep || {kind:'review'}})};
   if (url.endsWith('/v1/session')) {
     window.sessionCount = (window.sessionCount || 0) + 1;
-    const email = sessionStorage.getItem('mock-email') || 'review@example.invalid';
+    const email = window.mockEmail || sessionStorage.getItem('mock-email') || 'review@example.invalid';
     if (window.delaySession) return await new Promise(resolve => {window.finishSession = () => resolve({ok:true, json:async()=>({verified: true, email})});});
     return {ok: true, json: async () => ({verified: email !== 'none', email})};
   }
@@ -208,6 +209,70 @@ BROWSER_TEST = """
 """
 
 
+STORAGE_TEST = """
+(async () => {
+  const $ = id => document.getElementById(id);
+  const wait = () => new Promise(resolve => setTimeout(resolve, 20));
+  const results = [];
+  const check = (name, pass) => results.push({name, pass:!!pass});
+  const choose = name => document.querySelector(`[data-platform="${name}"]`).click();
+  const file = (id, name) => {
+    const transfer = new DataTransfer(); transfer.items.add(new File(['test'],name));
+    $(id).files = transfer.files;
+  };
+  choose('mhd'); await wait();
+  $('email').value = 'review@example.invalid'; $('send-code').click(); await wait();
+  $('code').value = '12345678'; $('verify-code').click(); await wait();
+  check('successful OTP opens form with unavailable storage', !$('order-form').hidden && $('verify-panel').hidden);
+  $('name').value = 'QA'; $('vin').value = 'WBA12345678901234';
+  $('whatsapp').value = '+233245858875'; $('vehicle').value = 'Test car';
+  $('engine').value = 'B-series'; $('rpm').value = '4500';
+  document.querySelector('input[name=transmission][value="automatic"]').checked = true;
+  file('stock','stock.zip'); file('flashoptions','VIN_flashoptions.xml');
+  $('order-form').requestSubmit(); await wait();
+  check('wrong stock extension blocked before upload', !window.uploadCount && $('order-status').textContent.includes('stock .bin'));
+  file('stock','x'.repeat(177) + '.bin');
+  $('order-form').requestSubmit(); await wait();
+  check('oversized filename blocked before server truncation', !window.uploadCount && $('order-status').textContent.includes('180 characters'));
+  file('stock','STOCK.BIN'); file('flashoptions','renamed.xml');
+  $('order-form').requestSubmit(); await wait();
+  check('wrong options name blocked with actionable guidance', !window.uploadCount && $('order-status').textContent.includes('{VIN}_flashoptions.xml'));
+  file('flashoptions','VIN_FLASHOPTIONS.XML');
+  // Simulate storage becoming unavailable after verification as well as on load.
+  window.breakStorage();
+  $('order-form').requestSubmit(); await wait();
+  check('valid files submit without storage', window.uploadCount === 1);
+  window.finishUpload(500); await wait();
+  $('order-form').requestSubmit(); await wait();
+  check('retry reuses the in-memory idempotency key', window.uploadCount === 2 && window.uploadKeys[0] === window.uploadKeys[1]);
+  window.finishUpload(); await wait();
+  check('success remains visible even when receipt storage fails', !$('success-panel').hidden && $('success-reference').textContent === 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+  window.mockEmail = 'review@example.invalid';
+  choose('bench'); await wait(); choose('mhd'); await wait();
+  check('same-page navigation restores in-memory receipt', !$('success-panel').hidden && $('order-form').hidden);
+  window.mockEmail = 'other@example.invalid'; choose('bench'); await wait(); choose('mhd'); await wait();
+  check('different verified account cannot reuse prior receipt', $('success-panel').hidden && !$('order-form').hidden);
+  choose('bench'); await wait(); file('raw','wrong.txt');
+  $('order-form').requestSubmit(); await wait();
+  check('bench file extension blocked before upload', window.uploadCount === 2 && $('order-status').textContent.includes('.bin or .mpc'));
+  file('raw','read.MPC'); $('order-form').requestSubmit(); await wait();
+  check('valid bench MPC is accepted', window.uploadCount === 3);
+  window.finishUpload(409); await wait();
+  $('order-form').requestSubmit(); await wait();
+  check('conflict clears fallback key', window.uploadCount === 4 && window.uploadKeys[2] !== window.uploadKeys[3]);
+  window.finishUpload(); await wait();
+  $('new-order').click(); await wait(); choose('mhd'); await wait(); choose('bench'); await wait();
+  check('new request clears fallback reference', !$('order-form').hidden && $('success-panel').hidden);
+  check('no unhandled browser errors', !window.testErrors.length);
+  const output = document.createElement('pre'); output.id = 'test-results';
+  output.textContent = JSON.stringify(results); document.body.append(output);
+})().catch(error => {
+  const output = document.createElement('pre'); output.id = 'test-results';
+  output.textContent = JSON.stringify([{name:error.stack,pass:false}]); document.body.append(output);
+});
+"""
+
+
 class OrderFormTests(unittest.TestCase):
     def test_turnstile_runs_after_its_callback_registration(self):
         page = (ROOT / 'order.html').read_text()
@@ -234,12 +299,29 @@ class OrderFormTests(unittest.TestCase):
                 self.assertEqual(query, 'v=' + hashlib.sha256(asset.read_bytes()).hexdigest()[:16])
 
     def test_browser_regressions(self):
+        self.run_browser(MOCK_API + '\n' + (ROOT / 'order.js').read_text() + '\n' + BROWSER_TEST)
+
+    def test_storage_and_file_recovery(self):
+        for failure in ['getter', 'quota', 'later']:
+            with self.subTest(failure=failure):
+                setup = """
+window.mockEmail = 'none'; window.testErrors = [];
+window.addEventListener('error', e => window.testErrors.push(e.message));
+window.addEventListener('unhandledrejection', e => window.testErrors.push(String(e.reason)));
+window.breakStorage = () => Object.defineProperty(window, 'sessionStorage', {configurable:true, get(){throw new DOMException('Access denied', 'SecurityError');}});
+"""
+                if failure == 'getter':
+                    setup += 'window.breakStorage();'
+                elif failure == 'quota':
+                    setup += "Storage.prototype.setItem = () => {throw new DOMException('Full', 'QuotaExceededError');};"
+                self.run_browser(setup + MOCK_API + '\n' + (ROOT / 'order.js').read_text() + '\n' + STORAGE_TEST)
+
+    def run_browser(self, scripts):
         chromium = shutil.which('chromium') or shutil.which('chromium-browser')
         self.assertIsNotNone(chromium, 'Chromium is required for browser regressions')
         page = (ROOT / 'order.html').read_text()
         page = re.sub(r'<script[^>]*src=[^>]*></script>', '', page)
         page = re.sub(r'<link[^>]*>', '', page)
-        scripts = MOCK_API + '\n' + (ROOT / 'order.js').read_text() + '\n' + BROWSER_TEST
         page = page.replace('</body>', '<script id="turnstile-script"></script><script>' + scripts + '</script></body>')
         with tempfile.TemporaryDirectory(prefix='cm-order-test-') as directory:
             path = Path(directory)
