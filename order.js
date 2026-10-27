@@ -1,4 +1,25 @@
 (() => {
+  // Some private/in-app browsers deny storage or exhaust its quota. Keep the
+  // current request key in memory too, so verification and retries still work.
+  const sessionValues = new Map();
+  const sessionState = {
+    getItem(key) {
+      if (sessionValues.has(key)) return sessionValues.get(key);
+      try {
+        const value = window.sessionStorage.getItem(key);
+        sessionValues.set(key, value);
+        return value;
+      } catch { return null; }
+    },
+    setItem(key, value) {
+      sessionValues.set(key, value);
+      try { window.sessionStorage.setItem(key, value); } catch { /* Use memory for this page. */ }
+    },
+    removeItem(key) {
+      sessionValues.set(key, null);
+      try { window.sessionStorage.removeItem(key); } catch { /* Keep the in-memory removal. */ }
+    }
+  };
   let receiptRequest = 0;
   const config = window.CMP_ORDER_CONFIG || {};
   const $ = id => document.getElementById(id);
@@ -133,7 +154,7 @@
       });
       const open = document.createElement('button'); open.type = 'button'; open.className = 'secondary'; open.textContent = 'Open request';
       open.addEventListener('click', () => {
-        sessionStorage.setItem(stored('reference',record.platform),record.reference);
+        sessionState.setItem(stored('reference',record.platform),record.reference);
         choose(record.platform);
       });
       actions.append(copy, remove, open); item.append(title, meta, code, actions, message); list.append(item);
@@ -141,15 +162,15 @@
   }
   function showForm(email, focus = false) {
     syncHistoryLink(email);
-    const prior = sessionStorage.getItem('cm-order-verified-email');
+    const prior = sessionState.getItem('cm-order-verified-email');
     if (prior && prior !== email) for (const option of ['mhd', 'bench']) {
-      sessionStorage.removeItem(stored('key', option));
-      sessionStorage.removeItem(stored('reference', option));
+      sessionState.removeItem(stored('key', option));
+      sessionState.removeItem(stored('reference', option));
     }
-    sessionStorage.setItem('cm-order-verified-email', email);
+    sessionState.setItem('cm-order-verified-email', email);
     $('verified-email').textContent = email;
     $('verify-panel').hidden = true;
-    const saved = sessionStorage.getItem(stored('reference'));
+    const saved = sessionState.getItem(stored('reference'));
     if (saved) showReceipt(saved, email, focus);
     else { $('success-panel').hidden = true; $('order-form').hidden = false; status('order-status', ''); if (focus) $('name').focus(); }
   }
@@ -326,7 +347,7 @@
     finally { $('verify-code').disabled = false; }
   });
   $('change-email').addEventListener('click', async () => { await api('/v1/email/logout',{method:'POST'}); $('order-form').hidden = true; $('verify-panel').hidden = false; $('code-fields').hidden = true; challenge = ''; });
-  $('new-order').addEventListener('click', () => {sessionStorage.removeItem(stored('key'));sessionStorage.removeItem(stored('reference'));$('order-form').reset();syncFormState();$('success-panel').hidden=true;$('order-form').hidden=false;status('order-status','');$('name').focus();});
+  $('new-order').addEventListener('click', () => {sessionState.removeItem(stored('key'));sessionState.removeItem(stored('reference'));$('order-form').reset();syncFormState();$('success-panel').hidden=true;$('order-form').hidden=false;status('order-status','');$('name').focus();});
   $('copy-reference').addEventListener('click', async () => {
     try { await navigator.clipboard.writeText($('success-reference').textContent); status('copy-status', 'Reference copied.'); }
     catch { status('copy-status', 'Select the reference above to copy it.', true); }
@@ -343,17 +364,23 @@
     if (files.some(f => !f)) { status('order-status', 'Choose the required file or files.', true); return; }
     if (files.reduce((n,f) => n+f.size,0) > 10_000_000 || files.some(f => !f.size)) { status('order-status','Files together must be nonempty and 10 MB or less.',true); return; }
     if (platform === 'mhd' && files[1].size > 1_000_000) { status('order-status','The flashoptions file must be 1 MB or less.',true); return; }
+    if (files.some(f => f.name.length > 180)) { status('order-status', 'One filename is too long. Shorten it to 180 characters or fewer, keeping the file extension and “flashoptions” in the MHD options filename.', true); return; }
+    const filenameError = platform === 'mhd'
+      ? (!/\.bin$/i.test(files[0].name) ? 'Choose the stock .bin file exported by MHD.'
+        : !/flashoptions/i.test(files[1].name) ? 'Choose the MHD-generated flashoptions file, usually {VIN}_flashoptions.xml. Other XML files cannot be used.' : '')
+      : !/\.(bin|mpc)$/i.test(files[0].name) ? 'Choose an unencrypted .bin or .mpc file exported by your ECU tool.' : '';
+    if (filenameError) { status('order-status', filenameError, true); return; }
     const whatsapp = $('whatsapp').value.replace(/[ ()-]/g, '');
     if (!/^\+?[1-9][0-9]{6,14}$/.test(whatsapp)) { status('order-status', 'Enter your WhatsApp number with country code, e.g. +233245858875.', true); $('whatsapp').focus(); return; }
     const details = {whatsapp: '+' + whatsapp.replace(/^\+/, ''), name:$('name').value.trim(), vin:$('vin').value.trim().toUpperCase(), vehicle:$('vehicle').value.trim(), engine:$('engine').value, platform, rpm:Number($('rpm').value), trigger:$('trigger').value, m1Rpm:$('m1-rpm').value, m2Rpm:$('m2-rpm').value, transmission:document.querySelector('input[name=transmission]:checked')?.value, note:$('note').value.trim()};
     const form = new FormData(); form.set('details',JSON.stringify(details));
     if (platform === 'mhd') { form.set('stock',files[0]); form.set('flashoptions',files[1]); } else form.set('raw',files[0]);
-    let key = sessionStorage.getItem(keyStorage); if (!key) { key = [...crypto.getRandomValues(new Uint8Array(16))].map(x=>x.toString(16).padStart(2,'0')).join(''); sessionStorage.setItem(keyStorage,key); }
+    let key = sessionState.getItem(keyStorage); if (!key) { key = [...crypto.getRandomValues(new Uint8Array(16))].map(x=>x.toString(16).padStart(2,'0')).join(''); sessionState.setItem(keyStorage,key); }
     setUploading(true);
     status('order-status','Uploading your files. Keep this page open.', false, true);
     try {
       const result = await api('/v1/order',{method:'POST',headers:{'x-order-key':key},body:form});
-      sessionStorage.setItem(referenceStorage, result.reference);
+      sessionState.setItem(referenceStorage, result.reference);
       saveReceipt(result.reference, $('verified-email').textContent, details);
       showReceipt(result.reference, $('verified-email').textContent, true, result.nextStep);
     } catch (error) {
@@ -365,7 +392,7 @@
         $('email').value = $('verified-email').textContent;
         status('verify-status','Your verification expired. Verify your email again to continue.',true);
       } else if (error.status === 409) {
-        sessionStorage.removeItem(keyStorage);
+        sessionState.removeItem(keyStorage);
         status('order-status','The upload was interrupted or the files changed. Check your selections, then press Submit request again.',true);
       } else status('order-status',error.message,true);
     } finally {
@@ -376,7 +403,7 @@
   const params = new URLSearchParams(location.search);
   const initial = params.get('platform');
   const returnReference = params.get('reference');
-  if (['mhd','bench'].includes(initial) && /^[a-f0-9]{32}$/.test(returnReference || '')) sessionStorage.setItem(stored('reference',initial),returnReference);
+  if (['mhd','bench'].includes(initial) && /^[a-f0-9]{32}$/.test(returnReference || '')) sessionState.setItem(stored('reference',initial),returnReference);
   if (params.get('view') === 'sent') openHistory(); else choose(['bootmod3','mhd','bench'].includes(initial) ? initial : '');
   syncFormState();
 })();
