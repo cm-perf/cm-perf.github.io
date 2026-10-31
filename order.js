@@ -275,7 +275,7 @@
       checkState('Verification is loading…');
       try {
         turnstileId = turnstile.render('#turnstile', {
-          sitekey:config.turnstileSiteKey, size:'flexible', appearance:'always',
+          sitekey:config.turnstileSiteKey, action:'order_email', size:'flexible', appearance:'always',
           callback:() => { clearTimeout(checkTimer); checkState('Verification complete.', true); },
           'error-callback':checkFailed,
           'expired-callback':() => { checkState('Verification expired. Checking again…'); turnstile.reset(turnstileId); },

@@ -25,7 +25,7 @@ async function html(input,name){
 }
 async function visit(dir){
  for(const entry of await readdir(dir,{withFileTypes:true})){
-  if(ignored.has(entry.name)||entry.name.startsWith('.')&&entry.name!=='.nojekyll'||['package.json','package-lock.json'].includes(entry.name))continue;
+  if(ignored.has(entry.name)||entry.name.startsWith('.')&&!['.nojekyll','.well-known'].includes(entry.name)||['package.json','package-lock.json'].includes(entry.name))continue;
   const src=resolve(dir,entry.name),name=relative(root,src),dest=resolve(out,name);
   if(entry.isDirectory()){await visit(src);continue;}
   if(!entry.isFile()||(!extensions.has(extname(entry.name))&&!['CNAME','.nojekyll'].includes(entry.name)))continue;
